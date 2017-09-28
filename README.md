@@ -1,13 +1,14 @@
-# mybot_gazebo
+# Auto Truck
 
-More information about the procedures about making this robot can be seen in my blog,
+## Overview
 
-	Making my own Autonomous Robot in ROS / Gazebo
+This work ...
 
-	Day 1: http://www.cnblogs.com/casperwin/p/6258565.html
+## Instruction
 
-Also, thanks to those I have referenced to,
+## Developing Log
 
-Robotic simulation scenarios with Gazebo and ROS (http://www.generationrobots.com/blog/en/2015/02/robotic-simulation-scenarios-with-gazebo-and-ros/)
+**9/27:**
 
-[Tutorial] Getting Starting with Autonomous Robots in ROS via Simulations (http://moorerobots.com/2016/09/27/tutorial-getting-started-with-ros-simulations/)
+* Duplicate [mybot package](https://github.com/xpharry/making_my_robot_in_gazebo.git) into the repo.
+
