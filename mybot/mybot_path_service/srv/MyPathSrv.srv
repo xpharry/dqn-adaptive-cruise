@@ -1,0 +1,5 @@
+# nav_msgs/Path includes field "poses", which is a vector of geometry_msgs/PoseStamped objects
+nav_msgs/Path nav_path
+---
+# could use the response, e.g., to get back a finer-resolution, interpolated set of subgoals
+nav_msgs/Path nav_path
