@@ -49,40 +49,40 @@ int main(int argc, char **argv) {
     pose_stamped.pose = pose;
 
     // subgoal 1
-    quat = convertPlanarPhi2Quaternion(PI/2); // get a quaterion corresponding to this heading
+    quat = convertPlanarPhi2Quaternion(0); // get a quaterion corresponding to this heading
     pose_stamped.pose.orientation = quat;   
-    pose_stamped.pose.position.y = 3.0; // say desired y-coord is 1.0
+    pose_stamped.pose.position.y = 5.0; // say desired y-coord is 1.0
     path_srv.request.nav_path.poses.push_back(pose_stamped);
  
     // subgoal 2
-    quat = convertPlanarPhi2Quaternion(0); // get a quaterion corresponding to this heading
+    quat = convertPlanarPhi2Quaternion(PI/2); // get a quaterion corresponding to this heading
     pose_stamped.pose.orientation = quat;   
-    pose_stamped.pose.position.y = 6.5; // say desired y-coord is 1.0
+    pose_stamped.pose.position.y = 5.0; // say desired y-coord is 1.0
     path_srv.request.nav_path.poses.push_back(pose_stamped);
 
     // subgoal 3
-    quat = convertPlanarPhi2Quaternion(PI/2); // get a quaterion corresponding to this heading
+    quat = convertPlanarPhi2Quaternion(0); // get a quaterion corresponding to this heading
     pose_stamped.pose.orientation = quat;   
-    pose_stamped.pose.position.y = 6; // say desired y-coord is 1.0
+    pose_stamped.pose.position.y = 5.0; // say desired y-coord is 1.0
     path_srv.request.nav_path.poses.push_back(pose_stamped);
 
-    // subgoal 4
-    quat = convertPlanarPhi2Quaternion(PI); // get a quaterion corresponding to this heading
-    pose_stamped.pose.orientation = quat;   
-    pose_stamped.pose.position.y = 3.2; // say desired y-coord is 1.0
-    path_srv.request.nav_path.poses.push_back(pose_stamped);
+    // // subgoal 4
+    // quat = convertPlanarPhi2Quaternion(PI); // get a quaterion corresponding to this heading
+    // pose_stamped.pose.orientation = quat;   
+    // pose_stamped.pose.position.y = 3.2; // say desired y-coord is 1.0
+    // path_srv.request.nav_path.poses.push_back(pose_stamped);
 
-    // subgoal 5
-    quat = convertPlanarPhi2Quaternion(PI/2); // get a quaterion corresponding to this heading
-    pose_stamped.pose.orientation = quat;   
-    pose_stamped.pose.position.y = 3.2; // say desired y-coord is 1.0
-    path_srv.request.nav_path.poses.push_back(pose_stamped);
+    // // subgoal 5
+    // quat = convertPlanarPhi2Quaternion(PI/2); // get a quaterion corresponding to this heading
+    // pose_stamped.pose.orientation = quat;   
+    // pose_stamped.pose.position.y = 3.2; // say desired y-coord is 1.0
+    // path_srv.request.nav_path.poses.push_back(pose_stamped);
 
-    // subgoal 6
-    quat = convertPlanarPhi2Quaternion(PI); // get a quaterion corresponding to this heading
-    pose_stamped.pose.orientation = quat;   
-    pose_stamped.pose.position.y = 3; // say desired y-coord is 1.0
-    path_srv.request.nav_path.poses.push_back(pose_stamped);
+    // // subgoal 6
+    // quat = convertPlanarPhi2Quaternion(PI); // get a quaterion corresponding to this heading
+    // pose_stamped.pose.orientation = quat;   
+    // pose_stamped.pose.position.y = 3; // say desired y-coord is 1.0
+    // path_srv.request.nav_path.poses.push_back(pose_stamped);
 
     // quat = convertPlanarPhi2Quaternion(PI);
     // pose_stamped.pose.orientation = quat;  
