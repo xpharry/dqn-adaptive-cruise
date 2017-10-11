@@ -33,6 +33,16 @@
       <width>0.5</width>
       <point>0 0 0</point>
       <point>10 0 0</point>
+      <point>10 10 0</point>
+      <point>0 10 0</point>
+      <point>0 0 0</point>
+    </road>
+    <road name="my_road">
+      <width>0.5</width>
+      <point>10 0 0</point>
+      <point>10 -10 0</point>
+      <point>0 -10 0</point>
+      <point>0 0 0</point>
     </road>
   </world>
 </sdf>
