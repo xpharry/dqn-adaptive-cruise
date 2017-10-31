@@ -1,0 +1,8 @@
+<launch>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+	<include file="$(find mobot_urdf)/launch/mobot_w_lidar.launch"/>
+	<node name="open_loop_controller" pkg="mobot_pub_des_state" type="open_loop_controller" output="screen"/>
+	<node name="mobot_pub_des_state" pkg="mobot_pub_des_state" type="mobot_pub_des_state" output="screen"/>
+	<node name="pub_des_state_path_client" pkg="mobot_pub_des_state" type="pub_des_state_path_client" output="screen"/>
+	<node name="estop" pkg="mobot_pub_des_state" type="estop" output="screen"/>
+</launch>
