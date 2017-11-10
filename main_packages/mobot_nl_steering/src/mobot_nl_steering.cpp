@@ -49,7 +49,7 @@ SteeringController::SteeringController(ros::NodeHandle* nodehandle):nh_(*nodehan
 void SteeringController::initializeSubscribers() {
     ROS_INFO("Initializing Subscribers: gazebo state and desState");
         //subscribe to gazebo messages; ONLY works in simulation
-    current_state_subscriber_ = nh_.subscribe("gazebo_mobot_pose", 1, &SteeringController::gazeboPoseCallback, this); 
+    current_state_subscriber_ = nh_.subscribe("/gazebo_mobot_pose", 1, &SteeringController::gazeboPoseCallback, this); 
 
     // subscribe to desired-state publications
     des_state_subscriber_ = nh_.subscribe("/desState", 1, &SteeringController::desStateCallback, this); 
@@ -60,9 +60,9 @@ void SteeringController::initializeSubscribers() {
 void SteeringController::initializePublishers()
 {
     ROS_INFO("Initializing Publishers"); //: cmd_vel and cmd_vel_stamped");
-    cmd_publisher_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1, true); // commands the robot!
+    cmd_publisher_ = nh_.advertise<geometry_msgs::Twist>("/catvehicle/cmd_vel", 1, true); // commands the robot!
     //next three are just for debug output, plotable by rqt_plot
-    heading_publisher_= nh_.advertise<std_msgs::Float32>("heading", 1, true);
+    heading_publisher_= nh_.advertise<std_msgs::Float32>("/catvehicle/steering", 1, true);
     heading_cmd_publisher_ = nh_.advertise<std_msgs::Float32>("heading_cmd", 1, true);
     lat_err_publisher_ = nh_.advertise<std_msgs::Float32>("lateral_err", 1, true);
 }

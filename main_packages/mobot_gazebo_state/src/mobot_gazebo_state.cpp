@@ -22,7 +22,7 @@ void model_state_CB(const gazebo_msgs::ModelStates& model_states)
   bool found_name=false;
   for (imodel=0;imodel<n_models;imodel++) {
     std::string model_name(model_states.name[imodel]); 
-    if (model_name.compare("mobot")==0) {
+    if (model_name.compare("catvehicle")==0) {
       //ROS_INFO("found match: mobot is model %d",imodel);
       found_name=true;
       break;
