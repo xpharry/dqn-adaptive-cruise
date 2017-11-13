@@ -74,7 +74,7 @@ SteeringController::SteeringController(ros::NodeHandle* nodehandle):nh_(*nodehan
 //member helper function to set up subscribers;
 void SteeringController::initializeSubscribers() {
     ROS_INFO("Initializing Subscribers: odom and desState");
-    odom_subscriber_ = nh_.subscribe("/odom", 1, &SteeringController::odomCallback, this); //subscribe to odom messages
+    odom_subscriber_ = nh_.subscribe("/gazebo_mobot_odom", 1, &SteeringController::odomCallback, this); //subscribe to odom messages
     // add more subscribers here, as needed
     des_state_subscriber_ = nh_.subscribe("/desState", 1, &SteeringController::desStateCallback, this); // for desired state messages
 }
@@ -96,7 +96,7 @@ void SteeringController::initializeServices()
 void SteeringController::initializePublishers()
 {
     ROS_INFO("Initializing Publishers: cmd_vel and cmd_vel_stamped");
-    cmd_publisher_ = nh_.advertise<geometry_msgs::Twist>("cmd_vel", 1, true); // talks to the robot!
+    cmd_publisher_ = nh_.advertise<geometry_msgs::Twist>("/catvechicle/cmd_vel", 1, true); // talks to the robot!
     cmd_publisher2_ = nh_.advertise<geometry_msgs::TwistStamped>("cmd_vel_stamped",1, true); //alt topic, includes time stamp
     //steering_errs_publisher_ =  nh_.advertise<std_msgs::Float32MultiArray>("steering_errs",1, true);
 }
