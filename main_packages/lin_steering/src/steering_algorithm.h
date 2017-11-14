@@ -33,9 +33,10 @@
 //#include <Eigen/Core>
 //#include <Eigen/LU>
 
-const double UPDATE_RATE = 50.0; // choose the desired-state publication update rate
+const double UPDATE_RATE = 100.0; // choose the desired-state publication update rate
 const double K_PHI= 10.0; // control gains for steering
-const double K_DISP = 3.0;
+const double K_DISP = 5.0;
+const double K_STEER = 1.0;
 const double K_TRIP_DIST = 1.0;
 // dynamic limitations:  these apply to the steering controller; they may be larger than the limits on des state generation
 const double MAX_SPEED = 1.0; // m/sec; adjust this
@@ -60,6 +61,7 @@ private:
     ros::Subscriber des_state_subscriber_;
     
     ros::Publisher cmd_publisher_; // = nh.advertise<geometry_msgs::Twist>("cmd_vel",1);
+    ros::Publisher steering_publisher_;
     ros::Publisher cmd_publisher2_; // = nh.advertise<geometry_msgs::TwistStamped>("cmd_vel_stamped",1);
     ros::Publisher steering_errs_publisher_;
     
@@ -68,7 +70,8 @@ private:
     tf::StampedTransform baseLink_wrt_map_;    
     tf::StampedTransform odomToMap_;
     geometry_msgs::Twist twist_cmd_;
-    geometry_msgs::TwistStamped twist_cmd2_;    
+    geometry_msgs::TwistStamped twist_cmd2_;
+    std_msgs::Float32 steering_cmd_;   
     double current_speed_des_;
     double current_omega_des_;
     

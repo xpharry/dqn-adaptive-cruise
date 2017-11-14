@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
     pose_stamped.header.frame_id = "world";
     geometry_msgs::Pose pose;
 
-    const float a = 5.0;
+    const float a = 30.0;
 
     // point 1
     pose.position.x = a; // say desired x-coord is 5
