@@ -8,6 +8,8 @@
 #include <nav_msgs/Path.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <math.h>
+
 using namespace std;
 
 geometry_msgs::Quaternion convertPlanarPhi2Quaternion(double phi) {
@@ -37,61 +39,79 @@ int main(int argc, char **argv) {
     pose_stamped.header.frame_id = "world";
     geometry_msgs::Pose pose;
 
-    const float a = 30.0;
+    const float ra = 30.0;
+    const int nlaps = 10, nedges = 20;
+    double phi = 0.0, theta = M_PI/2.0;     
+    for(int i = 0; i < nlaps; i++) {
+        for(int i = 0; i < nedges; i++) {
+            // point i
+            phi = 2.0 * M_PI / nedges * i;
+            while(phi > M_PI) phi -= 2.0*M_PI;
+            pose.position.x = ra * cos(phi); // say desired x-coord is 5
+            pose.position.y = ra * sin(phi);
+            pose.position.z = 0.0; // let's hope so!
+            theta = phi + M_PI/2.0;
+            while(theta > M_PI) theta -= 2.0*M_PI;
+            quat = convertPlanarPhi2Quaternion(0);
+            pose.orientation = quat;
+            pose_stamped.pose = pose;
+            path_srv.request.path.poses.push_back(pose_stamped);            
+        }
 
-    // point 1
-    pose.position.x = a; // say desired x-coord is 5
-    pose.position.y = 0.0;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
- 
-    // point 2
-    pose.position.x = 3.0/2.0*a; // say desired x-coord is 5
-    pose.position.y = sqrt(3.0)/2.0*a;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
+        // // point 1
+        // pose.position.x = a; // say desired x-coord is 5
+        // pose.position.y = 0.0;
+        // pose.position.z = 0.0; // let's hope so!
+        // quat = convertPlanarPhi2Quaternion(0);
+        // pose.orientation = quat;
+        // pose_stamped.pose = pose;
+        // path_srv.request.path.poses.push_back(pose_stamped);
+     
+        // // point 2
+        // pose.position.x = 3.0/2.0*a; // say desired x-coord is 5
+        // pose.position.y = sqrt(3.0)/2.0*a;
+        // pose.position.z = 0.0; // let's hope so!
+        // quat = convertPlanarPhi2Quaternion(0);
+        // pose.orientation = quat;
+        // pose_stamped.pose = pose;
+        // path_srv.request.path.poses.push_back(pose_stamped);
 
-    // point 3
-    pose.position.x = a; // say desired x-coord is 5
-    pose.position.y = sqrt(3.0)*a;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
+        // // point 3
+        // pose.position.x = a; // say desired x-coord is 5
+        // pose.position.y = sqrt(3.0)*a;
+        // pose.position.z = 0.0; // let's hope so!
+        // quat = convertPlanarPhi2Quaternion(0);
+        // pose.orientation = quat;
+        // pose_stamped.pose = pose;
+        // path_srv.request.path.poses.push_back(pose_stamped);
 
-    // point 4
-    pose.position.x = 0.0; // say desired x-coord is 5
-    pose.position.y = sqrt(3.0)*a;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
- 
-    // point 5
-    pose.position.x = -1.0/2.0*a; // say desired x-coord is 5
-    pose.position.y = sqrt(3.0)/2.0*a;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
+        // // point 4
+        // pose.position.x = 0.0; // say desired x-coord is 5
+        // pose.position.y = sqrt(3.0)*a;
+        // pose.position.z = 0.0; // let's hope so!
+        // quat = convertPlanarPhi2Quaternion(0);
+        // pose.orientation = quat;
+        // pose_stamped.pose = pose;
+        // path_srv.request.path.poses.push_back(pose_stamped);
+     
+        // // point 5
+        // pose.position.x = -1.0/2.0*a; // say desired x-coord is 5
+        // pose.position.y = sqrt(3.0)/2.0*a;
+        // pose.position.z = 0.0; // let's hope so!
+        // quat = convertPlanarPhi2Quaternion(0);
+        // pose.orientation = quat;
+        // pose_stamped.pose = pose;
+        // path_srv.request.path.poses.push_back(pose_stamped);
 
-    // point 6
-    pose.position.x = 0.0; // say desired x-coord is 5
-    pose.position.y = 0.0;
-    pose.position.z = 0.0; // let's hope so!
-    quat = convertPlanarPhi2Quaternion(0);
-    pose.orientation = quat;
-    pose_stamped.pose = pose;
-    path_srv.request.path.poses.push_back(pose_stamped);
+        // // point 6
+        // pose.position.x = 0.0; // say desired x-coord is 5
+        // pose.position.y = 0.0;
+        // pose.position.z = 0.0; // let's hope so!
+        // quat = convertPlanarPhi2Quaternion(0);
+        // pose.orientation = quat;
+        // pose_stamped.pose = pose;
+        // path_srv.request.path.poses.push_back(pose_stamped);
+    }
     
     //repeat (x,y) with new heading:
     pose_stamped.pose.orientation = convertPlanarPhi2Quaternion(0); 

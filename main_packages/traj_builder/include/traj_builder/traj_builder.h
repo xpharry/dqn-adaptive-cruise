@@ -20,7 +20,7 @@ const double default_alpha_max = 0.2; //1 rad/sec^2
 const double default_speed_max = 1.0; //1 m/sec
 const double default_omega_max = 1.0; //1 rad/sec
 const double default_path_move_tol = 0.01; // if path points are within 1cm, fuggidaboutit   
-const double default_dt=0.02;
+const double default_dt = 0.02;
 
 class TrajBuilder {
 private:
@@ -74,29 +74,38 @@ public:
     geometry_msgs::PoseStamped xyPsi2PoseStamped(double x, double y, double psi);
 
     //here are the main traj-builder fncs:
-    void build_trapezoidal_spin_traj(geometry_msgs::PoseStamped start_pose,
+    void build_spin_traj(geometry_msgs::PoseStamped start_pose,
             geometry_msgs::PoseStamped end_pose,
             std::vector<nav_msgs::Odometry> &vec_of_states);
     void build_triangular_spin_traj(geometry_msgs::PoseStamped start_pose,
             geometry_msgs::PoseStamped end_pose,
             std::vector<nav_msgs::Odometry> &vec_of_states);
-    void build_spin_traj(geometry_msgs::PoseStamped start_pose,
+    void build_trapezoidal_spin_traj(geometry_msgs::PoseStamped start_pose,
             geometry_msgs::PoseStamped end_pose,
             std::vector<nav_msgs::Odometry> &vec_of_states);
+    void build_constant_speed_spin_traj(geometry_msgs::PoseStamped start_pose,
+            geometry_msgs::PoseStamped end_pose,
+            std::vector<nav_msgs::Odometry> &vec_of_states);
+
     void build_travel_traj(geometry_msgs::PoseStamped start_pose,
-            geometry_msgs::PoseStamped end_pose,
-            std::vector<nav_msgs::Odometry> &vec_of_states);
-    void build_trapezoidal_travel_traj(geometry_msgs::PoseStamped start_pose,
             geometry_msgs::PoseStamped end_pose,
             std::vector<nav_msgs::Odometry> &vec_of_states);
     void build_triangular_travel_traj(geometry_msgs::PoseStamped start_pose,
             geometry_msgs::PoseStamped end_pose,
             std::vector<nav_msgs::Odometry> &vec_of_states);
-    void build_point_and_go_traj(geometry_msgs::PoseStamped start_pose,
+    void build_trapezoidal_travel_traj(geometry_msgs::PoseStamped start_pose,
+            geometry_msgs::PoseStamped end_pose,
+            std::vector<nav_msgs::Odometry> &vec_of_states);
+    void build_constant_speed_travel_traj(geometry_msgs::PoseStamped start_pose,
             geometry_msgs::PoseStamped end_pose,
             std::vector<nav_msgs::Odometry> &vec_of_states);
     void build_braking_traj(nav_msgs::Odometry start_state,
             std::vector<nav_msgs::Odometry> &vec_of_states);
+
+    void build_point_and_go_traj(geometry_msgs::PoseStamped start_pose,
+            geometry_msgs::PoseStamped end_pose,
+            std::vector<nav_msgs::Odometry> &vec_of_states);
+
 
 };
 
