@@ -1,4 +1,4 @@
-# Auto Truck
+# Auto Vehicle
 
 ## Overview
 
