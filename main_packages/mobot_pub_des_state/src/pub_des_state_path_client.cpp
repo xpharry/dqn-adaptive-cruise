@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
             // point i
             phi = 2.0 * M_PI / nedges * i;
             while(phi > M_PI) phi -= 2.0*M_PI;
-            pose.position.x = ra * cos(phi); // say desired x-coord is 5
+            pose.position.x = ra * cos(phi) - ra; // say desired x-coord is 5
             pose.position.y = ra * sin(phi);
             pose.position.z = 0.0; // let's hope so!
             theta = phi + M_PI/2.0;

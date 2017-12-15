@@ -12,7 +12,7 @@ catkin_simple()
 
 cs_add_executable(mobot_pub_des_state src/pub_des_state_main.cpp src/pub_des_state.cpp)
 cs_add_executable(open_loop_controller src/open_loop_controller.cpp)
-cs_add_executable(pub_des_state_startup src/pub_des_state_startup.cpp)
+#cs_add_executable(pub_des_state_startup src/pub_des_state_startup.cpp)
 cs_add_executable(pub_des_state_path_client src/pub_des_state_path_client.cpp)
 cs_add_executable(pub_des_state_flush_path_client src/pub_des_state_flush_path_client.cpp)
 cs_add_executable(pub_des_state_path_replanning_client src/pub_des_state_path_replanning_client.cpp)

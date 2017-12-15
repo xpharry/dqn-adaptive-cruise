@@ -1,0 +1,6 @@
+<launch>
+	<include file="$(find catvehicle)/launch/catvehicle_skidpan.launch"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find file_referral)/config/catvehicle_startup.rviz" output="screen"/>
+	<node name="mobot_gazebo_state" pkg="mobot_gazebo_state" type="mobot_gazebo_state" output="screen"/>
+	<node name="hoffmann_controller" pkg="hoffmann_controller" type="hoffmann_controller" output="screen"/>
+</launch>

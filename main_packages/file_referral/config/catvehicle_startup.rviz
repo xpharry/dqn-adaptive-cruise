@@ -8,6 +8,7 @@ Panels:
         - /Status1
         - /PointCloud1
         - /RobotModel1
+        - /Odometry1
         - /LaserScan1
       Splitter Ratio: 0.5
     Tree Height: 895
@@ -54,8 +55,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 3.12287
-        Min Value: -0.486586
+        Max Value: 3.54896
+        Min Value: -0.49401
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -174,8 +175,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: -9999
-        Min Value: 9999
+        Max Value: 5.87787e-09
+        Min Value: -1.0207e-07
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -201,6 +202,29 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.3
+      Head Length: 0.2
+      Length: 0.3
+      Line Style: Lines
+      Line Width: 0.03
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
+      Topic: /catvehicle/path
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -225,7 +249,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 91.153
+      Distance: 396.669
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
