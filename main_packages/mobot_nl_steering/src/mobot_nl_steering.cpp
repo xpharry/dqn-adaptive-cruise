@@ -80,8 +80,8 @@ void SteeringController::gazeboPoseCallback(const geometry_msgs::Pose& gazebo_po
 void SteeringController::desStateCallback(const nav_msgs::Odometry& des_state_rcvd) {
     // copy some of the components of the received message into member vars
     // we care about speed and spin, as well as position estimates x,y and heading
-    des_state_speed_ = des_state_rcvd.twist.twist.linear.x;
-    des_state_omega_ = des_state_rcvd.twist.twist.angular.z;
+    // des_state_speed_ = des_state_rcvd.twist.twist.linear.x;
+    // des_state_omega_ = des_state_rcvd.twist.twist.angular.z;
     
     des_state_x_ = des_state_rcvd.pose.pose.position.x;
     des_state_y_ = des_state_rcvd.pose.pose.position.y;
@@ -110,6 +110,16 @@ double SteeringController::sat(double x) {
     return x;
 }
 
+double SteeringController::sign(double x) {
+    if (x > 1.0) {
+        return 1.0;
+    }
+    if (x < -1.0) {
+        return -1.0;
+    }
+    return x;
+}
+
 //some conversion utilities:
 double SteeringController::convertPlanarQuat2Phi(geometry_msgs::Quaternion quaternion) {
     double quat_z = quaternion.z;
@@ -124,25 +134,22 @@ void SteeringController::mobot_nl_steering() {
     double controller_speed;
     double controller_omega;
     
-    // have access to: des_state_vel_, des_state_omega_, des_state_x_, des_state_y_, 
-    //  des_state_phi_ and corresponding robot state values   
+    double dx = des_state_x_ - state_x_;  //x-error relative to desired path
+    double dy = des_state_y_ - state_y_;  //y-error
     double tx = cos(des_state_psi_); // [tx,ty] is tangent of desired path
     double ty = sin(des_state_psi_); 
-    double nx = -ty; //components [nx, ny] of normal to path, points to left of desired heading
-    double ny = tx;   
-    
-    double dx = state_x_ - des_state_x_;  //x-error relative to desired path
-    double dy = state_y_ - des_state_y_;  //y-error
+    double nx = ty; //components [nx, ny] of normal to path, points to left of desired heading
+    double ny = -tx;
 
-    lateral_err_ = dx*nx+dy*ny; //lateral error is error vector dotted with path normal
-                                     // lateral offset error is positive if robot is to the left of the path
-    double trip_dist_err = dx*tx+dy*ty; // progress error: if positive, then we are ahead of schedule    
+    double signnn = sign(dx*nx + dy*ny);
+    double offset = sqrt(dx*dx + dy*dy);
+    double lateral_err_ = signnn * offset;
+    double trip_dist_err = dx*tx + dy*ty; // progress error: if positive, then we are ahead of schedule    
     //heading error: if positive, should rotate -omega to align with desired heading
     double heading_err = min_dang(state_psi_ - des_state_psi_);    
-    double strategy_psi = psi_strategy(lateral_err_); //heading command, based on NL algorithm    
-    controller_omega = omega_cmd_fnc(strategy_psi, state_psi_, des_state_psi_);
-
-    controller_speed = MAX_SPEED; //default...should speed up/slow down appropriately
+    
+    controller_speed = speed_cmd_fnc(des_state_speed_, lateral_err_); //default...should speed up/slow down appropriately
+    controller_omega = omega_cmd_fnc(heading_err, lateral_err_, controller_speed);
     
     // send out our speed/spin commands:
     twist_cmd_.linear.x = controller_speed;
@@ -150,15 +157,18 @@ void SteeringController::mobot_nl_steering() {
     cmd_publisher_.publish(twist_cmd_);  
         
     // DEBUG OUTPUT...
-    ROS_INFO("des_state_phi, heading err = %f, %f", des_state_psi_,heading_err);
-    ROS_INFO("lateral err, trip dist err = %f, %f",lateral_err_,trip_dist_err);
-    std_msgs::Float32 float_msg;
-    float_msg.data = lateral_err_;
-    lat_err_publisher_.publish(float_msg);
-    float_msg.data = state_psi_;
-    heading_publisher_.publish(float_msg);
-    float_msg.data = psi_cmd_;
-    heading_cmd_publisher_.publish(float_msg);
+    // ROS_INFO("des_state_phi, heading err = %f, %f", des_state_psi_,heading_err);
+    // ROS_INFO("lateral err, trip dist err = %f, %f",lateral_err_,trip_dist_err);
+    ROS_INFO("lateral err = %f,  \theading err = %f", lateral_err_, heading_err);
+    ROS_INFO("state_x_ = %f,     \tstate_y_ = %f,     \tstate_psi_ = %f", state_x_, state_y_, state_psi_);
+    ROS_INFO("des_state_x_ = %f, \tdes_state_y_ = %f, \tdes_state_psi_ = %f", des_state_x_, des_state_y_, des_state_psi_);
+    // std_msgs::Float32 float_msg;
+    // float_msg.data = lateral_err_;
+    // lat_err_publisher_.publish(float_msg);
+    // float_msg.data = state_psi_;
+    // heading_publisher_.publish(float_msg);
+    // float_msg.data = psi_cmd_;
+    // heading_cmd_publisher_.publish(float_msg);
     //END OF DEBUG OUTPUT   
 }
 
@@ -167,11 +177,16 @@ double SteeringController::psi_strategy(double offset_err) {
   return psi_strategy;
 }
 
-double SteeringController::omega_cmd_fnc(double psi_strategy, double psi_state, double psi_path) {
-  psi_cmd_ = psi_strategy+psi_path;
-  double omega_cmd = K_PSI*(psi_cmd_ - psi_state);
-  omega_cmd = MAX_OMEGA*sat(omega_cmd/MAX_OMEGA); //saturate the command at specified limit
-  return omega_cmd;
+double SteeringController::speed_cmd_fnc(double des_speed, double dist_err) {
+    // return dist_err > 4 ? 0 : des_speed;
+    return des_speed;
+}
+
+double SteeringController::omega_cmd_fnc(double heading_err, double offset_err, double des_speed) {
+    double omega_cmd;
+    omega_cmd = heading_err + atan2(K_PSI * offset_err, des_speed);
+    // omega_cmd = MAX_OMEGA * sat(omega_cmd / MAX_OMEGA); // saturate omega command at specified limits
+    return -omega_cmd;
 }
 
 int main(int argc, char** argv) 

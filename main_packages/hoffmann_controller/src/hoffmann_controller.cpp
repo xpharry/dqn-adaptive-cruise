@@ -149,8 +149,7 @@ void HoffmannController::nl_steering() {
     cmd_publisher_.publish(twist_cmd_);  
         
     // DEBUG OUTPUT...
-    // ROS_INFO("des_state_phi, heading err = %f, %f", des_state_psi_, heading_err);
-    // ROS_INFO("lateral err, trip dist err = %f, %f", lateral_err_, trip_dist_err);
+    ROS_INFO("lateral err = %f,  \theading err = %f", lateral_err_, heading_err);
     ROS_INFO("state_x_ = %f,     \tstate_y_ = %f,     \tstate_psi_ = %f", state_x_, state_y_, state_psi_);
     ROS_INFO("des_state_x_ = %f, \tdes_state_y_ = %f, \tdes_state_psi_ = %f", des_state_x_, des_state_y_, des_state_psi_);
     //END OF DEBUG OUTPUT   

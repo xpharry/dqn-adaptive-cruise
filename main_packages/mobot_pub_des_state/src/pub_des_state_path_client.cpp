@@ -21,6 +21,13 @@ geometry_msgs::Quaternion convertPlanarPhi2Quaternion(double phi) {
     return quaternion;
 }
 
+//utility fnc to compute min delta angle, accounting for periodicity
+double min_dang(double dang) {
+    while (dang > M_PI) dang -= 2.0 * M_PI;
+    while (dang < -M_PI) dang += 2.0 * M_PI;
+    return dang;
+}
+
 int main(int argc, char **argv) {
     ros::init(argc, argv, "append_path_client");
     ros::NodeHandle n;
@@ -40,22 +47,25 @@ int main(int argc, char **argv) {
     geometry_msgs::Pose pose;
 
     const float ra = 30.0;
-    const int nlaps = 10, nedges = 20;
-    double phi = 0.0, theta = M_PI/2.0;     
+    const int nlaps = 10, nedges = 6;
+    double phi0 = 0.0;     
     for(int i = 0; i < nlaps; i++) {
         for(int i = 0; i < nedges; i++) {
             // point i
-            phi = 2.0 * M_PI / nedges * i;
-            while(phi > M_PI) phi -= 2.0*M_PI;
+            geometry_msgs::Pose pose;
+            geometry_msgs::Quaternion quat;
+
+            double phi = min_dang(phi0 + 2.0 * M_PI / nedges * i);
             pose.position.x = ra * cos(phi) - ra; // say desired x-coord is 5
             pose.position.y = ra * sin(phi);
             pose.position.z = 0.0; // let's hope so!
-            theta = phi + M_PI/2.0;
-            while(theta > M_PI) theta -= 2.0*M_PI;
-            quat = convertPlanarPhi2Quaternion(0);
+            
+            double theta = min_dang(phi + M_PI/2.0);
+            quat = convertPlanarPhi2Quaternion(theta);
             pose.orientation = quat;
+
             pose_stamped.pose = pose;
-            path_srv.request.path.poses.push_back(pose_stamped);            
+            path_srv.request.path.poses.push_back(pose_stamped);           
         }
 
         // // point 1

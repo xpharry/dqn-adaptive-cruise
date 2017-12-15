@@ -37,10 +37,13 @@ public:
     SteeringController(ros::NodeHandle* nodehandle); 
     void mobot_nl_steering(); // use state and desired state to compute twist command, and publish it
     double psi_strategy(double); //computes strategic heading from lateral path-following error
+    double speed_cmd_fnc(double des_speed, double dist_err);
     double omega_cmd_fnc(double psi_strategy, double psi_state, double psi_path);
     double convertPlanarQuat2Phi(geometry_msgs::Quaternion quaternion);   
     double min_dang(double dang);  
     double sat(double x);
+    double sign(double x);
+
 private:
     ros::NodeHandle nh_; // we will need this, to pass between "main" and constructor
     // some objects to support subscriber and publisher
