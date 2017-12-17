@@ -45,9 +45,9 @@ void HoffmannController::initializeSubscribers() {
     ROS_INFO("Initializing Subscribers: gazebo state and desState");
     
     //subscribe to gazebo messages; ONLY works in simulation
-    current_state_subscriber_ = nh_.subscribe("/gazebo_mobot_pose", 1, &HoffmannController::gazeboPoseCallback, this);
+    // current_state_subscriber_ = nh_.subscribe("/gazebo_mobot_pose", 1, &HoffmannController::gazeboPoseCallback, this);
     // alternately we can use the topic "/catvehicle/odom"
-    // current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this); 
+    current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this); 
 }
 
 
@@ -173,16 +173,66 @@ void HoffmannController::generate_path() {
 
     const float ra = 36.6;
     const int nedges = 301;
-    double phi0 = -M_PI;     
+    double phi0 = 0;
+
+    geometry_msgs::Pose pose;
+    geometry_msgs::Quaternion quat;
+
+    // straight line 1
     for(int i = 0; i < nedges; i++) {
-
         // point i
-        geometry_msgs::Pose pose;
-        geometry_msgs::Quaternion quat;
+        pose.position.x = i * 2 * ra / nedges  - ra;
+        pose.position.y = 0.0;
+        pose.position.z = 0.0; // let's hope so!
+        
+        double theta = 0.0;
+        quat = convertPlanarPhi2Quaternion(theta);
+        pose.orientation = quat;
 
+        pose_stamped.pose = pose;
+        des_path_.poses.push_back(pose_stamped);         
+    }
+
+    // half circle 1
+    phi0 = -M_PI/2;
+    for(int i = 0; i < nedges/2; i++) {
+        // point i
         double phi = min_dang(phi0 + 2.0 * M_PI / nedges * i);
-        pose.position.x = ra * cos(phi) - ra; // say desired x-coord is 5
-        pose.position.y = ra * sin(phi);
+        pose.position.x = ra * cos(phi) + ra;
+        pose.position.y = ra * sin(phi) + ra;
+        pose.position.z = 0.0; // let's hope so!
+        
+        double theta = min_dang(phi + M_PI/2.0);
+        quat = convertPlanarPhi2Quaternion(theta);
+        pose.orientation = quat;
+
+        pose_stamped.pose = pose;
+        des_path_.poses.push_back(pose_stamped);            
+    }
+
+    // straight line 1
+    for(int i = 0; i < nedges; i++) {
+        // point i
+        double phi = min_dang(phi0 + 2.0 * M_PI / nedges * i);
+        pose.position.x = - i * 2 * ra / nedges  + ra;
+        pose.position.y = 2.0 * ra;
+        pose.position.z = 0.0; // let's hope so!
+        
+        double theta = M_PI;
+        quat = convertPlanarPhi2Quaternion(theta);
+        pose.orientation = quat;
+
+        pose_stamped.pose = pose;
+        des_path_.poses.push_back(pose_stamped);         
+    }
+
+    // half circle 2
+    phi0 = -M_PI/2;
+    for(int i = nedges/2; i < nedges; i++) {
+        // point i
+        double phi = min_dang(phi0 + 2.0 * M_PI / nedges * i);
+        pose.position.x = ra * cos(phi) - ra;
+        pose.position.y = ra * sin(phi) + ra;
         pose.position.z = 0.0; // let's hope so!
         
         double theta = min_dang(phi + M_PI/2.0);
