@@ -20,7 +20,7 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <nav_msgs/Odometry.h>
 #include <nav_msgs/Path.h>
-#include <std_msgs/Float32.h>
+#include <std_msgs/Float64.h>
 
 const double UPDATE_RATE = 20.0; // choose the update rate for steering controller
 const double K_PSI= 0.7; // control gains for steering
@@ -47,6 +47,7 @@ private:
     ros::NodeHandle nh_; // we will need this, to pass between "main" and constructor
 
     ros::Subscriber current_state_subscriber_; //topic to receive estimates of current robot state
+    ros::Subscriber designed_speed_subscriber_;
     ros::Publisher cmd_publisher_; // sends twist commands to cmd_vel topic
     
     geometry_msgs::Twist twist_cmd_;
@@ -76,6 +77,7 @@ private:
  
     void gazeboPoseCallback(const geometry_msgs::Pose& gazebo_pose);
     void odomCallback(const nav_msgs::Odometry& odom_rcvd);
+    void desSpeedCallback(const std_msgs::Float64& speed_rcvd);
 
     void generate_path();
     double compute_des_state();

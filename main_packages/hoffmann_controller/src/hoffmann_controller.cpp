@@ -47,7 +47,8 @@ void HoffmannController::initializeSubscribers() {
     //subscribe to gazebo messages; ONLY works in simulation
     // current_state_subscriber_ = nh_.subscribe("/gazebo_mobot_pose", 1, &HoffmannController::gazeboPoseCallback, this);
     // alternately we can use the topic "/catvehicle/odom"
-    current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this); 
+    current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this);
+    designed_speed_subscriber_ = nh_.subscribe("/catvehicle/des_speed", 1, &HoffmannController::desSpeedCallback, this); 
 }
 
 
@@ -71,6 +72,10 @@ void HoffmannController::odomCallback(const nav_msgs::Odometry& odom_rcvd) {
     state_y_ = odom_rcvd.pose.pose.position.y;
     state_quat_ = odom_rcvd.pose.pose.orientation;
     state_psi_ = convertPlanarQuat2Phi(state_quat_); // cheap conversion from quaternion to heading for planar motion
+}
+
+void HoffmannController::desSpeedCallback(const std_msgs::Float64& speed_rcvd) {
+    des_state_speed_ = speed_rcvd.data;
 }
 
 //utility fnc to compute min delta angle, accounting for periodicity

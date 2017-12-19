@@ -1,4 +1,0 @@
-<launch>
-	<include file="$(find catvehicle)/launch/catvehicle_skidpan.launch"/>
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find file_referral)/config/catvehicle_startup.rviz" output="screen"/>
-</launch>
