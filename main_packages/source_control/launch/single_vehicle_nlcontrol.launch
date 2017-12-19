@@ -1,0 +1,8 @@
+<launch>
+	<include file="$(find catvehicle)/launch/catvehicle_skidpan.launch"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/catvehicle_startup.rviz" output="screen"/>
+	<node name="mobot_gazebo_state" pkg="mobot_gazebo_state" type="mobot_gazebo_state" output="screen"/>
+	<node name="mobot_nl_steering" pkg="mobot_nl_steering" type="mobot_nl_steering" output="screen"/>
+	<node name="mobot_pub_des_state" pkg="mobot_pub_des_state" type="mobot_pub_des_state" output="screen"/>
+	<node name="pub_des_state_path_client" pkg="mobot_pub_des_state" type="pub_des_state_path_client" output="screen"/>>
+</launch>
