@@ -26,7 +26,7 @@ const double UPDATE_RATE = 20.0; // choose the update rate for steering controll
 const double K_PSI= 0.7; // control gains for steering
 
 // dynamic limitations:  
-const double MAX_SPEED = 3.0; // m/sec; tune this
+const double MAX_SPEED = 5.0; // m/sec; tune this
 const double MAX_OMEGA = 1.0; // rad/sec; tune this
 
 
