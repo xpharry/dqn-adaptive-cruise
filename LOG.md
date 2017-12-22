@@ -64,6 +64,9 @@ This work ...
 **12/20:**
 * Added in adaptive cruise control.
 
+**12/21:**
+* Reviewed my previous BehaviorLearning project and set up deep learning env.
+
 ## Resources
 
 1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)
