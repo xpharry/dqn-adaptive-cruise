@@ -70,6 +70,7 @@ This work ...
 ## Resources
 
 1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)
-2. [Tutorials of CAT VEHICLE TESTBED](https://cps-vo.org/node/31792)
 
 ## Reference
+
+1. [Tutorials of CAT VEHICLE TESTBED](https://cps-vo.org/node/31792)
