@@ -11,7 +11,8 @@ HoffmannController::HoffmannController(ros::NodeHandle* nodehandle):nh_(*nodehan
     ROS_INFO("in class constructor of HoffmannController");
     initializeSubscribers(); // package up the messy work of creating subscribers; do this overhead in constructor
     initializePublishers();
-    generate_path();
+    // generate_circle_path();
+    generate_track_path();
     
     state_psi_ = 1000.0; // put in impossible value for heading; 
     //test this value to make sure we have received a viable state message
@@ -172,7 +173,51 @@ double HoffmannController::omega_cmd_fnc(double heading_err, double offset_err, 
     return -omega_cmd;
 }
 
-void HoffmannController::generate_path() {
+void HoffmannController::generate_circle_path() {
+    geometry_msgs::PoseStamped pose_stamped;
+    pose_stamped.header.frame_id = "world";
+
+    const float ra = 36.6;
+    const int nedges = 301;
+    double phi0 = 0;
+
+    geometry_msgs::Pose pose;
+    geometry_msgs::Quaternion quat;
+
+    // half circle 1
+    phi0 = -M_PI/2;
+    for(int i = 0; i < nedges; i++) {
+        // point i
+        double phi = min_dang(phi0 + 2.0 * M_PI / nedges * i);
+        pose.position.x = ra * cos(phi);
+        pose.position.y = ra * sin(phi) + ra;
+        pose.position.z = 0.0; // let's hope so!
+        
+        double theta = min_dang(phi + M_PI/2.0);
+        quat = convertPlanarPhi2Quaternion(theta);
+        pose.orientation = quat;
+
+        pose_stamped.pose = pose;
+        des_path_.poses.push_back(pose_stamped);            
+    }
+
+    // straight line
+    for(int i = 0; i < nedges; i++) {
+        // point i
+        pose.position.x = i * ra / nedges  - ra;
+        pose.position.y = 0.0;
+        pose.position.z = 0.0; // let's hope so!
+        
+        double theta = 0.0;
+        quat = convertPlanarPhi2Quaternion(theta);
+        pose.orientation = quat;
+
+        pose_stamped.pose = pose;
+        des_path_.poses.push_back(pose_stamped);         
+    }
+}
+
+void HoffmannController::generate_track_path() {
     geometry_msgs::PoseStamped pose_stamped;
     pose_stamped.header.frame_id = "world";
 

@@ -138,7 +138,7 @@ int main( int argc, char **argv )
     ROS_INFO_STREAM("Publishing estimated angle to target in topic " << ros::this_node::getName( ) << "/" << angle_topic);
 
   	// run at 50Hz?
-  	ros::Rate loop_rate(1000);
+  	ros::Rate loop_rate(50);
     lastUpdate = ros::Time();
     newMessage = false;
 
