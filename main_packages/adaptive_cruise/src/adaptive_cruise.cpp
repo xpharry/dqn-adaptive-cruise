@@ -2,8 +2,10 @@
 #include "std_msgs/Float32.h"
 #include "std_msgs/Float64.h"
 #include "geometry_msgs/Twist.h"
+#include <math.h>
 
-const double safe_dist = 5.0;
+using namespace std;
+
 const double max_speed = 5.0;
 
 double dist;
@@ -30,7 +32,8 @@ int main(int argc, char **argv) {
 
     double begin = ros::Time::now().toSec();
     while(ros::ok()) {
-        double cmd_speed = dist > safe_dist ? cur_speed + 0.1 * max_speed : cur_speed - 0.1 * max_speed;
+        double safe_dist = max(cur_speed * 3, 10.0);
+        double cmd_speed = dist > safe_dist ? cur_speed + 0.05 * max_speed : cur_speed - 0.05 * max_speed;
         cmd_speed = cmd_speed > max_speed ? max_speed : cmd_speed;
         cmd_speed = cmd_speed < 0 ? 0 : cmd_speed;
         std_msgs::Float64 cmd_msg;

@@ -79,7 +79,8 @@ private:
     void odomCallback(const nav_msgs::Odometry& odom_rcvd);
     void desSpeedCallback(const std_msgs::Float64& speed_rcvd);
 
-    void generate_path();
+    void generate_circle_path();
+    void generate_track_path();
     double compute_des_state();
 }; // end of class definition
 
