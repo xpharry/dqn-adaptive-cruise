@@ -3,7 +3,6 @@ import os
 import sys
 import argparse
 import csv
-import cv2
 import numpy as np
 import tensorflow as tf
 from keras.models import Sequential

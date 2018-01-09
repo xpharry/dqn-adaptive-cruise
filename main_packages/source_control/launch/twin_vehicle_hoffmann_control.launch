@@ -20,11 +20,11 @@
 		<remap from="/catvehicle/cmd_vel" to="/catvehicle2/cmd_vel"/>
 		<remap from="/catvehicle/des_speed" to="/catvehicle2/des_speed"/>
 	</node>
-	<node name="adaptive_cruise" pkg="adaptive_cruise" type="adaptive_cruise" output="screen">
+	<!--<node name="adaptive_cruise" pkg="adaptive_cruise" type="adaptive_cruise" output="screen">
 		<remap from="/catvehicle/distanceEstimator/dist" to="/catvehicle2/distanceEstimator/dist"/>
 		<remap from="/catvehicle/cmd_vel" to="/catvehicle2/cmd_vel"/>
 		<remap from="/catvehicle/des_speed" to="/catvehicle2/des_speed"/>
-	</node>
+	</node>-->
 
 	<!-- rqt plot-->
 	<node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" args="/catvehicle1/des_speed, /catvehicle1/cmd_vel/linear/x, /catvehicle2/cmd_vel/linear/x" output="screen"/>
