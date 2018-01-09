@@ -67,6 +67,10 @@ This work ...
 **12/21:**
 * Reviewed my previous BehaviorLearning project and set up deep learning env.
 
+**1/9/2018:**
+* Trained a braker model with CNN.
+* Applied the braker on the simulation.
+
 ## Resources
 
 1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)
