@@ -71,6 +71,13 @@ This work ...
 * Trained a braker model with CNN.
 * Applied the braker on the simulation.
 
+**1/21/2018:**
+* Replace the hard coded map by a csv file and display it in rviz.
+* Found how to reset Gazebo: `rosservice call /gazebo/reset_world`
+* In C++, an example to set initial gazebo state is like:
+ `set_model_state_client =
+	  n.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");`
+
 ## Resources
 
 1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)
