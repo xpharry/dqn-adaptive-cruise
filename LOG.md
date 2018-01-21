@@ -75,6 +75,7 @@ This work ...
 * Replace the hard coded map by a csv file and display it in rviz.
 * Found how to reset Gazebo: `rosservice call /gazebo/reset_world`
 * In C++, an example to set initial gazebo state is like:
+ 
  `set_model_state_client =
 	  n.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");`
 
