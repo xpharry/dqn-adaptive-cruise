@@ -69,7 +69,7 @@ roslaunch catvehicle catvehicle_skidpan.launch
          command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle1' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
 <include file="$(find catvehicle)/launch/catvehicle.launch">
     <arg name="robot_name" value="catvehicle1"/>
-    <arg name="init_pose" value="-x 0 -y 0 -z 0"/>
+    <arg name="init_pose" value="-x 0 -y 0 -z -0.30"/>
     <arg name="config_file" value="catvehicle_control.yaml"/>
 </include>
 
@@ -85,7 +85,7 @@ roslaunch catvehicle catvehicle_skidpan.launch
          command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle2' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
 <include file="$(find catvehicle)/launch/catvehicle.launch">
     <arg name="robot_name" value="catvehicle2"/>
-    <arg name="init_pose" value="-x -20 -y 0 -z 0"/>
+    <arg name="init_pose" value="-x -20 -y 0 -z -0.30"/>
     <arg name="config_file" value="catvehicle_control.yaml"/>
 </include>
 

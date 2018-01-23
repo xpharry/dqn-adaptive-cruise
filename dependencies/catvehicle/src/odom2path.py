@@ -45,13 +45,9 @@ class odom2path:
         # the callback method is called
         rospy.Subscriber('odom'.format(ns), Odometry, self.constructPathCallback)
         # setup a Subscriber to reset path once simulation is reset
-        rospy.Subscriber('reset_path'.format(ns), String, self.resetPathCallback)
-        # setup a Subscriber to reset path once simulation is reset
-        rospy.Subscriber('reset_odom'.format(ns), Bool, self.resetPathCallback)
+        rospy.Subscriber('reset_sim'.format(ns), String, self.resetSimCallback)
         # reset path
         self.pub_path = rospy.Publisher('path'.format(ns), Path, queue_size=10)
-        # reset odom
-        self.pub_odom = rospy.Publisher('odom'.format(ns), Odometry, queue_size=10)
         # we want to publish immediately when we receive a new data point
         self.publishNow = True
         # initialize the path message and its header
@@ -110,14 +106,9 @@ class odom2path:
             # after we publish, we ensure to wait until a new odom point arrives
             self.publishNow = False
 
-    def resetPathCallback(self,msg):
+    def resetSimCallback(self,msg):
         self.pathMsg.poses = []
-        rospy.loginfo("The path point array is cleared." + msg)
-
-    def resetPathCallback(self,data):
-        odom = Odometry(header=rospy.Header(frame_id=self.odom_frame), child_frame_id=self.base_frame)
-        self.pub_odom.publish(odom)
-        rospy.loginfo("The odom is reset." + msg)
+        rospy.logdebug("The path point array is cleared.")
 
 def usage():
     print('odom2path -n catvehicle')

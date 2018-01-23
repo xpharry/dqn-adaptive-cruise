@@ -6,9 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /LaserScan1
-        - /PointCloud1
-        - /Odometry1
         - /Path1
       Splitter Ratio: 0.5
     Tree Height: 895
@@ -165,8 +162,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 3.12195
-        Min Value: -0.473785
+        Max Value: 3.09624
+        Min Value: -0.473951
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -191,16 +188,6 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
-    - Angle Tolerance: 0.1
-      Class: rviz/Odometry
-      Color: 255; 25; 0
-      Enabled: true
-      Keep: 98
-      Length: 1
-      Name: Odometry
-      Position Tolerance: 0.1
-      Topic: /catvehicle/odom
       Value: true
     - Alpha: 1
       Buffer Length: 1
@@ -249,7 +236,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 282.412
+      Distance: 218.7
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
@@ -264,7 +251,7 @@ Visualization Manager:
       Pitch: 1.4848
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.69857
+      Yaw: 4.68857
     Saved: ~
 Window Geometry:
   Displays:

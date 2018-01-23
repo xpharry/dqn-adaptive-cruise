@@ -19,12 +19,14 @@ class Simulation:
 
 		self.scan_ranges = []
 		self.collision = False
+		self.reset_proxy = rospy.ServiceProxy('/gazebo/reset_world', EmptySrv)
 
 		# the callback method is called
-		rospy.Subscriber('/catvehicle/front_laser_points', LaserScan, self.scanCallback)
-		self.vel_pub = rospy.Publisher('/catvehicle/cmd_vel', Twist, queue_size=10)
-		self.reset_path_pub = rospy.Publisher('/catvehicle/reset_path', String, queue_size=10)
-		self.reset_odom_pub = rospy.Publisher('/catvehicle/reset_odom', Bool, queue_size=10)
+		rospy.Subscriber('/catvehicle2/front_laser_points', LaserScan, self.scanCallback)
+		self.vel_pub = rospy.Publisher('/catvehicle2/cmd_vel', Twist, queue_size=10)
+		
+		self.reset_sim_pub1 = rospy.Publisher('/catvehicle1/reset_sim', String, queue_size=10)
+		self.reset_sim_pub2 = rospy.Publisher('/catvehicle2/reset_sim', String, queue_size=10)
 
 	def scanCallback(self,data):
 		self.scan_ranges = data.ranges
@@ -55,6 +57,14 @@ class Simulation:
 			print "Service \'set_model_state\' call failed: %s"%e
 
 	def reset(self):
+		# # Resets the state of the environment and returns an initial observation.
+		# rospy.wait_for_service('/gazebo/reset_world')
+		# try:
+		# 	#reset_proxy.call()
+		# 	self.reset_proxy()
+		# except (rospy.ServiceException) as e:
+		# 	print ("/gazebo/reset_world service call failed")
+
 		sim = rospy.get_param('/use_sim_time')
 		if sim is True:
 			rospy.loginfo('Waiting until simulated robot is prepared for the task...')
@@ -66,26 +76,32 @@ class Simulation:
 		rospy.loginfo("Reset vehicle")
 
 		# define initial pose for later use
-		pose = Pose()
-		pose.position.x = 0.0
-		pose.position.y = 0.0
-		pose.position.z = 0.0
-		pose.orientation.x = 0.0
-		pose.orientation.y = 0.0
-		pose.orientation.z = 0.0
-		pose.orientation.w = 0.0
-
+		pose1 = Pose()
+		pose1.position.x = 0.0
+		pose1.position.y = 0.0
+		pose1.position.z = -0.30
+		pose1.orientation.x = 0.0
+		pose1.orientation.y = 0.0
+		pose1.orientation.z = 0.0
+		pose1.orientation.w = 0.0
 		# set initial model state
-		model_state = ModelState()
-		model_state.model_name = "catvehicle"
-		model_state.pose = pose
+		model_state1 = ModelState()
+		model_state1.model_name = "catvehicle1"
+		model_state1.pose = pose1
+		self.set_model_state_client(model_state1)
 
-		self.set_model_state_client(model_state)
+		pose2 = pose1
+		pose2.position.x = -20.0
+		pose2.position.z = -0.30
+		model_state2 = ModelState()
+		model_state2.model_name = "catvehicle2"
+		model_state2.pose = pose2
+		self.set_model_state_client(model_state2)
 
-		self.reset_path_pub.publish('bla')
-		# rospy.sleep(rospy.Duration(1))
-
-		# self.reset_odom_pub.publish(True)
+		msg = String()
+		msg.data = "123"
+		self.reset_sim_pub1.publish(msg)
+		self.reset_sim_pub2.publish(msg)
 
 		rospy.loginfo("Unpausing physics")
 		self.unpause_physics_client()
@@ -104,7 +120,7 @@ class Simulation:
 		one_sec = rospy.Duration(1)
 		begin = rospy.Time.now().to_sec()
 		now = rospy.Time.now().to_sec()
-		while now - begin < 100000:
+		while now - begin < 10000:
 			now = rospy.Time.now().to_sec()
 			rospy.loginfo("I am doing something ...")
 			# self.vel_pub.publish(vel_msg)
@@ -115,7 +131,7 @@ class Simulation:
 				self.reset()		
 
 	def detect_collision(self,scan_ranges):
-		min_range = 5 #0.2
+		min_range = 1.6
 		for i in range(len(scan_ranges)):
 			if (min_range > scan_ranges[i] > 0):
 				self.collision = True

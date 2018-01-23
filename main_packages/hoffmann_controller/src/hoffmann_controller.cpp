@@ -73,6 +73,7 @@ void HoffmannController::odomCallback(const nav_msgs::Odometry& odom_rcvd) {
     state_y_ = odom_rcvd.pose.pose.position.y;
     state_quat_ = odom_rcvd.pose.pose.orientation;
     state_psi_ = convertPlanarQuat2Phi(state_quat_); // cheap conversion from quaternion to heading for planar motion
+    state_speed_ = odom_rcvd.twist.twist.linear.x;
 }
 
 void HoffmannController::desSpeedCallback(const std_msgs::Float64& speed_rcvd) {
@@ -162,7 +163,14 @@ void HoffmannController::nl_steering() {
 }
 
 double HoffmannController::speed_cmd_fnc(double des_speed, double dist_err) {
-    return dist_err > 4 ? 0 : des_speed;
+    des_speed = dist_err > 4 ? 0 : des_speed;
+    double cmd_speed;
+    if (des_speed > state_speed_) {
+        cmd_speed = state_speed_ + 0.1;
+    } else if (des_speed < state_speed_) {
+        cmd_speed = state_speed_ - 0.1;
+    }
+    return cmd_speed;
     // return des_speed;
 }
 
