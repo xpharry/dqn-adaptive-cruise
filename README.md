@@ -10,7 +10,6 @@ This work ...
 
 **9/27:**
 
-
 * Duplicate [mybot package](https://github.com/xpharry/making_my_robot_in_gazebo.git) into the repo.
 
 **9/29:**
@@ -53,31 +52,44 @@ This work ...
   * Create launch files and reports.
   
 **12/9:**
+
 * Hoffmann Controller in Simulink is tested.
 
 **12/15:**
+
 * Wrote a Hoffmann Controller in cpp and tested well.
 
 **12/16:**
+
 * Added in the second Catvehicle and made the both run together in the same trajectory.
 
 **12/20:**
+
 * Added in adaptive cruise control.
 
 **12/21:**
+
 * Reviewed my previous BehaviorLearning project and set up deep learning env.
 
 **1/9/2018:**
+
 * Trained a braker model with CNN.
 * Applied the braker on the simulation.
 
 **1/21/2018:**
+
 * Replace the hard coded map by a csv file and display it in rviz.
 * Found how to reset Gazebo: `rosservice call /gazebo/reset_world`
 * In C++, an example to set initial gazebo state is like:
 
     `set_model_state_client =
 	  n.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");`
+
+**1/23/2018:**
+
+* Realized simulation re-initialization and tested on twin vehicle case.
+* Added in C++11 support for Catvehicle. Simply add in a line `add_compile_options(-std=c++11)` in CMakeLists.txt.
+
 
 ## Resources
 
