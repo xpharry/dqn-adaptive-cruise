@@ -1,0 +1,2 @@
+from gym_vehicle.envs.catvehicle.gazebo_circuit_large_catvehicle_lidar import GazeboCircuitLargeCatvehicleLidarEnv
+from gym_vehicle.envs.catvehicle.gazebo_circuit_large_catvehicle_lidar_nn import GazeboCircuitLargeCatvehicleLidarNnEnv
