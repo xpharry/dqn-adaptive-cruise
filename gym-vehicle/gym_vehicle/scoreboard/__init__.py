@@ -40,4 +40,16 @@ add_task(
     summary='Test2.',
 )
 
+add_task(
+    id='GazeboTrackCatvehicleLidar-v0',
+    group='gym-vehicle',
+    summary='Test3.',
+)
+
+add_task(
+    id='GazeboTrackCatvehicleLidarNn-v0',
+    group='gym-vehicle',
+    summary='Test4.',
+)
+
 registry.finalize()

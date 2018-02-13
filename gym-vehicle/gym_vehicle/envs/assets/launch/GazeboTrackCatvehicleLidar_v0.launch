@@ -1,0 +1,67 @@
+<launch>
+  <arg name="paused" value="true"/>
+  <arg name="use_sim_time" default="false"/>
+  <arg name="gui" default="false"/>
+  <arg name="headless" value="true"/>
+
+  <!-- change these defaults here, or as a cmd line arg, in order to turn off   -->
+  <!--   sensors that you aren't using, thus freeing up computational resources -->
+  <!--   and reducing storage space for your bagfiles -->
+  <arg name="front_laser_points" default="true"/>
+  <arg name="velodyne_points" default="false"/>
+  <arg name="camera_right" default="false"/>
+  <arg name="camera_left" default="false"/>
+  <!-- change these defaults here, to see further left with the velodyne   -->
+  <arg name="velodyne_max_angle" default="0.4"/>
+  <!-- change these defaults here, to see further right with the velodyne   -->
+  <arg name="velodyne_min_angle" default="-0.4"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="world_name" value="$(find source_control)/worlds/skidpan.world"/>
+  </include>
+
+  <group ns="catvehicle1">
+    <param name="robot_description"
+             command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle1' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
+    <include file="$(find source_control)/launch/catvehicle.launch">
+      <arg name="robot_name" value="catvehicle1"/>
+      <arg name="init_pose" value="-x 0 -y 0 -z -0.30"/>
+      <arg name="config_file" value="catvehicle_control.yaml"/>
+    </include>
+    <node pkg="tf_broadcaster" type="tf_broadcaster" args="/catvehicle1" name="catvehicle1_tf_broadcaster" />
+  </group>
+
+  <group ns="catvehicle2">
+    <param name="robot_description"
+             command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle2' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
+    <include file="$(find source_control)/launch/catvehicle.launch">
+      <arg name="robot_name" value="catvehicle2"/>
+      <arg name="init_pose" value="-x -20 -y 0 -z -0.30"/>
+      <arg name="config_file" value="catvehicle_control.yaml"/>
+    </include>
+    <node pkg="tf_broadcaster" type="tf_broadcaster" args="/catvehicle2" name="catvehicle2_tf_broadcaster" />
+  </group>
+
+  <!-- Enable hoffmann_controller for Catvehicle 1 -->
+  <node name="hoffmann_controller1" pkg="hoffmann_controller" type="hoffmann_controller" output="screen">
+	<remap from="/catvehicle/odom" to="/catvehicle1/odom"/>
+	<remap from="/catvehicle/cmd_vel" to="/catvehicle1/cmd_vel"/>
+	<remap from="/catvehicle/des_speed" to="/catvehicle1/des_speed"/>
+  </node>
+  <node name="speed_designer" pkg="speed_designer" type="speed_designer">
+	<remap from="/catvehicle/des_speed" to="/catvehicle1/des_speed"/>
+  </node>
+
+  <!-- Enable hoffmann_controller for Catvehicle 2 -->
+  <node name="hoffmann_controller2" pkg="hoffmann_controller" type="hoffmann_controller" output="screen">
+	<remap from="/catvehicle/odom" to="/catvehicle2/odom"/>
+	<remap from="/catvehicle/cmd_vel" to="/catvehicle2/cmd_vel"/>
+	<remap from="/catvehicle/des_speed" to="/catvehicle2/des_speed"/>
+  </node>
+
+  <node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/twin_catvehicle_startup.rviz" output="screen"/>
+</launch>

@@ -117,22 +117,6 @@ class GazeboCircuitLargeCatvehicleLidarEnv(gazebo_env.GazeboEnv):
         # except (rospy.ServiceException) as e:
         #     print ("/gazebo/reset_simulation service call failed")
 
-        # Unpause simulation to make observation
-        rospy.wait_for_service('/gazebo/unpause_physics')
-        try:
-            #resp_pause = pause.call()
-            self.unpause()
-        except (rospy.ServiceException) as e:
-            print ("/gazebo/unpause_physics service call failed")
-
-        #read laser data
-        data = None
-        while data is None:
-            try:
-                data = rospy.wait_for_message('/catvehicle/front_laser_points', LaserScan, timeout=5)
-            except:
-                pass
-
         # define initial pose for later use
         pose = Pose()
         pose.position.x = -35.0
@@ -152,16 +136,32 @@ class GazeboCircuitLargeCatvehicleLidarEnv(gazebo_env.GazeboEnv):
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
             ret = set_model_state(model_state)
-            print (ret.status_message)
+            print(ret.status_message)
         except (rospy.ServiceException) as e:
-            print ("Service \'set_model_state\' call failed: %s" % e)
+            print("Service \'set_model_state\' call failed: %s" % e)
 
         rospy.wait_for_service('/gazebo/pause_physics')
         try:
             #resp_pause = pause.call()
             self.pause()
         except (rospy.ServiceException) as e:
-            print ("/gazebo/pause_physics service call failed")
+            print("/gazebo/pause_physics service call failed")
+
+        # Unpause simulation to make observation
+        rospy.wait_for_service('/gazebo/unpause_physics')
+        try:
+            #resp_pause = pause.call()
+            self.unpause()
+        except (rospy.ServiceException) as e:
+            print ("/gazebo/unpause_physics service call failed")
+
+        #read laser data
+        data = None
+        while data is None:
+            try:
+                data = rospy.wait_for_message('/catvehicle/front_laser_points', LaserScan, timeout=5)
+            except:
+                pass
 
         state = self.discretize_observation(data,5)
 

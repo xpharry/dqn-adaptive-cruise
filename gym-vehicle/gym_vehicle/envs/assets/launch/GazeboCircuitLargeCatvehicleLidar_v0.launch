@@ -8,9 +8,9 @@
   <!--   sensors that you aren't using, thus freeing up computational resources -->
   <!--   and reducing storage space for your bagfiles -->
   <arg name="front_laser_points" default="true"/>
-  <arg name="velodyne_points" default="true"/>
-  <arg name="camera_right" default="true"/>
-  <arg name="camera_left" default="true"/>
+  <arg name="velodyne_points" default="false"/>
+  <arg name="camera_right" default="false"/>
+  <arg name="camera_left" default="false"/>
   <!-- change these defaults here, to see further left with the velodyne   -->
   <arg name="velodyne_max_angle" default="0.4"/>
   <!-- change these defaults here, to see further right with the velodyne   -->
@@ -28,11 +28,11 @@
              command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
     <include file="$(find source_control)/launch/catvehicle.launch">
       <arg name="robot_name" value="catvehicle"/>
-      <arg name="init_pose" value="-x -35 -y 35 -z 0"/>
+      <arg name="init_pose" value="-x -10 -y 35 -z 0"/>
       <arg name="config_file" value="catvehicle_control.yaml"/>
     </include>
   </group>
 
   <node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
-  <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/catvehicle_startup.rviz" output="screen"/>-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/catvehicle_startup.rviz" output="screen"/>
 </launch>

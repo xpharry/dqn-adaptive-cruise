@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import gym
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -24,11 +25,11 @@ class LivePlot(object):
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
     def plot(self):
-        results = gym.monitoring.monitor.load_results(self.outdir)
-        data =  results[self.data_key]
+        results = gym.wrappers.Monitor.load_results(self.outdir)
+        data = results[self.data_key]
 
         #only update plot if data is different (plot calls are expensive)
-        if data !=  self._last_data:
+        if data != self._last_data:
             self._last_data = data
             plt.plot(data, color=self.line_color)
 

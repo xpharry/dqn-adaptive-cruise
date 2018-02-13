@@ -72,7 +72,7 @@ class DeepQ:
 
             if activationType == "LeakyReLU":
                 model.add(LeakyReLU(alpha=0.01))
-            else :
+            else:
                 model.add(Activation(activationType))
 
             for index in range(1, len(hiddenLayers)):
@@ -83,7 +83,7 @@ class DeepQ:
                     model.add(Dense(layerSize, kernel_initializer='lecun_uniform', bias=bias))
                 if activationType == "LeakyReLU":
                     model.add(LeakyReLU(alpha=0.01))
-                else :
+                else:
                     model.add(Activation(activationType))
                 if dropout > 0:
                     model.add(Dropout(dropout))
@@ -103,7 +103,7 @@ class DeepQ:
             model.add(Dense(hiddenLayers[0], input_shape=(self.input_size,), kernel_initializer='lecun_uniform'))
             if activationType == "LeakyReLU":
                 model.add(LeakyReLU(alpha=0.01))
-            else :
+            else:
                 model.add(Activation(activationType))
 
             for index in range(1, len(hiddenLayers)):
@@ -112,7 +112,7 @@ class DeepQ:
                 model.add(Dense(layerSize, kernel_initializer='lecun_uniform'))
                 if activationType == "LeakyReLU":
                     model.add(LeakyReLU(alpha=0.01))
-                else :
+                else:
                     model.add(Activation(activationType))
             model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
             model.add(Activation("linear"))
@@ -172,7 +172,7 @@ class DeepQ:
         rand = random.random()
         if rand < explorationRate:
             action = np.random.randint(0, self.output_size)
-        else :
+        else:
             action = self.getMaxIndex(qValues)
         return action
 
@@ -261,18 +261,15 @@ def clear_monitor_files(training_dir):
 
 if __name__ == '__main__':
 
-    env = gym.make('GazeboCircuitLargeCatvehicleLidarNn-v0')
-
-    time.sleep(2.0)  # delays for 5 seconds. You can Also Use Float Value.
-
+    env = gym.make('GazeboTrackCatvehicleLidarNn-v0')
     outdir = '/tmp/gazebo_vehicle_experiments/'
 
     continue_execution = False
     #fill this if continue_execution=True
 
-    weights_path = '/tmp/catvehicle_cl_dqn_ep200.h5'
-    monitor_path = '/tmp/catvehicle_cl_dqn_ep200'
-    params_json  = '/tmp/catvehicle_cl_dqn_ep200.json'
+    weights_path = '/tmp/catvehicle_track_dqn_ep200.h5'
+    monitor_path = '/tmp/catvehicle_track_dqn_ep200'
+    params_json  = '/tmp/catvehicle_track_dqn_ep200.json'
 
     if not continue_execution:
         #Each time we take a sample and update our weights it is called a mini-batch.
@@ -287,8 +284,8 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 180
-        network_outputs = 21
+        network_inputs = 2
+        network_outputs = 7
         network_structure = [300, 300]
         current_epoch = 0
 
@@ -356,14 +353,10 @@ if __name__ == '__main__':
             if stepCounter >= learnStart:
                 if stepCounter <= updateTargetNetwork:
                     deepQ.learnOnMiniBatch(minibatch_size, False)
-                else :
+                else:
                     deepQ.learnOnMiniBatch(minibatch_size, True)
 
             observation = newObservation
-
-            if t >= 1000:
-                print("reached the end! :D")
-                done = True
 
             # env.monitor.flush(force=True)
             if done:
@@ -380,14 +373,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel('/tmp/catvehicle_cl_dqn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel('/tmp/catvehicle_track_dqn_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
-                        copy_tree(outdir, '/tmp/catvehicle_cl_dqn_ep'+str(epoch))
+                        copy_tree(outdir, '/tmp/catvehicle_track_dqn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open('/tmp/catvehicle_cl_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open('/tmp/catvehicle_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 

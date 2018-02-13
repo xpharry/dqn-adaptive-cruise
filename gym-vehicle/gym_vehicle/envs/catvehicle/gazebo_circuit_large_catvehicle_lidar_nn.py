@@ -31,13 +31,13 @@ class GazeboCircuitLargeCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         self._seed()
 
-    def calculate_observation(self,data):
-        min_range = 2.0
+    def calculate_observation(self, data):
+        min_range = 4.0
         done = False
         for i, item in enumerate(data.ranges):
-            if (min_range > data.ranges[i] > 0):
+            if min_range > data.ranges[i] > 0:
                 done = True
-        return data.ranges,done
+        return data.ranges, done
 
     def _seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -47,14 +47,14 @@ class GazeboCircuitLargeCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         rospy.wait_for_service('/gazebo/unpause_physics')
         try:
             self.unpause()
-        except (rospy.ServiceException) as e:
-            print ("/gazebo/unpause_physics service call failed")
+        except rospy.ServiceException as e:
+            print("/gazebo/unpause_physics service call failed")
 
-        max_ang_speed = 1.0
-        ang_vel = (action-10)*max_ang_speed*0.1 #from (-0.33 to + 0.33)
+        max_ang_speed = 0.3
+        ang_vel = (action-10)*max_ang_speed*0.1 # from (-0.33 to + 0.33)
 
         vel_cmd = Twist()
-        vel_cmd.linear.x = 2.0
+        vel_cmd.linear.x = 0.2
         vel_cmd.angular.z = ang_vel
         self.vel_pub.publish(vel_cmd)
 
@@ -69,10 +69,10 @@ class GazeboCircuitLargeCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         try:
             #resp_pause = pause.call()
             self.pause()
-        except (rospy.ServiceException) as e:
-            print ("/gazebo/pause_physics service call failed")
+        except rospy.ServiceException as e:
+            print("/gazebo/pause_physics service call failed")
 
-        state,done = self.calculate_observation(data)
+        state, done = self.calculate_observation(data)
 
         if not done:
             # Straight reward = 5, Max angle reward = 0.5
@@ -92,25 +92,9 @@ class GazeboCircuitLargeCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         # except (rospy.ServiceException) as e:
         #     print ("/gazebo/reset_simulation service call failed")
 
-        # Unpause simulation to make observation
-        rospy.wait_for_service('/gazebo/unpause_physics')
-        try:
-            #resp_pause = pause.call()
-            self.unpause()
-        except (rospy.ServiceException) as e:
-            print ("/gazebo/unpause_physics service call failed")
-
-        #read laser data
-        data = None
-        while data is None:
-            try:
-                data = rospy.wait_for_message('/catvehicle/front_laser_points', LaserScan, timeout=5)
-            except:
-                pass
-
         # define initial pose for later use
         pose = Pose()
-        pose.position.x = -35.0
+        pose.position.x = -10.0
         pose.position.y = 35.0
         pose.position.z = 0.0
         pose.orientation.x = 0.0
@@ -127,17 +111,33 @@ class GazeboCircuitLargeCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
             ret = set_model_state(model_state)
-            print (ret.status_message)
+            print(ret.status_message)
         except (rospy.ServiceException) as e:
-            print ("Service \'set_model_state\' call failed: %s" % e)
+            print("Service \'set_model_state\' call failed: %s" % e)
+
+        # Unpause simulation to make observation
+        rospy.wait_for_service('/gazebo/unpause_physics')
+        try:
+            #resp_pause = pause.call()
+            self.unpause()
+        except (rospy.ServiceException) as e:
+            print("/gazebo/unpause_physics service call failed")
+
+        #read laser data
+        data = None
+        while data is None:
+            try:
+                data = rospy.wait_for_message('/catvehicle/front_laser_points', LaserScan, timeout=5)
+            except:
+                pass
 
         rospy.wait_for_service('/gazebo/pause_physics')
         try:
-            #resp_pause = pause.call()
+            # resp_pause = pause.call()
             self.pause()
-        except (rospy.ServiceException) as e:
-            print ("/gazebo/pause_physics service call failed")
+        except rospy.ServiceException as e:
+            print("/gazebo/pause_physics service call failed")
 
-        state,done = self.calculate_observation(data)
+        state, done = self.calculate_observation(data)
 
         return np.asarray(state)

@@ -20,9 +20,10 @@ def render():
     elif ((x-render_episodes)%render_interval == 0) and (x != 0) and (x > render_skip) and (render_episodes < x):
         env.render(close=True)
 
+
 if __name__ == '__main__':
 
-    env = gym.make('GazeboCircuitLargeCatvehicleLidar-v0')
+    env = gym.make('GazeboTrackCatvehicleLidar-v0')
 
     time.sleep(1.0)  # delays for 5 seconds. You can Also Use Float Value.
 

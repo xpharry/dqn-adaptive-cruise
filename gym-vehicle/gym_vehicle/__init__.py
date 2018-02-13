@@ -17,3 +17,13 @@ register(
     entry_point='gym_vehicle.envs.catvehicle:GazeboCircuitLargeCatvehicleLidarNnEnv',
     # More arguments here
 )
+register(
+    id='GazeboTrackCatvehicleLidar-v0',
+    entry_point='gym_vehicle.envs.catvehicle:GazeboTrackCatvehicleLidarEnv',
+    # More arguments here
+)
+register(
+    id='GazeboTrackCatvehicleLidarNn-v0',
+    entry_point='gym_vehicle.envs.catvehicle:GazeboTrackCatvehicleLidarNnEnv',
+    # More arguments here
+)
