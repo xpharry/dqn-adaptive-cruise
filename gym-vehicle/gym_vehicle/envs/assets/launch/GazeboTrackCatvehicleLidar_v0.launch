@@ -62,6 +62,6 @@
 	<remap from="/catvehicle/des_speed" to="/catvehicle2/des_speed"/>
   </node>
 
-  <node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
+  <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/twin_catvehicle_startup.rviz" output="screen"/>
 </launch>

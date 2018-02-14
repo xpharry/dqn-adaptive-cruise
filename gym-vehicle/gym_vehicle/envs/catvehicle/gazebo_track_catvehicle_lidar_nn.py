@@ -137,7 +137,7 @@ class GazeboTrackCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
             pose = Pose()
             phi = self.min_dang(phi0 + 2.0 * math.pi / medges * i)
             pose.position.x = ra * math.cos(phi) - ra
-            pose.position.y = ra * math.sin(phi) - ra
+            pose.position.y = ra * math.sin(phi) + ra
             pose.position.z = 0.0
 
             theta = self.min_dang(phi + math.pi / 2.0)
@@ -146,8 +146,8 @@ class GazeboTrackCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
             path.append(pose)
 
-        print("=============== Status Bar ==================")
-        print("path generated! length = %d" % len(path))
+        # print("=============== Status Bar ==================")
+        # print("path generated! length = %d" % len(path))
         return path
 
     def compute_dist(self, a, b):
@@ -177,7 +177,7 @@ class GazeboTrackCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         if num_units < 0:
             num_units = num_units + len(path)
         track_dist = num_units * unit_dist
-        print("index 1 = %d; index 2 = %d" % (index1, index2))
+        # print("index 1 = %d; index 2 = %d" % (index1, index2))
         # print(track_dist)
         return track_dist
 
@@ -203,7 +203,7 @@ class GazeboTrackCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         min_dist = 4.0
         done = False
         self.path_dist = self.calculate_track_dist(p1, p2, path)
-        print("path dist = %f " % self.path_dist)
+        # print("path dist = %f " % self.path_dist)
 
         if self.path_dist < min_dist:
             print("Collision detected!")
@@ -283,7 +283,7 @@ class GazeboTrackCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
             cmd_speed = self.saturate(cmd_speed)
             self.vel_pub.publish(cmd_speed)
 
-        print("travel distance = %f" % self.travel_dist)
+        # print("travel distance = %f" % self.travel_dist)
 
         # if not done:
 
@@ -333,7 +333,7 @@ class GazeboTrackCatvehicleLidarNnEnv(gazebo_env.GazeboEnv):
         # by acc_dist
         reward += 10 * acc_dist
 
-        if self.travel_dist >= 376:
+        if self.travel_dist >= 400:
             print("Safely finishing! :D")
             done = True
             self.travel_dist = 0
