@@ -97,7 +97,7 @@ class cmdvel2gazebo:
         # that the tire angle will not change
         # NOTE: we only set self.x to be 0 after 200ms of timeout
         if rospy.Time.now() - self.lastMsg > self.timeout:
-            rospy.loginfo(rospy.get_caller_id() + " timed out waiting for new input, setting velocity to 0.")
+            # rospy.loginfo(rospy.get_caller_id() + " timed out waiting for new input, setting velocity to 0.")
             self.x = 0
             return
 
@@ -150,7 +150,7 @@ def main(argv):
     # we eventually get the ns (namespace) from the ROS parameter server for this node
     ns=''
     node = cmdvel2gazebo(ns)
-    rate = rospy.Rate(100) # run at 10Hz
+    rate = rospy.Rate(10) # run at 10Hz
     while not rospy.is_shutdown():
         node.publish()
         rate.sleep()

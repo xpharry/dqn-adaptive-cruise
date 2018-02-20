@@ -63,7 +63,7 @@
     </light>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-2.7999 19.8021 145.697 0 1.5258 1.56512</pose>
+        <pose>0.03 -2.63 180.4 0 1.56 3.14</pose>
         <view_controller>orbit</view_controller>
       </camera>
     </gui>

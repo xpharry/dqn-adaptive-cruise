@@ -30,6 +30,7 @@
 
 import rospy
 from std_msgs.msg import String, Header
+from std_msgs.msg import Bool
 from geometry_msgs.msg import Twist, Pose, PoseStamped
 from nav_msgs.msg import Path, Odometry
 import sys, getopt
@@ -42,20 +43,25 @@ class odom2path:
 
         # set so that whenever we receive on the odom topic, 
         # the callback method is called
-        rospy.Subscriber('odom'.format(ns), Odometry, self.callback)
-        # setup the state data for the publisher
+        rospy.Subscriber('odom'.format(ns), Odometry, self.constructPathCallback)
+        # setup a Subscriber to reset path once simulation is reset
+        rospy.Subscriber('reset_sim'.format(ns), String, self.resetSimCallback)
+        # reset path
         self.pub_path = rospy.Publisher('path'.format(ns), Path, queue_size=10)
         # we want to publish immediately when we receive a new data point
         self.publishNow = True
         # initialize the path message and its header
         self.pathMsg = Path()
         self.pathMsg.header = Header()
+        # odom frame id
+        self.odom_frame = ''
+        self.base_frame = ''
         # initial values are not provided (set to None)
         self.x = None
         self.y = None
 
     # This method is called whenever we receive from the subscriber above
-    def callback(self,data):
+    def constructPathCallback(self,data):
         # we always publish right away
         self.publishNow = True
         # increment the header's sequence
@@ -65,6 +71,10 @@ class odom2path:
         # the odometry frame is set here
         # TODO: set a parameter for the odometry frame
         self.pathMsg.header.frame_id = '{0}/odom'.format(self.ns)
+
+        # odom frame id
+        self.odom_frame = data.header.frame_id
+        self.base_frame = data.child_frame_id
 
         # Note that we append a new pose to the path ONLY if the position
         # has moved more than 1m from its previous spot (L1 norm)
@@ -96,9 +106,12 @@ class odom2path:
             # after we publish, we ensure to wait until a new odom point arrives
             self.publishNow = False
 
+    def resetSimCallback(self,msg):
+        self.pathMsg.poses = []
+        rospy.logdebug("The path point array is cleared.")
+
 def usage():
     print('odom2path -n catvehicle')
-
 
 def main(argv):
     # here we must acquire the ns from the cmd line, so that we can 

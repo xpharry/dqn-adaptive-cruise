@@ -73,6 +73,7 @@ void HoffmannController::odomCallback(const nav_msgs::Odometry& odom_rcvd) {
     state_y_ = odom_rcvd.pose.pose.position.y;
     state_quat_ = odom_rcvd.pose.pose.orientation;
     state_psi_ = convertPlanarQuat2Phi(state_quat_); // cheap conversion from quaternion to heading for planar motion
+    state_speed_ = odom_rcvd.twist.twist.linear.x;
 }
 
 void HoffmannController::desSpeedCallback(const std_msgs::Float64& speed_rcvd) {
@@ -146,7 +147,7 @@ void HoffmannController::nl_steering() {
     //heading error: if positive, should rotate -omega to align with desired heading
     double heading_err = min_dang(state_psi_ - des_state_psi_);    
     
-    controller_speed = speed_cmd_fnc(des_state_speed_, lateral_err_); //default...should speed up/slow down appropriately
+    controller_speed = des_state_speed_; //speed_cmd_fnc(des_state_speed_, lateral_err_); //default...should speed up/slow down appropriately
     controller_omega = omega_cmd_fnc(heading_err, lateral_err_, controller_speed);
 
     // send out our speed/spin commands:
@@ -155,14 +156,22 @@ void HoffmannController::nl_steering() {
     cmd_publisher_.publish(twist_cmd_);  
         
     // DEBUG OUTPUT...
-    ROS_INFO("lateral err = %f,  \theading err = %f", lateral_err_, heading_err);
-    ROS_INFO("state_x_ = %f,     \tstate_y_ = %f,     \tstate_psi_ = %f", state_x_, state_y_, state_psi_);
-    ROS_INFO("des_state_x_ = %f, \tdes_state_y_ = %f, \tdes_state_psi_ = %f", des_state_x_, des_state_y_, des_state_psi_);
+    // ROS_INFO("lateral err = %f,  \theading err = %f", lateral_err_, heading_err);
+    // ROS_INFO("state_x_ = %f,     \tstate_y_ = %f,     \tstate_psi_ = %f", state_x_, state_y_, state_psi_);
+    // ROS_INFO("des_state_x_ = %f, \tdes_state_y_ = %f, \tdes_state_psi_ = %f", des_state_x_, des_state_y_, des_state_psi_);
     //END OF DEBUG OUTPUT   
 }
 
 double HoffmannController::speed_cmd_fnc(double des_speed, double dist_err) {
-    return dist_err > 4 ? 0 : des_speed;
+    // des_speed = dist_err > 4 ? 0 : des_speed;
+    double cmd_speed;
+    if (des_speed > state_speed_) {
+        cmd_speed = state_speed_ + 0.1;
+    } else if (des_speed < state_speed_) {
+        cmd_speed = state_speed_ - 0.1;
+    }
+    ROS_INFO("state_speed_ = %f,  \tcmd_speed = %f", state_speed_, cmd_speed);
+    return cmd_speed;
     // return des_speed;
 }
 
