@@ -90,6 +90,14 @@ This work ...
 * Realized simulation re-initialization and tested on twin vehicle case.
 * Added in C++11 support for Catvehicle. Simply add in a line `add_compile_options(-std=c++11)` in CMakeLists.txt.
 
+**2/14/2018:**
+
+* Trained a dqn model for vehicle on the track.
+
+**2/21/2018:**
+
+* Working one path planning.
+* Reformat folders.
 
 ## Resources
 
