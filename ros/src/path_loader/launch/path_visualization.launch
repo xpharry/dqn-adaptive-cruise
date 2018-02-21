@@ -4,4 +4,5 @@
         <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
         <param name="velocity" value="40" />
     </node>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find path_loader)../../../config/path_visulization.rviz"/>
 </launch>
