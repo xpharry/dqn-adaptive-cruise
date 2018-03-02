@@ -6,5 +6,5 @@
     </node>
     <node pkg="path_updater" type="pose_generator.py" name="pose_generator" output="screen"/>
     <node pkg="path_updater" type="path_updater.py" name="path_updater" output="screen"/>
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find path_loader)../../../config/path_updater_visulization.rviz"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find path_loader)../../../config/path_updater_visualization.rviz"/>
 </launch>

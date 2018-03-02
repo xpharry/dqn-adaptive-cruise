@@ -26,24 +26,6 @@ def quaternion_from_yaw(yaw):
 def generate_standard_track(radius, nedges):
     poses = []
 
-    # circle
-    phi0 = -pi/2
-    for i in range(nedges):
-        pose_stamped = PoseStamped()
-        pose = Pose()
-
-        phi = min_dang(phi0 + 2.0*pi/nedges * i)
-        pose.position.x = radius * cos(phi)
-        pose.position.y = radius * sin(phi) + radius
-        pose.position.z = 0.0  # let's hope so!
-
-        yaw = min_dang(phi + pi/2.0)
-        quat = quaternion_from_yaw(yaw)
-        pose.orientation = quat
-
-        pose_stamped.pose = pose
-        poses.append(pose_stamped)
-
     # straight line
     for i in range(nedges):
         pose_stamped = PoseStamped()
@@ -62,6 +44,25 @@ def generate_standard_track(radius, nedges):
         pose_stamped.pose = pose
 
         poses.append(pose_stamped)
+
+    # circle
+    phi0 = -pi/2
+    for i in range(nedges):
+        pose_stamped = PoseStamped()
+        pose = Pose()
+
+        phi = min_dang(phi0 + 2.0*pi/nedges * i)
+        pose.position.x = radius * cos(phi)
+        pose.position.y = radius * sin(phi) + radius
+        pose.position.z = 0.0  # let's hope so!
+
+        yaw = min_dang(phi + pi/2.0)
+        quat = quaternion_from_yaw(yaw)
+        pose.orientation = quat
+
+        pose_stamped.pose = pose
+        poses.append(pose_stamped)
+
 
     return poses
 

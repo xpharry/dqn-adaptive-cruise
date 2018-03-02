@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <node pkg="path_loader" type="path_loader.py" name="path_loader">
+    <node pkg="path_loader" type="path_loader.py" name="path_loader" output="screen">
         <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
         <param name="velocity" value="40" />
     </node>

@@ -84,7 +84,7 @@ def generate_circle_track(radius, nedges):
 
     # half circle
     phi0 = -pi/2
-    for i in range(nedges/2, nedges):
+    for i in range(nedges/2+1, nedges):
         pose_stamped = PoseStamped()
         pose = Pose()
 
