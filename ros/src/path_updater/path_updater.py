@@ -14,6 +14,9 @@ from std_msgs.msg import Int32
 import path_utils as utils
 import math
 
+from scipy.interpolate import interp1d
+
+
 '''
 This node will publish paths from the car's current position to some `x` distance ahead.
 

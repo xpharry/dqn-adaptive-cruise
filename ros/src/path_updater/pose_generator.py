@@ -55,7 +55,7 @@ class poseGenerator(object):
                 next_pose = self.base_path.poses[(seq+1)%(len(self.base_path.poses))]
             self.pose = next_pose
 
-            rospy.loginfo('Pose Seq = %d, x: %f, y % f' % (seq, self.pose.pose.position.x, self.pose.pose.position.y))
+            # rospy.loginfo('Pose Seq = %d, x: %f, y % f' % (seq, self.pose.pose.position.x, self.pose.pose.position.y))
 
             # Publish
             pose_stamped = PoseStamped()
