@@ -185,8 +185,9 @@ class PathLoader(object):
             map_x_prev = map_x
             map_y_prev = map_y
 
-        for i in range(len(maps_s)):
-            rospy.loginfo('i = %d, map_s = %f' % (i, maps_s[i]))
+        # debug
+        # for i in range(len(maps_s)):
+        #     rospy.loginfo('i = %d, map_s = %f' % (i, maps_s[i]))
 
         nlines = 4
 
@@ -202,7 +203,8 @@ class PathLoader(object):
                     x, y = self.get_xy(maps_s[i]+0.00001, d, maps_s, poses)
                 else:
                     x, y = self.get_xy(maps_s[i], d, maps_s, poses)
-                rospy.loginfo('map_x = %f, map_y = %f, x = %f, y = %f' % (poses[i].pose.position.x, poses[i].pose.position.y, x, y))
+                # debug
+                # rospy.loginfo('map_x = %f, map_y = %f, x = %f, y = %f' % (poses[i].pose.position.x, poses[i].pose.position.y, x, y))
 
                 pose_stamped = PoseStamped()
                 pose = Pose()
