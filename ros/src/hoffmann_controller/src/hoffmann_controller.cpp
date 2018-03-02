@@ -6,15 +6,15 @@
 // this header incorporates all the necessary #include files and defines the class "HoffmannController"
 #include "hoffmann_controller.h"
 
-//CONSTRUCTOR:  
+//CONSTRUCTOR:
 HoffmannController::HoffmannController(ros::NodeHandle* nodehandle):nh_(*nodehandle) { // constructor
     ROS_INFO("in class constructor of HoffmannController");
     initializeSubscribers(); // package up the messy work of creating subscribers; do this overhead in constructor
     initializePublishers();
     // generate_circle_path();
-    generate_track_path();
-    
-    state_psi_ = 1000.0; // put in impossible value for heading; 
+    // generate_track_path();
+
+    state_psi_ = 1000.0; // put in impossible value for heading;
     //test this value to make sure we have received a viable state message
     ROS_INFO("waiting for valid state message...");
     while (state_psi_ > 500.0) {
@@ -22,15 +22,15 @@ HoffmannController::HoffmannController(ros::NodeHandle* nodehandle):nh_(*nodehan
         std::cout << ".";
         ros::spinOnce();
     }
-    ROS_INFO("constructor: got a state message");    
-      
+    ROS_INFO("constructor: got a state message");
+
     //initialize desired state;  can be changed dynamically by publishing to topic /desState
     des_state_speed_ = MAX_SPEED; //can make dynamic via des_state_rcvd.twist.twist.linear.x;
-    
+
     // hard code a simple path: the world x axis
-    des_state_x_ = 0.0; 
-    des_state_y_ = 0.0; 
-    des_state_psi_ = 0.0; 
+    des_state_x_ = 0.0;
+    des_state_y_ = 0.0;
+    des_state_psi_ = 0.0;
 
     //initialize the twist command components, all to zero
     twist_cmd_.linear.x = 0.0;
@@ -44,12 +44,13 @@ HoffmannController::HoffmannController(ros::NodeHandle* nodehandle):nh_(*nodehan
 //member helper function to set up subscribers;
 void HoffmannController::initializeSubscribers() {
     ROS_INFO("Initializing Subscribers: gazebo state and desState");
-    
+
     //subscribe to gazebo messages; ONLY works in simulation
     // current_state_subscriber_ = nh_.subscribe("/gazebo_mobot_pose", 1, &HoffmannController::gazeboPoseCallback, this);
     // alternately we can use the topic "/catvehicle/odom"
     current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this);
-    designed_speed_subscriber_ = nh_.subscribe("/catvehicle/des_speed", 1, &HoffmannController::desSpeedCallback, this); 
+    designed_speed_subscriber_ = nh_.subscribe("/catvehicle/des_speed", 1, &HoffmannController::desSpeedCallback, this);
+    des_path_subscriber_ = nh_.subscribe("/local_path", 1, &HoffmannController::desPathCallback, this);
 }
 
 
@@ -73,11 +74,14 @@ void HoffmannController::odomCallback(const nav_msgs::Odometry& odom_rcvd) {
     state_y_ = odom_rcvd.pose.pose.position.y;
     state_quat_ = odom_rcvd.pose.pose.orientation;
     state_psi_ = convertPlanarQuat2Phi(state_quat_); // cheap conversion from quaternion to heading for planar motion
-    state_speed_ = odom_rcvd.twist.twist.linear.x;
 }
 
 void HoffmannController::desSpeedCallback(const std_msgs::Float64& speed_rcvd) {
     des_state_speed_ = speed_rcvd.data;
+}
+
+void HoffmannController::desPathCallback(const nav_msgs::Path& path_rcvd) {
+    des_path_ = path_rcvd;
 }
 
 //utility fnc to compute min delta angle, accounting for periodicity
@@ -130,48 +134,40 @@ geometry_msgs::Quaternion HoffmannController::convertPlanarPhi2Quaternion(double
 void HoffmannController::nl_steering() {
     double controller_speed;
     double controller_omega;
-    
+
     compute_des_state();
 
     double dx = des_state_x_ - state_x_;  //x-error relative to desired path
     double dy = des_state_y_ - state_y_;  //y-error
     double tx = cos(des_state_psi_); // [tx,ty] is tangent of desired path
-    double ty = sin(des_state_psi_); 
+    double ty = sin(des_state_psi_);
     double nx = ty; //components [nx, ny] of normal to path, points to left of desired heading
     double ny = -tx;
 
     double signnn = sign(dx*nx + dy*ny);
     double offset = sqrt(dx*dx + dy*dy);
     double lateral_err_ = signnn * offset;
-    double trip_dist_err = dx*tx + dy*ty; // progress error: if positive, then we are ahead of schedule    
+    double trip_dist_err = dx*tx + dy*ty; // progress error: if positive, then we are ahead of schedule
     //heading error: if positive, should rotate -omega to align with desired heading
-    double heading_err = min_dang(state_psi_ - des_state_psi_);    
-    
-    controller_speed = des_state_speed_; //speed_cmd_fnc(des_state_speed_, lateral_err_); //default...should speed up/slow down appropriately
+    double heading_err = min_dang(state_psi_ - des_state_psi_);
+
+    controller_speed = speed_cmd_fnc(des_state_speed_, lateral_err_); //default...should speed up/slow down appropriately
     controller_omega = omega_cmd_fnc(heading_err, lateral_err_, controller_speed);
 
     // send out our speed/spin commands:
     twist_cmd_.linear.x = controller_speed;
     twist_cmd_.angular.z = controller_omega;
-    cmd_publisher_.publish(twist_cmd_);  
-        
+    cmd_publisher_.publish(twist_cmd_);
+
     // DEBUG OUTPUT...
     // ROS_INFO("lateral err = %f,  \theading err = %f", lateral_err_, heading_err);
     // ROS_INFO("state_x_ = %f,     \tstate_y_ = %f,     \tstate_psi_ = %f", state_x_, state_y_, state_psi_);
     // ROS_INFO("des_state_x_ = %f, \tdes_state_y_ = %f, \tdes_state_psi_ = %f", des_state_x_, des_state_y_, des_state_psi_);
-    //END OF DEBUG OUTPUT   
+    //END OF DEBUG OUTPUT
 }
 
 double HoffmannController::speed_cmd_fnc(double des_speed, double dist_err) {
-    // des_speed = dist_err > 4 ? 0 : des_speed;
-    double cmd_speed;
-    if (des_speed > state_speed_) {
-        cmd_speed = state_speed_ + 0.1;
-    } else if (des_speed < state_speed_) {
-        cmd_speed = state_speed_ - 0.1;
-    }
-    ROS_INFO("state_speed_ = %f,  \tcmd_speed = %f", state_speed_, cmd_speed);
-    return cmd_speed;
+    return dist_err > 4 ? 0 : des_speed;
     // return des_speed;
 }
 
@@ -201,13 +197,13 @@ void HoffmannController::generate_circle_path() {
         pose.position.x = ra * cos(phi);
         pose.position.y = ra * sin(phi) + ra;
         pose.position.z = 0.0; // let's hope so!
-        
+
         double theta = min_dang(phi + M_PI/2.0);
         quat = convertPlanarPhi2Quaternion(theta);
         pose.orientation = quat;
 
         pose_stamped.pose = pose;
-        des_path_.poses.push_back(pose_stamped);            
+        des_path_.poses.push_back(pose_stamped);
     }
 
     // straight line
@@ -216,13 +212,13 @@ void HoffmannController::generate_circle_path() {
         pose.position.x = i * ra / nedges  - ra;
         pose.position.y = 0.0;
         pose.position.z = 0.0; // let's hope so!
-        
+
         double theta = 0.0;
         quat = convertPlanarPhi2Quaternion(theta);
         pose.orientation = quat;
 
         pose_stamped.pose = pose;
-        des_path_.poses.push_back(pose_stamped);         
+        des_path_.poses.push_back(pose_stamped);
     }
 }
 
@@ -243,13 +239,13 @@ void HoffmannController::generate_track_path() {
         pose.position.x = i * 2 * ra / nedges  - ra;
         pose.position.y = 0.0;
         pose.position.z = 0.0; // let's hope so!
-        
+
         double theta = 0.0;
         quat = convertPlanarPhi2Quaternion(theta);
         pose.orientation = quat;
 
         pose_stamped.pose = pose;
-        des_path_.poses.push_back(pose_stamped);         
+        des_path_.poses.push_back(pose_stamped);
     }
 
     // half circle 1
@@ -260,13 +256,13 @@ void HoffmannController::generate_track_path() {
         pose.position.x = ra * cos(phi) + ra;
         pose.position.y = ra * sin(phi) + ra;
         pose.position.z = 0.0; // let's hope so!
-        
+
         double theta = min_dang(phi + M_PI/2.0);
         quat = convertPlanarPhi2Quaternion(theta);
         pose.orientation = quat;
 
         pose_stamped.pose = pose;
-        des_path_.poses.push_back(pose_stamped);            
+        des_path_.poses.push_back(pose_stamped);
     }
 
     // straight line 1
@@ -276,13 +272,13 @@ void HoffmannController::generate_track_path() {
         pose.position.x = - i * 2 * ra / nedges  + ra;
         pose.position.y = 2.0 * ra;
         pose.position.z = 0.0; // let's hope so!
-        
+
         double theta = M_PI;
         quat = convertPlanarPhi2Quaternion(theta);
         pose.orientation = quat;
 
         pose_stamped.pose = pose;
-        des_path_.poses.push_back(pose_stamped);         
+        des_path_.poses.push_back(pose_stamped);
     }
 
     // half circle 2
@@ -293,13 +289,13 @@ void HoffmannController::generate_track_path() {
         pose.position.x = ra * cos(phi) - ra;
         pose.position.y = ra * sin(phi) + ra;
         pose.position.z = 0.0; // let's hope so!
-        
+
         double theta = min_dang(phi + M_PI/2.0);
         quat = convertPlanarPhi2Quaternion(theta);
         pose.orientation = quat;
 
         pose_stamped.pose = pose;
-        des_path_.poses.push_back(pose_stamped);            
+        des_path_.poses.push_back(pose_stamped);
     }
 }
 
@@ -307,6 +303,8 @@ double HoffmannController::compute_des_state() {
     // codegen
     double e = DBL_MAX;
     int index = 0;
+
+    ROS_INFO("PATH SIZE: %d", des_path_.poses.size());
 
     // find the nearest x,y
     for(int i = 0; i < des_path_.poses.size(); i++) {
@@ -333,17 +331,16 @@ int main(int argc, char** argv) {
 
     ROS_INFO("main: instantiating an object of type HoffmannController");
     //instantiate an ExampleRosClass object and pass in pointer to nodehandle for constructor to use
-    HoffmannController HoffmannController(&nh);  
- 
+    HoffmannController HoffmannController(&nh);
+
     ros::Rate sleep_timer(UPDATE_RATE); //a timer for desired rate, e.g. 50Hz
-   
+
     ROS_INFO:("starting steering algorithm");
     while (ros::ok()) {
-        // compute and publish twist commands 
-        HoffmannController.nl_steering(); 
+        // compute and publish twist commands
+        HoffmannController.nl_steering();
         ros::spinOnce();
         sleep_timer.sleep();
     }
     return 0;
-} 
-
+}

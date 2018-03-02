@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="path_loader" type="path_loader.py" name="path_loader">
+        <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
+        <param name="velocity" value="40" />
+    </node>
+    <node pkg="path_updater" type="pose_generator.py" name="pose_generator" output="screen"/>
+    <node pkg="path_updater" type="path_updater.py" name="path_updater" output="screen"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find path_loader)../../../config/path_updater_visualization.rviz"/>
+</launch>

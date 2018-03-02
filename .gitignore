@@ -1,0 +1,8 @@
+*.py[cod]
+
+build
+devel
+
+profile.tmp
+
+~

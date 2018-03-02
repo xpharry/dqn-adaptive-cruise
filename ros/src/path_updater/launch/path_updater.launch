@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="path_updater" type="path_updater.py" name="path_updater" output="screen"/>
+</launch>
