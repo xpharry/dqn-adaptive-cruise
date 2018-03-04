@@ -2,6 +2,6 @@
 <launch>
     <node pkg="path_loader" type="path_loader.py" name="path_loader">
         <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
-        <param name="velocity" value="40" />
+        <param name="frame_id" value="world" />
     </node>
 </launch>

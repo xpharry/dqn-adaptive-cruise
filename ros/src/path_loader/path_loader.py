@@ -21,6 +21,8 @@ class PathLoader(object):
 
         rospy.init_node('path_loader', log_level=rospy.DEBUG)
 
+        self.frame_id = rospy.get_param('~frame_id')
+
         self.path_pub = rospy.Publisher('/base_path', Path, queue_size=1, latch=True)
         self.path_points_pub = rospy.Publisher('/base_path_points', PointCloud, queue_size=1, latch=True)
 
@@ -60,7 +62,7 @@ class PathLoader(object):
                 pose.position.y = float(wp['y'])
                 pose.position.z = 0.0
                 
-                pose_stamped.header.frame_id = 'world'
+                pose_stamped.header.frame_id = self.frame_id
                 pose_stamped.header.seq = index
                 pose_stamped.pose = pose
                 poses.append(pose_stamped)
@@ -213,7 +215,7 @@ class PathLoader(object):
                 pose.position.y = y
                 pose.position.z = 0.0
                 
-                pose_stamped.header.frame_id = 'world'
+                pose_stamped.header.frame_id = self.frame_id
                 pose_stamped.header.seq = i
                 pose_stamped.pose = pose
 
@@ -232,7 +234,7 @@ class PathLoader(object):
 
     def publish(self, poses, lane_lines, points, lane_lines_points):
         path = Path()
-        path.header.frame_id = '/world'
+        path.header.frame_id = self.frame_id
         path.header.stamp = rospy.Time(0)
         path.poses = poses
         self.path_pub.publish(path)
@@ -240,31 +242,31 @@ class PathLoader(object):
         # lane lines
 
         lane_line0 = Path()
-        lane_line0.header.frame_id = '/world'
+        lane_line0.header.frame_id = self.frame_id
         lane_line0.header.stamp = rospy.Time(0)
         lane_line0.poses = lane_lines[0]
         self.lane_line0_pub.publish(lane_line0)
 
         lane_line1 = Path()
-        lane_line1.header.frame_id = '/world'
+        lane_line1.header.frame_id = self.frame_id
         lane_line1.header.stamp = rospy.Time(0)
         lane_line1.poses = lane_lines[1]
         self.lane_line1_pub.publish(lane_line1)
 
         lane_line2 = Path()
-        lane_line2.header.frame_id = '/world'
+        lane_line2.header.frame_id = self.frame_id
         lane_line2.header.stamp = rospy.Time(0)
         lane_line2.poses = lane_lines[2]
         self.lane_line2_pub.publish(lane_line2)
 
         lane_line3 = Path()
-        lane_line3.header.frame_id = '/world'
+        lane_line3.header.frame_id = self.frame_id
         lane_line3.header.stamp = rospy.Time(0)
         lane_line3.poses = lane_lines[3]
         self.lane_line3_pub.publish(lane_line3)
 
         path_points = PointCloud()
-        path_points.header.frame_id = '/world'
+        path_points.header.frame_id = self.frame_id
         path_points.header.stamp = rospy.Time(0)
         path_points.points = points
         self.path_points_pub.publish(path_points)
@@ -272,25 +274,25 @@ class PathLoader(object):
         # lane lines point cloud display
 
         lane_line0_points = PointCloud()
-        lane_line0_points.header.frame_id = '/world'
+        lane_line0_points.header.frame_id = self.frame_id
         lane_line0_points.header.stamp = rospy.Time(0)
         lane_line0_points.points = lane_lines_points[0]
         self.lane_line0_points_pub.publish(lane_line0_points)
 
         lane_line1_points = PointCloud()
-        lane_line1_points.header.frame_id = '/world'
+        lane_line1_points.header.frame_id = self.frame_id
         lane_line1_points.header.stamp = rospy.Time(0)
         lane_line1_points.points = lane_lines_points[1]
         self.lane_line1_points_pub.publish(lane_line1_points)
 
         lane_line2_points = PointCloud()
-        lane_line2_points.header.frame_id = '/world'
+        lane_line2_points.header.frame_id = self.frame_id
         lane_line2_points.header.stamp = rospy.Time(0)
         lane_line2_points.points = lane_lines_points[2]
         self.lane_line2_points_pub.publish(lane_line2_points)
 
         lane_line3_points = PointCloud()
-        lane_line3_points.header.frame_id = '/world'
+        lane_line3_points.header.frame_id = self.frame_id
         lane_line3_points.header.stamp = rospy.Time(0)
         lane_line3_points.points = lane_lines_points[3]
         self.lane_line3_points_pub.publish(lane_line3_points)
