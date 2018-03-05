@@ -207,6 +207,8 @@ def get_xy(s, d, maps_s, poses):
 
 def get_next_waypoints(waypoints, base, n):
     """Return a list of n paths ahead of the vehicle"""
+    frame_id = waypoints[0].header.frame_id
+
     next_waypoints = []
     for k in range(base, base+n):
         wp = k % len(waypoints)
@@ -266,7 +268,7 @@ def get_next_waypoints(waypoints, base, n):
 
     next_waypoints = []
     next_waypoints_cloud = PointCloud()
-    next_waypoints_cloud.header.frame_id = '/world'
+    next_waypoints_cloud.header.frame_id = frame_id
 
     for i in range(n):
         pose_stamped = PoseStamped()
@@ -276,7 +278,7 @@ def get_next_waypoints(waypoints, base, n):
         pose.position.y = y_points[i]
         pose.position.z = 0.0
         
-        pose_stamped.header.frame_id = 'world'
+        pose_stamped.header.frame_id = frame_id
         pose_stamped.header.seq = i
         pose_stamped.pose = pose
 

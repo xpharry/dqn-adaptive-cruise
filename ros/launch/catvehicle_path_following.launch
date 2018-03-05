@@ -1,14 +1,16 @@
 <launch>
-	<include file="$(find source_control)/launch/single_catvehicle_skidpan.launch"/>
+	<include file="$(find utility)/launch/single_catvehicle_skidpan.launch"/>
 
     <!-- Display -->
 	<!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/catvehicle_startup.rviz" output="screen"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)../../../config/path_following_visualization.rviz" output="screen"/>
 
     <!-- Continuously publish the vehicle's pose and odom -->
-	<node name="mobot_gazebo_state" pkg="mobot_gazebo_state" type="mobot_gazebo_state" output="screen"/>
+	<node name="mobot_gazebo_state" pkg="mobot_gazebo_state" type="mobot_gazebo_state" output="screen">
+		<param name="target_model" value="catvehicle"/>
+	</node>
 
-	<!--<node name="hoffmann_controller" pkg="hoffmann_controller" type="hoffmann_controller" output="screen"/>-->
+	<node name="hoffmann_controller" pkg="hoffmann_controller" type="hoffmann_controller" output="screen"/>
 
     <!-- A des_velocity_pub playing a role of speed controller -->
 	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub" output="screen"/>
@@ -17,14 +19,19 @@
     <!-- Waypoint follower -->
     <arg name="linear_interpolate_mode" default="True"/>
 	<!-- rosrun waypoint_follower pure_pursuit -->
-	<node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
+	<!--<node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
 		<param name="linear_interpolate_mode" value="$(arg linear_interpolate_mode)"/>
 		<remap from="current_velocity" to="/catvehicle/cmd_vel" />
-	</node>
+	</node>-->
 
-    <!-- Waypoint updater playing a role as path planner -->
+    <!-- Waypoint loader playing a role as global path planner -->
     <node pkg="path_loader" type="path_loader.py" name="path_loader">
         <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
         <param name="frame_id" value="/catvehicle/odom" />
+        <remap from="current_pose" to="/catvehicle/current_pose" />
+    </node>
+
+    <node pkg="path_updater" type="path_updater.py" name="path_updater" output="screen">
+    	<remap from="current_pose" to="/catvehicle/current_pose" />
     </node>
 </launch>

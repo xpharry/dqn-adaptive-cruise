@@ -1,7 +1,7 @@
 <launch>
-	<include file="$(find source_control)/launch/twin_catvehicle_skidpan.launch"/>
+	<include file="$(find utility)/launch/twin_catvehicle_skidpan.launch"/>
 	<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/twin_catvehicle_startup.rviz" output="screen"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)/config/twin_catvehicle_startup.rviz" output="screen"/>
 	<!--<node name="mobot_gazebo_state" pkg="mobot_gazebo_state" type="mobot_gazebo_state" output="screen"/>-->
 
 	<!-- Catvehicle 1 -->

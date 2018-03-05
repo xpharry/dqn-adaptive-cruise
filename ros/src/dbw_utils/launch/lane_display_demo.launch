@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_mkz_gazebo)/worlds/test_track.world" />
+    <arg name="sim_param_file" value="$(find dbw_mkz_gazebo)/yaml/single_vehicle_test_track.yaml" />
+  </include>
+
+</launch>

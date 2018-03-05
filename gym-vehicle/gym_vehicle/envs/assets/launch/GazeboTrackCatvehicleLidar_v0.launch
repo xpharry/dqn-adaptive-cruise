@@ -20,13 +20,13 @@
     <arg name="use_sim_time" value="true"/>
     <arg name="debug" value="false"/>
     <arg name="gui" value="$(arg gui)" />
-    <arg name="world_name" value="$(find source_control)/worlds/skidpan.world"/>
+    <arg name="world_name" value="$(find utility)/worlds/skidpan.world"/>
   </include>
 
   <group ns="catvehicle1">
     <param name="robot_description"
              command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle1' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
-    <include file="$(find source_control)/launch/catvehicle.launch">
+    <include file="$(find utility)/launch/catvehicle.launch">
       <arg name="robot_name" value="catvehicle1"/>
       <arg name="init_pose" value="-x 0 -y 0 -z -0.30"/>
       <arg name="config_file" value="catvehicle_control.yaml"/>
@@ -37,7 +37,7 @@
   <group ns="catvehicle2">
     <param name="robot_description"
              command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle.xacro' roboname:='catvehicle2' front_laser_points:='$(arg front_laser_points)' velodyne_points:='$(arg velodyne_points)' camera_right:='$(arg camera_right)' camera_left:='$(arg camera_left)' velodyne_max_angle:='$(arg velodyne_max_angle)' velodyne_min_angle:='$(arg velodyne_min_angle)'" />
-    <include file="$(find source_control)/launch/catvehicle.launch">
+    <include file="$(find utility)/launch/catvehicle.launch">
       <arg name="robot_name" value="catvehicle2"/>
       <arg name="init_pose" value="-x -20 -y 0 -z -0.30"/>
       <arg name="config_file" value="catvehicle_control.yaml"/>
@@ -63,5 +63,5 @@
   </node>
 
   <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find source_control)/config/twin_catvehicle_startup.rviz" output="screen"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)/config/twin_catvehicle_startup.rviz" output="screen"/>
 </launch>
