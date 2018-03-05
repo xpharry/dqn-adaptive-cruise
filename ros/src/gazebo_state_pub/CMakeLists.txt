@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(mobot_gazebo_state)
+project(gazebo_state_pub)
 
 find_package(catkin_simple REQUIRED)
 
@@ -29,8 +29,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
 # Executables: uncomment the following and edit arguments to compile new nodes
 # may add more of these lines for more nodes from the same package
-cs_add_executable(mobot_gazebo_state src/mobot_gazebo_state.cpp)
-cs_add_executable(mobot_gazebo_state2 src/mobot_gazebo_state2.cpp)
+cs_add_executable(gazebo_state_pub src/gazebo_state_pub.cpp)
 
 #the following is required, if desire to link a node in this package with a library created in this same package
 # edit the arguments to reference the named node and named library within this package

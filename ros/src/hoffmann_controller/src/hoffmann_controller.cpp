@@ -60,7 +60,7 @@ void HoffmannController::initializePublishers() {
     cmd_publisher_ = nh_.advertise<geometry_msgs::Twist>("/catvehicle/cmd_vel", 1, true); // commands the robot!
 }
 
-//receive publications from gazebo via node mobot_gazebo_state;
+//receive publications from gazebo via node gazebo_state_pub;
 // this stands in for a state estimator; for a real system need to create such a node
 void HoffmannController::gazeboPoseCallback(const geometry_msgs::Pose& gazebo_pose) {
    state_x_ = gazebo_pose.position.x; //copy the state to member variables of this object

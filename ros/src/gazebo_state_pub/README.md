@@ -1,4 +1,4 @@
-# mobot_gazebo_state
+# gazebo_state_pub
 This node is a stand-in for a robot localization system, to be used for 
 learning and code-development purposes only.  It assumes a mobile-robot model
 called "mobot" is known to gazebo.  It subscribes to the topic
@@ -10,6 +10,6 @@ A steering algorithm can consult this topic for use in feedback, relative to
 some path of interest.
 
 ## Example usage
-`rosrun mobot_gazebo_state mobot_gazebo_state`
+`rosrun gazebo_state_pub gazebo_state_pub`
 
     

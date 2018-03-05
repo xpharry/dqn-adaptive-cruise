@@ -55,7 +55,7 @@ void model_state_CB(const gazebo_msgs::ModelStates& model_states)
 } 
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "gazebo_model_publisher");
+    ros::init(argc, argv, "gazebo_model_state_publisher");
     ros::NodeHandle nh;
 
     ros::param::get("~target_model", target_model);
