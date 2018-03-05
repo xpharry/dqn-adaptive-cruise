@@ -48,21 +48,19 @@ void model_state_CB(const gazebo_msgs::ModelStates& model_states)
     g_gps_publisher.publish(g_noisy_mobot_pose); //publish noisy values
     //double randval = distribution(generator);
     //ROS_INFO("randval =%f",randval);
-    }
-  else
-    {
-      ROS_WARN("state of mobot model not found");
-    }
+  } else {
+    ROS_WARN("state of model not found");
+  }
 } 
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "gazebo_model_publisher");
     ros::NodeHandle nh;
 
-    g_pose_publisher= nh.advertise<geometry_msgs::Pose>("gazebo_mobot_pose", 1); 
-    g_odom_publisher= nh.advertise<nav_msgs::Odometry>("gazebo_mobot_odom", 1);
+    g_pose_publisher= nh.advertise<geometry_msgs::Pose>("current_pose", 1);
+    g_odom_publisher= nh.advertise<nav_msgs::Odometry>("current_odom", 1);
     g_gps_publisher = nh.advertise<geometry_msgs::Pose>("gazebo_mobot_noisy_pose", 1);
-    ros::Subscriber state_sub = nh.subscribe("gazebo/model_states",1,model_state_CB); 
+    ros::Subscriber state_sub = nh.subscribe("gazebo/model_states", 1, model_state_CB);
     //suppress the orientation output for noisy state; fill out a legal, constant quaternion
     g_quat.x=0;
     g_quat.y=0;
