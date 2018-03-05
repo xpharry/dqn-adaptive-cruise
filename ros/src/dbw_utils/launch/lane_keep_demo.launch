@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_mkz_gazebo)/worlds/test_track.world" />
+    <arg name="sim_param_file" value="$(find dbw_mkz_gazebo)/yaml/single_vehicle_test_track.yaml" />
+  </include>
+  
+  <include file="$(find dbw_mkz_vision_sim)/launch/lane_detection.launch" />
+
+  <node ns="vehicle" pkg="dbw_mkz_vision_sim" type="path_following_node" name="path_following" />
+  
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+  </include>
+</launch>
