@@ -131,6 +131,16 @@ This work ...
 * Working one path planning.
 * Reformat folders.
 
+**3/2/2018**
+
+* Generate multiple lane lines using frenet.
+* Generate local paths using frenet.
+* Path following is not perfect due to the latency.
+
+**3/5/2018**
+
+* Found "deb_mkz_gazebo" package both useful in Indigo and Kinetics.
+
 ## Resources
 
 1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)

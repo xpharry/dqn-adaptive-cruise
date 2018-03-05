@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(speed_designer)
+project(des_velocity_pub)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -132,7 +132,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(speed_designer src/speed_designer.cpp)
+add_executable(des_velocity_pub src/des_velocity_pub.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -145,7 +145,7 @@ add_executable(speed_designer src/speed_designer.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(speed_designer   ${catkin_LIBRARIES})
+target_link_libraries(des_velocity_pub   ${catkin_LIBRARIES})
 
 #############
 ## Install ##

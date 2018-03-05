@@ -12,7 +12,7 @@ HoffmannController::HoffmannController(ros::NodeHandle* nodehandle):nh_(*nodehan
     initializeSubscribers(); // package up the messy work of creating subscribers; do this overhead in constructor
     initializePublishers();
     // generate_circle_path();
-    // generate_track_path();
+    generate_track_path();
 
     state_psi_ = 1000.0; // put in impossible value for heading;
     //test this value to make sure we have received a viable state message
@@ -50,7 +50,7 @@ void HoffmannController::initializeSubscribers() {
     // alternately we can use the topic "/catvehicle/odom"
     current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this);
     designed_speed_subscriber_ = nh_.subscribe("/catvehicle/des_speed", 1, &HoffmannController::desSpeedCallback, this);
-    des_path_subscriber_ = nh_.subscribe("/local_path", 1, &HoffmannController::desPathCallback, this);
+    des_path_subscriber_ = nh_.subscribe("/base_path_xx", 1, &HoffmannController::desPathCallback, this);
 }
 
 
@@ -81,6 +81,7 @@ void HoffmannController::desSpeedCallback(const std_msgs::Float64& speed_rcvd) {
 }
 
 void HoffmannController::desPathCallback(const nav_msgs::Path& path_rcvd) {
+    ROS_INFO("Received a path ...");
     des_path_ = path_rcvd;
 }
 
@@ -167,8 +168,8 @@ void HoffmannController::nl_steering() {
 }
 
 double HoffmannController::speed_cmd_fnc(double des_speed, double dist_err) {
-    return dist_err > 4 ? 0 : des_speed;
-    // return des_speed;
+    // return dist_err > 4 ? 0 : des_speed;
+    return des_speed;
 }
 
 double HoffmannController::omega_cmd_fnc(double heading_err, double offset_err, double des_speed) {
@@ -317,9 +318,9 @@ double HoffmannController::compute_des_state() {
         }
     }
 
-    des_state_x_ = des_path_.poses[index].pose.position.x;
-    des_state_y_ = des_path_.poses[index].pose.position.y;
-    des_state_quat_ = des_path_.poses[index].pose.orientation;
+    des_state_x_ = des_path_.poses[(index)%des_path_.poses.size()].pose.position.x;
+    des_state_y_ = des_path_.poses[(index)%des_path_.poses.size()].pose.position.y;
+    des_state_quat_ = des_path_.poses[(index)%des_path_.poses.size()].pose.orientation;
     des_state_psi_ = min_dang(convertPlanarQuat2Phi(des_state_quat_));
 }
 
