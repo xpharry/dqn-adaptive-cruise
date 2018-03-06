@@ -41,7 +41,7 @@ void PurePursuit::callbackFromCurrentPose(const geometry_msgs::PoseStampedConstP
   pose_set_ = true;
 }//processing frequency
 
-void PurePursuit::callbackFromCurrentVelocity(const geometry_msgs::TwistStampedConstPtr &msg)
+void PurePursuit::callbackFromCurrentVelocity(const geometry_msgs::TwistConstPtr &msg)
 {
   current_velocity_ = *msg;
   velocity_set_ = true;
@@ -69,7 +69,7 @@ double PurePursuit::getCmdVelocity(int waypoint) const
 
 void PurePursuit::calcLookaheadDistance(int waypoint)
 {
-  double current_velocity_mps = current_velocity_.twist.linear.x;
+  double current_velocity_mps = current_velocity_.linear.x;
   double maximum_lookahead_distance =  current_velocity_mps * 10;
   double ld = current_velocity_mps * lookahead_distance_calc_ratio_;
 
@@ -260,7 +260,7 @@ geometry_msgs::Twist PurePursuit::calcTwist(double curvature, double cmd_velocit
   if (!following_flag)
   {
     //ROS_ERROR_STREAM("Not following");
-    twist.angular.z = current_velocity_.twist.linear.x * curvature;
+    twist.angular.z = current_velocity_.linear.x * curvature;
   }
   else
   {

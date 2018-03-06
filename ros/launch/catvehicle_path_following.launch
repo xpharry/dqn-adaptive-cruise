@@ -10,19 +10,21 @@
 		<param name="target_model" value="catvehicle"/>
 	</node>
 
-	<node name="hoffmann_controller" pkg="hoffmann_controller" type="hoffmann_controller" output="screen"/>
+	<!--<node name="hoffmann_controller" pkg="hoffmann_controller" type="hoffmann_controller" output="screen"/>-->
 
     <!-- A des_velocity_pub playing a role of speed controller -->
-	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub" output="screen"/>
-	<node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" args="/catvehicle/des_speed" output="screen"/>
+	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub"/>
+	<node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" args="/catvehicle/des_speed"/>
 
     <!-- Waypoint follower -->
     <arg name="linear_interpolate_mode" default="True"/>
 	<!-- rosrun waypoint_follower pure_pursuit -->
-	<!--<node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
+	<node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
 		<param name="linear_interpolate_mode" value="$(arg linear_interpolate_mode)"/>
-		<remap from="current_velocity" to="/catvehicle/cmd_vel" />
-	</node>-->
+		<remap from="current_pose" to="/catvehicle/current_pose" />
+		<remap from="current_velocity" to="/catvehicle/vel" />
+		<remap from="cmd_vel" to="/catvehicle/cmd_vel" />
+	</node>
 
     <!-- Waypoint loader playing a role as global path planner -->
     <node pkg="path_loader" type="path_loader.py" name="path_loader">

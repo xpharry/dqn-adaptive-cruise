@@ -205,7 +205,7 @@ def get_xy(s, d, maps_s, poses):
     return x, y
 
 
-def get_next_waypoints(waypoints, base, n):
+def get_next_waypoints(waypoints, current_pose, base, n):
     """Return a list of n paths ahead of the vehicle"""
     frame_id = waypoints[0].header.frame_id
 
@@ -232,11 +232,16 @@ def get_next_waypoints(waypoints, base, n):
     # for i in range(len(maps_s)):
     #     rospy.loginfo('i = %d, map_s = %f' % (i, maps_s[i]))
 
+    current_x, current_y = current_pose.pose.position.x, current_pose.pose.position.y
+    # current_s, current_d = get_frenet(current_x, current_y, 0, next_waypoints)
+    # rospy.loginfo('******** s = %f, d = %f *********' % (current_s, current_d))
+    current_d = distance(current_x, current_y, next_waypoints[0].pose.position.x, next_waypoints[0].pose.position.y)
+
     d = 4
 
     # fits a polynomial for given paths
     s_coords = [maps_s[0], maps_s[1], maps_s[n/2], maps_s[-3], maps_s[-2], maps_s[-1]]
-    d_coords = [0, 0, d/2, d, d, d]
+    d_coords = [current_d, current_d, (current_d+d)/2, d, d, d]
 
     f = interp1d(s_coords, d_coords, kind='cubic')
 
@@ -255,9 +260,9 @@ def get_next_waypoints(waypoints, base, n):
         try:
             d_point = f(s_point)
         except:
-            rospy.loginfo('debug====== s = %f, d = %f' % (s_point, d_point))
+            rospy.loginfo('Error: s = %f, d = %f' % (s_point, d_point))
 
-        rospy.loginfo('s = %f, d = %f' % (s_point, d_point))
+        # rospy.loginfo('s = %f, d = %f' % (s_point, d_point))
 
         s_add_on = s_point
 
