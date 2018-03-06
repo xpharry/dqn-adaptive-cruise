@@ -10,6 +10,7 @@ import rospy
 from geometry_msgs.msg import PoseStamped, Pose, Point32
 from sensor_msgs.msg import PointCloud
 from nav_msgs.msg import Path
+from styx_msgs.msg import Lane, Waypoint
 from std_msgs.msg import Int32
 import path_utils as utils
 import math
@@ -32,7 +33,7 @@ as well as to verify your TL classifier.
 TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 '''
 
-LOOKAHEAD_WPS = 200  # Number of paths we will publish. You can change this number
+LOOKAHEAD_WPS = 100  # Number of paths we will publish. You can change this number
 
 
 class pathUpdater(object):
@@ -44,6 +45,7 @@ class pathUpdater(object):
 
         self.final_path_pub = rospy.Publisher('final_path', Path, queue_size=1)
         self.final_path_points_pub = rospy.Publisher('final_path_points', PointCloud, queue_size=1)
+        self.final_waypoints_pub = rospy.Publisher('final_waypoints', Lane, queue_size=1)
         self.car_index_pub = rospy.Publisher('car_index', Int32, queue_size=1)
 
         self.pose_stamped = None
@@ -82,7 +84,7 @@ class pathUpdater(object):
         """
         Continuously publish local path paths with target velocities
         """
-        rate = rospy.Rate(10)
+        rate = rospy.Rate(5)
 
         while not rospy.is_shutdown():
 
@@ -93,13 +95,24 @@ class pathUpdater(object):
             car_index = utils.get_closest_waypoint_index(self.pose_stamped, self.base_path.poses)
 
             # Get subset paths ahead
-            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, car_index, LOOKAHEAD_WPS)
+            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS)
 
             # Publish
             path = utils.construct_path_object(self.frame_id, lookahead_waypoints)
-            rospy.loginfo('Update local path waypoints ...')
+            
+            lane = Lane()
+            lane.header.frame_id = self.frame_id
+            for i in range(len(lookahead_waypoints)):
+                waypoint = Waypoint()
+                waypoint.pose = lookahead_waypoints[i]
+                waypoint.twist.header.frame_id = self.frame_id
+                waypoint.twist.twist.linear.x = 2
+                lane.waypoints.append(waypoint)
+
+            rospy.loginfo('Update local path and waypoints ...')
             self.final_path_pub.publish(path)
             self.final_path_points_pub.publish(lookahead_waypoints_display)
+            self.final_waypoints_pub.publish(lane)
             self.car_index_pub.publish(car_index)
 
             rate.sleep()

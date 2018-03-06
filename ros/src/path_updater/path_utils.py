@@ -205,7 +205,7 @@ def get_xy(s, d, maps_s, poses):
     return x, y
 
 
-def get_next_waypoints(waypoints, base, n):
+def get_next_waypoints(waypoints, current_pose, base, n):
     """Return a list of n paths ahead of the vehicle"""
     frame_id = waypoints[0].header.frame_id
 
@@ -232,11 +232,16 @@ def get_next_waypoints(waypoints, base, n):
     # for i in range(len(maps_s)):
     #     rospy.loginfo('i = %d, map_s = %f' % (i, maps_s[i]))
 
-    d = 4
+    current_x, current_y = current_pose.pose.position.x, current_pose.pose.position.y
+    # current_s, current_d = get_frenet(current_x, current_y, 0, next_waypoints)
+    # rospy.loginfo('******** s = %f, d = %f *********' % (current_s, current_d))
+    current_d = distance(current_x, current_y, next_waypoints[0].pose.position.x, next_waypoints[0].pose.position.y)
+
+    d = 6
 
     # fits a polynomial for given paths
     s_coords = [maps_s[0], maps_s[1], maps_s[n/2], maps_s[-3], maps_s[-2], maps_s[-1]]
-    d_coords = [0, 0, d/2, d, d, d]
+    d_coords = [d, d, d, d, d, d]
 
     f = interp1d(s_coords, d_coords, kind='cubic')
 
@@ -255,9 +260,9 @@ def get_next_waypoints(waypoints, base, n):
         try:
             d_point = f(s_point)
         except:
-            rospy.loginfo('debug====== s = %f, d = %f' % (s_point, d_point))
+            rospy.loginfo('Error: s = %f, d = %f' % (s_point, d_point))
 
-        rospy.loginfo('s = %f, d = %f' % (s_point, d_point))
+        # rospy.loginfo('s = %f, d = %f' % (s_point, d_point))
 
         s_add_on = s_point
 
@@ -276,7 +281,7 @@ def get_next_waypoints(waypoints, base, n):
 
         pose.position.x = x_points[i]
         pose.position.y = y_points[i]
-        pose.position.z = 0.0
+        pose.position.z = 0.5
         
         pose_stamped.header.frame_id = frame_id
         pose_stamped.header.seq = i
@@ -287,7 +292,7 @@ def get_next_waypoints(waypoints, base, n):
         point = Point32()
         point.x = x_points[i]
         point.y = y_points[i]
-        point.z = 0.0
+        point.z = 0.5
         next_waypoints_cloud.points.append(point)
 
         # rospy.loginfo('x = %f, y = %f' % (x_points[i], y_points[i]))
