@@ -63,5 +63,5 @@
   </node>
 
   <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)/config/twin_catvehicle_startup.rviz" output="screen"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)/config/two_catvehicles_startup.rviz" output="screen"/>
 </launch>

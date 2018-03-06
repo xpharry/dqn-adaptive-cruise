@@ -1,5 +1,5 @@
 <launch>
-	<include file="$(find utility)/launch/single_catvehicle_skidpan.launch"/>
+	<include file="$(find utility)/launch/catvehicle_skidpan.launch"/>
 
     <!-- Display -->
 	<!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
