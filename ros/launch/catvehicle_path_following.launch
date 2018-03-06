@@ -6,7 +6,7 @@
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)../../../config/path_following_visualization.rviz" output="screen"/>
 
     <!-- Continuously publish the vehicle's pose and odom -->
-	<node name="mobot_gazebo_state" pkg="mobot_gazebo_state" type="mobot_gazebo_state" output="screen">
+	<node name="gazebo_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
 		<param name="target_model" value="catvehicle"/>
 	</node>
 
