@@ -210,7 +210,7 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     frame_id = waypoints[0].header.frame_id
 
     next_waypoints = []
-    for k in range(base, base+n):
+    for k in range(base, base+4*n):
         wp = k % len(waypoints)
         next_waypoints.append(waypoints[wp])
 
@@ -220,7 +220,7 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     maps_s.append(map_s)
     map_x_prev = next_waypoints[0].pose.position.x
     map_y_prev = next_waypoints[0].pose.position.y
-    for i in range(1, n):
+    for i in range(1, 4*n):
         map_x = next_waypoints[i].pose.position.x
         map_y = next_waypoints[i].pose.position.y
         map_s += distance(map_x, map_y, map_x_prev, map_y_prev)
@@ -249,18 +249,14 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     x_points = []
     y_points = []
 
-    target_s = maps_s[-2]
+    target_s = min(30.0, maps_s[-2])
     target_d = d
 
     s_add_on = 0
     
     for i in range(n):
         s_point = s_add_on + target_s / n
-
-        try:
-            d_point = f(s_point)
-        except:
-            rospy.loginfo('Error: s = %f, d = %f' % (s_point, d_point))
+        d_point = f(s_point)
 
         # rospy.loginfo('s = %f, d = %f' % (s_point, d_point))
 
