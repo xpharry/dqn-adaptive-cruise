@@ -12,7 +12,7 @@ HoffmannController::HoffmannController(ros::NodeHandle* nodehandle):nh_(*nodehan
     initializeSubscribers(); // package up the messy work of creating subscribers; do this overhead in constructor
     initializePublishers();
     // generate_circle_path();
-    generate_track_path();
+    // generate_track_path();
 
     state_psi_ = 1000.0; // put in impossible value for heading;
     //test this value to make sure we have received a viable state message
@@ -50,7 +50,7 @@ void HoffmannController::initializeSubscribers() {
     // alternately we can use the topic "/catvehicle/odom"
     current_state_subscriber_ = nh_.subscribe("/catvehicle/odom", 1, &HoffmannController::odomCallback, this);
     designed_speed_subscriber_ = nh_.subscribe("/catvehicle/des_speed", 1, &HoffmannController::desSpeedCallback, this);
-    des_path_subscriber_ = nh_.subscribe("/base_path_xx", 1, &HoffmannController::desPathCallback, this);
+    des_path_subscriber_ = nh_.subscribe("/final_path", 1, &HoffmannController::desPathCallback, this);
 }
 
 
