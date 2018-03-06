@@ -1,5 +1,5 @@
 <launch>
-	<include file="$(find utility)/launch/twin_catvehicle_skidpan.launch"/>
+	<include file="$(find utility)/launch/two_catvehicles_skidpan.launch"/>
 	<!--<node name="gazebo_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen"/>-->
 
 	<!-- Catvehicle 1 -->
@@ -15,5 +15,5 @@
 	<!-- Catvehicle 2 -->
 
 	<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)/config/twin_catvehicle_startup.rviz" output="screen"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)/config/two_catvehicles_startup.rviz" output="screen"/>
 </launch>
