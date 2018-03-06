@@ -1,5 +1,0 @@
-#goal definition
-nav_msgs/Path path
----
-#result definition
-bool status
