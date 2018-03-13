@@ -3,6 +3,7 @@
 <launch>
   
   <arg name="use_camera_control" default="true" />
+  <arg name="gui" default="false"/>
   <arg name="world_name" default="$(find dbw_mkz_gazebo)/worlds/empty_world.world" />
   <arg name="sim_param_file" default="$(find dbw_mkz_gazebo)/yaml/default_sim_params.yaml" />
   <arg name="urdf_file" default="$(find dbw_mkz_gazebo)/urdf/mkz.urdf.xacro" />
