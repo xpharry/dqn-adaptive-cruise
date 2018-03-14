@@ -1,29 +1,17 @@
-- fusion1:
-    x: 2.0
-    y: 2.0
+- fusion:
+    x: -10.0
+    y: -2.0
     z: 0.0
     yaw: 0.0
-    model: fusion
+    model: mkz
     color: {r: 0.8, g: 0.1, b: 0.0}
-- fusion2:
-    x: 0.0
-    y: 0.0
+    pub_tf: true
+- mkz:
+    x: 10.0
+    y: -2.0
     z: 0.0
     yaw: 0.0
-    model: fusion
+    model: mkz
     color: green
-- mkz1:
-    x: 2.0
-    y: 2.0
-    z: 0.0
-    yaw: 0.0
-    model: mkz
-    color: {r: 0.8, g: 0.1, b: 0.0}
-- mkz2:
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    yaw: 0.0
-    model: mkz
-    color: black
+    pub_tf: true
 

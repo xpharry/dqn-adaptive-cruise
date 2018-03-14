@@ -22,5 +22,7 @@
     <arg name="can_ns" value="can_bus_dbw" />
     <arg name="vehicle_ns" value="mkz" />
   </include>
-  <node ns="mkz" pkg="rostopic" type="rostopic" name="twist_pub" args="pub cmd_vel geometry_msgs/Twist '{linear: {x: 5.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: -0.5}}' -r 50" />
+
+  <node pkg="rviz" type="rviz" name="multi_car_rviz" args="-d $(find dbw_mkz_gazebo)/rviz/multi_car.rviz" respawn="true" />
+
 </launch>

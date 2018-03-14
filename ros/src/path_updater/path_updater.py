@@ -84,7 +84,7 @@ class pathUpdater(object):
         """
         Continuously publish local path paths with target velocities
         """
-        rate = rospy.Rate(5)
+        rate = rospy.Rate(50)
 
         while not rospy.is_shutdown():
 
@@ -106,7 +106,7 @@ class pathUpdater(object):
                 waypoint = Waypoint()
                 waypoint.pose = lookahead_waypoints[i]
                 waypoint.twist.header.frame_id = self.frame_id
-                waypoint.twist.twist.linear.x = 2
+                waypoint.twist.twist.linear.x = 10
                 lane.waypoints.append(waypoint)
 
             rospy.loginfo('Update local path and waypoints ...')

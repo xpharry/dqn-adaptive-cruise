@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_mkz_gazebo)/worlds/empty_world.world" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/multi_vehicle.yaml" />
+  </include>
+
+  <!-- Waypoint loader playing a role as global path planner -->
+  <node pkg="path_loader" type="path_loader.py" name="path_loader">
+    <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
+    <param name="frame_id" value="/world" />
+  </node>
+
+  <!-- Fusion -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="fusion" />
+  </include>
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="gazebo_state_pub1" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="fusion"/>
+  </node>
+  <!-- Path planning -->
+  <node name="path_updater1" pkg="path_updater" type="path_updater.py">
+    <remap from="current_pose" to="/fusion/current_pose" />
+    <remap from="final_path_points" to="/fusion/final_path_points" />
+  </node>
+  <node name="waypoint_follower1" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/fusion/current_pose" />
+    <remap from="current_velocity" to="/fusion/twist" />
+    <remap from="cmd_vel" to="/fusion/cmd_vel" />
+  </node>
+
+  <!-- MKZ -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz" />
+  </include>
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="gazebo_state_pub2" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="mkz"/>
+  </node>
+  <!-- Path planning -->
+  <node name="path_updater2" pkg="path_updater" type="path_updater.py">
+    <remap from="current_pose" to="/mkz/current_pose" />
+    <remap from="final_path_points" to="/mkz/final_path_points" />
+  </node>
+  <node name="waypoint_follower2" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mkz/current_pose" />
+    <remap from="current_velocity" to="/mkz/twist" />
+    <remap from="cmd_vel" to="/mkz/cmd_vel" />
+  </node>
+
+  <!-- Display -->
+  <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
+  <node pkg="rviz" type="rviz" name="multi_vehicle_rviz" args="-d $(find utility)../../../config/multi_vehicle_path_following_visualization.rviz" respawn="true" />
+
+</launch>

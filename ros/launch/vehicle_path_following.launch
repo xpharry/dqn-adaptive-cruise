@@ -41,7 +41,6 @@
     <node pkg="path_loader" type="path_loader.py" name="path_loader">
         <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
         <param name="frame_id" value="/world" />
-        <remap from="current_pose" to="/vehicle/current_pose" />
     </node>
 
     <node pkg="path_updater" type="path_updater.py" name="path_updater" output="screen">
