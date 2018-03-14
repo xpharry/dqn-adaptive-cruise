@@ -109,7 +109,7 @@ class pathUpdater(object):
                 waypoint = Waypoint()
                 waypoint.pose = lookahead_waypoints[i]
                 waypoint.twist.header.frame_id = self.frame_id
-                waypoint.twist.twist.linear.x = 10
+                waypoint.twist.twist.linear.x = cruise_speed
                 lane.waypoints.append(waypoint)
 
             rospy.loginfo('Update local path and waypoints ...')
