@@ -86,6 +86,9 @@ class pathUpdater(object):
         """
         rate = rospy.Rate(50)
 
+        lane = int(rospy.get_param("/lane_index", 0))
+        cruise_speed = int(rospy.get_param("/cruise_speed", 10))
+
         while not rospy.is_shutdown():
 
             if self.base_path is None or self.pose is None or self.frame_id is None:
@@ -95,7 +98,7 @@ class pathUpdater(object):
             car_index = utils.get_closest_waypoint_index(self.pose_stamped, self.base_path.poses)
 
             # Get subset paths ahead
-            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS)
+            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS, lane)
 
             # Publish
             path = utils.construct_path_object(self.frame_id, lookahead_waypoints)

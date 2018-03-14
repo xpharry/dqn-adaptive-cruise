@@ -4,7 +4,6 @@ Helper functions for paths_updater
 Author: Peng Xu <robotpengxu@gmail.com>
 Date:   Feb 20 2018
 """
-# pylint: disable=invalid-name
 
 import math
 from math import cos, sin, sqrt
@@ -205,7 +204,7 @@ def get_xy(s, d, maps_s, poses):
     return x, y
 
 
-def get_next_waypoints(waypoints, current_pose, base, n):
+def get_next_waypoints(waypoints, current_pose, base, n, lane):
     """Return a list of n paths ahead of the vehicle"""
     frame_id = waypoints[0].header.frame_id
 
@@ -237,7 +236,7 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     # rospy.loginfo('******** s = %f, d = %f *********' % (current_s, current_d))
     current_d = distance(current_x, current_y, next_waypoints[0].pose.position.x, next_waypoints[0].pose.position.y)
 
-    d = 2
+    d = 2 + lane * 4
 
     # fits a polynomial for given paths
     s_coords = [maps_s[0], maps_s[1], maps_s[n/2], maps_s[-3], maps_s[-2], maps_s[-1]]
@@ -295,18 +294,3 @@ def get_next_waypoints(waypoints, current_pose, base, n):
 
     return next_waypoints, next_waypoints_cloud
 
-
-def fit_polynomial(waypoints, degree):
-    """fits a polynomial for given paths"""
-    x_coords = [waypoint.pose.pose.position.x for waypoint in waypoints]
-    y_coords = [waypoint.pose.pose.position.y for waypoint in waypoints]
-    return np.polyfit(x_coords, y_coords, degree)
-
-
-def calculateRCurve(coeffs, X):
-    """calculates the radius of curvature"""
-    if coeffs is None:
-        return None
-    a = coeffs[0]
-    b = coeffs[1]
-    return (1 + (2 * a * X + b) ** 2) ** 1.5 / np.absolute(2 * a)

@@ -1,17 +1,40 @@
-- fusion:
+- fusion1:
     x: -10.0
     y: -2.0
     z: 0.0
     yaw: 0.0
-    model: mkz
+    model: fusion
     color: {r: 0.8, g: 0.1, b: 0.0}
     pub_tf: true
-- mkz:
+- fusion2:
     x: 10.0
     y: -2.0
     z: 0.0
     yaw: 0.0
-    model: mkz
+    model: fusion
     color: green
     pub_tf: true
-
+- mkz1:
+    x: -10.0
+    y: -10.0
+    z: 0.0
+    yaw: 0.0
+    model: mkz
+    color: blue
+    pub_tf: true
+- mkz2:
+    x: 10.0
+    y: -10.0
+    z: 0.0
+    yaw: 0.0
+    model: mkz
+    color: balck
+    pub_tf: true
+- mondeo:
+    x: 20.0
+    y: -6.0
+    z: 0.0
+    yaw: 0.0
+    model: mondeo
+    color: white
+    pub_tf: true
