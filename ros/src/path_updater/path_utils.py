@@ -4,7 +4,6 @@ Helper functions for paths_updater
 Author: Peng Xu <robotpengxu@gmail.com>
 Date:   Feb 20 2018
 """
-# pylint: disable=invalid-name
 
 import math
 from math import cos, sin, sqrt
@@ -205,12 +204,12 @@ def get_xy(s, d, maps_s, poses):
     return x, y
 
 
-def get_next_waypoints(waypoints, current_pose, base, n):
+def get_next_waypoints(waypoints, current_pose, base, n, ilane):
     """Return a list of n paths ahead of the vehicle"""
     frame_id = waypoints[0].header.frame_id
 
     next_waypoints = []
-    for k in range(base, base+n):
+    for k in range(base, base+4*n):
         wp = k % len(waypoints)
         next_waypoints.append(waypoints[wp])
 
@@ -220,7 +219,7 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     maps_s.append(map_s)
     map_x_prev = next_waypoints[0].pose.position.x
     map_y_prev = next_waypoints[0].pose.position.y
-    for i in range(1, n):
+    for i in range(1, 4*n):
         map_x = next_waypoints[i].pose.position.x
         map_y = next_waypoints[i].pose.position.y
         map_s += distance(map_x, map_y, map_x_prev, map_y_prev)
@@ -237,7 +236,7 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     # rospy.loginfo('******** s = %f, d = %f *********' % (current_s, current_d))
     current_d = distance(current_x, current_y, next_waypoints[0].pose.position.x, next_waypoints[0].pose.position.y)
 
-    d = 6
+    d = 2 + ilane * 4
 
     # fits a polynomial for given paths
     s_coords = [maps_s[0], maps_s[1], maps_s[n/2], maps_s[-3], maps_s[-2], maps_s[-1]]
@@ -249,18 +248,14 @@ def get_next_waypoints(waypoints, current_pose, base, n):
     x_points = []
     y_points = []
 
-    target_s = maps_s[-2]
+    target_s = min(30.0, maps_s[-2])
     target_d = d
 
     s_add_on = 0
     
     for i in range(n):
         s_point = s_add_on + target_s / n
-
-        try:
-            d_point = f(s_point)
-        except:
-            rospy.loginfo('Error: s = %f, d = %f' % (s_point, d_point))
+        d_point = f(s_point)
 
         # rospy.loginfo('s = %f, d = %f' % (s_point, d_point))
 
@@ -299,18 +294,3 @@ def get_next_waypoints(waypoints, current_pose, base, n):
 
     return next_waypoints, next_waypoints_cloud
 
-
-def fit_polynomial(waypoints, degree):
-    """fits a polynomial for given paths"""
-    x_coords = [waypoint.pose.pose.position.x for waypoint in waypoints]
-    y_coords = [waypoint.pose.pose.position.y for waypoint in waypoints]
-    return np.polyfit(x_coords, y_coords, degree)
-
-
-def calculateRCurve(coeffs, X):
-    """calculates the radius of curvature"""
-    if coeffs is None:
-        return None
-    a = coeffs[0]
-    b = coeffs[1]
-    return (1 + (2 * a * X + b) ** 2) ** 1.5 / np.absolute(2 * a)

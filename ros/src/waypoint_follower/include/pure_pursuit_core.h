@@ -75,7 +75,7 @@ private:
   double lookahead_distance_;
 
   geometry_msgs::PoseStamped current_pose_;
-  geometry_msgs::Twist current_velocity_;
+  geometry_msgs::TwistStamped current_velocity_;
   WayPoints current_waypoints_;
 
   double getCmdVelocity(int waypoint) const;
@@ -114,7 +114,7 @@ public:
 
   // for ROS
   void callbackFromCurrentPose(const geometry_msgs::PoseStampedConstPtr &msg);
-  void callbackFromCurrentVelocity(const geometry_msgs::TwistConstPtr &msg);
+  void callbackFromCurrentVelocity(const geometry_msgs::TwistStampedConstPtr &msg);
   void callbackFromWayPoints(const styx_msgs::LaneConstPtr &msg);
 
   // for debug

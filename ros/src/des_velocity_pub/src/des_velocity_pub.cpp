@@ -7,7 +7,7 @@
 int main(int argc, char **argv) {
     ros::init(argc, argv, "des_velocity");
     ros::NodeHandle n;
-    ros::Publisher des_speed_pub = n.advertise<std_msgs::Float64>("/catvehicle/des_speed", 1000);
+    ros::Publisher des_speed_pub = n.advertise<std_msgs::Float64>("/des_speed", 1000);
     // ros::Publisher des_velocity_pub = n.advertise<geometry_msgs::TwistStamped>("/catvehicle/des_vel", 1000);
     ros::Rate loop_rate(20);
 

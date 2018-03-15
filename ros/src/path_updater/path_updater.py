@@ -11,7 +11,7 @@ from geometry_msgs.msg import PoseStamped, Pose, Point32
 from sensor_msgs.msg import PointCloud
 from nav_msgs.msg import Path
 from styx_msgs.msg import Lane, Waypoint
-from std_msgs.msg import Int32
+from std_msgs.msg import Int32, String
 import path_utils as utils
 import math
 
@@ -33,7 +33,7 @@ as well as to verify your TL classifier.
 TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 '''
 
-LOOKAHEAD_WPS = 100  # Number of paths we will publish. You can change this number
+LOOKAHEAD_WPS = 50  # Number of paths we will publish. You can change this number
 
 
 class pathUpdater(object):
@@ -42,17 +42,21 @@ class pathUpdater(object):
 
         rospy.Subscriber('/current_pose', PoseStamped, self.pose_cb)
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
+        rospy.Subscriber('/change_lane', String, self.change_lane_cb)
 
         self.final_path_pub = rospy.Publisher('final_path', Path, queue_size=1)
         self.final_path_points_pub = rospy.Publisher('final_path_points', PointCloud, queue_size=1)
         self.final_waypoints_pub = rospy.Publisher('final_waypoints', Lane, queue_size=1)
         self.car_index_pub = rospy.Publisher('car_index', Int32, queue_size=1)
+        self.change_lane_reward_pub = rospy.Publisher('change_lane_reward', Int32, queue_size=1)
 
         self.pose_stamped = None
         self.pose = None
         self.frame_id = None
         self.base_path = None
         self.waypoints = None
+        self.ilane = None
+        self.lane_timestamp = None
 
         self.run()
 
@@ -65,6 +69,34 @@ class pathUpdater(object):
     def base_path_cb(self, msg):
         """ Store the given map """
         self.base_path = msg
+
+    def change_lane_cb(self, msg):
+        """ Store the given map """
+        signal = msg.data
+        reward = 0
+        new_timestamp = rospy.get_time()
+        if self.lane_timestamp == None or new_timestamp - self.lane_timestamp > 5:
+            if signal == "Keep":
+                self.lane_timestamp = new_timestamp
+                reward = 10
+                rospy.loginfo("Keep lane!")
+            elif signal == "Left" and self.ilane > 0:
+                self.ilane -= 1
+                self.lane_timestamp = new_timestamp
+                reward = 10
+                rospy.loginfo("Changed to Left!")
+            elif signal == "Right" and self.ilane < 2:
+                self.ilane += 1
+                self.lane_timestamp = new_timestamp
+                reward = 10
+                rospy.loginfo("Changed to Right!")
+            else:
+                reward = -10
+                rospy.loginfo("Cannot execute the command this time because the target lane is not available ...")
+        else:
+            reward = -5
+            rospy.loginfo("Cannot execute the command this time because the last execution hasn't finished ...")
+        self.change_lane_reward_pub.publish(reward)
 
     def get_waypoint_velocity(self, waypoint):
         return waypoint.twist.twist.linear.x
@@ -84,7 +116,10 @@ class pathUpdater(object):
         """
         Continuously publish local path paths with target velocities
         """
-        rate = rospy.Rate(5)
+        rate = rospy.Rate(10)
+
+        self.ilane = int(rospy.get_param("~lane_index", '0'))
+        cruise_speed = int(rospy.get_param("~cruise_speed", '10'))
 
         while not rospy.is_shutdown():
 
@@ -95,7 +130,8 @@ class pathUpdater(object):
             car_index = utils.get_closest_waypoint_index(self.pose_stamped, self.base_path.poses)
 
             # Get subset paths ahead
-            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS)
+            lookahead_waypoints, lookahead_waypoints_display \
+                = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS, self.ilane)
 
             # Publish
             path = utils.construct_path_object(self.frame_id, lookahead_waypoints)
@@ -106,10 +142,11 @@ class pathUpdater(object):
                 waypoint = Waypoint()
                 waypoint.pose = lookahead_waypoints[i]
                 waypoint.twist.header.frame_id = self.frame_id
-                waypoint.twist.twist.linear.x = 2
+                waypoint.twist.twist.linear.x = cruise_speed
                 lane.waypoints.append(waypoint)
 
-            rospy.loginfo('Update local path and waypoints ...')
+            rospy.logdebug('Update local path and waypoints ...')
+
             self.final_path_pub.publish(path)
             self.final_path_points_pub.publish(lookahead_waypoints_display)
             self.final_waypoints_pub.publish(lane)

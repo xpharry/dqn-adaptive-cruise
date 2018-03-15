@@ -13,7 +13,9 @@
 	<!--<node name="hoffmann_controller" pkg="hoffmann_controller" type="hoffmann_controller" output="screen"/>-->
 
     <!-- A des_velocity_pub playing a role of speed controller -->
-	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub"/>
+	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub">
+        <remap from="/des_speed" to="/catvehicle/des_speed" />
+	</node>
 	<node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" args="/catvehicle/des_speed"/>
 
     <!-- Waypoint follower -->

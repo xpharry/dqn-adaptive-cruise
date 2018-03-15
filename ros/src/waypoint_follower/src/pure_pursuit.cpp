@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 
   ROS_INFO("set publisher...");
   // publish topic
-  ros::Publisher cmd_velocity_publisher = nh.advertise<geometry_msgs::TwistStamped>("twist_cmd", 10);
+  ros::Publisher cmd_vel_stamped_publisher = nh.advertise<geometry_msgs::TwistStamped>("cmd_vel_stamped", 10);
   ros::Publisher cmd_vel_publisher = nh.advertise<geometry_msgs::Twist>("cmd_vel", 10);
 
   ROS_INFO("set subscriber...");
@@ -68,10 +68,13 @@ int main(int argc, char **argv)
   while (ros::ok())
   {
     ros::spinOnce();
-    geometry_msgs::TwistStamped cmd_twist = pp.go();
-    cmd_velocity_publisher.publish(cmd_twist);
-    geometry_msgs::Twist cmd_vel = cmd_twist.twist;
+
+    geometry_msgs::TwistStamped cmd_vel_stamped = pp.go();
+    cmd_vel_stamped_publisher.publish(cmd_vel_stamped);
+
+    geometry_msgs::Twist cmd_vel = cmd_vel_stamped.twist;
     cmd_vel_publisher.publish(cmd_vel);
+    
     loop_rate.sleep();
   }
 
