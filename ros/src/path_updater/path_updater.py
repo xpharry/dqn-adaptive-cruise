@@ -84,10 +84,10 @@ class pathUpdater(object):
         """
         Continuously publish local path paths with target velocities
         """
-        rate = rospy.Rate(50)
+        rate = rospy.Rate(10)
 
-        lane = int(rospy.get_param("/lane_index", 0))
-        cruise_speed = int(rospy.get_param("/cruise_speed", 10))
+        ilane = int(rospy.get_param("~lane_index", '0'))
+        cruise_speed = int(rospy.get_param("~cruise_speed", '10'))
 
         while not rospy.is_shutdown():
 
@@ -98,7 +98,7 @@ class pathUpdater(object):
             car_index = utils.get_closest_waypoint_index(self.pose_stamped, self.base_path.poses)
 
             # Get subset paths ahead
-            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS, lane)
+            lookahead_waypoints, lookahead_waypoints_display = utils.get_next_waypoints(self.base_path.poses, self.pose_stamped, car_index, LOOKAHEAD_WPS, ilane)
 
             # Publish
             path = utils.construct_path_object(self.frame_id, lookahead_waypoints)

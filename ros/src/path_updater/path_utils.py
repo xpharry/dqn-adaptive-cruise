@@ -204,7 +204,7 @@ def get_xy(s, d, maps_s, poses):
     return x, y
 
 
-def get_next_waypoints(waypoints, current_pose, base, n, lane):
+def get_next_waypoints(waypoints, current_pose, base, n, ilane):
     """Return a list of n paths ahead of the vehicle"""
     frame_id = waypoints[0].header.frame_id
 
@@ -236,7 +236,7 @@ def get_next_waypoints(waypoints, current_pose, base, n, lane):
     # rospy.loginfo('******** s = %f, d = %f *********' % (current_s, current_d))
     current_d = distance(current_x, current_y, next_waypoints[0].pose.position.x, next_waypoints[0].pose.position.y)
 
-    d = 2 + lane * 4
+    d = 2 + ilane * 4
 
     # fits a polynomial for given paths
     s_coords = [maps_s[0], maps_s[1], maps_s[n/2], maps_s[-3], maps_s[-2], maps_s[-1]]

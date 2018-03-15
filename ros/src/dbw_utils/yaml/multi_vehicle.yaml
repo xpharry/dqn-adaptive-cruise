@@ -4,7 +4,7 @@
     z: 0.0
     yaw: 0.0
     model: fusion
-    color: {r: 0.8, g: 0.1, b: 0.0}
+    color: red
     pub_tf: true
 - fusion2:
     x: 10.0
@@ -12,7 +12,23 @@
     z: 0.0
     yaw: 0.0
     model: fusion
-    color: green
+    color: red
+    pub_tf: true
+- ego:
+    x: -10.0
+    y: -6.0
+    z: 0.0
+    yaw: 0.0
+    model: mondeo
+    color: {r: 0.0, g: 0.8, b: 1.0}
+    pub_tf: true
+- mondeo2:
+    x: 10.0
+    y: -6.0
+    z: 0.0
+    yaw: 0.0
+    model: mondeo
+    color: white
     pub_tf: true
 - mkz1:
     x: -10.0
@@ -20,7 +36,7 @@
     z: 0.0
     yaw: 0.0
     model: mkz
-    color: blue
+    color: green
     pub_tf: true
 - mkz2:
     x: 10.0
@@ -28,13 +44,5 @@
     z: 0.0
     yaw: 0.0
     model: mkz
-    color: balck
-    pub_tf: true
-- mondeo:
-    x: 20.0
-    y: -6.0
-    z: 0.0
-    yaw: 0.0
-    model: mondeo
-    color: white
+    color: green
     pub_tf: true

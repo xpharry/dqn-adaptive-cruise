@@ -5,9 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Status1
-        - /PointCloud1
-        - /RobotModel2
-        - /PointCloud2
       Splitter Ratio: 0.5
     Tree Height: 775
   - Class: rviz/Selection
@@ -142,6 +139,298 @@ Visualization Manager:
       Topic: /lane_line3
       Unreliable: false
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        ego/base_footprint:
+          Value: true
+        ego/base_link:
+          Value: true
+        ego/front_camera:
+          Value: true
+        ego/front_camera_optical:
+          Value: true
+        ego/perfect_gps:
+          Value: true
+        ego/steer_fl:
+          Value: true
+        ego/steer_fr:
+          Value: true
+        ego/velodyne:
+          Value: true
+        ego/velodyne_base_link:
+          Value: true
+        ego/wheel_fl:
+          Value: true
+        ego/wheel_fr:
+          Value: true
+        ego/wheel_rl:
+          Value: true
+        ego/wheel_rr:
+          Value: true
+        fusion1/base_footprint:
+          Value: true
+        fusion1/base_link:
+          Value: true
+        fusion1/front_camera:
+          Value: true
+        fusion1/front_camera_optical:
+          Value: true
+        fusion1/perfect_gps:
+          Value: true
+        fusion1/steer_fl:
+          Value: true
+        fusion1/steer_fr:
+          Value: true
+        fusion1/velodyne:
+          Value: true
+        fusion1/velodyne_base_link:
+          Value: true
+        fusion1/wheel_fl:
+          Value: true
+        fusion1/wheel_fr:
+          Value: true
+        fusion1/wheel_rl:
+          Value: true
+        fusion1/wheel_rr:
+          Value: true
+        fusion2/base_footprint:
+          Value: true
+        fusion2/base_link:
+          Value: true
+        fusion2/front_camera:
+          Value: true
+        fusion2/front_camera_optical:
+          Value: true
+        fusion2/perfect_gps:
+          Value: true
+        fusion2/steer_fl:
+          Value: true
+        fusion2/steer_fr:
+          Value: true
+        fusion2/velodyne:
+          Value: true
+        fusion2/velodyne_base_link:
+          Value: true
+        fusion2/wheel_fl:
+          Value: true
+        fusion2/wheel_fr:
+          Value: true
+        fusion2/wheel_rl:
+          Value: true
+        fusion2/wheel_rr:
+          Value: true
+        mkz1/base_footprint:
+          Value: true
+        mkz1/base_link:
+          Value: true
+        mkz1/front_camera:
+          Value: true
+        mkz1/front_camera_optical:
+          Value: true
+        mkz1/perfect_gps:
+          Value: true
+        mkz1/steer_fl:
+          Value: true
+        mkz1/steer_fr:
+          Value: true
+        mkz1/velodyne:
+          Value: true
+        mkz1/velodyne_base_link:
+          Value: true
+        mkz1/wheel_fl:
+          Value: true
+        mkz1/wheel_fr:
+          Value: true
+        mkz1/wheel_rl:
+          Value: true
+        mkz1/wheel_rr:
+          Value: true
+        mkz2/base_footprint:
+          Value: true
+        mkz2/base_link:
+          Value: true
+        mkz2/front_camera:
+          Value: true
+        mkz2/front_camera_optical:
+          Value: true
+        mkz2/perfect_gps:
+          Value: true
+        mkz2/steer_fl:
+          Value: true
+        mkz2/steer_fr:
+          Value: true
+        mkz2/velodyne:
+          Value: true
+        mkz2/velodyne_base_link:
+          Value: true
+        mkz2/wheel_fl:
+          Value: true
+        mkz2/wheel_fr:
+          Value: true
+        mkz2/wheel_rl:
+          Value: true
+        mkz2/wheel_rr:
+          Value: true
+        mondeo2/base_footprint:
+          Value: true
+        mondeo2/base_link:
+          Value: true
+        mondeo2/front_camera:
+          Value: true
+        mondeo2/front_camera_optical:
+          Value: true
+        mondeo2/perfect_gps:
+          Value: true
+        mondeo2/steer_fl:
+          Value: true
+        mondeo2/steer_fr:
+          Value: true
+        mondeo2/velodyne:
+          Value: true
+        mondeo2/velodyne_base_link:
+          Value: true
+        mondeo2/wheel_fl:
+          Value: true
+        mondeo2/wheel_fr:
+          Value: true
+        mondeo2/wheel_rl:
+          Value: true
+        mondeo2/wheel_rr:
+          Value: true
+        world:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          ego/base_footprint:
+            ego/base_link:
+              ego/steer_fl:
+                ego/wheel_fl:
+                  {}
+              ego/steer_fr:
+                ego/wheel_fr:
+                  {}
+              ego/wheel_rl:
+                {}
+              ego/wheel_rr:
+                {}
+            ego/front_camera_optical:
+              ego/front_camera:
+                {}
+            ego/perfect_gps:
+              {}
+            ego/velodyne_base_link:
+              ego/velodyne:
+                {}
+          fusion1/base_footprint:
+            fusion1/base_link:
+              fusion1/steer_fl:
+                fusion1/wheel_fl:
+                  {}
+              fusion1/steer_fr:
+                fusion1/wheel_fr:
+                  {}
+              fusion1/wheel_rl:
+                {}
+              fusion1/wheel_rr:
+                {}
+            fusion1/front_camera_optical:
+              fusion1/front_camera:
+                {}
+            fusion1/perfect_gps:
+              {}
+            fusion1/velodyne_base_link:
+              fusion1/velodyne:
+                {}
+          fusion2/base_footprint:
+            fusion2/base_link:
+              fusion2/steer_fl:
+                fusion2/wheel_fl:
+                  {}
+              fusion2/steer_fr:
+                fusion2/wheel_fr:
+                  {}
+              fusion2/wheel_rl:
+                {}
+              fusion2/wheel_rr:
+                {}
+            fusion2/front_camera_optical:
+              fusion2/front_camera:
+                {}
+            fusion2/perfect_gps:
+              {}
+            fusion2/velodyne_base_link:
+              fusion2/velodyne:
+                {}
+          mkz1/base_footprint:
+            mkz1/base_link:
+              mkz1/steer_fl:
+                mkz1/wheel_fl:
+                  {}
+              mkz1/steer_fr:
+                mkz1/wheel_fr:
+                  {}
+              mkz1/wheel_rl:
+                {}
+              mkz1/wheel_rr:
+                {}
+            mkz1/front_camera_optical:
+              mkz1/front_camera:
+                {}
+            mkz1/perfect_gps:
+              {}
+            mkz1/velodyne_base_link:
+              mkz1/velodyne:
+                {}
+          mkz2/base_footprint:
+            mkz2/base_link:
+              mkz2/steer_fl:
+                mkz2/wheel_fl:
+                  {}
+              mkz2/steer_fr:
+                mkz2/wheel_fr:
+                  {}
+              mkz2/wheel_rl:
+                {}
+              mkz2/wheel_rr:
+                {}
+            mkz2/front_camera_optical:
+              mkz2/front_camera:
+                {}
+            mkz2/perfect_gps:
+              {}
+            mkz2/velodyne_base_link:
+              mkz2/velodyne:
+                {}
+          mondeo2/base_footprint:
+            mondeo2/base_link:
+              mondeo2/steer_fl:
+                mondeo2/wheel_fl:
+                  {}
+              mondeo2/steer_fr:
+                mondeo2/wheel_fr:
+                  {}
+              mondeo2/wheel_rl:
+                {}
+              mondeo2/wheel_rr:
+                {}
+            mondeo2/front_camera_optical:
+              mondeo2/front_camera:
+                {}
+            mondeo2/perfect_gps:
+              {}
+            mondeo2/velodyne_base_link:
+              mondeo2/velodyne:
+                {}
+      Update Interval: 0
+      Value: true
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -214,8 +503,393 @@ Visualization Manager:
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: /fusion/robot_description
-      TF Prefix: fusion
+      Robot Description: /fusion1/robot_description
+      TF Prefix: fusion1
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        perfect_gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        steer_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        velodyne:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /fusion2/robot_description
+      TF Prefix: fusion2
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        perfect_gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        steer_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        velodyne:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /ego/robot_description
+      TF Prefix: ego
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        perfect_gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        steer_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        velodyne:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /mondeo2/robot_description
+      TF Prefix: mondeo2
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        perfect_gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        steer_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        velodyne:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /mkz1/robot_description
+      TF Prefix: mkz1
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        perfect_gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        steer_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        velodyne:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: /mkz2/robot_description
+      TF Prefix: mkz2
       Update Interval: 0
       Value: true
       Visual Enabled: true
@@ -233,6 +907,66 @@ Visualization Manager:
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
+      Max Color: 255; 0; 0
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 5
+      Size (m): 0.00999999978
+      Style: Points
+      Topic: /fusion1/final_path_points
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud
+      Color: 255; 0; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 5
+      Size (m): 0.00999999978
+      Style: Points
+      Topic: /fusion2/final_path_points
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud
+      Color: 0; 0; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
       Max Color: 255; 105; 180
       Max Intensity: 4096
       Min Color: 255; 105; 180
@@ -244,88 +978,41 @@ Visualization Manager:
       Size (Pixels): 5
       Size (m): 0.00999999978
       Style: Points
-      Topic: /fusion/final_path_points
+      Topic: /ego/final_path_points
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
     - Alpha: 1
-      Class: rviz/RobotModel
-      Collision Enabled: false
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud
+      Color: 255; 255; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
       Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera_optical:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        perfect_gps:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        steer_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        steer_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        velodyne:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        velodyne_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_rl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_rr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-      Name: RobotModel
-      Robot Description: /mkz/robot_description
-      TF Prefix: mkz
-      Update Interval: 0
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 5
+      Size (m): 0.00999999978
+      Style: Points
+      Topic: /mondeo2/final_path_points
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
-      Visual Enabled: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -348,121 +1035,43 @@ Visualization Manager:
       Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
-      Size (Pixels): 3
+      Size (Pixels): 5
       Size (m): 0.00999999978
       Style: Points
-      Topic: /mkz/final_path_points
+      Topic: /mkz1/final_path_points
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
-    - Class: rviz/TF
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud
+      Color: 0; 255; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
       Enabled: true
-      Frame Timeout: 15
-      Frames:
-        All Enabled: true
-        fusion/base_footprint:
-          Value: true
-        fusion/base_link:
-          Value: true
-        fusion/front_camera:
-          Value: true
-        fusion/front_camera_optical:
-          Value: true
-        fusion/perfect_gps:
-          Value: true
-        fusion/steer_fl:
-          Value: true
-        fusion/steer_fr:
-          Value: true
-        fusion/velodyne:
-          Value: true
-        fusion/velodyne_base_link:
-          Value: true
-        fusion/wheel_fl:
-          Value: true
-        fusion/wheel_fr:
-          Value: true
-        fusion/wheel_rl:
-          Value: true
-        fusion/wheel_rr:
-          Value: true
-        mkz/base_footprint:
-          Value: true
-        mkz/base_link:
-          Value: true
-        mkz/front_camera:
-          Value: true
-        mkz/front_camera_optical:
-          Value: true
-        mkz/perfect_gps:
-          Value: true
-        mkz/steer_fl:
-          Value: true
-        mkz/steer_fr:
-          Value: true
-        mkz/velodyne:
-          Value: true
-        mkz/velodyne_base_link:
-          Value: true
-        mkz/wheel_fl:
-          Value: true
-        mkz/wheel_fr:
-          Value: true
-        mkz/wheel_rl:
-          Value: true
-        mkz/wheel_rr:
-          Value: true
-        world:
-          Value: true
-      Marker Scale: 1
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Tree:
-        world:
-          fusion/base_footprint:
-            fusion/base_link:
-              fusion/steer_fl:
-                fusion/wheel_fl:
-                  {}
-              fusion/steer_fr:
-                fusion/wheel_fr:
-                  {}
-              fusion/wheel_rl:
-                {}
-              fusion/wheel_rr:
-                {}
-            fusion/front_camera_optical:
-              fusion/front_camera:
-                {}
-            fusion/perfect_gps:
-              {}
-            fusion/velodyne_base_link:
-              fusion/velodyne:
-                {}
-          mkz/base_footprint:
-            mkz/base_link:
-              mkz/steer_fl:
-                mkz/wheel_fl:
-                  {}
-              mkz/steer_fr:
-                mkz/wheel_fr:
-                  {}
-              mkz/wheel_rl:
-                {}
-              mkz/wheel_rr:
-                {}
-            mkz/front_camera_optical:
-              mkz/front_camera:
-                {}
-            mkz/perfect_gps:
-              {}
-            mkz/velodyne_base_link:
-              mkz/velodyne:
-                {}
-      Update Interval: 0
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 5
+      Size (m): 0.00999999978
+      Style: Points
+      Topic: /mkz2/final_path_points
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
