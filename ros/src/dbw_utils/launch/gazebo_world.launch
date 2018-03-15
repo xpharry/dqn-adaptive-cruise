@@ -17,11 +17,11 @@
   <node name="gazebo" pkg="gazebo_ros" type="gzserver" respawn="false" output="screen"
         args="$(arg headless_arg) -e $(arg physics) $(arg world_name)" />
 
-  <!-- start gazebo client -->
+  <!-- start gazebo client 
   <group unless="$(arg headless)">
     <arg unless="$(arg use_camera_control)" name="gzclient_args" value="" />
     <arg     if="$(arg use_camera_control)" name="gzclient_args" value="-g libdbw_mkz_gazebo_camera.so" />
     <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" args="$(arg gzclient_args)" output="screen"/>
-  </group>
+  </group>-->
 
 </launch>

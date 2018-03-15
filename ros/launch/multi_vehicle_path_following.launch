@@ -4,7 +4,7 @@
   
   <include file="$(find dbw_utils)/launch/dbw_mkz_gazebo.launch" >
     <arg name="use_camera_control" value="true" />
-    <arg name="world_name" value="$(find dbw_mkz_gazebo)/worlds/empty_world.world" />
+    <arg name="world_name" value="$(find dbw_utils)/worlds/empty_world.world" />
     <arg name="sim_param_file" value="$(find dbw_utils)/yaml/multi_vehicle.yaml" />
   </include>
 
@@ -112,15 +112,16 @@
     <param name="target_model" value="ego"/>
   </node>
   <!-- Path planning -->
-  <node name="mondeo1_path_updater" pkg="path_updater" type="path_updater.py">
+  <node name="ego_path_updater" pkg="path_updater" type="path_updater.py" output="screen">
     <param name="lane_index" value="1"/>
     <param name="cruise_speed" value="10"/>
     <remap from="current_pose" to="/ego/current_pose" />
     <remap from="final_path" to="/ego/final_path" />
     <remap from="final_waypoints" to="/ego/final_waypoints" />
     <remap from="final_path_points" to="/ego/final_path_points" />
+    <remap from="change_lane" to="/ego/change_lane" />
   </node>
-  <node name="mondeo1_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+  <node name="ego_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
     <param name="linear_interpolate_mode" value="True"/>
     <remap from="current_pose" to="/ego/current_pose" />
     <remap from="final_waypoints" to="/ego/final_waypoints" />
