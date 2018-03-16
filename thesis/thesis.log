@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  16 MAR 2018 01:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  16 MAR 2018 01:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -282,31 +282,6 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 (/usr/local/texlive/2017/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 ))
-(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count112
-\lst@gtempboxa=\box29
-\lst@token=\toks26
-\lst@length=\count113
-\lst@currlwidth=\dimen118
-\lst@column=\count114
-\lst@pos=\count115
-\lst@lostspace=\dimen119
-\lst@width=\dimen120
-\lst@newlines=\count116
-\lst@lineno=\count117
-\lst@maxwidth=\dimen121
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count118
-\lst@skipnumbers=\count119
-\lst@framebox=\box30
-)
-(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2015/06/04 1.6 listings configuration
-))
-Package: listings 2015/06/04 1.6 (Carsten Heinz)
-
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fourier.sty
 Package: fourier 2005/01/01 1.4 fourier-GUTenberg package
 
@@ -517,8 +492,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 )
-\Gin@req@height=\dimen122
-\Gin@req@width=\dimen123
+\Gin@req@height=\dimen118
+\Gin@req@width=\dimen119
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
@@ -529,30 +504,29 @@ Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen124
-\captionmargin@=\dimen125
-\captionwidth=\dimen126
-\caption@tempdima=\dimen127
-\caption@indent=\dimen128
-\caption@parindent=\dimen129
-\caption@hangindent=\dimen130
+\captionmargin=\dimen120
+\captionmargin@=\dimen121
+\captionwidth=\dimen122
+\caption@tempdima=\dimen123
+\caption@indent=\dimen124
+\caption@parindent=\dimen125
+\caption@hangindent=\dimen126
 )
 Package caption Info: AMS or SMF document class.
-\c@ContinuedFloat=\count120
+\c@ContinuedFloat=\count112
 Package caption Info: hyperref package is loaded.
-Package caption Info: listings package is loaded.
 )
-\c@KVtest=\count121
+\c@KVtest=\count113
 \sf@farskip=\skip54
-\sf@captopadj=\dimen131
+\sf@captopadj=\dimen127
 \sf@capskip=\skip55
 \sf@nearskip=\skip56
-\c@subfigure=\count122
-\c@subfigure@save=\count123
-\c@lofdepth=\count124
-\c@subtable=\count125
-\c@subtable@save=\count126
-\c@lotdepth=\count127
+\c@subfigure=\count114
+\c@subfigure@save=\count115
+\c@lofdepth=\count116
+\c@subtable=\count117
+\c@subtable@save=\count118
+\c@lotdepth=\count119
 \sf@top=\skip57
 \sf@bottom=\skip58
 )
@@ -570,73 +544,73 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTright=\skip60
 \LTpre=\skip61
 \LTpost=\skip62
-\LTchunksize=\count128
-\LTcapwidth=\dimen132
-\LT@head=\box31
-\LT@firsthead=\box32
-\LT@foot=\box33
-\LT@lastfoot=\box34
-\LT@cols=\count129
-\LT@rows=\count130
-\c@LT@tables=\count131
-\c@LT@chunks=\count132
-\LT@p@ftn=\toks27
+\LTchunksize=\count120
+\LTcapwidth=\dimen128
+\LT@head=\box29
+\LT@firsthead=\box30
+\LT@foot=\box31
+\LT@lastfoot=\box32
+\LT@cols=\count121
+\LT@rows=\count122
+\c@LT@tables=\count123
+\c@LT@chunks=\count124
+\LT@p@ftn=\toks26
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2017/01/14 v0.5h Insert pages of external PDF documents (AM)
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count133
-\calc@Bcount=\count134
-\calc@Adimen=\dimen133
-\calc@Bdimen=\dimen134
+\calc@Acount=\count125
+\calc@Bcount=\count126
+\calc@Adimen=\dimen129
+\calc@Bdimen=\dimen130
 \calc@Askip=\skip63
 \calc@Bskip=\skip64
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count135
+\calc@Ccount=\count127
 \calc@Cskip=\skip65
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
 )
-\AM@pagewidth=\dimen135
-\AM@pageheight=\dimen136
+\AM@pagewidth=\dimen131
+\AM@pageheight=\dimen132
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2017/01/14 v0.5h Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box35
-\AM@global@opts=\toks28
-\AM@toc@title=\toks29
-\c@AM@survey=\count136
-\AM@templatesizebox=\box36
+\AM@pagebox=\box33
+\AM@global@opts=\toks27
+\AM@toc@title=\toks28
+\c@AM@survey=\count128
+\AM@templatesizebox=\box34
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks30
-\verbatim@line=\toks31
+\every@verbatim=\toks29
+\verbatim@line=\toks30
 \verbatim@in@stream=\read1
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen137
-\WF@size=\dimen138
-\c@WF@wrappedlines=\count137
-\WF@box=\box37
-\WF@everypar=\toks32
+\wrapoverhang=\dimen133
+\WF@size=\dimen134
+\c@WF@wrappedlines=\count129
+\WF@box=\box35
+\WF@everypar=\toks31
 Package: wrapfig 2003/01/31  v 3.6
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@colwidth=\skip66
-\multirow@cntb=\count138
+\multirow@cntb=\count130
 \multirow@dima=\skip67
-\bigstrutjot=\dimen139
+\bigstrutjot=\dimen135
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/threeparttable/threeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box38
+\@tempboxb=\box36
 ) (./input/KL-Typing-Aids.sty (./input/FE-uGreek.sty)) (./input/protcode.tex)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
@@ -657,123 +631,116 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
 (/usr/local/texlive/2017/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box39
-\UL@hyphenbox=\box40
+\UL@box=\box37
+\UL@hyphenbox=\box38
 \UL@skip=\skip68
-\UL@hook=\toks33
-\UL@height=\dimen140
-\UL@pe=\count139
-\UL@pixel=\dimen141
-\ULC@box=\box41
+\UL@hook=\toks32
+\UL@height=\dimen136
+\UL@pe=\count131
+\UL@pixel=\dimen137
+\ULC@box=\box39
 Package: ulem 2012/05/18
-\ULdepth=\dimen142
+\ULdepth=\dimen138
 )
 
 LaTeX Warning: Unused global option(s):
     [help,onepage].
 
-(./thesis.aux (./content/01-Introduction.aux)
-(./content/02-LiteratureReview.aux) (./content/03-Experimental.aux)
-(./content/04-Results.aux) (./content/05-Discussion.aux)
-(./content/06-Conclusions.aux) (./content/07-Futurework.aux)
-(./app/app_pprofile.aux) (./app/app_specimens.aux) (./app/app_thesis_prep.aux)
-(./app/app_figs.aux))
+(./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 199.
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 199.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 199
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 148.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 148.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 148
 .
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmlfutm.fd
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 199.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 199
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 148.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 148
 .
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmsfutm.fd
+ (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 199.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 199
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 148.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 148
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 199.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 199.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 148.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 148.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 199.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 199.
+LaTeX Font Info:    ... okay on input line 148.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 148.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/t1futs.fd
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 )
-LaTeX Font Info:    Try loading font information for FML+futmi on input line 19
-9.
+LaTeX Font Info:    Try loading font information for FML+futmi on input line 14
+8.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmlfutmi.fd
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 199.
+(Font)              scaled to size 9.19998pt on input line 148.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 199.
+(Font)              scaled to size 6.99199pt on input line 148.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 199.
-LaTeX Font Info:    Try loading font information for U+msa on input line 199.
+(Font)              scaled to size 5.51999pt on input line 148.
+LaTeX Font Info:    Try loading font information for U+msa on input line 148.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 199.
+LaTeX Font Info:    Try loading font information for U+msb on input line 148.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 199.
+(Font)              scaled to size 9.19998pt on input line 148.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 199.
+(Font)              scaled to size 6.99199pt on input line 148.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 199.
+(Font)              scaled to size 5.51999pt on input line 148.
 
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count140
-\scratchdimen=\dimen143
-\scratchbox=\box42
-\nofMPsegments=\count141
-\nofMParguments=\count142
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count143
-\MPscratchDim=\dimen144
-\MPnumerator=\count144
-\makeMPintoPDFobject=\count145
-\everyMPtoPDFconversion=\toks35
+\scratchcounter=\count132
+\scratchdimen=\dimen139
+\scratchbox=\box40
+\nofMPsegments=\count133
+\nofMParguments=\count134
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count135
+\MPscratchDim=\dimen140
+\MPnumerator=\count136
+\makeMPintoPDFobject=\count137
+\everyMPtoPDFconversion=\toks34
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -790,8 +757,8 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box43
-Package hyperref Info: Link coloring ON on input line 199.
+\AtBeginShipoutBox=\box41
+Package hyperref Info: Link coloring ON on input line 148.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -799,17 +766,16 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count146
+\c@section@level=\count138
 )
-LaTeX Info: Redefining \ref on input line 199.
-LaTeX Info: Redefining \pageref on input line 199.
-LaTeX Info: Redefining \nameref on input line 199.
+LaTeX Info: Redefining \ref on input line 148.
+LaTeX Info: Redefining \pageref on input line 148.
+LaTeX Info: Redefining \nameref on input line 148.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write3
 \openout3 = `thesis.out'.
 
-\c@lstlisting=\count147
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: longtable package is loaded.
@@ -821,183 +787,70 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 204.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 153.
  [1
 
 
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 220.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 169.
 
 
-Package xcolor Warning: Incompatible color definition on input line 220.
+Package xcolor Warning: Incompatible color definition on input line 169.
 
 [2]
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 230.
+(Font)              scaled to size 11.03998pt on input line 179.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 230.
+(Font)              scaled to size 8.27998pt on input line 179.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 230.
+(Font)              scaled to size 6.43999pt on input line 179.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 230.
+(Font)              scaled to size 11.03998pt on input line 179.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 230.
+(Font)              scaled to size 8.27998pt on input line 179.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 230.
+(Font)              scaled to size 6.43999pt on input line 179.
 
-Overfull \hbox (28.0pt too wide) in paragraph at lines 230--230
+Overfull \hbox (28.0pt too wide) in paragraph at lines 179--179
 [][] 
  []
 
+
+Package hyperref Warning: old toc file detected, not used; run LaTeX again.
+
+\tf@toc=\write4
+\openout4 = `thesis.toc'.
+
+
+Package hyperref Warning: old lot file detected, not used; run LaTeX again.
+
+\tf@lot=\write5
+\openout5 = `thesis.lot'.
+
+
+Package hyperref Warning: old lof file detected, not used; run LaTeX again.
+
+\tf@lof=\write6
+\openout6 = `thesis.lof'.
+
 [3]
-Table of Contents
-LaTeX Font Info:    Try loading font information for T1+pag on input line 237.
+Acknowledgements
+LaTeX Font Info:    Try loading font information for T1+pag on input line 196.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/t1pag.fd
 File: t1pag.fd 2001/06/04 font definitions for T1/pag.
 )
 LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/pag/b/n' tried instead on input line 237.
+(Font)              Font shape `T1/pag/b/n' tried instead on input line 196.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <14.4> not available
-(Font)              Font shape `T1/pag/db/n' tried instead on input line 237.
- (./thesis.toc
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 196.
 
-Package xcolor Warning: Incompatible color definition on input line 1.
-
-
-Package xcolor Warning: Incompatible color definition on input line 2.
-
-
-Package xcolor Warning: Incompatible color definition on input line 3.
-
-
-Package xcolor Warning: Incompatible color definition on input line 4.
-
-
-Package xcolor Warning: Incompatible color definition on input line 5.
-
-
-Package xcolor Warning: Incompatible color definition on input line 6.
-
-
-Package xcolor Warning: Incompatible color definition on input line 7.
-
-
-Package xcolor Warning: Incompatible color definition on input line 8.
-
-
-Package xcolor Warning: Incompatible color definition on input line 12.
-
-
-Package xcolor Warning: Incompatible color definition on input line 13.
-
-
-Package xcolor Warning: Incompatible color definition on input line 24.
-
-
-Package xcolor Warning: Incompatible color definition on input line 25.
-
-
-Package xcolor Warning: Incompatible color definition on input line 26.
-
-
-Package xcolor Warning: Incompatible color definition on input line 36.
-
-
-Package xcolor Warning: Incompatible color definition on input line 37.
-
-
-Package xcolor Warning: Incompatible color definition on input line 40.
-
-
-Package xcolor Warning: Incompatible color definition on input line 41.
-
-
-Package xcolor Warning: Incompatible color definition on input line 46.
-
-
-Package xcolor Warning: Incompatible color definition on input line 47.
-
-
-Package xcolor Warning: Incompatible color definition on input line 49.
-
-
-Underfull \vbox (badness 1521) has occurred while \output is active []
-
- [4
-
-]
-
-Package xcolor Warning: Incompatible color definition on input line 50.
-
-
-Package xcolor Warning: Incompatible color definition on input line 51.
-
-
-Package xcolor Warning: Incompatible color definition on input line 52.
-
-)
-\tf@toc=\write4
-\openout4 = `thesis.toc'.
-
- [5]
-List of Tables
-(./thesis.lot)
-\tf@lot=\write5
-\openout5 = `thesis.lot'.
-
- [6
-
-]
-List of Figures
-(./thesis.lof
-
-Package xcolor Warning: Incompatible color definition on input line 4.
-
-
-Package xcolor Warning: Incompatible color definition on input line 6.
-
-
-Package xcolor Warning: Incompatible color definition on input line 7.
-
-
-Package xcolor Warning: Incompatible color definition on input line 8.
-
-
-Package xcolor Warning: Incompatible color definition on input line 9.
-
-
-Package xcolor Warning: Incompatible color definition on input line 11.
-
-
-Package xcolor Warning: Incompatible color definition on input line 12.
-
-
-Package xcolor Warning: Incompatible color definition on input line 13.
-
-
-Package xcolor Warning: Incompatible color definition on input line 15.
-
-
-Package xcolor Warning: Incompatible color definition on input line 16.
-
-
-Package xcolor Warning: Incompatible color definition on input line 20.
-
-)
-\tf@lof=\write6
-\openout6 = `thesis.lof'.
-
- [7
-
-]
-Acknowledgements
-(./content/00-Acknowledgements.tex) [8
+(./content/00-Acknowledgements.tex) [4
 
 ]
 Abstract
-(./content/00-Abstract.tex [9
+(./content/00-Abstract.tex [5
 
 ])
 \openout2 = `content/01-Introduction.aux'.
@@ -1014,7 +867,7 @@ LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <12> not available
 (Font)              Font shape `T1/pag/b/n' tried instead on input line 5.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <12> not available
 (Font)              Font shape `T1/pag/db/n' tried instead on input line 5.
-<figs/magic.png, id=181, 409.53pt x 409.53pt>
+<figs/magic.png, id=35, 409.53pt x 409.53pt>
 File: figs/magic.png Graphic file (type png)
  <use figs/magic.png>
 Package pdftex.def Info: figs/magic.png used on input line 12.
@@ -1267,16 +1120,16 @@ No file thesis.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 327.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 327.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 276.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
 (./thesis.aux (./content/01-Introduction.aux)
 (./content/02-LiteratureReview.aux) (./content/03-Experimental.aux)
 (./content/04-Results.aux) (./content/05-Discussion.aux)
 (./content/06-Conclusions.aux) (./content/07-Futurework.aux)
 (./app/app_pprofile.aux) (./app/app_specimens.aux) (./app/app_thesis_prep.aux)
 (./app/app_figs.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 327.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 327.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
 
 
 Package rerunfilecheck Warning: File `thesis.out' has changed.
@@ -1284,21 +1137,24 @@ Package rerunfilecheck Warning: File `thesis.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `thesis.out':
-(rerunfilecheck)             Before: 1CDF7258FADBC1B0FD933024680BBFD0;1419
-(rerunfilecheck)             After:  66F750A55F1F4610FECC8EF54ED03849;1407.
+(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
+(rerunfilecheck)             After:  C2637B9C11241894129AC085089BC0FA;1308.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 327.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 276.
  ) 
 Here is how much of TeX's memory you used:
- 11901 strings out of 492995
- 172381 string characters out of 6132704
- 277750 words of memory out of 5000000
- 14884 multiletter control sequences out of 15000+600000
+ 10662 strings out of 492995
+ 153860 string characters out of 6132704
+ 252340 words of memory out of 5000000
+ 13689 multiletter control sequences out of 15000+600000
  96859 words of font info for 108 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 44i,11n,42p,968b,430s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,11n,42p,968b,429s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1313,10 +1169,10 @@ ive/2017/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/local/texlive/201
 -dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/local/texlive/2017/texmf-dist/
 fonts/type1/urw/avantgar/uagd8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
 ype1/urw/avantgar/uagk8a.pfb>
-Output written on thesis.pdf (36 pages, 138672 bytes).
+Output written on thesis.pdf (32 pages, 133422 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
- 337 compressed objects within 4 object streams
- 92 named destinations out of 1000 (max. 500000)
- 1726 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 267 PDF objects out of 1000 (max. 8388607)
+ 219 compressed objects within 3 object streams
+ 88 named destinations out of 1000 (max. 500000)
+ 1542 words of extra memory for PDF output out of 10000 (max. 10000000)
 

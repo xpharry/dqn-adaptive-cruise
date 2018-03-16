@@ -38,57 +38,6 @@
 % ArgMax
 \DeclareMathOperator*{\argmax}{\arg\!\max}
 
-% Custom colors
-\usepackage{color}
-\definecolor{deepblue}{rgb}{0,0,0.5}
-\definecolor{deepred}{rgb}{0.6,0,0}
-\definecolor{deepgreen}{rgb}{0,0.5,0}
-%\definecolor{coolblue}{HTML}{101094}
-
-\usepackage{listings}
-
-\definecolor{codebg}{RGB}{238,238,238}
-
-% Python style for highlighting
-\newcommand\pythonstyle{\lstset{
-    language=Python,
-    basicstyle=\ttm,
-    otherkeywords={},             % Add keywords here
-    keywordstyle=\ttm\color{coolblue},
-    emph={MyClass},          % Custom highlighting
-    emphstyle=\ttm\color{deepred},    % Custom highlighting style
-    stringstyle=\color{deepgreen},
-    frame=tb,                         % Any extra options here
-    framesep=10pt,
-    framexleftmargin=10pt,
-    backgroundcolor=\color{codebg},
-    rulecolor=\color{codebg},
-    aboveskip=15pt,
-    belowskip=15pt,
-    showstringspaces=false            % 
-}}
-
-
-% Python environment
-\lstnewenvironment{python}[1][] {
-    \pythonstyle
-    \lstset{#1}
-}{}
-
-% \setmonofont[Color={0019D4}]{Courier New}
-
-
-% Python for external files
-\newcommand\pythonexternal[2][]{{
-\pythonstyle
-\lstinputlisting[#1]{#2}}}
-
-% Python for inline
-\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
-
-% Path of images
-%\graphicspath{ {./figs} }
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
