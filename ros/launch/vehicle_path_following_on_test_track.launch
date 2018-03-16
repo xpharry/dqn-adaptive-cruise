@@ -3,8 +3,8 @@
 <launch>
   <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
     <arg name="use_camera_control" value="true" />
-    <arg name="world_name" value="$(find dbw_mkz_gazebo)/worlds/empty_world.world" />
-    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/single_vehicle.yaml" />
+    <arg name="world_name" value="$(find dbw_utils)/worlds/test_track.world" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/single_vehicle_test_track.yaml" />
   </include>
   
   <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
@@ -20,7 +20,7 @@
 
     <!-- Display -->
 	<!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)../../../config/vehicle_path_following_visualization.rviz" output="screen"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)../../../config/lane_keep.rviz" output="screen"/>
 
     <!-- A des_velocity_pub playing a role of speed controller -->
 	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub">
@@ -39,7 +39,7 @@
 
     <!-- Waypoint loader playing a role as global path planner -->
     <node pkg="path_loader" type="path_loader.py" name="path_loader">
-        <param name="fpath" value="$(find path_loader)../../../data/standard_track_map.csv" />
+        <param name="fpath" value="$(find path_loader)../../../data/test_track.csv" />
         <param name="frame_id" value="/world" />
     </node>
 

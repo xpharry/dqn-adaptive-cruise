@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node name="gazebo_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen" >
+		<param name="target_model" value="vehicle"/>
+	</node>
+	<node name="traj_recorder" pkg="gazebo_state_pub" type="traj_recorder.py" output="screen" >
+		<param name="filepath" value="$(find utility)../../../data/test_track.csv"/>
+		<remap from="current_pose" to="/vehicle/current_pose" />
+	</node>
+</launch>

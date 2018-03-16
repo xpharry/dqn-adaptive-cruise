@@ -11,7 +11,7 @@
 
   <!-- Waypoint loader playing a role as global path planner -->
   <node pkg="path_loader" type="path_loader.py" name="path_loader">
-    <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
+    <param name="fpath" value="$(find path_loader)../../../data/standard_track_map.csv" />
     <param name="frame_id" value="/world" />
   </node>
 
