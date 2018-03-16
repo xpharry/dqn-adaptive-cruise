@@ -3,6 +3,8 @@
 build
 devel
 
+.DS_Store
+
 profile.tmp
 
 ~

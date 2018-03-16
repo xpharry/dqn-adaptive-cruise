@@ -1,0 +1,24 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces How an agent interacts with the environment.\relax }}{2}{figure.caption.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A browser screenshot of Coaster Racer Game.\relax }}{5}{figure.caption.4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces A flowchart of training the Coaster Racer Game Bot.\relax }}{6}{figure.caption.5}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Deep Neural Network model from DeepMind paper.\relax }}{7}{figure.caption.6}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces LeNet-5.\relax }}{8}{figure.caption.7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Cropped input image.\relax }}{12}{figure.caption.8}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Downsized input image.\relax }}{12}{figure.caption.9}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Grayscaled input image.\relax }}{13}{figure.caption.10}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces High score by the Game Bot.\relax }}{16}{figure.caption.11}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces A comparison between DQN trained Game Bot and a random Game Bot.\relax }}{17}{figure.caption.12}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces A bigger action space.\relax }}{23}{figure.caption.13}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

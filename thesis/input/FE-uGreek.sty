@@ -1,0 +1,110 @@
+% Upright Greek Letters
+% 
+% Source: Springer TeX, Kloeckl 432
+%
+% Unfortunately, a dynamic definition based on a test using 
+% \ifthenelse does not work in figure captions. Back to the roots!
+%
+\newif\ifuGreekUseLucida
+\uGreekUseLucidafalse
+%
+% select Euler fonts (eurm10, Kloeckl 432):
+\newcommand{\uGreekEuler}[1]{\usefont{U}{eur}{m}{n}#1}
+\newcommand{\uGreekEulerBold}[1]{\usefont{U}{eur}{b}{n}#1}
+\newcommand{\uGreekLucida}[1]{\usefont{OML}{hlcm}{m}{n}#1}
+\newcommand{\uGreekLucidaBold}[1]{\usefont{OML}{hlcm}{b}{n}#1}
+%
+\newcommand{\uGreekDef}[2]{%
+  \newcommand{#1}%
+  {\ifuGreekUseLucida\mbox{\uGreekLucida{\char#2}}%
+   \else\mbox{\uGreekEuler{\char#2}}\fi}}
+
+\newcommand{\uGreekDefBold}[2]{%
+  \newcommand{#1}%
+  {\ifuGreekUseLucida\mbox{\uGreekLucida{\char#2}}%
+        \typeout{}%
+        \typeout{***Warning: Lucida upright greek boldface not available.}%
+        \typeout{}%
+      \else\mbox{\uGreekEulerBold{\char#2}}\fi}}
+
+\newcommand{\uGreekDefLucida}[2]{%
+  \newcommand{#1}%
+  {\mbox{\uGreekLucida{\char#2}}}}%
+
+\newcommand{\uGreekDefEuler}[2]{%
+  \newcommand{#1}%
+  {\mbox{\uGreekEuler{\char#2}}}}%
+
+%% \ifthenelse{\boolean{uGreekUseLucida}}%
+%%  {\uGreekDefLucida{\ualpha}{11}
+%%   \uGreekDefLucida{\ubeta}{12}
+%%   \uGreekDefLucida{\udelta}{14}
+%%   \uGreekDefLucida{\ugamma}{13}
+%%   \uGreekDefLucida{\uepsilon}{15}
+%%   \uGreekDefLucida{\umu}{22}
+%%   \uGreekDefLucida{\uGamma}{0}
+%%   \uGreekDefLucida{\uDelta}{1}
+%%   \uGreekDefLucida{\uPi}{5}
+%%   \uGreekDefLucida{\uSigma}{6}
+%%   \uGreekDefLucida{\uOmega}{10}
+%%   \uGreekDefLucida{\upi}{25}
+%%   \uGreekDefLucida{\uchi}{31}
+%%   \uGreekDefLucida{\pdif}{64}}
+%%  {\uGreekDefEuler{\ualpha}{11}
+%%   \uGreekDefEuler{\ubeta}{12}
+%%   \uGreekDefEuler{\udelta}{14}
+%%   \uGreekDefEuler{\ugamma}{13}
+%%   \uGreekDefEuler{\uepsilon}{15}
+%%   \uGreekDefEuler{\umu}{22}
+%%   \uGreekDefEuler{\uGamma}{0}
+%%   \uGreekDefEuler{\uDelta}{1}
+%%   \uGreekDefEuler{\uPi}{5}
+%%   \uGreekDefEuler{\uSigma}{6}
+%%   \uGreekDefEuler{\uOmega}{10}
+%%   \uGreekDefEuler{\upi}{25}
+%%   \uGreekDefEuler{\uchi}{31}
+%%   \uGreekDefEuler{\pdif}{64}}
+
+\uGreekDef{\ualpha}{11}
+\uGreekDef{\ubeta}{12}
+\uGreekDef{\udelta}{14}
+\uGreekDef{\ugamma}{13}
+\uGreekDef{\uepsilon}{15}
+\uGreekDef{\utheta}{18}
+\uGreekDef{\umu}{22}
+\uGreekDef{\uGamma}{0}
+\uGreekDef{\uDelta}{1}
+\uGreekDef{\uPi}{5}
+\uGreekDef{\uSigma}{6}
+\uGreekDef{\uOmega}{10}
+\uGreekDef{\uTheta}{2}
+\uGreekDef{\upi}{25}
+\uGreekDef{\usigma}{27}
+\uGreekDef{\uchi}{31}
+\uGreekDef{\pdif}{64}
+
+\uGreekDefBold{\ualphab}{11}
+\uGreekDefBold{\ubetab}{12}
+\uGreekDefBold{\udeltab}{14}
+\uGreekDefBold{\ugammab}{13}
+\uGreekDefBold{\uthetab}{18}
+\uGreekDefBold{\uepsilonb}{15}
+\uGreekDefBold{\umub}{22}
+\uGreekDefBold{\uGammab}{0}
+\uGreekDefBold{\uDeltab}{1}
+\uGreekDefBold{\uPib}{5}
+\uGreekDefBold{\uSigmab}{6}
+\uGreekDefBold{\uOmegab}{10}
+\uGreekDefBold{\uThetab}{2}
+\uGreekDefBold{\upib}{25}
+\uGreekDefBold{\usigmab}{27}
+\uGreekDefBold{\uchib}{31}
+\uGreekDefBold{\pdifb}{64}
+
+% Find out about more upright Greek letters with the following macro:
+\newcommand{\showAllUprightGreekLetters}{
+  \newcounter{i}\setcounter{i}{0}
+  \whiledo{\value{i}<200}
+    {\arabic{i}: \mbox{\uGreekEuler{\char\value{i}}}\\
+    \stepcounter{i}}}
+

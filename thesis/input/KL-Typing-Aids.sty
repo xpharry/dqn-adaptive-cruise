@@ -1,0 +1,206 @@
+%KL Typing Aids 
+%modified version of FE-Typing-Aids (created by Frank Ernst)
+%last modified 6/15/2006
+% Note: Math delimiters ``\(`` and ``\)'' are not robust commands. 
+% When included in a figure environment, for example, they lead to 
+% bizarre error messages in the .aux file. Since these messages do
+% not include appropriate line breaks, they cause a buffer overflow
+% when BibTeX reads the .aux file.
+%
+% Therefore, ``FE-Typing-Aids'' exclusively uses the robust ``$'' 
+% math delimiters.
+%
+\RequirePackage{amsmath} 
+\RequirePackage{input/FE-uGreek}
+%
+%Markups
+\RequirePackage{color}
+\newcommand{\note}[1]{(\begin{footnotesize}\textbf{\textit{\color{green}#1}}\end{footnotesize})}
+% inline note with parens around it
+\newcommand{\mnote}[1]{\marginpar{\note{#1\\[0.1cm]}}} %separated right-sided margin note for one sided doc
+%Subscripts and Superscripts
+\newcommand{\lo}[1]{$_{\text{#1}}$}
+\newcommand{\hi}[1]{$^{\text{#1}}$}
+\newcommand{\mhi}[1]{$^{#1}$}
+\newcommand{\mlo}[1]{$^{#1}$}
+%
+% alternative implementation (Kopka 408):
+% \newcommand{\lo}[1]{$_{\mbox{\scriptstyle{#1}}}$}
+% \newcommand{\hi}[1]{$^{\mbox{\scriptstyle{#1}}}$}
+%
+% Figures
+% In figure environment, define macro with arbitrary name to typeset 
+% the caption, insert the caption, and define label with the same name
+\newcommand{\figCapLab}[2]{\expandafter\gdef\csname #1\endcsname{#2}
+\caption{\csname #1\endcsname}
+  \label{fig:#1}}
+% Highlight figures where first mentioned.
+\newcommand{\FigureI}[1] {\textbf{Figure~\ref{#1}}}
+\newcommand{\FigI}[1] {\textbf{Fig.~\ref{#1}}}
+\newcommand{\FiguresI}[1] {\textbf{Figures~\ref{#1}}}
+\newcommand{\FigsI}[1] {\textbf{Figs.~\ref{#1}}}
+%
+% Tables
+\newcommand{\nt}{\\[\parsep]} \newcommand{\nl}{\newline}
+% 
+% Units
+\renewcommand{\deg}[1]{$#1^{\circ}$}
+\newcommand{\adeg}[1]{$\approx #1^{\circ}$}
+\newcommand{\mdeg}[1]{#1^{\circ}}
+\newcommand{\degC}{$^{\circ}\text{C}$}
+\newcommand{\micron}{\umu m}
+\newcommand{\dirdeg}[2]{$#1^{\circ}\!\!\leftrightarrow\!#2^{\circ}$}
+\newcommand{\ang}{$\AA$}
+%
+% ISO conventions for typesetting mathematics (Beccari 1997)
+% from: A Guide to LaTeX, H. Kopka and P. W. Daly (1999), p. 142
+\RequirePackage{amsmath}
+%\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\me}{\mathrm{e}}
+\newcommand{\mi}{\mathrm{i}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\ip}{\mi\upi}
+\newcommand{\tp}{2\upi}
+\newcommand{\tpi}{2\upi\mi}
+\newcommand{\xlnx}[1]{#1\Ln\left[#1\right]}
+%slanted sans-serif font for matrices and tensors
+%\DeclareMathAlphabet{\mathsfsl}{OT1}{cmss}{m}{sl} 
+\DeclareMathAlphabet{\mathsfsl}{T1}{\sfdefault}{m}{it} 
+\newcommand{\tensym}[1]{\mathsfsl{#1}}
+\newcommand{\matsym}[1]{\mathsfsl{#1}}
+%
+% Textfractions
+\newcommand{\textfrac}[2]{
+  \leavevmode\kern0.1em\raisebox{0.5ex}{\scriptsize #1}%
+  \kern-0.1em/\kern-0.15em\raisebox{-0.25ex}{\scriptsize #2}}
+%
+% Quantities and units
+\newcommand{\qu}[2]{$#1$\,#2}
+\newcommand{\aq}[1]{$\approx\!\!#1$}
+\newcommand{\aqu}[2]{\mbox{$\approx\!\!#1$\,#2}}
+% Crystallography
+\newcommand{\plane}[1]{$\left( #1 \right)$}
+\newcommand{\planes}[1]{$\left\{ #1 \right\}$}
+\newcommand{\dir}[1]{$\left[ #1 \right]$}
+\newcommand{\dirs}[1]{$\left< #1 \right>$}
+\newcommand{\fcc}{face-centered cubic}
+\newcommand{\bcc}{body-centered cubic}
+%Valences
+\newcommand{\ca}{Ca\hi{2+}} %is there a way to select 
+\newcommand{\val}[2]{#1\hi{#2}}
+%Elements
+\newcommand{\Ca}{calcium }
+%Bone
+\newcommand{\hcan}{{H}aversian canal}
+\newcommand{\hcans}{{H}aversian canals}
+\newcommand{\vcan}{{V}olkmann's canal}
+\newcommand{\vcans}{{V}olkmann's canals}
+% Materials
+\newcommand{\gesix}[1]{$\text{Ge}_{#1}\-\text{Si}_{(1-#1)}$}
+\newcommand{\sigex}[1]{$\text{Si}_{(1-#1)}\-\text{Ge}_{#1}$}
+\newcommand{\gesixy}[2]{$\text{Ge}_{#1}\-\text{Si}_{#2}$}
+\newcommand{\sigexy}[2]{$\text{Si}_{#1}\-\text{Ge}_{#2}$}
+\newcommand{\alumina}{Al\lo{2}O\lo{3}}
+\newcommand{\chromia}{Cr\lo{2}O\lo{3}}
+\newcommand{\spinel}{MgAl\lo{2}O\lo{4}}
+\newcommand{\cuinse}{Cu--In--Se}
+\newcommand{\cuinsex}[3]{Cu\lo{#1}--In\lo{#2}--Se\lo{#3}}
+\newcommand{\acuinse}{\ualpha-Cu--In--Se}
+\newcommand{\cis}{Cu\-In\-Se\lo{2}}
+\newcommand{\acis}{\ualpha-Cu\-In\-Se\lo{2}}
+\newcommand{\cuprite}{Cu\lo{2}\kern-0.05emO}
+\newcommand{\silica}{SiO\lo{2}}
+\newcommand{\hagg}{Fe\lo{5}C\lo{2}}
+\newcommand{\tifive}{Ti--6Al--4V}
+\newcommand{\sintrd}{Si\lo{3}N\lo{4}}
+\newcommand{\gamfe}{$\gamma$-Fe}
+\newcommand{\mfct}{M\lo{5}C\lo{2}}
+\newcommand{\msct}{M\lo{7}C\lo{3}}
+\newcommand{\ffct}{Fe\lo{5}C\lo{2}}
+\newcommand{\fsct}{Fe\lo{7}C\lo{3}}
+\newcommand{\mtcs}{M\lo{23}C\lo{6}}
+\newcommand{\csct}{Cr\lo{7}C\lo{3}}
+\newcommand{\ctcs}{Cr\lo{23}C\lo{6}}
+\newcommand{\titn}{Ti\lo{2}N}
+\newcommand{\mc}[2]{M\lo{#1}C\lo{#2}}
+\newcommand{\fec}[2]{Fe\lo{#1}C\lo{#2}}
+\newcommand{\labsix}{LaB\lo{6}}
+\newcommand{\ass}{au\-ste\-ni\-tic stain\-less steel}
+\newcommand{\asss}{au\-ste\-ni\-tic stain\-less steels}
+\newcommand{\ltc}{low-tem\-pe\-ra\-ture car\-bu\-ri\-za\-tion}
+\newcommand{\ltcd}{low-tem\-pe\-ra\-ture car\-bu\-rized}
+\newcommand{\ltcss}{low-tem\-pe\-ra\-ture co\-los\-sal su\-per\-sa\-tu\-ra\-tion}
+\newcommand{\asp}{Al--\spinel}
+\newcommand{\aspi}{Al--\spinel\ interface}
+\newcommand{\aspis}{Al--\spinel\ interfaces}
+\newcommand{\dpalsp}{\(\phi_{\text{Al}}-\phi_{\text{\spinel}}\)}
+% Latin
+\newcommand{\eg}{e.\,g.~} %~ or thin space \, after cmd
+\newcommand{\ie}{i.\,e.~}
+\@ifundefined{etal}{\newcommand{\etal}{\textit{et~al.}}}{}
+\newcommand{\etc}{\textit{etc.}}
+\newcommand{\cose}{CoSe\lo{2}}
+\newcommand{\comnse}{Co\(_x\)Mn\(_{(1-x)}\)Se\lo{2}}
+%
+%Physiological terms
+\newcommand{\btemp}{\qu{37}{\degC}} %body temperature
+\newcommand{\ivit}{\textit{in\,vitro}} %"within glass" test tube, in bodily fluid
+\newcommand{\iviv}{\textit{in\,vivo}} %in the body
+\newcommand{\eviv}{\textit{ex\,vivo}} %outside of the body
+\newcommand{\isit}{\textit{in\,situ}} 
+\newcommand{\Isit}{\textit{In\,situ}} 
+\newcommand{\denovo}{\textit{de\,novo}} %completely new
+
+% Instruments
+\newcommand{\tf}{Tecnai~F30}
+%
+% Instrument abbreviations
+\newcommand{\lom}{light-optical microscopy}
+\newcommand{\sem}{scanning electron microscopy}
+\newcommand{\fib}{focused ion beam}
+\newcommand{\afm}{atomic force microscopy}
+\newcommand{\tem}{transmission electron microscopy}
+\newcommand{\hrtem}{high-resolution transmission electron microscopy}
+\newcommand{\qhrtem}{quantitative high-resolution transmission
+  electron microscopy} 
+\newcommand{\atem}{analytical transmission electron microscopy} 
+\newcommand{\eftem}{energy-filtering transmission electron microscopy} 
+\newcommand{\xrd}{X-ray diffraction}
+\newcommand{\xeds}{X-ray energy-dispersive spectroscopy}
+\newcommand{\lscm}{laser scanning confocal microscopy}
+\newcommand{\tlbf}{transmitted light brightfield optical microscopy}
+\newcommand{\Tlbf}{Transmitted light brightfield optical microscopy}
+%
+% Affiliations
+\newcommand{\cwru}{\textsc{Case}} % "\case" seems to be defined in AMSMath
+\newcommand{\eecs}{Electrical Engineering and Computer Science}
+\newcommand{\deecs}{Department of Electrical Engineering and Computer Science}
+\newcommand{\dmae}{Department of Mechanical and Aerospace Engineering}
+\newcommand{\mpimf}{Max-Planck-Ins\-ti\-tut f\"ur Metall\-for\-schung}
+%
+%Salutations
+\newcommand{\dr}{Dr.~}
+\newcommand{\mrs}{Mrs.~}
+\newcommand{\ms}{Ms.~}
+\newcommand{\miss}{Miss~}
+\newcommand{\sir}{Sir~}
+\newcommand{\mr}{Mr.~}
+%
+%Names
+\newcommand{\wn}{\dr Wyatt Newman}
+\newcommand{\mcc}{\dr M. Cenk Cavusoglut}
+% Arrows
+\newcommand{\rarr}{\(\rightarrow\)}
+\newcommand{\rArr}{\(\Rightarrow\)}
+\newcommand{\larr}{\(\leftarrow\)}
+\newcommand{\lArr}{\(\Leftarrow\)}
+\newcommand{\darr}{\(\leftrightarrow\)}
+\newcommand{\dArr}{\(\Leftrightarrow\)}
+% Miscellaneous
+\newcommand{\rt}{room-tem\-pe\-ra\-ture}
+%EBH test
+\newcommand{\testp}{\qu{300}{MPa}, \qu{600}{MPa}, and \qu{1300}{MPa}}
+% all test pressures used
+\newcommand{\specanal}{non-irradiated, non-pressurized;
+  non-irradiated, \qu{1243}{MPa}; irradiated, non-pressurized;
+irradiated, \qu{1317}{MPa}}
