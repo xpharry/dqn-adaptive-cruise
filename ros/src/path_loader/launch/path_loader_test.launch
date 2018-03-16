@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
     <node pkg="path_loader" type="path_loader.py" name="path_loader" output="screen">
-        <param name="path" value="$(find path_loader)../../../data/standard_track_map.csv" />
+        <param name="fpath" value="$(find path_loader)../../../data/test_track.csv" />
+        <!--<param name="new_fpath" value="$(find path_loader)../../../data/new_test_track.csv" />-->
         <param name="frame_id" value="world" />
     </node>
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find path_loader)../../../config/path_loader_visualization.rviz"/>
