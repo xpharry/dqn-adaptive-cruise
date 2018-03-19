@@ -52,4 +52,10 @@ add_task(
     summary='Test4.',
 )
 
+add_task(
+    id='GazeboStandardTrackMultiVehicleLidarNn-v0',
+    group='gym-vehicle',
+    summary='Test5.',
+)
+
 registry.finalize()

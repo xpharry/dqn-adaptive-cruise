@@ -27,3 +27,8 @@ register(
     entry_point='gym_vehicle.envs.catvehicle:GazeboTrackCatvehicleLidarNnEnv',
     # More arguments here
 )
+register(
+    id='GazeboStandardTrackMultiVehicleLidarNn-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboStandardTrackMultiVehicleLidarNnEnv',
+    # More arguments here
+)

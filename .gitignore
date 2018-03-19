@@ -6,3 +6,11 @@ devel
 profile.tmp
 
 ~
+
+*.swp
+*.pyc
+*.py~
+.DS_Store
+.egg-info
+
+gym_vehicle.egg-info
