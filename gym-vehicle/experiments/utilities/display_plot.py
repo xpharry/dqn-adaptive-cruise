@@ -34,7 +34,7 @@ class LivePlot(object):
         matplotlib.rcParams.update({'font.size': 15})
 
     def plot(self, full=True, dots=False, average=0, interpolated=0):
-        results = gym.monitoring.monitor.load_results(self.outdir)
+        results = gym.wrappers.monitor.load_results(self.outdir)
         data =  results[self.data_key]
         avg_data = []
 
@@ -91,7 +91,7 @@ def pause():
 
 if __name__ == '__main__':
 
-    outdir = '/tmp/gazebo_gym_experiments'
+    outdir = '/tmp/gazebo_vehicle_experiments'
     plotter = LivePlot(outdir)
 
     parser = argparse.ArgumentParser()
