@@ -35,7 +35,6 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         self.base_path = None
         self.speeds = [0, 0, 0, 0, 0, 0]
         self.poses = [None, None, None, None, None, None]
-        self.path_dists = [-80, 80, -80, 80, -80, 80]
         self.lane_index = INIT_LANE_INDEX
         self.lanes = [0, 0, 0]
         self.travel_dist = 0
@@ -47,7 +46,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
 
         rospy.Subscriber('/fusion1/twist', TwistStamped, self.fusion1_vel_cb)
-        rospy.Subscriber('/fusion1/twist', TwistStamped, self.fusion2_vel_cb)
+        rospy.Subscriber('/fusion2/twist', TwistStamped, self.fusion2_vel_cb)
         rospy.Subscriber('/ego/twist', TwistStamped, self.ego_vel_cb)
         rospy.Subscriber('/mondeo2/twist', TwistStamped, self.mondeo2_vel_cb)
         rospy.Subscriber('/mkz1/twist', TwistStamped, self.mkz1_vel_cb)
@@ -285,14 +284,15 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
+        cmp_dists = [-80, 80, -80, 80, -80, 80]
+        cmp_speeds = [0, 0, 0, 0, 0, 0]
+
         if self.base_path == None:
-            return  self.path_dists + self.speeds + self.lanes + [0], False
+            return  cmp_dists + cmp_speeds + [self.speeds[2]] + self.lanes + [0], False
 
         for i in range(6):
             if self.poses[i] == None:
-                return self.path_dists + self.speeds + self.lanes + [0], False
-
-        self.path_dists = [-80, 80, -80, 80, -80, 80]
+                return cmp_dists + cmp_speeds + [self.speeds[2]] + self.lanes + [0], False
 
         ss = []
         dd = []
@@ -310,7 +310,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         ego_d = dd[2]
 
         if ego_d < 0 or ego_d >= 12:
-            return self.path_dists + self.speeds + self.lanes + [0], True
+            return cmp_dists + cmp_speeds + [self.speeds[2]] + self.lanes + [0], True
 
         for i in range(6):
             if i == 2:
@@ -321,22 +321,31 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             rp = self.check_relative_postion(delta_s, ego_d, d)
             if rp == -1:
                 continue
-            if abs(s-ego_s) < abs(self.path_dists[rp]):
-                self.path_dists[rp] = s - ego_s
+            if abs(delta_s) < abs(cmp_dists[rp]):
+                cmp_dists[rp] = delta_s
+                cmp_speeds[rp] = self.speeds[i] - self.speeds[2]
 
         done = False
 
         print("\n")
         print("|----------------- Current State ---------------|")
-        print("| %f \t| %f \t| %f \t|" % (self.path_dists[1], self.path_dists[3], self.path_dists[5]))
+        print("| Compared Dist:                                |")
+        print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
         print("|---------------|----- Ego -----|---------------|")
-        print("| %f \t| %f \t| %f \t|" % (self.path_dists[0], self.path_dists[2], self.path_dists[4]))
+        print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
+        print("| Compared Speed:                               |")
+        print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
+        print("|---------------|----- Ego -----|---------------|")
+        print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
+        print("|-----------------------------------------------|")
+        print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
         print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
         print("| Travel Time: %f \t\t\t|" % (self.travel_time))
+        print("| Current Speed: %f \t\t\t|" % (self.speeds[2]))
         print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
         print("|-----------------------------------------------|")
 
-        if abs(self.path_dists[2]) < COLLISON_DIST or abs(self.path_dists[3]) < COLLISON_DIST:
+        if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
 
@@ -350,7 +359,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         is_changing_lane = (self.lane_index != self.d_to_ilane(ego_d))
 
-        state = self.path_dists + self.speeds + self.lanes + [is_changing_lane]
+        state = cmp_dists + cmp_speeds + [self.speeds[2]] + self.lanes + [is_changing_lane]
 
         return state, done
 
@@ -400,6 +409,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         else:
             reward += -10000
             self.travel_dist = 0
+            self.travel_time = 0
 
         if self.prev_ego_pose == None:
             acc_dist = 0
@@ -430,6 +440,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             print("Safely finishing! :D")
             done = True
             self.travel_dist = 0
+            self.travel_time = 0
 
         return np.asarray(state), reward, done, {}
 
@@ -451,58 +462,46 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         # define initial pose for later use
         # ************************************************
         init_pose0 = Pose()
-        init_pose0.position.x = -10.0
+        init_pose0.position.x = -30.0
         init_pose0.position.y = -2.0
         init_pose0.position.z = 0.0
-        init_pose0.orientation.x = 0.0
-        init_pose0.orientation.y = 0.0
-        init_pose0.orientation.z = 0.0
-        init_pose0.orientation.w = 0.0
+        quat0 = Quaternion()
+        init_pose0.orientation = quat0
 
         init_pose1 = Pose()
-        init_pose1.position.x = 10.0
-        init_pose1.position.y = -2.0
+        init_pose1.position.x = 30.0
+        init_pose1.position.y = 75.2
         init_pose1.position.z = 0.0
-        init_pose1.orientation.x = 0.0
-        init_pose1.orientation.y = 0.0
-        init_pose1.orientation.z = 0.0
-        init_pose1.orientation.w = 0.0
+        quat1 = self.phi2quat(math.pi)
+        init_pose2.orientation = quat1
 
         init_pose2 = Pose()
-        init_pose2.position.x = -10.0
+        init_pose2.position.x = 0.0
         init_pose2.position.y = -6.0
         init_pose2.position.z = 0.0
-        init_pose2.orientation.x = 0.0
-        init_pose2.orientation.y = 0.0
-        init_pose2.orientation.z = 0.0
-        init_pose2.orientation.w = 0.0
+        quat2 = Quaternion()
+        init_pose2.orientation = quat2
 
         init_pose3 = Pose()
-        init_pose3.position.x = 10.0
-        init_pose3.position.y = -6.0
+        init_pose3.position.x = 0.0
+        init_pose3.position.y = 79.2
         init_pose3.position.z = 0.0
-        init_pose3.orientation.x = 0.0
-        init_pose3.orientation.y = 0.0
-        init_pose3.orientation.z = 0.0
-        init_pose3.orientation.w = 0.0
+        quat3 = self.phi2quat(math.pi)
+        init_pose2.orientation = quat3
 
         init_pose4 = Pose()
-        init_pose4.position.x = -10.0
+        init_pose4.position.x = 30.0
         init_pose4.position.y = -10.0
         init_pose4.position.z = 0.0
-        init_pose4.orientation.x = 0.0
-        init_pose4.orientation.y = 0.0
-        init_pose4.orientation.z = 0.0
-        init_pose4.orientation.w = 0.0
+        quat4 = Quaternion()
+        init_pose2.orientation = quat4
 
         init_pose5 = Pose()
-        init_pose5.position.x = 10.0
-        init_pose5.position.y = -10.0
+        init_pose5.position.x = -30.0
+        init_pose5.position.y = 83.2
         init_pose5.position.z = 0.0
-        init_pose5.orientation.x = 0.0
-        init_pose5.orientation.y = 0.0
-        init_pose5.orientation.z = 0.0
-        init_pose5.orientation.w = 0.0
+        quat5 = self.phi2quat(math.pi)
+        init_pose2.orientation = quat5
 
         # ************************************************
         # set initial model state
