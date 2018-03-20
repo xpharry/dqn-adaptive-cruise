@@ -85,23 +85,23 @@ class pathUpdater(object):
             if signal == "Keep":
                 self.lane_timestamp = new_timestamp
                 reward = 10
-                rospy.loginfo("Keep lane!")
+                print("\nKeep lane!")
             elif signal == "Left" and self.ilane > 0:
                 self.ilane -= 1
                 self.lane_timestamp = new_timestamp
                 reward = 10
-                rospy.loginfo("Changed to Left!")
+                print("\nChanged to Left!")
             elif signal == "Right" and self.ilane < 2:
                 self.ilane += 1
                 self.lane_timestamp = new_timestamp
                 reward = 10
-                rospy.loginfo("Changed to Right!")
+                print("\nChanged to Right!")
             else:
                 reward = -10
-                rospy.loginfo("Cannot execute the command this time because the target lane is not available ...")
+                # print("Cannot execute the command this time because the target lane is not available ...")
         else:
             reward = -5
-            rospy.loginfo("Cannot execute the command this time because the last execution hasn't finished ...")
+            # print("Cannot execute the command this time because the last execution hasn't finished ...")
         self.current_lane_pub.publish(self.ilane)
         self.change_lane_reward_pub.publish(reward)
 

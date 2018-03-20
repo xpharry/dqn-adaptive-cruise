@@ -284,7 +284,7 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 15
+        network_inputs = 16
         network_outputs = 27
         network_structure = [300, 300]
         current_epoch = 0

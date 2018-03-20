@@ -22,7 +22,7 @@ from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
 MAX_SPEED = 22.35  # m/sec; tune this
-COLLISON_DIST = 3 # m
+COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
 
 
@@ -35,10 +35,12 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         self.base_path = None
         self.speeds = [0, 0, 0, 0, 0, 0]
         self.poses = [None, None, None, None, None, None]
-        self.path_dists = [80, 80, 80, 80, 80]
+        self.path_dists = [-80, 80, -80, 80, -80, 80]
         self.lane_index = INIT_LANE_INDEX
         self.lanes = [0, 0, 0]
         self.travel_dist = 0
+        self.travel_time = 0
+        self.time_stamp = rospy.get_time()
         self.prev_ego_pose = None
         self.change_lane_reward = 0
 
@@ -62,7 +64,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         rospy.Subscriber('/ego/chang_lane_reward', Int32, self.change_lane_reward_cb)
 
         self.cruise_speed_pub = rospy.Publisher('/ego/cruise_speed', Float64, queue_size=5)
-        self.change_lane_pub = rospy.Publisher('/ego/chang_lane', String, queue_size=5)
+        self.change_lane_pub = rospy.Publisher('/ego/change_lane', String, queue_size=5)
 
         self.unpause = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
         self.pause = rospy.ServiceProxy('/gazebo/pause_physics', Empty)
@@ -77,7 +79,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         self.base_path = msg
 
     def fusion1_vel_cb(self, data):
-        self.speeds[0] = data.twsit.linear.x
+        self.speeds[0] = data.twist.linear.x
 
     def fusion2_vel_cb(self, data):
         self.speeds[1] = data.twist.linear.x
@@ -95,22 +97,22 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         self.speeds[5] = data.twist.linear.x
 
     def fusion1_pose_cb(self, data):
-        self.poses[0] = data.pose
+        self.poses[0] = data
 
     def fusion2_pose_cb(self, data):
-        self.poses[1] = data.pose
+        self.poses[1] = data
 
     def ego_pose_cb(self, data):
-        self.poses[2] = data.pose
+        self.poses[2] = data
 
     def mondeo2_pose_cb(self, data):
-        self.poses[3] = data.pose
+        self.poses[3] = data
 
     def mkz1_pose_cb(self, data):
-        self.poses[4] = data.pose
+        self.poses[4] = data
 
     def mkz2_pose_cb(self, data):
-        self.poses[5] = data.pose
+        self.poses[5] = data
 
     def cur_lane_cb(self, msg):
         self.lane_index = msg.data
@@ -133,6 +135,12 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             return 0
         return x
 
+    def quat2phi(self, quat):
+        quat_z = quat.z
+        quat_w = quat.w
+        phi = 2.0 * math.atan2(quat_z, quat_w)
+        return phi
+
     def phi2quat(self, phi):
         quaternion = Quaternion()
         quaternion.x = 0.0
@@ -144,8 +152,10 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
     def track_distance(self, path_poses, p1, p2):
         dist = 0
         dl = lambda a, b: math.sqrt((a.x-b.x)**2 + (a.y-b.y)**2 + (a.z-b.z)**2)
+        if p2 < p1:
+            p2 += len(path_poses)
         for i in range(p1, p2+1):
-            dist += dl(path_poses[p1].pose.pose.position, path_poses[i].pose.pose.position)
+            dist += dl(path_poses[p1%len(path_poses)].pose.position, path_poses[i%len(path_poses)].pose.position)
             p1 = i
         return dist
 
@@ -174,7 +184,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         heading = math.atan2((map_y-y), (map_x-x))
 
-        angle = math.fabs(psi-heading)
+        angle = abs(psi-heading)
         angle = min(2*math.pi - angle, angle);
 
         if angle > math.pi/4:
@@ -207,8 +217,8 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         # see if d value is positive or negative by comparing it to a center point
 
-        center_x = 1000 - poses[prev_wp].pose.position.x
-        center_y = 2000 - poses[prev_wp].pose.position.y
+        center_x = 0 - poses[prev_wp].pose.position.x
+        center_y = 36.6 - poses[prev_wp].pose.position.y
         center_to_pos = self.euclidean_distance(center_x, center_y, x_x, x_y)
         center_to_ref = self.euclidean_distance(center_x, center_y, proj_x, proj_y)
 
@@ -232,31 +242,45 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         elif d >=8 and d < 12:
             ilane = 2
         else:
+            # print("error lane index: d = %f" % d)
             ilane = None
         return ilane
 
-    def check_relative_postion(self, s, d, sp, dp):
-        ilane = self.d_to_ilane(d)
-        ilanep = self.d_to_ilane(dp)
+    def compute_delta_s(self, pose1, pose2):
+        p1 = self.closest_waypoint_index(pose1.pose.position.x, pose1.pose.position.y, self.base_path.poses)
+        p2 = self.closest_waypoint_index(pose2.pose.position.x, pose2.pose.position.y, self.base_path.poses)
+        dist1 = self.track_distance(self.base_path.poses, p1, p2)
+        dist2 = self.track_distance(self.base_path.poses, p2, p1)
+        if dist1 < dist2:
+            return dist1
+        else:
+            return -dist2
 
-        if ilane == -1 or ilanep == -1:
+    def check_relative_postion(self, delta_s, d1, d2):
+        ilane1 = self.d_to_ilane(d1)
+        ilane2 = self.d_to_ilane(d2)
+
+        if ilane1 is None or ilane2 is None:
+            return -1
+
+        if ilane1 == -1 or ilane2 == -1:
             return None
 
-        if ilanep + 1 == ilane:
-            if sp < s:
+        if ilane2 + 1 == ilane1:
+            if delta_s < 0:
                 return 0
             else:
                 return 1
-        elif ilanep == ilane:
-            if sp < s:
-                return -1
-            else:
+        elif ilane2 == ilane1:
+            if delta_s < 0:
                 return 2
-        elif ilanep - 1 == ilane:
-            if sp < s:
-                return 3
             else:
+                return 3
+        elif ilane2 - 1 == ilane1:
+            if delta_s < 0:
                 return 4
+            else:
+                return 5
         else:
             return -1
 
@@ -268,37 +292,51 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             if self.poses[i] == None:
                 return self.path_dists + self.speeds + self.lanes + [0], False
 
-        self.path_dists = [80, 80, 80, 80, 80]
+        self.path_dists = [-80, 80, -80, 80, -80, 80]
 
         ss = []
         dd = []
         for i in range(6):
-            s, d = self.get_frenet(self.poses[i].pose.position.x, self.poses[i].pose.position.y, 0, self.base_path.poses)
+            x = self.poses[i].pose.position.x
+            y = self.poses[i].pose.position.y
+            psi = self.quat2phi(self.poses[i].pose.orientation)
+            s, d = self.get_frenet(x, y, psi, self.base_path.poses)
+            # if i == 2:
+            #     print("s = %f, d = %f" %(s, d))
             ss.append(s)
             dd.append(d)
 
         ego_s = ss[2]
         ego_d = dd[2]
 
-        for i in range(2):
+        if ego_d < 0 or ego_d >= 12:
+            return self.path_dists + self.speeds + self.lanes + [0], True
+
+        for i in range(6):
+            if i == 2:
+                continue
             s = ss[i]
             d = dd[i]
-            rp = self.check_relative_postion(ego_s, ego_d, s, d)
+            delta_s = self.compute_delta_s(self.poses[2], self.poses[i])
+            rp = self.check_relative_postion(delta_s, ego_d, d)
             if rp == -1:
                 continue
-            if fabs(s-ego_s) < self.path_dists[rp]:
+            if abs(s-ego_s) < abs(self.path_dists[rp]):
                 self.path_dists[rp] = s - ego_s
 
-        for i in range(3, 6):
-            s = ss[i]
-            d = dd[i]
-            rp = self.check_relative_postion(ego_s, ego_d, s, d)
-            if rp == -1:
-                continue
-            if fabs(s-ego_s) < self.path_dists[rp]:
-                self.path_dists[rp] = s - ego_s
+        done = False
 
-        if fabs(self.path_dist[2]) < COLLISON_DIST:
+        print("\n")
+        print("|----------------- Current State ---------------|")
+        print("| %f \t| %f \t| %f \t|" % (self.path_dists[1], self.path_dists[3], self.path_dists[5]))
+        print("|---------------|----- Ego -----|---------------|")
+        print("| %f \t| %f \t| %f \t|" % (self.path_dists[0], self.path_dists[2], self.path_dists[4]))
+        print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
+        print("| Travel Time: %f \t\t\t|" % (self.travel_time))
+        print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
+        print("|-----------------------------------------------|")
+
+        if abs(self.path_dists[2]) < COLLISON_DIST or abs(self.path_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
 
@@ -315,6 +353,23 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         state = self.path_dists + self.speeds + self.lanes + [is_changing_lane]
 
         return state, done
+
+    def action_names(self, action):
+        i = action%9
+        j = action/9
+        action_move_forward = ["Accelerate +2.0 m/s",
+                               "Accelerate +1.5 m/s",
+                               "Accelerate +1.0 m/s",
+                               "Accelerate +0.5 m/s",
+                               "Keep current speed",
+                               "Decelerate -0.5 m/s",
+                               "Decelerate -1.0 m/s",
+                               "Decelerate -1.5 m/s",
+                               "Decelerate -2.0 m/s"]
+        action_change_lane = ["Change to Left",
+                              "Keep Lane",
+                              "Change to Right"]
+        return action_move_forward[i] + " & " + action_change_lane[j]
 
     def _seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -355,8 +410,11 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         self.travel_dist += acc_dist
         self.prev_ego_pose = self.poses[2]
 
+        self.travel_time += rospy.get_time() - self.time_stamp
+        self.time_stamp = rospy.get_time()
+
         # speed
-        reward += 1.0 * (MAX_SPEED - fabs(MAX_SPEED - self.speeds[2]))
+        reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[2]))
 
         # change lane reward
         reward += self.change_lane_reward
@@ -364,7 +422,11 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         # by acc_dist
         reward += 10 * acc_dist
 
-        if self.travel_dist >= 1000:
+        print("| Action: %s\t|" % self.action_names(action))
+        print("| Reward: %f \t\t\t\t|" % reward)
+        print("|-----------------------------------------------|")
+
+        if self.travel_dist >= 376.0 * 5:
             print("Safely finishing! :D")
             done = True
             self.travel_dist = 0
