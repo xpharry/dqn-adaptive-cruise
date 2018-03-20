@@ -53,7 +53,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         rospy.Subscriber('/mkz2/twist', TwistStamped, self.mkz2_vel_cb)
 
         rospy.Subscriber('/fusion1/current_pose', PoseStamped, self.fusion1_pose_cb)
-        rospy.Subscriber('/fusion1/current_pose', PoseStamped, self.fusion2_pose_cb)
+        rospy.Subscriber('/fusion2/current_pose', PoseStamped, self.fusion2_pose_cb)
         rospy.Subscriber('/ego/current_pose', PoseStamped, self.ego_pose_cb)
         rospy.Subscriber('/mondeo2/current_pose', PoseStamped, self.mondeo2_pose_cb)
         rospy.Subscriber('/mkz1/current_pose', PoseStamped, self.mkz1_pose_cb)
