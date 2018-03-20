@@ -473,7 +473,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         init_pose1.position.y = 75.2
         init_pose1.position.z = 0.0
         quat1 = self.phi2quat(math.pi)
-        init_pose2.orientation = quat1
+        init_pose1.orientation = quat1
 
         init_pose2 = Pose()
         init_pose2.position.x = 0.0
@@ -487,21 +487,21 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         init_pose3.position.y = 79.2
         init_pose3.position.z = 0.0
         quat3 = self.phi2quat(math.pi)
-        init_pose2.orientation = quat3
+        init_pose3.orientation = quat3
 
         init_pose4 = Pose()
         init_pose4.position.x = 30.0
         init_pose4.position.y = -10.0
         init_pose4.position.z = 0.0
         quat4 = Quaternion()
-        init_pose2.orientation = quat4
+        init_pose4.orientation = quat4
 
         init_pose5 = Pose()
         init_pose5.position.x = -30.0
         init_pose5.position.y = 83.2
         init_pose5.position.z = 0.0
         quat5 = self.phi2quat(math.pi)
-        init_pose2.orientation = quat5
+        init_pose5.orientation = quat5
 
         # ************************************************
         # set initial model state
