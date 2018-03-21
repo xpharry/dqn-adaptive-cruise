@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find dbw_utils)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_utils)/worlds/empty_world.world" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/multi_vehicle.yaml" />
+  </include>
+
+
+  <!-- Waypoint loader playing a role as global path planner -->
+  <node pkg="path_loader" type="path_loader.py" name="path_loader">
+    <param name="fpath" value="$(find path_loader)../../../data/standard_track_map.csv" />
+    <param name="frame_id" value="/world" />
+  </node>
+
+
+  <!-- Fusion1 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="fusion1" />
+  </include>
+
+  <!-- Fusion2 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="fusion2" />
+  </include>
+
+  <!-- ego -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="ego" />
+  </include>
+
+  <!-- mondeo2 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mondeo2" />
+  </include>
+
+  <!-- MKZ1 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz1" />
+  </include>
+
+  <!-- MKZ2 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz2" />
+  </include>
+
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="fusion1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="fusion1"/>
+  </node>
+  <!-- Path planning -->
+  <node name="fusion1_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="0"/>
+    <param name="cruise_speed" value="12"/>
+    <remap from="current_pose" to="/fusion1/current_pose" />
+    <remap from="final_path" to="/fusion1/final_path" />
+    <remap from="final_waypoints" to="/fusion1/final_waypoints" />
+    <remap from="final_path_points" to="/fusion1/final_path_points" />
+  </node>
+  <node name="fusion1_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/fusion1/current_pose" />
+    <remap from="final_waypoints" to="/fusion1/final_waypoints" />
+    <remap from="current_velocity" to="/fusion1/twist" />
+    <remap from="cmd_vel" to="/fusion1/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="fusion2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="fusion2"/>
+  </node>
+  <!-- Path planning -->
+  <node name="fusion2_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="0"/>
+    <param name="cruise_speed" value="12"/>
+    <remap from="current_pose" to="/fusion2/current_pose" />
+    <remap from="final_path" to="/fusion2/final_path" />
+    <remap from="final_waypoints" to="/fusion2/final_waypoints" />
+    <remap from="final_path_points" to="/fusion2/final_path_points" />
+  </node>
+  <node name="fusion2_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/fusion2/current_pose" />
+    <remap from="final_waypoints" to="/fusion2/final_waypoints" />
+    <remap from="current_velocity" to="/fusion2/twist" />
+    <remap from="cmd_vel" to="/fusion2/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="ego_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="ego"/>
+  </node>
+  <!-- Path planning -->
+  <node name="ego_path_updater" pkg="path_updater" type="path_updater.py" output="screen">
+    <param name="lane_index" value="1"/>
+    <param name="cruise_speed" value="10"/>
+    <remap from="current_pose" to="/ego/current_pose" />
+    <remap from="final_path" to="/ego/final_path" />
+    <remap from="final_waypoints" to="/ego/final_waypoints" />
+    <remap from="final_path_points" to="/ego/final_path_points" />
+    <remap from="cruise_speed" to="/ego/cruise_speed" />
+    <remap from="change_lane" to="/ego/change_lane" />
+  </node>
+  <node name="ego_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/ego/current_pose" />
+    <remap from="final_waypoints" to="/ego/final_waypoints" />
+    <remap from="current_velocity" to="/ego/twist" />
+    <remap from="cmd_vel" to="/ego/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="mondeo2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="mondeo2"/>
+  </node>
+  <!-- Path planning -->
+  <node name="mondeo2_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="1"/>
+    <param name="cruise_speed" value="10"/>
+    <remap from="current_pose" to="/mondeo2/current_pose" />
+    <remap from="final_path" to="/mondeo2/final_path" />
+    <remap from="final_waypoints" to="/mondeo2/final_waypoints" />
+    <remap from="final_path_points" to="/mondeo2/final_path_points" />
+  </node>
+  <node name="mondeo2_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mondeo2/current_pose" />
+    <remap from="final_waypoints" to="/mondeo2/final_waypoints" />
+    <remap from="current_velocity" to="/mondeo2/twist" />
+    <remap from="cmd_vel" to="/mondeo2/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="mkz1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="mkz1"/>
+  </node>
+  <!-- Path planning -->
+  <node name="mkz1_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="2"/>
+    <param name="cruise_speed" value="8"/>
+    <remap from="current_pose" to="/mkz1/current_pose" />
+    <remap from="final_path" to="/mkz1/final_path" />
+    <remap from="final_waypoints" to="/mkz1/final_waypoints" />
+    <remap from="final_path_points" to="/mkz1/final_path_points" />
+  </node>
+  <node name="mkz1_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mkz1/current_pose" />
+    <remap from="final_waypoints" to="/mkz1/final_waypoints" />
+    <remap from="current_velocity" to="/mkz1/twist" />
+    <remap from="cmd_vel" to="/mkz1/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="mkz2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+    <param name="target_model" value="mkz2"/>
+  </node>
+  <!-- Path planning -->
+  <node name="mkz2_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="2"/>
+    <param name="cruise_speed" value="8"/>
+    <remap from="current_pose" to="/mkz2/current_pose" />
+    <remap from="final_path" to="/mkz2/final_path" />
+    <remap from="final_waypoints" to="/mkz2/final_waypoints" />
+    <remap from="final_path_points" to="/mkz2/final_path_points" />
+  </node>
+  <node name="mkz2_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mkz2/current_pose" />
+    <remap from="final_waypoints" to="/mkz2/final_waypoints" />
+    <remap from="current_velocity" to="/mkz2/twist" />
+    <remap from="cmd_vel" to="/mkz2/cmd_vel" />
+  </node>
+  <!-- Display -->
+  <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
+  <node pkg="rviz" type="rviz" name="multi_vehicle_rviz" args="-d $(find utility)../../../config/multi_vehicle_path_following_visualization.rviz" respawn="true" />
+
+</launch>
