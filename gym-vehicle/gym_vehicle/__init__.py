@@ -32,3 +32,8 @@ register(
     entry_point='gym_vehicle.envs.vehicle:GazeboStandardTrackMultiVehicleLidarNnEnv',
     # More arguments here
 )
+register(
+    id='GazeboCartPole-v0',
+    entry_point='gym_vehicle.envs.gazebo_cartpole:GazeboCartPolev0Env',
+    # More arguments here
+)
