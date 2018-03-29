@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="world_file"  default="/usr/share/gazebo-8/worlds/empty_bullet.world"/>
+  <arg name="world_file"  default="$(find cartpole_gazebo)/worlds/empty_bullet.world"/>
   <arg name="gui" default="true"/>
   <arg name="verbose" default="true"/>
   <arg name="headless" value="true"/>
