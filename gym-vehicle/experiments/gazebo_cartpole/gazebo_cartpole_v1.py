@@ -4,7 +4,6 @@ import random
 import gym
 import gym_vehicle
 import math
-import matplotlib.pyplot as plt
 import matplotlib
 import matplotlib.pyplot as plt
 import os

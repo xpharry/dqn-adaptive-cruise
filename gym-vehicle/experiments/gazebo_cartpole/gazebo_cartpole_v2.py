@@ -2,6 +2,9 @@ import gym
 import keras
 import numpy as np
 import random
+import os
+import matplotlib
+import matplotlib.pyplot as plt
 
 from gym import wrappers
 from keras.models import Sequential
@@ -191,9 +194,10 @@ def main():
       observation, reward, done, info = env.step(action)
 
       if done:
-        print ('Episode {}, iterations: {}'.format(
+        print ('Episode {}, iterations: {}, reward: {}'.format(
           episode,
-          iteration
+          iteration,
+          reward - 200
         ))
 
         # print action_model.get_weights()
@@ -216,10 +220,10 @@ def main():
       #   steps_until_reset = TARGET_UPDATE_FREQ
 
     list_rewards.append(reward)
-    if(i%20==0):
+    if(episode%20==0):
       plotter.plot(list_rewards)
-    if(i%100==0):
-      plotter.save(outdir, i)
+    if(episode%100==0):
+      plotter.save(outdir, episode)
 
 
 if __name__ == "__main__":
