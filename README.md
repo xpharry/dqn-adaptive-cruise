@@ -141,6 +141,11 @@ This work ...
 
 * Found "deb_mkz_gazebo" package both useful in Indigo and Kinetics.
 
+**3/31/2018**
+
+* Added in Cartpole as a simpler example to use dqn.
+* Enabled online visualization and auto save of reward history.
+
 ## Resources
 
 1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)
