@@ -100,8 +100,8 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
         # except (rospy.ServiceException) as e:
         #     print ("/gazebo/pause_physics service call failed")
 
-        state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
-        # state = [self.data.position[1], 0, self.data.position[0], 0]
+        # state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
+        state = [self.data.position[1], 0, self.data.position[0], 0]
 
         x, x_dot, theta, theta_dot = state
 
@@ -171,8 +171,8 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
                 self.data = rospy.wait_for_message('/cart_pole/joint_states', JointState, timeout=5)
             except:
                 pass
-        state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
-        # state = [self.data.position[1], 0, self.data.position[0], 0]
+        # state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
+        state = [self.data.position[1], 0, self.data.position[0], 0]
 
         self.steps_beyond_done = None
         self.current_vel = 0

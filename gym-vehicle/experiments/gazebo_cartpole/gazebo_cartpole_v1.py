@@ -7,8 +7,11 @@ import math
 import matplotlib.pyplot as plt
 import matplotlib
 import matplotlib.pyplot as plt
+import os
 
 env = None
+
+
 class LivePlot(object):
     def __init__(self, outdir, data_key='episode_rewards', line_color='blue'):
         """
@@ -44,6 +47,18 @@ class LivePlot(object):
         # pause so matplotlib will display
         # may want to figure out matplotlib animation or use a different library in the future
         plt.pause(0.05)
+
+    def save(self, outdir, epoch):
+        # results = monitoring.load_results(self.outdir)
+        # print(results)
+        # if(results==None): return
+
+        plt.savefig(outdir+'cartpole-reward_history-epoch-'+str(epoch), format='png')
+
+        # pause so matplotlib will display
+        # may want to figure out matplotlib animation or use a different library in the future
+        plt.pause(0.05)
+
 
 def softmax(x):
     e_x = np.exp(x - np.max(x))
@@ -144,7 +159,10 @@ def run_episode(env, policy_grad, value_grad, sess):
 env = gym.make('GazeboCartPole-v0')
 
 
-outdir = '/tmp/gazebo_gym_experiments'
+outdir = '../../results/'
+if not os.path.exists(outdir):
+    os.mkdir(outdir, 0755)
+
 plotter = LivePlot(outdir)
 import time
 #env.monitor.start('cartpole-hill/', force=True)
@@ -159,6 +177,8 @@ for i in range(2000):
     list_rewards.append(reward)
     if(i%20==0):
         plotter.plot(list_rewards)
+    if(i%100==0):
+        plotter.save(outdir, i)
 #    if reward == 200:
 #        print "reward 200"
 #        print i
