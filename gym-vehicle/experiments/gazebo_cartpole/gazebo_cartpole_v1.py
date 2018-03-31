@@ -159,7 +159,7 @@ def run_episode(env, policy_grad, value_grad, sess):
 env = gym.make('GazeboCartPole-v0')
 
 
-outdir = '../../results/cartpole'
+outdir = '../../results/cartpole_v1/'
 if not os.path.exists(outdir):
     os.mkdir(outdir, 0755)
 

@@ -311,7 +311,9 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboStandardTrackMultiVehicleLidarNn-v0')
     outdir = '../../results/vehicle/'
-
+    if not os.path.exists(outdir):
+        os.mkdir(outdir, 0755)
+    
     plotter = LivePlot(outdir)
 
     continue_execution = False

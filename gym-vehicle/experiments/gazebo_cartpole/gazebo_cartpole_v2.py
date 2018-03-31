@@ -27,6 +27,55 @@ MINIBATCH_SIZE = 32
 RANDOM_ACTION_DECAY = 0.99
 INITIAL_RANDOM_ACTION = 1
 
+
+class LivePlot(object):
+    def __init__(self, outdir, data_key='episode_rewards', line_color='blue'):
+        """
+        Liveplot renders a graph of either episode_rewards or episode_lengths
+        Args:
+            outdir (outdir): Monitor output file location used to populate the graph
+            data_key (Optional[str]): The key in the json to graph (episode_rewards or episode_lengths).
+            line_color (Optional[dict]): Color of the plot.
+        """
+        self.outdir = outdir
+        self._last_data = None
+        self.data_key = data_key
+        self.line_color = line_color
+
+        #styling options
+        matplotlib.rcParams['toolbar'] = 'None'
+        plt.style.use('ggplot')
+        plt.xlabel("")
+        plt.ylabel(data_key)
+        fig = plt.gcf().canvas.set_window_title('simulation_graph')
+
+    def plot(self, reward):
+        # results = monitoring.load_results(self.outdir)
+        # print(results)
+        # if(results==None): return
+
+        data = reward
+        #only update plot if data is different (plot calls are expensive)
+        # if data !=  self._last_data:
+        self._last_data = data
+        plt.plot(data, color=self.line_color)
+
+        # pause so matplotlib will display
+        # may want to figure out matplotlib animation or use a different library in the future
+        plt.pause(0.05)
+
+    def save(self, outdir, epoch):
+        # results = monitoring.load_results(self.outdir)
+        # print(results)
+        # if(results==None): return
+
+        plt.savefig(outdir+'cartpole-reward_history-epoch-'+str(epoch), format='png')
+
+        # pause so matplotlib will display
+        # may want to figure out matplotlib animation or use a different library in the future
+        plt.pause(0.05)
+
+
 class ReplayBuffer():
 
   def __init__(self, max_size):
@@ -114,6 +163,14 @@ def main():
   env = gym.make('GazeboCartPole-v0')
   # env = wrappers.Monitor(env, '/tmp/cartpole-experiment-1')
 
+  outdir = '../../results/cartpole_v2/'
+  if not os.path.exists(outdir):
+    os.mkdir(outdir, 0755)
+
+  plotter = LivePlot(outdir)
+
+  list_rewards = []
+
   for episode in range(NUM_EPISODES):
     observation = env.reset()
 
@@ -157,6 +214,13 @@ def main():
       # if steps_until_reset == 0:
       #   target_model.set_weights(action_model.get_weights())
       #   steps_until_reset = TARGET_UPDATE_FREQ
+
+    list_rewards.append(reward)
+    if(i%20==0):
+      plotter.plot(list_rewards)
+    if(i%100==0):
+      plotter.save(outdir, i)
+
 
 if __name__ == "__main__":
     main()
