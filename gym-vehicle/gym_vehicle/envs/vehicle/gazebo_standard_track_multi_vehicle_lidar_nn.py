@@ -21,10 +21,12 @@ from sensor_msgs.msg import LaserScan
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
+DISPLAY_STATE = False
+
 MAX_SPEED = 22.35  # m/sec; tune this
 COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
-
+LAPS = 4
 
 class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
@@ -327,23 +329,24 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         done = False
 
-        print("\n")
-        print("|----------------- Current State ---------------|")
-        print("| Compared Dist:                                |")
-        print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
-        print("|---------------|----- Ego -----|---------------|")
-        print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
-        print("| Compared Speed:                               |")
-        print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
-        print("|---------------|----- Ego -----|---------------|")
-        print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
-        print("|-----------------------------------------------|")
-        print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
-        print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
-        print("| Travel Time: %f \t\t\t|" % (self.travel_time))
-        print("| Current Speed: %f \t\t\t|" % (self.speeds[2]))
-        print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
-        print("|-----------------------------------------------|")
+        if DISPLAY_STATE:
+            print("\n")
+            print("|----------------- Current State ---------------|")
+            print("| Compared Dist:                                |")
+            print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
+            print("|---------------|----- Ego -----|---------------|")
+            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
+            print("| Compared Speed:                               |")
+            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
+            print("|---------------|----- Ego -----|---------------|")
+            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
+            print("|-----------------------------------------------|")
+            print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
+            print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
+            print("| Travel Time: %f \t\t\t|" % (self.travel_time))
+            print("| Current Speed: %f \t\t\t|" % (self.speeds[2]))
+            print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
+            print("|-----------------------------------------------|")
 
         if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
@@ -432,12 +435,19 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         # by acc_dist
         reward += 10 * acc_dist
 
-        print("| Action: %s\t|" % self.action_names(action))
-        print("| Reward: %f \t\t\t\t|" % reward)
-        print("|-----------------------------------------------|")
+        if DISPLAY_STATE:
+            print("| Action: %s\t|" % self.action_names(action))
+            print("| Reward: %f \t\t\t\t|" % reward)
+            print("|-----------------------------------------------|")
 
-        if self.travel_dist >= 376.0 * 5:
-            print("Safely finishing! :D")
+        if self.travel_time >= 30.0 * LAPS:
+            print("Time Out! :(")
+            done = True
+            self.travel_dist = 0
+            self.travel_time = 0
+
+        if self.travel_dist >= 376.0 * LAPS:
+            print("Safely finishing! :)")
             done = True
             self.travel_dist = 0
             self.travel_time = 0
