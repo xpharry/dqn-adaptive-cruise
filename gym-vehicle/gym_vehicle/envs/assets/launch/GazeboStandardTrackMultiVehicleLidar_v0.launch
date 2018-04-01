@@ -66,7 +66,7 @@
 
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <node name="fusion1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+  <node name="fusion1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="fusion1"/>
   </node>
   <!-- Path planning -->
@@ -87,7 +87,7 @@
   </node>
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <node name="fusion2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+  <node name="fusion2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="fusion2"/>
   </node>
   <!-- Path planning -->
@@ -108,11 +108,11 @@
   </node>
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <node name="ego_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+  <node name="ego_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="ego"/>
   </node>
   <!-- Path planning -->
-  <node name="ego_path_updater" pkg="path_updater" type="path_updater.py" output="screen">
+  <node name="ego_path_updater" pkg="path_updater" type="path_updater.py" output="log">
     <param name="lane_index" value="1"/>
     <param name="cruise_speed" value="10"/>
     <remap from="current_pose" to="/ego/current_pose" />
@@ -131,7 +131,7 @@
   </node>
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <node name="mondeo2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+  <node name="mondeo2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="mondeo2"/>
   </node>
   <!-- Path planning -->
@@ -152,7 +152,7 @@
   </node>
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <node name="mkz1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+  <node name="mkz1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="mkz1"/>
   </node>
   <!-- Path planning -->
@@ -173,7 +173,7 @@
   </node>
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <node name="mkz2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+  <node name="mkz2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="mkz2"/>
   </node>
   <!-- Path planning -->

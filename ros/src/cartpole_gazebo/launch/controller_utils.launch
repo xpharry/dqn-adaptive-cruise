@@ -2,11 +2,11 @@
 <launch>
 
   <!-- Robot state publisher -->
-  <!--<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="50.0" />
     <param name="tf_prefix" type="string" value="/" />
     <remap from="/joint_states" to="/teo/joint_states"/>
-  </node>-->
+  </node>
 
   <!-- Gazebo state publisher -->
   <node pkg="gazebo_state_pub" type="joint_state_pub" name="joint_state_pub">
