@@ -57,7 +57,7 @@ class LivePlot(object):
 
         # pause so matplotlib will display
         # may want to figure out matplotlib animation or use a different library in the future
-        plt.pause(0.0005)
+        plt.pause(0.05)
 
     def save(self, outdir, epoch):
         # results = monitoring.load_results(self.outdir)
@@ -68,7 +68,7 @@ class LivePlot(object):
 
         # pause so matplotlib will display
         # may want to figure out matplotlib animation or use a different library in the future
-        plt.pause(0.0005)
+        plt.pause(0.05)
 
 
 class DeepQ:
@@ -312,6 +312,7 @@ def clear_monitor_files(training_dir):
 if __name__ == '__main__':
 
     env = gym.make('GazeboStandardTrackMultiVehicleLidarNn-v0')
+    
     outdir = '../../results/vehicle/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
