@@ -85,17 +85,17 @@ class pathUpdater(object):
             if signal == "Keep":
                 self.lane_timestamp = new_timestamp
                 reward = 10
-                print("\nKeep lane!")
+                # print("\nKeep lane!")
             elif signal == "Left" and self.ilane > 0:
                 self.ilane -= 1
                 self.lane_timestamp = new_timestamp
                 reward = 10
-                print("\nChanged to Left!")
+                # print("\nChanged to Left!")
             elif signal == "Right" and self.ilane < 2:
                 self.ilane += 1
                 self.lane_timestamp = new_timestamp
                 reward = 10
-                print("\nChanged to Right!")
+                # print("\nChanged to Right!")
             else:
                 reward = -10
                 # print("Cannot execute the command this time because the target lane is not available ...")
