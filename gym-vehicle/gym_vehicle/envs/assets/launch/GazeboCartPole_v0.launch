@@ -24,4 +24,7 @@
 
   <include file="$(find cartpole_gazebo)/launch/controller_utils.launch"/>
 
+  <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)../../../config/cartpole.rviz" output="screen"/>
+
 </launch>

@@ -45,7 +45,7 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
 
         self.current_vel = 0
         self.action_space = spaces.Discrete(2)
-        rospy.Subscriber("/cart_pole/joint_states", JointState, self.callback)
+        rospy.Subscriber("/cartpole/joint_states", JointState, self.callback)
 
     def callback(self, data):
         self.data = data
@@ -66,7 +66,7 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
         if self.data==None:
             while self.data is None:
                 try:
-                    self.data = rospy.wait_for_message('/cart_pole/joint_states', JointState, timeout=5)
+                    self.data = rospy.wait_for_message('/cartpole/joint_states', JointState, timeout=5)
                 except:
                     pass
         # rospy.wait_for_service('/gazebo/unpause_physics')
@@ -100,8 +100,8 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
         # except (rospy.ServiceException) as e:
         #     print ("/gazebo/pause_physics service call failed")
 
-        # state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
-        state = [self.data.position[1], 0, self.data.position[0], 0]
+        state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
+        # state = [self.data.position[1], 0, self.data.position[0], 0]
 
         x, x_dot, theta, theta_dot = state
 
@@ -168,11 +168,11 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
         self.data = None
         while self.data is None:
             try:
-                self.data = rospy.wait_for_message('/cart_pole/joint_states', JointState, timeout=5)
+                self.data = rospy.wait_for_message('/cartpole/joint_states', JointState, timeout=5)
             except:
                 pass
-        # state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
-        state = [self.data.position[1], 0, self.data.position[0], 0]
+        state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
+        # state = [self.data.position[1], 0, self.data.position[0], 0]
 
         self.steps_beyond_done = None
         self.current_vel = 0

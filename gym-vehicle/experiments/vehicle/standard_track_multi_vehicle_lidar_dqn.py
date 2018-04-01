@@ -19,6 +19,8 @@ from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 from keras.regularizers import l2
 import memory
+import matplotlib
+import matplotlib.pyplot as plt
 
 
 class LivePlot(object):
@@ -66,7 +68,7 @@ class LivePlot(object):
 
         # pause so matplotlib will display
         # may want to figure out matplotlib animation or use a different library in the future
-        plt.pause(0.05)
+        plt.pause(0.0005)
 
 
 class DeepQ:
@@ -443,11 +445,11 @@ if __name__ == '__main__':
                 deepQ.updateTargetNetwork()
                 print("updating target network")
 
-            list_rewards.append(cumulated_reward)
-            if(epoch%20==0):
-                plotter.plot(list_rewards)
-            if(epoch%100==0):
-                plotter.save(epoch)
+        list_rewards.append(cumulated_reward)
+        if(epoch%20==0):
+            plotter.plot(list_rewards)
+        if(epoch%100==0):
+            plotter.save(outdir, epoch)
 
         explorationRate *= 0.995  # epsilon decay
         # explorationRate -= (2.0/epochs)
