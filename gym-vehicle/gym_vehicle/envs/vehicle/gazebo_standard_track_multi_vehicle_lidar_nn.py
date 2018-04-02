@@ -440,7 +440,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             print("| Reward: %f \t\t\t\t|" % reward)
             print("|-----------------------------------------------|")
 
-        if self.travel_time >= 30.0 * LAPS:
+        if self.travel_time >= 35.0 * LAPS:
             print("Time Out! :(")
             done = True
             self.travel_dist = 0
@@ -448,6 +448,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         if self.travel_dist >= 376.0 * LAPS:
             print("Safely finishing! :)")
+            reward += 10000
             done = True
             self.travel_dist = 0
             self.travel_time = 0

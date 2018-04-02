@@ -24,7 +24,7 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
 
         # Angle at which to fail the episode
         self.theta_threshold_radians = 12 * 2 * math.pi / 360
-        self.x_threshold = 15
+        self.x_threshold = 2.4
 
         self._pub = rospy.Publisher('/cart_pole_controller/command', Float64, queue_size=1)
         # self._sub = rospy.Subscriber('/joint_states', JointState, self.observation_callback)
@@ -100,7 +100,7 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
         # except (rospy.ServiceException) as e:
         #     print ("/gazebo/pause_physics service call failed")
 
-        state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
+        state = [self.data.position[0], self.data.velocity[0], self.data.position[1], self.data.velocity[1]]
         # state = [self.data.position[1], 0, self.data.position[0], 0]
 
         x, x_dot, theta, theta_dot = state
@@ -171,7 +171,7 @@ class GazeboCartPolev0Env(gazebo_env.GazeboEnv):
                 self.data = rospy.wait_for_message('/cartpole/joint_states', JointState, timeout=5)
             except:
                 pass
-        state = [self.data.position[1], self.data.velocity[1], self.data.position[0], self.data.velocity[0]]
+        state = [self.data.position[0], self.data.velocity[0], self.data.position[1], self.data.velocity[1]]
         # state = [self.data.position[1], 0, self.data.position[0], 0]
 
         self.steps_beyond_done = None
