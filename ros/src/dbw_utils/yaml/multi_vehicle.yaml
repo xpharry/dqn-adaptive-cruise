@@ -1,5 +1,5 @@
 - fusion1:
-    x: -30.0
+    x: 0.0
     y: -2.0
     z: 0.0
     yaw: 0.0
@@ -7,7 +7,7 @@
     color: red
     pub_tf: true
 - fusion2:
-    x: 30.0
+    x: 0.0
     y: 75.2
     z: 0.0
     yaw: 3.14
@@ -15,7 +15,7 @@
     color: red
     pub_tf: true
 - ego:
-    x: 0.0
+    x: -30.0
     y: -6.0
     z: 0.0
     yaw: 0.0
@@ -23,7 +23,7 @@
     color: {r: 0.0, g: 0.8, b: 1.0}
     pub_tf: true
 - mondeo2:
-    x: 0.0
+    x: 30.0
     y: 79.2
     z: 0.0
     yaw: 3.14

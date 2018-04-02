@@ -330,7 +330,7 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 1000
+        epochs = 10000
         steps = 10000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -432,7 +432,7 @@ if __name__ == '__main__':
                         # save model weights and monitoring data every 100 epochs.
                         deepQ.saveModel('../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
-                        copy_tree(outdir, '../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch))
+                        # copy_tree(outdir, '../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
@@ -452,7 +452,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.995  # epsilon decay
+        explorationRate *= 0.999  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.05, explorationRate)
 
