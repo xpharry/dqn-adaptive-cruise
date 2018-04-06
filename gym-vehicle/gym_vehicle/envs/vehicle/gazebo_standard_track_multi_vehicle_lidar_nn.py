@@ -23,7 +23,7 @@ from gazebo_msgs.msg import ModelState, ModelStates
 
 DISPLAY_STATE = False
 
-MAX_SPEED = 22.35  # m/sec; tune this
+MAX_SPEED = 29.0576  # m/sec; tune this
 COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
 LAPS = 4
@@ -440,7 +440,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             print("| Reward: %f \t\t\t\t|" % reward)
             print("|-----------------------------------------------|")
 
-        if self.travel_time >= 35.0 * LAPS:
+        if self.travel_time >= 25.0 * LAPS:
             print("Time Out! :(")
             done = True
             self.travel_dist = 0
