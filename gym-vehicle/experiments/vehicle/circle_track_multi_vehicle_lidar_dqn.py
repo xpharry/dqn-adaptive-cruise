@@ -328,9 +328,9 @@ def clear_monitor_files(training_dir):
 
 if __name__ == '__main__':
 
-    env = gym.make('GazeboStandardTrackMultiVehicleLidarNn-v0')
+    env = gym.make('GazeboCircleTrackMultiVehicleLidarNn-v0')
     
-    outdir = '../../results/vehicle/'
+    outdir = '../../results/vehicle-circle/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -339,15 +339,15 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    weights_path = '../../saved_weights/multi_vehicle_track_dqn_ep200.h5'
-    monitor_path = '../../saved_weights/multi_vehicle_track_dqn_ep200'
-    params_json  = '../../saved_weights/multi_vehicle_track_dqn_ep200.json'
+    weights_path = '../../saved_weights/multi_vehicle_circle_track_dqn_ep200.h5'
+    monitor_path = '../../saved_weights/multi_vehicle_circle_track_dqn_ep200'
+    params_json  = '../../saved_weights/multi_vehicle_circle_track_dqn_ep200.json'
 
     if not continue_execution:
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 10000
+        epochs = 1000
         steps = 10000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -356,8 +356,8 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 17
-        network_outputs = 27
+        network_inputs = 5
+        network_outputs = 9
         network_structure = [300, 300]
         current_epoch = 0
 
@@ -447,14 +447,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel('../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel('../../saved_weights/multi_vehicle_circle_track_dqn_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
-                        # copy_tree(outdir, '../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch))
+                        # copy_tree(outdir, '../../saved_weights/multi_vehicle_circle_track_dqn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open('../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open('../../saved_weights/multi_vehicle_circle_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 
@@ -469,7 +469,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.999  # epsilon decay
+        explorationRate *= 0.997  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.05, explorationRate)
 

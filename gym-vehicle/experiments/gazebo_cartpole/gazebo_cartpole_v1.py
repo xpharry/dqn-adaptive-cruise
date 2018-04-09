@@ -4,8 +4,10 @@ import random
 import gym
 import gym_vehicle
 import math
+import itertools
 import matplotlib
 import matplotlib.pyplot as plt
+from scipy import interpolate
 import os
 
 env = None
@@ -32,6 +34,11 @@ class LivePlot(object):
         plt.ylabel(data_key)
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
+    def expand(self, lst, n):
+        lst = [[i]*n for i in lst]
+        lst = list(itertools.chain.from_iterable(lst))
+        return lst
+
     def plot(self, reward):
         # results = monitoring.load_results(self.outdir)
         # print(results)
@@ -42,6 +49,16 @@ class LivePlot(object):
         # if data !=  self._last_data:
         self._last_data = data
         plt.plot(data, color=self.line_color)
+
+        avg_data = []
+        average = 10
+        for i, val in enumerate(data):
+            if i%average==0:
+                if (i+average) < len(data):
+                    avg =  sum(data[i:i+average])/average
+                    avg_data.append(avg)
+        new_data = self.expand(avg_data,average)
+        plt.plot(new_data, color='red', linewidth=2.5) 
 
         # pause so matplotlib will display
         # may want to figure out matplotlib animation or use a different library in the future
