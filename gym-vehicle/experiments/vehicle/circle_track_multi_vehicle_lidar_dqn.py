@@ -357,7 +357,7 @@ if __name__ == '__main__':
         discountFactor = 0.99
         memorySize = 1000000
         network_inputs = 5
-        network_outputs = 9
+        network_outputs = 5
         network_structure = [300, 300]
         current_epoch = 0
 

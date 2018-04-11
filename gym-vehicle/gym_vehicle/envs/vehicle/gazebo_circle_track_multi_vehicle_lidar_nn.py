@@ -310,13 +310,9 @@ class GazeboCircleTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
     def action_names(self, action):
         action_move_forward = ["Accelerate +2.0 m/s",
-                               "Accelerate +1.5 m/s",
                                "Accelerate +1.0 m/s",
-                               "Accelerate +0.5 m/s",
                                "Keep current speed",
-                               "Decelerate -0.5 m/s",
                                "Decelerate -1.0 m/s",
-                               "Decelerate -1.5 m/s",
                                "Decelerate -2.0 m/s"]
         return action_move_forward[action]
 
@@ -330,10 +326,10 @@ class GazeboCircleTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         # 9 actions
         speed_cmd = self.speeds[0]
-        add_on = [+2.0, +1.5, +1.0, 0.5, 0, -0.5, -1.0, -1.5, -2.0]
+        add_on = [+2.0, +1.0, 0, -1.0, -2.0]
 
         # print("cmd_speed = %f" % cmd_speed)
-        speed_cmd = self.speed_saturate(speed_cmd + add_on[action%len(add_on)])
+        speed_cmd = self.speed_saturate(speed_cmd + add_on[action])
         self.cruise_speed_pub.publish(speed_cmd)
 
         # 9 actions
@@ -372,14 +368,14 @@ class GazeboCircleTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             print("| Reward: %f \t\t|" % reward)
             print("|-------------------|")
 
-        if self.travel_time >= 40.0 * LAPS:
+        if self.travel_time >= 20.0 * LAPS:
             print(self.travel_time)
             print("Time Out! :(")
             done = True
             self.travel_dist = 0
             self.travel_time = 0
 
-        if self.travel_dist >= 376.0 * LAPS:
+        if self.travel_dist >= 230.0 * LAPS:
             print("Safely finishing! :)")
             reward += 10000
             done = True
