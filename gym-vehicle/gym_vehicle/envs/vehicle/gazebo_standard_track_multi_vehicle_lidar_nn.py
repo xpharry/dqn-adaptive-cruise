@@ -373,16 +373,12 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
         return state, done
 
     def action_names(self, action):
-        i = action%9
-        j = action/9
+        i = action%5
+        j = action/5
         action_move_forward = ["Accelerate +2.0 m/s",
-                               "Accelerate +1.5 m/s",
                                "Accelerate +1.0 m/s",
-                               "Accelerate +0.5 m/s",
                                "Keep current speed",
-                               "Decelerate -0.5 m/s",
                                "Decelerate -1.0 m/s",
-                               "Decelerate -1.5 m/s",
                                "Decelerate -2.0 m/s"]
         action_change_lane = ["Change to Left",
                               "Keep Lane",
@@ -399,7 +395,7 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
 
         # 27 actions
         speed_cmd = self.speeds[0]
-        add_on = [+2.0, +1.5, +1.0, 0.5, 0, -0.5, -1.0, -1.5, -2.0]
+        add_on = [+2.0, +1.0, 0, -1.0, -2.0]
         chang_lane_cmds = ["Left", "Keep", "Right"]
 
         # print("cmd_speed = %f" % cmd_speed)
@@ -424,10 +420,10 @@ class GazeboStandardTrackMultiVehicleLidarNnEnv(gazebo_env.GazeboEnv):
             acc_dist = 0
         else:
             x0, y0 = self.prev_ego_pose.pose.position.x, self.prev_ego_pose.pose.position.y
-            x1, y1 = self.poses[2].pose.position.x, self.poses[2].pose.position.y
+            x1, y1 = self.poses[0].pose.position.x, self.poses[0].pose.position.y
             acc_dist = self.euclidean_distance(x0, y0, x1, y1)
         self.travel_dist += acc_dist
-        self.prev_ego_pose = self.poses[2]
+        self.prev_ego_pose = self.poses[0]
 
         if self.time_stamp is None:
             self.travel_time = 0

@@ -330,7 +330,7 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboStandardTrackMultiVehicleLidarNn-v0')
     
-    outdir = '../../results/vehicle/'
+    outdir = '../../results/vehicle-standard/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -348,7 +348,7 @@ if __name__ == '__main__':
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
         epochs = 10000
-        steps = 10000
+        steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
         minibatch_size = 64
@@ -357,7 +357,7 @@ if __name__ == '__main__':
         discountFactor = 0.99
         memorySize = 1000000
         network_inputs = 17
-        network_outputs = 27
+        network_outputs = 15
         network_structure = [300, 300]
         current_epoch = 0
 
