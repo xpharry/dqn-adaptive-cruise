@@ -8,3 +8,12 @@ devel
 profile.tmp
 
 ~
+
+
+.log
+.aux
+.out
+.synctex.gz
+.blg
+.toc
+.lof

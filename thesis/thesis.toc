@@ -1,50 +1,71 @@
-\contentsline {chapter}{\tocchapter {Chapter}{}{Acknowledgements}}{iv}{chapter*.1}
-\contentsline {section}{\tocsection {}{}{Acknowledgements}}{iv}{section.0.1}
-\contentsline {chapter}{\tocchapter {Chapter}{}{Abstract}}{v}{chapter*.2}
-\contentsline {section}{\tocsection {}{}{Abstract}}{v}{section.0.2}
+\contentsline {chapter}{\tocchapter {Chapter}{}{List of Tables}}{vi}{Doc-Start}
+\contentsline {chapter}{\tocchapter {Chapter}{}{List of Figures}}{vii}{Doc-Start}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Acknowledgements}}{viii}{chapter*.1}
+\contentsline {section}{\tocsection {}{}{Acknowledgements}}{viii}{section.0.1}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Abstract}}{ix}{chapter*.2}
+\contentsline {section}{\tocsection {}{}{Abstract}}{ix}{section.0.2}
 \contentsline {chapter}{\tocchapter {Chapter}{1}{Introduction}}{1}{chapter.1}
-\contentsline {section}{\tocsection {}{}{Lifetime and Degradation Science: Applicability to Renewable energy}}{1}{section.1.1}
-\contentsline {subsection}{\tocsubsection {}{1.1.1}{Project Overview}}{1}{subsection.1.1.1}
-\contentsline {subsection}{\tocsubsection {}{1.1.2}{Problem Statement}}{2}{subsection.1.1.2}
-\contentsline {subsection}{\tocsubsection {}{1.1.3}{Metrics}}{3}{subsection.1.1.3}
-\contentsline {chapter}{\tocchapter {Chapter}{2}{Chapter Title}}{4}{chapter.2}
-\contentsline {section}{\tocsection {}{}{Analysis}}{4}{section.2.1}
-\contentsline {subsection}{\tocsubsection {}{2.1.1}{Data Exploration and Visualization}}{4}{subsection.2.1.1}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.1.0}{Coaster Racer Game environment}}{4}{subsection.2.1.1}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.1.0}{States}}{4}{figure.caption.4}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.1.0}{Actions}}{5}{figure.caption.4}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.1.0}{Rewards}}{5}{figure.caption.4}
-\contentsline {subsection}{\tocsubsection {}{2.1.2}{Algorithms and Techniques}}{6}{subsection.2.1.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.2.0}{Overal Representation}}{6}{figure.caption.5}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.2.0}{Deep Neural Network}}{7}{figure.caption.5}
-\contentsline {subsubsection}{\tocsubsubsection {}{2.1.2.0}{Q-learning}}{8}{figure.caption.7}
-\contentsline {subsection}{\tocsubsection {}{2.1.3}{Benchmark}}{10}{subsection.2.1.3}
-\contentsline {chapter}{\tocchapter {Chapter}{3}{Methodology}}{11}{chapter.3}
-\contentsline {section}{\tocsection {}{}{Section header}}{11}{section.3.1}
-\contentsline {section}{\tocsection {}{}{Algorithm}}{11}{section.3.2}
-\contentsline {subsection}{\tocsubsection {}{3.2.1}{Data Preprocessing}}{11}{subsection.3.2.1}
-\contentsline {subsection}{\tocsubsection {}{3.2.2}{Implementation}}{13}{subsection.3.2.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Environment Setting}}{13}{subsection.3.2.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Build the Deep Neural Network}}{14}{subsection.3.2.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Preprocessing Functions}}{14}{subsection.3.2.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Finetuning Hyperparameters}}{14}{subsection.3.2.2}
-\contentsline {subsection}{\tocsubsection {}{3.2.3}{Refinement}}{14}{subsection.3.2.3}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.3.0}{Relay Memory}}{14}{subsection.3.2.3}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.3.0}{The Complexity of the Nerwork}}{14}{subsection.3.2.3}
-\contentsline {chapter}{\tocchapter {Chapter}{4}{Results}}{16}{chapter.4}
-\contentsline {section}{\tocsection {}{}{Specimen Selection \& Characterization}}{16}{section.4.1}
-\contentsline {subsection}{\tocsubsection {}{4.1.1}{Model Evaluation and Validation}}{16}{subsection.4.1.1}
-\contentsline {subsection}{\tocsubsection {}{4.1.2}{Justification}}{17}{subsection.4.1.2}
-\contentsline {chapter}{\tocchapter {Chapter}{5}{Discussion}}{18}{chapter.5}
-\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{19}{chapter.6}
-\contentsline {subsection}{\tocsubsection {}{6.0.1}{Free-Form Visualization}}{19}{subsection.6.0.1}
-\contentsline {subsection}{\tocsubsection {}{6.0.2}{Reflection}}{19}{subsection.6.0.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{6.0.2.0}{Diffculties}}{19}{subsection.6.0.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{6.0.2.0}{General Pipeline}}{20}{subsection.6.0.2}
-\contentsline {chapter}{\tocchapter {Chapter}{7}{Suggested Future Research}}{22}{chapter.7}
-\contentsline {section}{\tocsection {}{}{Continuation of Exposures and Analysis}}{22}{section.7.1}
-\contentsline {subsection}{\tocsubsection {}{7.1.1}{Improvement}}{22}{subsection.7.1.1}
-\contentsline {chapter}{\tocappendix {Appendix}{A}{Pprofile}}{24}{chapter.1}
-\contentsline {chapter}{\tocappendix {Appendix}{B}{Specimens}}{25}{chapter.2}
-\contentsline {chapter}{\tocappendix {Appendix}{C}{Preparation of this document}}{26}{chapter.3}
-\contentsline {chapter}{\tocappendix {Appendix}{D}{Figures}}{27}{chapter.4}
+\contentsline {section}{\tocsection {}{}{Motivation and Background}}{1}{section.1.1}
+\contentsline {section}{\tocsection {}{}{Literation Review}}{2}{section.1.2}
+\contentsline {section}{\tocsection {}{}{Thesis Outline}}{7}{section.1.3}
+\contentsline {chapter}{\tocchapter {Chapter}{2}{Simulation}}{11}{chapter.2}
+\contentsline {section}{\tocsection {}{}{ROS}}{12}{section.2.1}
+\contentsline {subsection}{\tocsubsection {}{2.1.1}{Nomenclature}}{12}{subsection.2.1.1}
+\contentsline {subsection}{\tocsubsection {}{2.1.2}{Visualization and Monitoring}}{13}{subsection.2.1.2}
+\contentsline {subsection}{\tocsubsection {}{2.1.3}{Transformations}}{15}{subsection.2.1.3}
+\contentsline {section}{\tocsection {}{}{Gazebo}}{16}{section.2.2}
+\contentsline {subsection}{\tocsubsection {}{2.2.1}{Architecture}}{17}{subsection.2.2.1}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.2.1.0}{Physics Engine}}{18}{subsection.2.2.1}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.2.1.0}{Visualization}}{18}{subsection.2.2.1}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.2.1.0}{The World}}{19}{subsection.2.2.1}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.2.1.0}{Construction of Models}}{21}{subsection.2.2.1}
+\contentsline {section}{\tocsection {}{}{Vehicle Model}}{22}{section.2.3}
+\contentsline {subsection}{\tocsubsection {}{2.3.1}{URDF Models}}{22}{subsection.2.3.1}
+\contentsline {subsection}{\tocsubsection {}{2.3.2}{Simulated CAN Message Interface}}{22}{subsection.2.3.2}
+\contentsline {subsection}{\tocsubsection {}{2.3.3}{Simulating Multiple Vehicles}}{23}{subsection.2.3.3}
+\contentsline {section}{\tocsection {}{}{OpenAI-Gym}}{25}{section.2.4}
+\contentsline {subsection}{\tocsubsection {}{2.4.1}{Architecture}}{25}{subsection.2.4.1}
+\contentsline {subsection}{\tocsubsection {}{2.4.2}{Environments and Robots}}{26}{subsection.2.4.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.4.2.0}{Turtlebot.}}{27}{subsection.2.4.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.4.2.0}{Erle-Rover.}}{27}{subsection.2.4.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.4.2.0}{Erle-Copter.}}{27}{subsection.2.4.2}
+\contentsline {subsection}{\tocsubsection {}{2.4.3}{Design Decisions}}{27}{subsection.2.4.3}
+\contentsline {subsubsection}{\tocsubsubsection {}{2.4.3.0}{Example Use}}{29}{subsection.2.4.3}
+\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{30}{chapter.3}
+\contentsline {section}{\tocsection {}{}{Behavior Planner}}{32}{section.3.1}
+\contentsline {subsection}{\tocsubsection {}{3.1.1}{States for Autonomous Vehicles}}{32}{subsection.3.1.1}
+\contentsline {section}{\tocsection {}{}{Trajectory Generation}}{32}{section.3.2}
+\contentsline {subsection}{\tocsubsection {}{3.2.1}{Frenet Coordinates}}{34}{subsection.3.2.1}
+\contentsline {subsection}{\tocsubsection {}{3.2.2}{Path candidates generation}}{36}{subsection.3.2.2}
+\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path candidates generation in the s q coordinate system}}{37}{subsection.3.2.3}
+\contentsline {subsection}{\tocsubsection {}{3.2.4}{Coordinates conversion of path candidate points}}{39}{subsection.3.2.4}
+\contentsline {section}{\tocsection {}{}{Montrol Control}}{39}{section.3.3}
+\contentsline {subsection}{\tocsubsection {}{3.3.1}{Waypoint Follower Node}}{39}{subsection.3.3.1}
+\contentsline {subsection}{\tocsubsection {}{3.3.2}{Drive By Wire (DBW) Node}}{40}{subsection.3.3.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{3.3.2.0}{Twist Controller}}{42}{subsection.3.3.2}
+\contentsline {chapter}{\tocchapter {Chapter}{4}{Deep Reinforcement Learning}}{43}{chapter.4}
+\contentsline {section}{\tocsection {}{}{Structure of DRL}}{43}{section.4.1}
+\contentsline {section}{\tocsection {}{}{Q Learning}}{44}{section.4.2}
+\contentsline {section}{\tocsection {}{}{Policy Representation}}{48}{section.4.3}
+\contentsline {subsection}{\tocsubsection {}{4.3.1}{State}}{48}{subsection.4.3.1}
+\contentsline {subsection}{\tocsubsection {}{4.3.2}{Actions}}{49}{subsection.4.3.2}
+\contentsline {subsection}{\tocsubsection {}{4.3.3}{Reward Function}}{49}{subsection.4.3.3}
+\contentsline {subsection}{\tocsubsection {}{4.3.4}{Relay Memory}}{50}{subsection.4.3.4}
+\contentsline {section}{\tocsection {}{}{Deep Neural Network}}{52}{section.4.4}
+\contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{54}{chapter.5}
+\contentsline {section}{\tocsection {}{}{Simulation Setup}}{54}{section.5.1}
+\contentsline {section}{\tocsection {}{}{Training of DQN}}{55}{section.5.2}
+\contentsline {section}{\tocsection {}{}{Visualizing the Value Function}}{56}{section.5.3}
+\contentsline {section}{\tocsection {}{}{Main Evaluation}}{58}{section.5.4}
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{59}{chapter.6}
+\contentsline {subsection}{\tocsubsection {}{6.0.1}{Free-Form Visualization}}{59}{subsection.6.0.1}
+\contentsline {subsection}{\tocsubsection {}{6.0.2}{Reflection}}{59}{subsection.6.0.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{6.0.2.0}{Diffculties}}{59}{subsection.6.0.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{6.0.2.0}{General Pipeline}}{60}{subsection.6.0.2}
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{62}{chapter.7}
+\contentsline {section}{\tocsection {}{}{Improvement}}{63}{section.7.1}
+\contentsline {chapter}{\tocappendix {Appendix}{A}{Pprofile}}{64}{chapter.1}
+\contentsline {chapter}{\tocappendix {Appendix}{B}{Specimens}}{65}{chapter.2}
+\contentsline {chapter}{\tocappendix {Appendix}{C}{Preparation of this document}}{66}{chapter.3}
+\contentsline {chapter}{\tocappendix {Appendix}{D}{Figures}}{67}{chapter.4}
+\contentsline {chapter}{\tocappendix {Appendix}{}{Complete References}}{68}{chapter*.23}

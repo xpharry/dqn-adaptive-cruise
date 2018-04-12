@@ -95,9 +95,19 @@
 % Your packages can go here:
 \usepackage{input/KL-Typing-Aids}
 
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{blue}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Author and title
 \author{\uppercase{Peng Xu}}
-\title{Cooperative Control of Autonomous Vehicle on Highways}
+\title{Adaptive Cruise Control with Deep Q Learning}
 
 \degree{Master of Science}  
 % Default: Doctor of Philosophy.
@@ -212,11 +222,11 @@
 \definecolor{felinkcolor}{rgb}{0,0,0.5}
 
 \include{content/01-Introduction}
-\include{content/02-LiteratureReview}
-\include{content/03-Experimental}
-\include{content/04-Results}
-\include{content/05-Discussion}
-\include{content/06-Conclusions}
+\include{content/02-Simulation}
+\include{content/03-SystemDesign}
+\include{content/04-DeepReinforcementLearning}
+\include{content/05-Results}
+\include{content/06-Conclusion}
 \include{content/07-Futurework}
 %\include{10-Summary}
 \appendix
@@ -237,7 +247,7 @@
 \bibliographystyle{unsrt} %if you have problems with the style, consult the CWRU-thesis.cls file
 \markright{\textit{Bibliography}}
 %\renewcommand{\chaptername}{}
-\bibliography{refs/my_references}
+\bibliography{refs/my_reference}
 %if latex throws errors with the .bbl file, fix the problem in the .bib, and delete the .bbl before trying to recompile
 %also, if the tex runs but says bib?, you can hit enter and get everything but the bibliography
 

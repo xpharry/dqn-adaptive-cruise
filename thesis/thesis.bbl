@@ -1,0 +1,190 @@
+\begin{thebibliography}{10}
+
+\bibitem{WANG2015727}
+R.~Wang et~al.
+\newblock Integrated optimal dynamics control of 4wd4ws electric ground vehicle
+  with tire-road frictional coefficient estimation.
+\newblock {\em Mechanical Systems and Signal Processing}, 60-61:727 -- 741,
+  2015.
+
+\bibitem{AutonomousStructured}
+A.~Vatavu R. Danescu~S. Nedevschi.
+\newblock Autonomous driving in structured and unstructured environments.
+\newblock In {\em Intelligent Vehicles Symposium}, Tokyo, Japan, September
+  2006. IEEE.
+
+\bibitem{DrivingUrban2008}
+Chris~Urmson etc.
+\newblock Autonomous driving in urban environments: Boss and the urban
+  challenge.
+\newblock {\em Journal of Field Robotics}, 25, 2008.
+
+\bibitem{Mnih2015AtariNature}
+V.~Mni et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock {\em Nature}, pages 529--533, 2015.
+
+\bibitem{OK-Robot-1987}
+O.~Khatib.
+\newblock A unified approach for motion and force control of robot
+  manipulators: The operational space formulation.
+\newblock {\em IEEE Journal on Robotics and Automation}, 1987.
+
+\bibitem{Predictive2014}
+B.~Boots~A. Byravan and D.~Fox.
+\newblock Learning predictive models of a depth camera and manipulator from raw
+  execution traces.
+\newblock {\em International Conference on Robotics and Automation (ICRA)},
+  2014.
+
+\bibitem{PlanningFramework2012}
+M.~R. Dogar and S.~S. Srinivasa.
+\newblock A planning framework for non-prehensile manipulation under clutter
+  and uncertainty.
+\newblock {\em Autonomous Robots}, 2012.
+
+\bibitem{IROS2016}
+K.~T. Yu M. Bauza~N. Fazeli and A.~Rodriguez.
+\newblock More than a million ways to be pushed: A high-fidelity experimental
+  data set of planar pushing.
+\newblock {\em International Conference on Intelligent Robots and Systems
+  (IROS)}, 2016.
+
+\bibitem{Visual1995}
+H.~Murase and S.~K. Nayar.
+\newblock Visual learning and recognition of 3-d objects from appearance.
+\newblock {\em International Journal of Computer Vision (IJCV)}, 1995.
+
+\bibitem{ObjectRecognition2009}
+A.~Collet D. Berenson S.~S. Srinivasa and D.~Ferguson.
+\newblock Object recognition and full pose registration from a single image for
+  robotic manipulation.
+\newblock {\em International Conference on Robotics and Automation (ICRA)},
+  2009.
+
+\bibitem{DynamicsDoor2013}
+F.~Endres J.Trinkle and W.~Burgard.
+\newblock Learning the dynamics of doors for robotic manipulation.
+\newblock {\em nternational Conference on Intelligent Robots and Systems
+  (IROS)}, 2013.
+
+\bibitem{FieldersNature2003}
+P.~McLeod~N. Reed and Z.~Dienes.
+\newblock Psychophysics: How fielders arrive in time to catch the ball.
+\newblock {\em Nature}, 2003.
+
+\bibitem{AutonomousLand1989}
+D.~Pomerleau.
+\newblock Alvinn: an autonomous land vehicle in a neural network.
+\newblock {\em Neural Information Processing Systems (NIPS)}, 1989.
+
+\bibitem{LongrangeVision2009}
+R.~Hadsell P. Sermanet J. Ben A. Erkan M. Scoffier K. Kavukcuoglu~U. Muller and
+  Y.~LeCun.
+\newblock Learning long-range vision for autonomous off-road driving.
+\newblock {\em Journal of Field Robotics (JFR)}, 2009.
+
+\bibitem{RobotSoccer2009}
+M.~Riedmiller T. Gabel~R. Hafner and S.~Lange.
+\newblock Reinforcement learning for robot soccer.
+\newblock {\em Autonomous Robots}, 2009.
+
+\bibitem{Grasp2016}
+L.~Pinto and A.~Gupta.
+\newblock Supersizing self-supervision: Learning to grasp from 50k tries and
+  700 robot hours.
+\newblock {\em International Conference on Robotics and Automation (ICRA)},
+  2016.
+
+\bibitem{RooticGrasping2016}
+S.~Levine P. Pastor~A. Krizhevsky and D.~Quillen.
+\newblock Learning hand-eye coordination for robotic grasping with deep
+  learning and large-scale data collection.
+\newblock {\em International Symposium on Experimental Robotics (ISER)}, 2016.
+
+\bibitem{Visuomotor2016}
+S.~Levine C. Finn~T. Darrell and P.~Abbeel.
+\newblock End-to-end training of deep visuomotor policies.
+\newblock {\em Journal of Machine Learning Research (JMLR)}, 2016.
+
+\bibitem{PolicySearch2011}
+M.~Deisenroth and C.~E. Rasmussen.
+\newblock Pilco: A model-based and data-efficient approach to policy search.
+\newblock {\em nternational Conference on Machine Learning (ICML)}, 2011.
+
+\bibitem{HeliNg2007}
+P.~Abbeel A. Coates~M. Quigley and A.~Y. Ng.
+\newblock An application of reinforcement learning to aerobatic helicopter
+  flight.
+\newblock {\em Neural Informa- tion Processing Systems (NIPS)}, 2007.
+
+\bibitem{Trajectory2012}
+Y.~Tassa~T. Erez and E.~Todorov.
+\newblock Synthesis and stabilization of complex behaviors through online
+  trajectory optimization.
+\newblock {\em International Conference on Intelligent Robots and Systems
+  (IROS)}, 2012.
+
+\bibitem{Deepmpc2015}
+I.~Lenz~R. Knepper and A.~Saxena.
+\newblock Deepmpc: Learning deep latent features for model predictive control.
+\newblock {\em Robotics Science and Systems (RSS)}, 2015.
+
+\bibitem{CACC1999}
+C.~Unsal~P. Kachroo and J.~S.
+\newblock Simulation study of multiple intelligent vehicle control using
+  stochastic learning automata.
+\newblock {\em IEEE Transactions on Systems, Man and Cybernetics - Part A :
+  Systems and Humans}, 29(1):120--128, 1999.
+
+\bibitem{DistributedRL-Traffic2000}
+M.~D. Pendrith.
+\newblock Distributed reinforcement learning for a traffic engineering
+  application.
+\newblock {\em the fourth international conference on Autonomous Agents}, pages
+  404 -- 411, 2000.
+
+\bibitem{GameControl2005}
+R.~Emery-Montermerlo.
+\newblock Game-theoretic control for robot teams.
+\newblock Technical report, Technical Report CMU-RI-TR-05-36, Robotics
+  Institute, Carnegie Mellon University, August 2005.
+
+\bibitem{Sparse2004}
+J.~R. Kok and N.~Vlassis.
+\newblock Proc. of the 21st int. conf. on machine learning.
+\newblock In R.~Greiner and D.~Schuurmans, editors, {\em Sparse Cooperative
+  Q-learning}, pages 481--488, Banff, Canada, July 2004. ACM.
+
+\bibitem{JointAction2003}
+N.~Fulda and D.~Ventura.
+\newblock Dynamic joint action perception for q-learning agents.
+\newblock {\em International Conference on Machine Learning and Applications},
+  2003.
+
+\bibitem{Multi-agentCooperation2001}
+P.~Xuan~V. Lesser and S.~Zilberstein.
+\newblock Communication decisions in multi-agent cooperation: model and
+  experiments.
+\newblock In {\em the Fifth International Conference on Autonomous Agents},
+  pages 616--623, Montreal, Canada, 2001. ACM.
+
+\bibitem{Communicative2002}
+D.~V. Pynadath and M.~Tambe.
+\newblock The communicative multiagent team decision problem: Analyzing
+  teamwork theories and models.
+\newblock {\em Journal of AI research}, 16:389--423, 2002.
+
+\bibitem{Makov2004}
+D.~Dolgov and E.~H. Durfee.
+\newblock Graphical models in local, asymmetric multi-agent markov decision
+  processes.
+\newblock {\em Proceedings of the Third International Joint Conference on
+  Autonomous Agents and Multiagent Systems (AAMAS-04)}, 2004.
+
+\bibitem{Sutton1998RL}
+R.~S. Sutton and A.~G. Barto.
+\newblock {\em Reinforcement Learning: An Introduction}.
+\newblock MIT Press, 1998.
+
+\end{thebibliography}

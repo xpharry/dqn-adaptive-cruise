@@ -1,23 +1,30 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces How an agent interacts with the environment.\relax }}{2}{figure.caption.3}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces How an agent interacts with the environment.\relax }}{3}{figure.caption.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces A browser screenshot of Coaster Racer Game.\relax }}{5}{figure.caption.4}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces A flowchart of training the Coaster Racer Game Bot.\relax }}{6}{figure.caption.5}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Deep Neural Network model from DeepMind paper.\relax }}{7}{figure.caption.6}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces LeNet-5.\relax }}{8}{figure.caption.7}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Gazebo for robot simulation.\relax }}{14}{figure.caption.4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Gazebo for robot simulation.\relax }}{16}{figure.caption.5}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces A general highway case display.\relax }}{22}{figure.caption.6}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Simulation model and corresponding TF tree.\relax }}{23}{figure.caption.7}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Simplified software architecture used in OpenAI Gym for robotics..\relax }}{25}{figure.caption.11}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Cropped input image.\relax }}{12}{figure.caption.8}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Downsized input image.\relax }}{12}{figure.caption.9}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Grayscaled input image.\relax }}{13}{figure.caption.10}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Standard Architecture of Autonomous Vehicle Control.\relax }}{32}{figure.caption.12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Cropped input image.\relax }}{35}{figure.caption.13}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Cropped input image.\relax }}{36}{figure.caption.14}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Cropped input image.\relax }}{37}{figure.caption.15}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Cropped input image.\relax }}{38}{figure.caption.16}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Cropped input image.\relax }}{39}{figure.caption.17}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Cropped input image.\relax }}{40}{figure.caption.18}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Cropped input image.\relax }}{41}{figure.caption.19}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces High score by the Game Bot.\relax }}{16}{figure.caption.11}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces A comparison between DQN trained Game Bot and a random Game Bot.\relax }}{17}{figure.caption.12}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces A general highway case display.\relax }}{44}{figure.caption.20}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Deep Neural Network model from DeepMind paper.\relax }}{53}{figure.caption.21}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Achieved value function achieved during training.\relax }}{57}{figure.caption.22}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces A bigger action space.\relax }}{23}{figure.caption.13}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

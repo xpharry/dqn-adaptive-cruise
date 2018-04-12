@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: content/01-Introduction.aux
+A level-1 auxiliary file: content/02-Simulation.aux
+A level-1 auxiliary file: content/03-SystemDesign.aux
+A level-1 auxiliary file: content/04-DeepReinforcementLearning.aux
+A level-1 auxiliary file: content/05-Results.aux
+A level-1 auxiliary file: content/06-Conclusion.aux
+A level-1 auxiliary file: content/07-Futurework.aux
+A level-1 auxiliary file: app/app_pprofile.aux
+A level-1 auxiliary file: app/app_specimens.aux
+A level-1 auxiliary file: app/app_thesis_prep.aux
+A level-1 auxiliary file: app/app_figs.aux
+The style file: unsrt.bst
+Database file #1: refs/my_reference.bib
+You've used 31 entries,
+            1791 wiz_defined-function locations,
+            644 strings with 9313 characters,
+and the built_in function-call counts, 5706 in all, are:
+= -- 524
+> -- 232
+< -- 4
++ -- 89
+- -- 58
+* -- 246
+:= -- 951
+add.period$ -- 96
+call.type$ -- 31
+change.case$ -- 31
+chr.to.int$ -- 0
+cite$ -- 31
+duplicate$ -- 303
+empty$ -- 555
+format.name$ -- 58
+if$ -- 1291
+int.to.chr$ -- 0
+int.to.str$ -- 31
+missing$ -- 31
+newline$ -- 158
+num.names$ -- 33
+pop$ -- 95
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 163
+stack$ -- 0
+substring$ -- 213
+swap$ -- 68
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 49
+width$ -- 33
+write$ -- 327
