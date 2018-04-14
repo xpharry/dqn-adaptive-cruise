@@ -1,14 +1,14 @@
 %Conclusions
 \chapter{Conclusions}
 
-\subsection{Free-Form Visualization}
+\section{Free-Form Visualization}
 
 A Youtube video has also been uploaded with the link https://youtu.be/VdVA3od4tVs here and it shows how it performs after 17000 time steps' training. It shows a capacity to stay in the road though it has some difficulty choosing right actions when blocked by the guard bars. The guard covered part of its view and the always acceleration actions made it even hard to get out of the stuck.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Reflection}
+\section{Reflection}
 
-\subsubsection{Diffculties}
+\subsection{Diffculties}
 
 The most difficult aspect of this project was that is extremely hard to stabilize reinforcement learning with non-linear function approximators. There are plenty of tricks that can be used and hyper-parameters that need to be tuned to get it to work, such as exploration policy, discount factor, learning rate, number of episodes, batch size, experience pool size and initial value.
 
@@ -16,7 +16,7 @@ All these techniques and parameters were selected by trial and error, and no sys
 
 Also a huge difficulty of a reinforcement learning problem could be the time lag between the action and the reward. When training with grouped actions off of the heuristic reward function, the reward for a given action was immediate, and this network showed the best performance. The next best performance came from a network based off of grouped actions, where actions were only a few steps removed from the next reward. Our worst performance came from the networks trained to estimate actions, where actions were several dozen steps removed from the next rewards.
 
-\subsubsection{General Pipeline}
+\subsection{General Pipeline}
 
 In a Deep Q Network setting, there are several elements which we have to be careful to define.
 
