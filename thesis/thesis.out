@@ -8,30 +8,32 @@
 \BOOKMARK [1][]{section.1.1}{Motivation and Background}{chapter.1}% 8
 \BOOKMARK [1][]{section.1.2}{Literation Review}{chapter.1}% 9
 \BOOKMARK [1][]{section.1.3}{Thesis Outline}{chapter.1}% 10
-\BOOKMARK [0][]{chapter.2}{Chapter 2. Simulation}{}% 11
+\BOOKMARK [0][]{chapter.2}{Chapter 2. Simulated Environment}{}% 11
 \BOOKMARK [1][]{section.2.1}{ROS}{chapter.2}% 12
 \BOOKMARK [1][]{section.2.2}{Gazebo}{chapter.2}% 13
-\BOOKMARK [1][]{section.2.3}{Vehicle Model}{chapter.2}% 14
-\BOOKMARK [1][]{section.2.4}{OpenAI-Gym}{chapter.2}% 15
+\BOOKMARK [1][]{section.2.3}{OpenAI-Gym}{chapter.2}% 14
+\BOOKMARK [1][]{section.2.4}{Vehicle Model: DBW Kit}{chapter.2}% 15
 \BOOKMARK [0][]{chapter.3}{Chapter 3. System Design}{}% 16
-\BOOKMARK [1][]{section.3.1}{Behavior Planner}{chapter.3}% 17
-\BOOKMARK [1][]{section.3.2}{Trajectory Generation}{chapter.3}% 18
-\BOOKMARK [1][]{section.3.3}{Montrol Control}{chapter.3}% 19
-\BOOKMARK [0][]{chapter.4}{Chapter 4. Deep Reinforcement Learning}{}% 20
-\BOOKMARK [1][]{section.4.1}{Structure of DRL}{chapter.4}% 21
-\BOOKMARK [1][]{section.4.2}{Q Learning}{chapter.4}% 22
-\BOOKMARK [1][]{section.4.3}{Policy Representation}{chapter.4}% 23
-\BOOKMARK [1][]{section.4.4}{Deep Neural Network}{chapter.4}% 24
-\BOOKMARK [0][]{chapter.5}{Chapter 5. Results}{}% 25
-\BOOKMARK [1][]{section.5.1}{Simulation Setup}{chapter.5}% 26
-\BOOKMARK [1][]{section.5.2}{Training of DQN}{chapter.5}% 27
-\BOOKMARK [1][]{section.5.3}{Visualizing the Value Function}{chapter.5}% 28
-\BOOKMARK [1][]{section.5.4}{Main Evaluation}{chapter.5}% 29
-\BOOKMARK [0][]{chapter.6}{Chapter 6. Conclusions}{}% 30
-\BOOKMARK [0][]{chapter.7}{Chapter 7. Future Work}{}% 31
-\BOOKMARK [1][]{section.7.1}{Improvement}{chapter.7}% 32
-\BOOKMARK [0][]{chapter.1}{Appendix A. Pprofile}{}% 33
-\BOOKMARK [0][]{chapter.2}{Appendix B. Specimens}{}% 34
-\BOOKMARK [0][]{chapter.3}{Appendix C. Preparation of this document}{}% 35
-\BOOKMARK [0][]{chapter.4}{Appendix D. Figures}{}% 36
-\BOOKMARK [0][]{chapter*.23}{Complete References}{}% 37
+\BOOKMARK [1][]{section.3.1}{Motion Planner}{chapter.3}% 17
+\BOOKMARK [1][]{section.3.2}{Trajectory Generator}{chapter.3}% 18
+\BOOKMARK [1][]{section.3.3}{Path Flowing}{chapter.3}% 19
+\BOOKMARK [1][]{section.3.4}{Drive By Wire}{chapter.3}% 20
+\BOOKMARK [1][]{section.3.5}{Experiment}{chapter.3}% 21
+\BOOKMARK [0][]{chapter.4}{Chapter 4. Deep Q-Learning}{}% 22
+\BOOKMARK [1][]{section.4.1}{General Architecture}{chapter.4}% 23
+\BOOKMARK [1][]{section.4.2}{Reinforcement Learning for Longitudinal Motion}{chapter.4}% 24
+\BOOKMARK [1][]{section.4.3}{Reinforcement Learning for Lateral Motion}{chapter.4}% 25
+\BOOKMARK [1][]{section.4.4}{Q Learning}{chapter.4}% 26
+\BOOKMARK [1][]{section.4.5}{Policy Representation}{chapter.4}% 27
+\BOOKMARK [1][]{section.4.6}{Deep Neural Network Layer}{chapter.4}% 28
+\BOOKMARK [0][]{chapter.5}{Chapter 5. Results}{}% 29
+\BOOKMARK [1][]{section.5.1}{Simulation Setup}{chapter.5}% 30
+\BOOKMARK [1][]{section.5.2}{Training for Longitudinal Motion only}{chapter.5}% 31
+\BOOKMARK [1][]{section.5.3}{Training for Combined Motion}{chapter.5}% 32
+\BOOKMARK [1][]{section.5.4}{Main Evaluation}{chapter.5}% 33
+\BOOKMARK [0][]{chapter.6}{Chapter 6. Conclusions}{}% 34
+\BOOKMARK [1][]{section.6.1}{Free-Form Visualization}{chapter.6}% 35
+\BOOKMARK [1][]{section.6.2}{Analysis}{chapter.6}% 36
+\BOOKMARK [1][]{section.6.3}{Reflection}{chapter.6}% 37
+\BOOKMARK [0][]{chapter.7}{Chapter 7. Future Work}{}% 38
+\BOOKMARK [0][]{chapter*.38}{Bibliography}{}% 39

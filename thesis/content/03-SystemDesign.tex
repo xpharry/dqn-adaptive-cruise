@@ -42,7 +42,7 @@ The framework proposed above is general and can be applied to a variety of drivi
 \section{Motion Planner}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Longitudinal Control Problem}
+\subsection{Longitudinal Control:  Adaptive Cruise Control}
 
 We define the following variables to represent the relative motion of the autonomous vehicle (referred to as the "ego vehicle") and the vehicle located ahead or behind in the same lane as the autonomous vehicle (referred to as the "preceding vehicle" or the "trailing car").
 
@@ -56,7 +56,7 @@ We define the following variables to represent the relative motion of the autono
 At each time step \textit{t} , the driver model generates an acceleration command. This acceleration command is used by the trajectory generator to compute a target velocity as a reference. The controller solves a constrained optimization problem over the prediction horizon , and generates a planned velocity sequence which guarantees the safety of the vehicle.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Lateral Control Problem}
+\subsection{Lateral Control: Lane Change Control}
 
 We define a one-dimensional array with boolean values to represent the lateral position of the autonomous vehicle in a 3-lane highway scenario.
 
@@ -107,6 +107,7 @@ As we have mentioned several times in the previous section, a road-aligned coord
 \end{figure}
 
 \subsubsection{Frenet Coordinates}
+
 
 Frenet Coordinates are a way of representing position on a road in a more intuitive way than traditional $(x,y)$ Cartesian Coordinates. With Frenet coordinates, we use the variables $s$ and $d$ to describe a vehicle's position on the road. The $s$ coordinate represents distance along the road (also known as longitudinal displacement) and the $d$ coordinate represents side-to-side position on the road (also known as lateral displacement). Imagine a curvy road like in Fig. \ref{fig:curve-in-cartesian} with a Cartesian coordinate system laid on top of it.
 
@@ -198,13 +199,10 @@ Path candidates are generated in the Frenet coordinate system, but path planning
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Path Flowing}
 
-\subsection{Waypoint Follower Node}
-The waypoint follower node uses the $/final_waypoints$ data to publish $/twist_cmd$ for the dbw node to use. The node implementation uses an open source implementation of pure pursuit algorithm from Autoware. (https://github.com/CPFL/Autoware)
+bla
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Drive By Wire}
-
-\subsection{Drive By Wire (DBW) Node}
 
 An autonomous car require that actuators that control the motion of the vehicle, can be interacted with electronically. Therefore a drive-by-wire system is needed. A drive-by-wire system replaces the mechanical systems in a traditional vehicle by using electrical/electronic (E/E) systems to perform fundamental vehicle functions.
 
@@ -212,34 +210,26 @@ The drive-by-wire system includes steer-by-wire, brake-by-wire and throttle-by-w
 
 The advantage of using drive-by-wire rather than mechanical systems is that reduction of cost, moving parts and weight can be achieved. Since the steering rack can be removed, the car?s shock impact, in case of a collision, can be improved. Using an electrical based system will also increase the information flow and ease up the interconnect between different components in the car, facilitating the use of safety functions such as; ABS (anti-lock brake system), ESP (electronic stability programme), etc.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experiment}
 
-The purpose of the drive by wire node is to publish commands to the vehicle actuators: steering wheel, accelerator, and break. The node subscribes to the following nodes:
+\subsection{Lane Keep}
 
-${/current_velocity}$
+\begin{figure}[h]
+\centering
+\includegraphics[height=2.8in]{figs/ch3/frenet-final}
+\caption{Comparison display in Frenet and Cartesian coordinate systems.}
+\label{fig:lane-keep}
+\end{figure}
 
-$/twist_cmd$
+\subsection{Lane Change}
 
-$/vehicle/dbw_enabled$
-
-It uses information from $current_velocity$ and $twist_cmd$ to determine the values to be sent to the actuators, while $/vehicle/dbw_enabled$ topic is only used to determine if drive-by-wire is being overridden, in which point it will stop publishing any message, and ignore the received messages.
-
-The node delegates the actuator's value to the $twist_controller$ class, which returns a value for each of the actuators.
-
-\subsubsection{Twist Controller}
-The twist controller is initialized with values based on the vehicle configuration, as steer ratio and vehicle mass, and implements a single method control, which receives the vehicle target position and current velocity, and will return a value for acceleration, braking, and steering. It will in turn, delegate the calculation for each of those values to the $throttle_controller$, $brake_controller$, and $yaw_controller$. The $yaw_controller$ calculates a steering angle for every update, while the twist controller will calculate the position error (current - target) to determine if braking or acceleration should be engaged. If the error is positive, the throttle controller is used, while a negative error will be sent to the brake PID.
-
-1) Throttle Controller ($throttle_controller.py$)
-The throttle is initialized with a min and max acceleration values. It uses a PID controller to determine the amount of acceleration or decelaration to be given based on the difference between the target velocity and the current velocity.
-
-2) Braking Controller ($braking_controller.py$)
-The brake controller calculates the amount of torque to be sent to the brake by multiplying the vehicle mass, wheel radius and aceleration.
-
-3) Steering Controller ($yaw_controller.py$)
-The steering controller calculates the amount of steering it should send to the actuator using the target linear and angular velocity, taking into account the steer ratio of the vehicle.
-
-
-
-
+\begin{figure}[h]
+\centering
+\includegraphics[height=2.8in]{figs/ch3/frenet-final}
+\caption{Comparison display in Frenet and Cartesian coordinate systems.}
+\label{fig:lane-change}
+\end{figure}
 
 %\bibliographystyle{plainnat}
 %\markright{\textit{Bibliography}}

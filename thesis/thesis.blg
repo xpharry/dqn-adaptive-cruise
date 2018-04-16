@@ -8,50 +8,46 @@ A level-1 auxiliary file: content/04-DeepReinforcementLearning.aux
 A level-1 auxiliary file: content/05-Results.aux
 A level-1 auxiliary file: content/06-Conclusion.aux
 A level-1 auxiliary file: content/07-Futurework.aux
-A level-1 auxiliary file: app/app_pprofile.aux
-A level-1 auxiliary file: app/app_specimens.aux
-A level-1 auxiliary file: app/app_thesis_prep.aux
-A level-1 auxiliary file: app/app_figs.aux
 The style file: unsrt.bst
 Database file #1: refs/my_reference.bib
-You've used 31 entries,
+You've used 40 entries,
             1791 wiz_defined-function locations,
-            644 strings with 9313 characters,
-and the built_in function-call counts, 5706 in all, are:
-= -- 524
-> -- 232
-< -- 4
-+ -- 89
-- -- 58
-* -- 246
-:= -- 951
-add.period$ -- 96
-call.type$ -- 31
-change.case$ -- 31
+            691 strings with 11157 characters,
+and the built_in function-call counts, 7518 in all, are:
+= -- 693
+> -- 303
+< -- 6
++ -- 116
+- -- 76
+* -- 332
+:= -- 1235
+add.period$ -- 123
+call.type$ -- 40
+change.case$ -- 39
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 303
-empty$ -- 555
-format.name$ -- 58
-if$ -- 1291
+cite$ -- 40
+duplicate$ -- 402
+empty$ -- 732
+format.name$ -- 76
+if$ -- 1709
 int.to.chr$ -- 0
-int.to.str$ -- 31
-missing$ -- 31
-newline$ -- 158
-num.names$ -- 33
-pop$ -- 95
+int.to.str$ -- 40
+missing$ -- 41
+newline$ -- 203
+num.names$ -- 42
+pop$ -- 127
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 163
+skip$ -- 218
 stack$ -- 0
-substring$ -- 213
-swap$ -- 68
-text.length$ -- 4
+substring$ -- 293
+swap$ -- 95
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 49
-width$ -- 33
-write$ -- 327
+while$ -- 66
+width$ -- 42
+write$ -- 422

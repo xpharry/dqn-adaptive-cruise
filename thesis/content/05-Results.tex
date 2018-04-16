@@ -1,28 +1,32 @@
-%Discussion
 \chapter{Results}
 
-In this chapter, we evaluate the performance of the proposed adaptive cruise system via computer simulations.
+In this chapter, we evaluate the performance of the proposed autonomous highway driving system via computer simulations. It also briefly explains and discusses some characteristics of the results, whereas a more general discussion follows in the next Chapter. As described in Chapter 4, two agents with different action spaces were investigated. Agent 1 only decided when to change lanes, whereas Agent 2 decided both the speed and when to change lanes.
 
+% Furthermore, two different neural network architectures were used.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Simulation Setup}
 
-In simulations, we used the commercial software PreScan which models vehicle dynamics in real time [15]. We generated the environment in order to train the DQN by simulating the random behavior of the pedestrian. In the simulations, we assume that the relative location of the pedestrian is provided to the agent. To make the system practical, we add slight measurement noise to it. In each episode, the initial position of vehicle is set to (0, 0). Time-to-collision T T C is chosen according to the uniform distrubution between 1.5 s and 4 s. The initial velocity of the vehicle is uniformly distributed between $v_{initmin} = 2.78 m/s (10 km/s)$ and $v_{initmax} = 16.67 m/s (60 km/h)$. At the beginning of the episodes, the position of the pedestrian is fixed to 5 ? $v_{init}$ meters away from the position of the vehicle. The pedestrian stands either at the far-side or at near-side of the vehicle with equal probability. The behavior of the pedestrian follows one of two scenarios below;
+In simulations, we used the open source software OpenAI-Gym and ROS / Gazebo which models highway environment in real time. We generated the environment in order to train the DQN by simulating the behaviors of the cars on highway. In the simulations, we assume that the positions and velocities of the ego vehicle's neighboring vehicles is detected and stored by the ego vehicle. In each episode, the initial position of ego vehicle is set to (0, -6) in the middle lane. The initial velocities of the other vehicle are set based on their lane. With different velocities, the other vehicles have chances to create several different scenarios for the DQN model to learn.
 
 \begin{itemize}
-\item Scenario 1 : Cross the road
-\item Scenario 2 : Stay at initial position.
-During training, either of two scenarios is selected with equal probability. In Scenario 1, the pedestrian starts to move when the vehicle is crossing at the ?pedestrian crossing point? ptrig = (5?TTC)?vinit. (see Fig. 4.) The safety distance l for the pedestrian is set to 3 m. The agent chooses the brake control among ahigh = ?9.8 m/s2, amid = ?5.9 m/s2, ahigh = ?2.9 m/s2 and anothing = 0 m/s2 every ?T = 0.1 second. The detailed simulation setup is summarized below.
-\item Initial velocity of vehicle vinit ? U (2.78, 16.67) m/s ? Velocity of pedestrian vped ? U (2, 4) m/s
-\item Time-to-collision T T C ? U (1.5, 4) s
-\item Initial pedestrian position pedposx = 5 ? vinit m
-\item Trigger point $p_{trig} = (5 TTC) ? v_{init} m$
-\item Safety dist = 3 m
-\item T=0.1s
-\item $a_{high}, a_{mid}, a_{low}, a_{zero} = {9.8, 5.9, 2.9, 0} m/s^2$
+\item Scenario 1: No vehicle in the ego vehicle's detecting range.
+\item Scenario 2: One vehicle is detected in the same lane of the ego vehicle.
+\item Scenario 3: One vehicle is detected but in a different lane of the ego vehicle.
+\item Scenario 4: Vehicles are detected in the left, right and the ego's lanes.
 \end{itemize}
 
-\section{Training of DQN}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Training for Longitudinal Motion only}
 
-The neural network used for the DQN consists of the fully- connected layers with five hidden layers. RMSProp algorithm [14] is used to minimize the loss with learning rate ? = 0.0005. The number of position data samples used as a state is set to n = 5. We set the size of the replay memory to 10,000 and that of the trauma memory to 1,000. We set the replay batch size to 32 and trauma batch size to 10. The summary of the DQN configurations used for our experiments is provided below:
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figs/magic}
+\caption{The architecture of Deep Neural Network.}
+\label{fig:dnn}
+\end{figure}
+
+The neural network used for the DQN consists of the fully-connected layers with five hidden layers. RMSProp algorithm [14] is used to minimize the loss with learning rate ? = 0.0005. The number of position data samples used as a state is set to n = 5. We set the size of the replay memory to 10,000. We set the replay batch size to 32 and trauma batch size to 10. The summary of the DQN configurations used for our experiments is provided below:
 
 \begin{itemize}
 \item State buffer size: n = 5
@@ -32,28 +36,91 @@ The neural network used for the DQN consists of the fully- connected layers with
 \item RMSProp optimizer with learning rate 0.0005 [14]
 \item Replay memory size: 10,000
 \item Replay batch size: 32
-\item Trauma memory size: 1,000
-\item Trauma batch size = 10
-\item Reward function: ? = 0.001, ? = 0.1, ? = 0.01, ? =100
 \end{itemize}
 
-Fig. 5 provides the plot of the total accumulated rewards i.e., value function achieved for each episode when training is conducted with and without trauma memory. We observe that with trauma memory the value function converges after 2,000 episodes and high total reward is steadily attained after convergence while without trauma memory the policy does not converge and keeps fluctuating.
+\subsection{Case 1: The neighboring vehicles are at constant speeds.}
 
-\section{Visualizing the Value Function}
+The parameters are set as below,
+
+\begin{itemize}
+\item Cruise speeds in Lane 0, 1and 2 are $vel_{lane0}, vel_{lane1}, vel_{lane2} = {12, 10, 8} m/s$ which means Lane 0, 1 and 2 are Fast Lane, Medium Lane and Slow Lane.
+\item Safety distance is $dist_{safety} = 5 m$
+\item $accel_{high}, accel_{low}, accel_{zero}, decel_{low}, decel_{high} = {2, 1, 0, -1, -2} m/s^2$
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figs/ch5/agent1-reward-history-epoch-1000-a}
+\caption{The reward history of training for Adaptive Cruise Control in Case 1.}
+\label{fig:res-1-a}
+\end{figure}
+
+Fig. \ref{fig:res-1-a} provides the plot of the total accumulated rewards i.e., value function achieved for each episode. We observe that the value function converges after 750 episodes and high total reward is steadily attained after convergence.
+
+\subsection{Case 2: The neighboring vehicles are at erratic speeds.}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.5\textwidth]{figs/magic}
-\caption{Achieved value function achieved during training.}
+\caption{The speed variance of vehicle in each lane.}
+\label{fig:erratic-curve}
 \end{figure}
 
-Safety test was conducted for several different T T C values. Collision rate is measured for 10,000 trials for each TTC value. Table I provides the collision rate for each TTC value for the test performed for Scenario 1. The agent avoids collision successfully for TTC values above 1.5s. For the cases with TTC values less than 1.5s, we observe some collisions. According to our analysis on the trajectory of braking actions, these are the cases where collision was not avoidable due to the high initial velocity of the vehicle even though full braking actions were applied. The agent passed the pedestrian without unnecessary stop for all cases in the Scenario 2. The detailed trajectory of the brake actions for one example case is shown in Fig. 6. Fig. 6 (a) shows the trajectory of the position of the vehicle and the pedestrian recorded every 0.1 s. The velocity of the agent and the brake actions applied are shown in Fig. 6 (b) and (c), respectively. The vehicle starts to decelerate about 20 m away from the pedestrian and completely stops about 5 m ahead, thereby accomplishing collision avoidance. We observe that weak braking actions are applied in the beginning part of deceleration and then strong braking actions come as the agent gets close to the pedestrian.
+The parameters are set as below,
 
-Fig. 7 shows how the initial position of the pedestrian and the relative distance between the pedestrian and vehicle are distributed for 1,000 trials in the scenario 1. We see that the vehicle stops around 5 m in front of the pedestrian for most of cases. This seems to be reasonable safe braking operation considering the safety distance of l = 3 m. Note that this distance can be adjusted by changing the reward parameters. Overall, the experimental results show that the proposed autonomous braking system exhibits consistent brake control performance for all cases considered.
+\begin{itemize}
+\item The speed of the vehicle except for the ego vehicle in each lane would follow a sine curve, a period of zero value and a period of costant non-zero value as shown in Fig.  \ref{fig:erratic-curve}.
+\item Safety distance is  $dist_{safety} = 5 m$
+\item $accel_{high}, accel_{low}, accel_{zero}, decel_{low}, decel{high} = {2, 1, 0, -1, -2} m/s^2$
+\end{itemize}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figs/ch5/agent1-reward-history-epoch-1000-b}
+\caption{The reward history of training for Adaptive Cruise Control in Case 2.}
+\label{fig:res-1-b}
+\end{figure}
+
+Fig. \ref{fig:res-1-b} provides the plot of the total accumulated rewards i.e., value function achieved for each episode. We observe that the value function converges after 1,000 episodes and high total reward is steadily attained after convergence.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Training for Combined Motion}
+
+The neural network used for the DQN consists of the fully-connected layers with five hidden layers. RMSProp algorithm [14] is used to minimize the loss with learning rate ? = 0.0005. The number of position data samples used as a state is set to n = 5. We set the size of the replay memory to 10,000. We set the replay batch size to 32 and trauma batch size to 10. The summary of the DQN configurations used for our experiments is provided below:
+
+\begin{itemize}
+\item State buffer size: n = 5
+\item Network architecture: fully-connected feed-forward network
+\item Nonlinear function: leaky ReLU [13]
+\item Number of nodes for each layers : [17 (Input layer), 100, 70, 50, 70, 100, 27 (Output layer)]
+\item RMSProp optimizer with learning rate 0.0005 [14]
+\item Replay memory size: 10,000
+\item Replay batch size: 32
+\end{itemize}
+
+The parameters are set as below,
+
+\begin{itemize}
+\item Cruise speeds in Lane 0, 1and 2 are $vel_{lane0}, vel_{lane1}, vel_{lane2} = {12, 10, 8} m/s$ which means Lane 0, 1 and 2 are Fast Lane, Slow Lane.
+\item Safety distance is $dist_{safety} = 5 m$
+\item $accel_{high}, accel_{low}, accel_{zero}, decel_{low}, decel{high} = {2, 1, 0, -1, -2} m/s^2$
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth]{figs/ch5/agent2-vehicle-reward-history-epoch-3000-std-track}
+\caption{The reward history of training for full autonomous highway driving.}
+\label{fig:res-2}
+\end{figure}
+
+Fig. \ref{fig:res-2} provides the plot of the total accumulated rewards i.e., value function achieved for each episode. We observe that the value function converges after 2,000 episodes and high total reward is steadily attained after convergence.
+
+Both Agent1FCNN and Agent2FCNN failed to complete all the evaluation episodes without collisions, see Fig. 4 and Table VI. Naturally, Agent1FCNN solved a significantly higher fraction of the episodes and performed better than Agent2FCNN, since it only needed to decide when to change lanes, and not control the speed. In the beginning, it learned to always stay in its lane, and thereby solved all episodes without collisions, but reached a lower performance index than the reference model, see Fig. 5. With more training, it started to change lanes and performed reasonably well, but sometimes caused collisions. Agent2FCNN performed significantly worse and collided in 14\% of the episodes by the end of its training. A longer training run was carried out for Agent1FCNN and Agent2FCNN, but after 20 million iterations, the results were the same.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Main Evaluation}
 
-We compare our results with the best performing methods from the RL literature [3, 4]. The method labeled Sarsa used the Sarsa algorithm to learn linear policies on several different feature sets hand- engineered for the Atari task and we report the score for the best performing feature set [3]. Contingency used the same basic approach as Sarsa but augmented the feature sets with a learned representation of the parts of the screen that are under the agent?s control [4]. Note that both of these methods incorporate significant prior knowledge about the visual problem by using background sub- traction and treating each of the 128 colors as a separate channel. Since many of the Atari games use one distinct color for each type of object, treating each color as a separate channel can be similar to producing a separate binary map encoding the presence of each object type. In contrast, our agents only receive the raw RGB screenshots as input and must learn to detect objects on their own.
+We compare our results with the best performing methods from the RL literature [3, 4]. The method labeled Sarsa used the Sarsa algorithm to learn linear policies on several different feature sets hand-engineered for the Atari task and we report the score for the best performing feature set [3]. Contingency used the same basic approach as Sarsa but augmented the feature sets with a learned representation of the parts of the screen that are under the agent?s control [4]. Note that both of these methods incorporate significant prior knowledge about the visual problem by using background sub- traction and treating each of the 128 colors as a separate channel. Since many of the Atari games use one distinct color for each type of object, treating each color as a separate channel can be similar to producing a separate binary map encoding the presence of each object type. In contrast, our agents only receive the raw RGB screenshots as input and must learn to detect objects on their own.
 
 
 %\vfill

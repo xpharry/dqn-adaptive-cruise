@@ -1,50 +1,76 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{30}{chapter.3}}
+\citation{DARPA2009}
+\citation{FullyAD}
+\citation{BerthaDrive2014}
+\citation{PROUD2014}
+\@writefile{toc}{\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{35}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Standard Architecture of Autonomous Vehicle Control.\relax }}{32}{figure.caption.12}}
-\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Behavior Planner}}{32}{section.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.1.1}{States for Autonomous Vehicles}}{32}{subsection.3.1.1}}
-\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Trajectory Generation}}{32}{section.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.1}{Frenet Coordinates}}{34}{subsection.3.2.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Cropped input image.\relax }}{35}{figure.caption.13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Cropped input image.\relax }}{36}{figure.caption.14}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.2}{Path candidates generation}}{36}{subsection.3.2.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Cropped input image.\relax }}{37}{figure.caption.15}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path candidates generation in the s q coordinate system}}{37}{subsection.3.2.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Cropped input image.\relax }}{38}{figure.caption.16}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Cropped input image.\relax }}{39}{figure.caption.17}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.4}{Coordinates conversion of path candidate points}}{39}{subsection.3.2.4}}
-\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Montrol Control}}{39}{section.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.3.1}{Waypoint Follower Node}}{39}{subsection.3.3.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Cropped input image.\relax }}{40}{figure.caption.18}}
-\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.3.2}{Drive By Wire (DBW) Node}}{40}{subsection.3.3.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Cropped input image.\relax }}{41}{figure.caption.19}}
-\@writefile{toc}{\contentsline {subsubsection}{\tocsubsubsection {}{3.3.2.0}{Twist Controller}}{42}{subsection.3.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Standard Architecture of Autonomous Vehicle.\relax }}{35}{figure.caption.17}}
+\newlabel{fig:std-archi}{{3.1}{35}{Standard Architecture of Autonomous Vehicle.\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Standard Architecture of Autonomous Vehicle Control.\relax }}{37}{figure.caption.18}}
+\newlabel{fig:proposed-architecture}{{3.2}{37}{Standard Architecture of Autonomous Vehicle Control.\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Motion Planner}}{37}{section.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.1.1}{Longitudinal Control: Adaptive Cruise Control}}{37}{subsection.3.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.1.2}{Lateral Control: Lane Change Control}}{38}{subsection.3.1.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces The finite state machine for lateral motion control.\relax }}{39}{figure.caption.19}}
+\newlabel{fig:fsm}{{3.3}{39}{The finite state machine for lateral motion control.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Trajectory Generator}}{40}{section.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.1}{Trajectory Planning}}{40}{subsection.3.2.1}}
+\citation{Frenet2008}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces The global route and the waypoints.\relax }}{41}{figure.caption.20}}
+\newlabel{fig:center-line}{{3.4}{41}{The global route and the waypoints.\relax }{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.2}{A road-aligned coordinate system: Frenet Coordinate}}{41}{subsection.3.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Trajectory generation in Frenet coordinate.\relax }}{42}{figure.caption.21}}
+\newlabel{fig:traj-generation}{{3.5}{42}{Trajectory generation in Frenet coordinate.\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Frenet Coordinates}}{42}{figure.caption.21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces A curve road in Cartesian coordinate.\relax }}{43}{figure.caption.22}}
+\newlabel{fig:curve-in-cartesian}{{3.6}{43}{A curve road in Cartesian coordinate.\relax }{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces A curve road in Cartesian coordinate with waypoints.\relax }}{43}{figure.caption.23}}
+\newlabel{fig:curve-in-cartesian-wp}{{3.7}{43}{A curve road in Cartesian coordinate with waypoints.\relax }{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Curve in Frenet coordinate system.\relax }}{44}{figure.caption.24}}
+\newlabel{fig:curve-in-frenet}{{3.8}{44}{Curve in Frenet coordinate system.\relax }{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces A curve road in Frenet coordinate with waypoints.\relax }}{44}{figure.caption.25}}
+\newlabel{fig:curve-in-frenet-wp}{{3.9}{44}{A curve road in Frenet coordinate with waypoints.\relax }{figure.caption.25}{}}
+\newlabel{eq:math-in-frenet}{{3.1}{44}{Frenet Coordinates}{equation.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.10}{\ignorespaces Comparison display in Frenet and Cartesian coordinate systems.\relax }}{45}{figure.caption.26}}
+\newlabel{fig:frenet-final}{{3.10}{45}{Comparison display in Frenet and Cartesian coordinate systems.\relax }{figure.caption.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.2.3}{Reference path generation}}{45}{subsection.3.2.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Vehicle localization on the center line. (a) Center waypoints and center line segments, (b) localization on the center line.\relax }}{46}{figure.caption.27}}
+\newlabel{fig:loc-line}{{3.11}{46}{Vehicle localization on the center line. (a) Center waypoints and center line segments, (b) localization on the center line.\relax }{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Path Flowing}}{47}{section.3.3}}
+\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Drive By Wire}}{47}{section.3.4}}
+\@writefile{toc}{\contentsline {section}{\tocsection {}{}{Experiment}}{48}{section.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.5.1}{Lane Keep}}{48}{subsection.3.5.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.12}{\ignorespaces Comparison display in Frenet and Cartesian coordinate systems.\relax }}{48}{figure.caption.28}}
+\newlabel{fig:lane-keep}{{3.12}{48}{Comparison display in Frenet and Cartesian coordinate systems.\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\tocsubsection {}{3.5.2}{Lane Change}}{48}{subsection.3.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.13}{\ignorespaces Comparison display in Frenet and Cartesian coordinate systems.\relax }}{48}{figure.caption.29}}
+\newlabel{fig:lane-change}{{3.13}{48}{Comparison display in Frenet and Cartesian coordinate systems.\relax }{figure.caption.29}{}}
 \@setckpt{content/03-SystemDesign}{
-\setcounter{page}{43}
-\setcounter{equation}{0}
-\setcounter{enumi}{0}
+\setcounter{page}{49}
+\setcounter{equation}{1}
+\setcounter{enumi}{3}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
 \setcounter{footnote}{0}
 \setcounter{mpfootnote}{0}
-\setcounter{parentequation}{0}
+\setcounter{parentequation}{1}
 \setcounter{part}{0}
 \setcounter{chapter}{3}
-\setcounter{section}{3}
+\setcounter{section}{5}
 \setcounter{subsection}{2}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{8}
+\setcounter{figure}{13}
 \setcounter{table}{0}
 \setcounter{NAT@ctr}{0}
-\setcounter{Item}{0}
+\setcounter{Item}{3}
 \setcounter{Hfootnote}{1}
-\setcounter{bookmark@seq@number}{19}
+\setcounter{bookmark@seq@number}{21}
 \setcounter{ContinuedFloat}{0}
 \setcounter{KVtest}{0}
 \setcounter{subfigure}{0}
@@ -57,6 +83,6 @@
 \setcounter{LT@chunks}{0}
 \setcounter{AM@survey}{0}
 \setcounter{lstnumber}{13}
-\setcounter{section@level}{3}
+\setcounter{section@level}{2}
 \setcounter{lstlisting}{0}
 }

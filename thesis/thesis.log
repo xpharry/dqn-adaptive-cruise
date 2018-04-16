@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  11 APR 2018 19:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  16 APR 2018 19:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -18,6 +18,7 @@ Document Class: CWRU-Thesis 2006/05/09 v1.0 Frank Ernst
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 
+Pass to amsbook.cls: tikz
 Pass to amsbook.cls: 12pt
 Pass to amsbook.cls: onepage
 Pass to amsbook.cls: reqno
@@ -670,95 +671,97 @@ Package: ulem 2012/05/18
 )
 
 LaTeX Warning: Unused global option(s):
-    [help,onepage].
+    [tikz,help,onepage].
 
-(./thesis.aux (./content/01-Introduction.aux) (./content/02-Simulation.aux)
-(./content/03-SystemDesign.aux) (./content/04-DeepReinforcementLearning.aux)
+(./thesis.aux (./content/01-Introduction.aux) (./content/02-Simulation.aux
+
+LaTeX Warning: Label `fig:pr2' multiply defined.
+
+) (./content/03-SystemDesign.aux) (./content/04-DeepReinforcementLearning.aux)
 (./content/05-Results.aux) (./content/06-Conclusion.aux)
-(./content/07-Futurework.aux) (./app/app_pprofile.aux) (./app/app_specimens.aux
-) (./app/app_thesis_prep.aux) (./app/app_figs.aux))
+(./content/07-Futurework.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 158.
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 158.
-LaTeX Font Info:    Try loading font information for FML+futm on input line 158
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 160.
+LaTeX Font Info:    Try loading font information for FML+futm on input line 160
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 158.
-LaTeX Font Info:    Try loading font information for FMS+futm on input line 158
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 160.
+LaTeX Font Info:    Try loading font information for FMS+futm on input line 160
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 158.
-LaTeX Font Info:    Try loading font information for FMX+futm on input line 158
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 160.
+LaTeX Font Info:    Try loading font information for FMX+futm on input line 160
 .
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 158.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 158.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 160.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 160.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 158.
-LaTeX Font Info:    Try loading font information for T1+futs on input line 158.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Try loading font information for T1+futs on input line 160.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/t1futs.fd
 File: t1futs.fd 2004/03/02 Fontinst v1.926 font definitions for T1/futs.
 )
-LaTeX Font Info:    Try loading font information for FML+futmi on input line 15
-8.
+LaTeX Font Info:    Try loading font information for FML+futmi on input line 16
+0.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/fourier/fmlfutmi.fd
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 158.
+(Font)              scaled to size 9.19998pt on input line 160.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 158.
+(Font)              scaled to size 6.99199pt on input line 160.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 158.
-LaTeX Font Info:    Try loading font information for U+msa on input line 158.
+(Font)              scaled to size 5.51999pt on input line 160.
+LaTeX Font Info:    Try loading font information for U+msa on input line 160.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 158.
+LaTeX Font Info:    Try loading font information for U+msb on input line 160.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 158.
+(Font)              scaled to size 9.19998pt on input line 160.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 158.
+(Font)              scaled to size 6.99199pt on input line 160.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 158.
+(Font)              scaled to size 5.51999pt on input line 160.
 
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -790,7 +793,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box43
-Package hyperref Info: Link coloring ON on input line 158.
+Package hyperref Info: Link coloring ON on input line 160.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -800,9 +803,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count146
 )
-LaTeX Info: Redefining \ref on input line 158.
-LaTeX Info: Redefining \pageref on input line 158.
-LaTeX Info: Redefining \nameref on input line 158.
+LaTeX Info: Redefining \ref on input line 160.
+LaTeX Info: Redefining \pageref on input line 160.
+LaTeX Info: Redefining \nameref on input line 160.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write3
@@ -821,46 +824,46 @@ Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count147
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 163.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 165.
  [1
 
 
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 179.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 181.
 
 
-Package xcolor Warning: Incompatible color definition on input line 179.
+Package xcolor Warning: Incompatible color definition on input line 181.
 
 [2]
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 189.
+(Font)              scaled to size 11.03998pt on input line 191.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 189.
+(Font)              scaled to size 8.27998pt on input line 191.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 189.
+(Font)              scaled to size 6.43999pt on input line 191.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 189.
+(Font)              scaled to size 11.03998pt on input line 191.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 189.
+(Font)              scaled to size 8.27998pt on input line 191.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 189.
+(Font)              scaled to size 6.43999pt on input line 191.
 
-Overfull \hbox (28.0pt too wide) in paragraph at lines 189--189
+Overfull \hbox (28.0pt too wide) in paragraph at lines 191--191
 [][] 
  []
 
 [3]
 Table of Contents
-LaTeX Font Info:    Try loading font information for T1+pag on input line 196.
+LaTeX Font Info:    Try loading font information for T1+pag on input line 198.
 (/usr/local/texlive/2017/texmf-dist/tex/latex/psnfss/t1pag.fd
 File: t1pag.fd 2001/06/04 font definitions for T1/pag.
 )
 LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/pag/b/n' tried instead on input line 196.
+(Font)              Font shape `T1/pag/b/n' tried instead on input line 198.
 LaTeX Font Info:    Font shape `T1/pag/b/n' in size <14.4> not available
-(Font)              Font shape `T1/pag/db/n' tried instead on input line 196.
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 198.
  (./thesis.toc
 
 Package xcolor Warning: Incompatible color definition on input line 1.
@@ -899,26 +902,38 @@ Package xcolor Warning: Incompatible color definition on input line 11.
 Package xcolor Warning: Incompatible color definition on input line 12.
 
 
-Package xcolor Warning: Incompatible color definition on input line 16.
+Package xcolor Warning: Incompatible color definition on input line 17.
 
 
-Package xcolor Warning: Incompatible color definition on input line 22.
+Package xcolor Warning: Incompatible color definition on input line 23.
 
 
-Package xcolor Warning: Incompatible color definition on input line 26.
+Package xcolor Warning: Incompatible color definition on input line 27.
 
 
-Package xcolor Warning: Incompatible color definition on input line 34.
+Package xcolor Warning: Incompatible color definition on input line 31.
+
+
+Package xcolor Warning: Incompatible color definition on input line 32.
 
 
 Package xcolor Warning: Incompatible color definition on input line 35.
 
 
-Package xcolor Warning: Incompatible color definition on input line 37.
+Package xcolor Warning: Incompatible color definition on input line 40.
+
+
+Package xcolor Warning: Incompatible color definition on input line 41.
 
 
 Package xcolor Warning: Incompatible color definition on input line 42.
 
+
+Package xcolor Warning: Incompatible color definition on input line 45.
+
+[4
+
+]
 
 Package xcolor Warning: Incompatible color definition on input line 46.
 
@@ -926,19 +941,13 @@ Package xcolor Warning: Incompatible color definition on input line 46.
 Package xcolor Warning: Incompatible color definition on input line 47.
 
 
-Underfull \vbox (badness 3826) has occurred while \output is active []
-
- [4
-
-]
-
 Package xcolor Warning: Incompatible color definition on input line 48.
 
 
 Package xcolor Warning: Incompatible color definition on input line 49.
 
 
-Package xcolor Warning: Incompatible color definition on input line 54.
+Package xcolor Warning: Incompatible color definition on input line 50.
 
 
 Package xcolor Warning: Incompatible color definition on input line 55.
@@ -953,10 +962,16 @@ Package xcolor Warning: Incompatible color definition on input line 57.
 Package xcolor Warning: Incompatible color definition on input line 58.
 
 
-Package xcolor Warning: Incompatible color definition on input line 59.
+Package xcolor Warning: Incompatible color definition on input line 61.
 
 
-Package xcolor Warning: Incompatible color definition on input line 60.
+Package xcolor Warning: Incompatible color definition on input line 62.
+
+
+Package xcolor Warning: Incompatible color definition on input line 63.
+
+
+Package xcolor Warning: Incompatible color definition on input line 64.
 
 
 Package xcolor Warning: Incompatible color definition on input line 65.
@@ -965,19 +980,10 @@ Package xcolor Warning: Incompatible color definition on input line 65.
 Package xcolor Warning: Incompatible color definition on input line 66.
 
 
-Package xcolor Warning: Incompatible color definition on input line 67.
-
-
-Package xcolor Warning: Incompatible color definition on input line 68.
-
-
 Package xcolor Warning: Incompatible color definition on input line 69.
 
 
 Package xcolor Warning: Incompatible color definition on input line 70.
-
-
-Package xcolor Warning: Incompatible color definition on input line 71.
 
 )
 \tf@toc=\write4
@@ -1023,6 +1029,9 @@ Package xcolor Warning: Incompatible color definition on input line 9.
 Package xcolor Warning: Incompatible color definition on input line 10.
 
 
+Package xcolor Warning: Incompatible color definition on input line 11.
+
+
 Package xcolor Warning: Incompatible color definition on input line 12.
 
 
@@ -1035,9 +1044,6 @@ Package xcolor Warning: Incompatible color definition on input line 14.
 Package xcolor Warning: Incompatible color definition on input line 15.
 
 
-Package xcolor Warning: Incompatible color definition on input line 16.
-
-
 Package xcolor Warning: Incompatible color definition on input line 17.
 
 
@@ -1047,27 +1053,73 @@ Package xcolor Warning: Incompatible color definition on input line 18.
 Package xcolor Warning: Incompatible color definition on input line 19.
 
 
+Package xcolor Warning: Incompatible color definition on input line 20.
+
+
 Package xcolor Warning: Incompatible color definition on input line 21.
 
 
 Package xcolor Warning: Incompatible color definition on input line 22.
 
 
+Package xcolor Warning: Incompatible color definition on input line 23.
+
+
 Package xcolor Warning: Incompatible color definition on input line 24.
+
+
+Package xcolor Warning: Incompatible color definition on input line 25.
+
+
+Package xcolor Warning: Incompatible color definition on input line 26.
+
+[7
+
+]
+
+Package xcolor Warning: Incompatible color definition on input line 27.
+
+
+Package xcolor Warning: Incompatible color definition on input line 28.
+
+
+Package xcolor Warning: Incompatible color definition on input line 29.
+
+
+Package xcolor Warning: Incompatible color definition on input line 31.
+
+
+Package xcolor Warning: Incompatible color definition on input line 32.
+
+
+Package xcolor Warning: Incompatible color definition on input line 33.
+
+
+Package xcolor Warning: Incompatible color definition on input line 35.
+
+
+Package xcolor Warning: Incompatible color definition on input line 36.
+
+
+Package xcolor Warning: Incompatible color definition on input line 37.
+
+
+Package xcolor Warning: Incompatible color definition on input line 38.
+
+
+Package xcolor Warning: Incompatible color definition on input line 39.
 
 )
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
- [7
-
-]
+ [8]
 Acknowledgements
-(./content/00-Acknowledgements.tex) [8
+(./content/00-Acknowledgements.tex) [9
 
 ]
 Abstract
-(./content/00-Abstract.tex [9
+(./content/00-Abstract.tex [10
 
 ])
 \openout2 = `content/01-Introduction.aux'.
@@ -1081,19 +1133,30 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-[2]
-<figs/ch1/Reinforcement_learning_diagram.png, id=286, 796.9775pt x 770.88pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2]
+Overfull \hbox (4.97762pt too wide) in paragraph at lines 26--27
+\T1/futs/m/n/12 The com-pany Deep-Mind com-bined deep learn-ing with re-in-forc
+e-ment learn-ing to achieve
+ []
+
+[3]
+<figs/ch1/Reinforcement_learning_diagram.png, id=341, 796.9775pt x 770.88pt>
 File: figs/ch1/Reinforcement_learning_diagram.png Graphic file (type png)
 
 <use figs/ch1/Reinforcement_learning_diagram.png>
 Package pdftex.def Info: figs/ch1/Reinforcement_learning_diagram.png used on in
-put line 27.
+put line 37.
 (pdftex.def)             Requested size: 216.81pt x 209.70482pt.
- [3 <./figs/ch1/Reinforcement_learning_diagram.png>]
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [4]
-Overfull \hbox (18.67151pt too wide) in paragraph at lines 42--43
+ [4 <./figs/ch1/Reinforcement_learning_diagram.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+Overfull \hbox (18.67151pt too wide) in paragraph at lines 52--53
 []\T1/futs/m/n/12 Regarding the re-in-force-ment learn-ing in a ve-hi-cle co-or
 -di-na-tion prob-lem, Un-sal, Kachroo
  []
@@ -1101,235 +1164,211 @@ Overfull \hbox (18.67151pt too wide) in paragraph at lines 42--43
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [6]
-[7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8]
+ [7]
+[8]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9])
-[10]
+ [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10])
+[11]
 \openout2 = `content/02-Simulation.aux'.
 
  (./content/02-Simulation.tex
 Chapter 2
+<figs/ch2/simulation-architecture.png, id=433, 390.45876pt x 402.50375pt>
+File: figs/ch2/simulation-architecture.png Graphic file (type png)
+
+<use figs/ch2/simulation-architecture.png>
+Package pdftex.def Info: figs/ch2/simulation-architecture.png used on input lin
+e 14.
+(pdftex.def)             Requested size: 303.53267pt x 312.90756pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11
+ [12
 
 
 
 ]
-LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <12> not available
-(Font)              Font shape `T1/pag/b/n' tried instead on input line 26.
-LaTeX Font Info:    Font shape `T1/pag/b/n' in size <12> not available
-(Font)              Font shape `T1/pag/db/n' tried instead on input line 26.
+Underfull \vbox (badness 4316) has occurred while \output is active []
 
-[12] [13] <figs/ch2/ros-pipeline.png, id=393, 565.11125pt x 667.49374pt>
+ [13 <./figs/ch2/simulation-architecture.png>] [14]
+LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <12> not available
+(Font)              Font shape `T1/pag/b/n' tried instead on input line 46.
+LaTeX Font Info:    Font shape `T1/pag/b/n' in size <12> not available
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 46.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15]
+<figs/ch2/ros-pipeline.png, id=462, 565.11125pt x 667.49374pt>
 File: figs/ch2/ros-pipeline.png Graphic file (type png)
 
 <use figs/ch2/ros-pipeline.png>
-Package pdftex.def Info: figs/ch2/ros-pipeline.png used on input line 45.
-(pdftex.def)             Requested size: 216.81pt x 256.0845pt.
-
-Underfull \vbox (badness 2556) has occurred while \output is active []
-
- [14 <./figs/ch2/ros-pipeline.png>] [15]
-<figs/ch2/osrf.jpeg, id=404, 622.325pt x 468.75125pt>
+Package pdftex.def Info: figs/ch2/ros-pipeline.png used on input line 58.
+(pdftex.def)             Requested size: 260.17464pt x 307.31566pt.
+ [16 <./figs/ch2/ros-pipeline.png>] [17]
+[18] <figs/ch2/osrf.jpeg, id=480, 622.325pt x 468.75125pt>
 File: figs/ch2/osrf.jpeg Graphic file (type jpg)
- <use figs/ch2/osrf.jpeg>
-Package pdftex.def Info: figs/ch2/osrf.jpeg used on input line 66.
-(pdftex.def)             Requested size: 216.81pt x 163.30722pt.
 
-[16 <./figs/ch2/osrf.jpeg>]
-Overfull \hbox (10.00739pt too wide) in paragraph at lines 102--103
-\T1/futs/m/n/12 Gazebo?s ar-chi-tec-ture has pro-gressed through a cou-ple it-e
+<use figs/ch2/osrf.jpeg>
+Package pdftex.def Info: figs/ch2/osrf.jpeg used on input line 95.
+(pdftex.def)             Requested size: 346.89731pt x 261.29012pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19]
+Overfull \hbox (6.80338pt too wide) in paragraph at lines 121--122
+\T1/futs/m/n/12 Gazebo's ar-chi-tec-ture has pro-gressed through a cou-ple it-e
 r-a-tions dur-ing which we learned
  []
 
 
-Underfull \vbox (badness 1728) has occurred while \output is active []
-
- [17]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18]
+ [20 <./figs/ch2/osrf.jpeg>]
+<figs/ch2/gazebo-structure.png, id=490, 799.98875pt x 569.12625pt>
+File: figs/ch2/gazebo-structure.png Graphic file (type png)
+
+<use figs/ch2/gazebo-structure.png>
+Package pdftex.def Info: figs/ch2/gazebo-structure.png used on input line 125.
+(pdftex.def)             Requested size: 346.89731pt x 246.78635pt.
+ [21 <./figs/ch2/gazebo-structure.png>]
+[22]
+Overfull \hbox (9.66238pt too wide) in paragraph at lines 142--143
+[]\T1/futs/m/n/12 GLUT is a sim-ple win-dow sys-tem in-de-pen-dent toolkit for 
+OpenGL ap-pli-ca-tions. Scenes
+ []
+
+
+Underfull \vbox (badness 6268) has occurred while \output is active []
+
+ [23]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [19]
+ [24]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [20]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [25]
+[26] <figs/ch2/toolkit-of-openaigym.png, id=523, 564.1075pt x 430.60875pt>
+File: figs/ch2/toolkit-of-openaigym.png Graphic file (type png)
 
- [21]
-<figs/ch2/mkz-cover.png, id=431, 674.52pt x 462.72874pt>
+<use figs/ch2/toolkit-of-openaigym.png>
+Package pdftex.def Info: figs/ch2/toolkit-of-openaigym.png used on input line 1
+95.
+(pdftex.def)             Requested size: 346.89731pt x 264.80637pt.
+ [27]
+Overfull \hbox (10.19833pt too wide) in paragraph at lines 200--201
+[]\T1/futs/m/n/12 The ar-chi-tec-ture con-sists of three main soft-ware blocks:
+ Ope-nAI Gym, ROS and Gazebo
+ []
+
+<figs/ch2/cartpole-epoch-1200.png, id=532, 462.528pt x 346.896pt>
+File: figs/ch2/cartpole-epoch-1200.png Graphic file (type png)
+
+<use figs/ch2/cartpole-epoch-1200.png>
+Package pdftex.def Info: figs/ch2/cartpole-epoch-1200.png used on input line 20
+8.
+(pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
+ [28 <./figs/ch2/toolkit-of-openaigym.png>]
+File: figs/ch2/cartpole-epoch-1200.png Graphic file (type png)
+ <use figs/ch2/cartpole-epoch-1200.png>
+Package pdftex.def Info: figs/ch2/cartpole-epoch-1200.png used on input line 21
+5.
+(pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[29 <./figs/ch2/cartpole-epoch-1200.png>]
+File: figs/ch2/cartpole-epoch-1200.png Graphic file (type png)
+
+<use figs/ch2/cartpole-epoch-1200.png>
+Package pdftex.def Info: figs/ch2/cartpole-epoch-1200.png used on input line 24
+5.
+(pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figs/ch2/mkz-cover.png, id=547, 674.52pt x 462.72874pt>
 File: figs/ch2/mkz-cover.png Graphic file (type png)
 
 <use figs/ch2/mkz-cover.png>
-Package pdftex.def Info: figs/ch2/mkz-cover.png used on input line 147.
-(pdftex.def)             Requested size: 216.81pt x 148.73286pt.
-
-<figs/ch2/mkz-model.png, id=432, 432.61626pt x 255.95625pt>
+Package pdftex.def Info: figs/ch2/mkz-cover.png used on input line 259.
+(pdftex.def)             Requested size: 303.53267pt x 208.22601pt.
+ [30]
+<figs/ch2/mkz-model.png, id=554, 432.61626pt x 255.95625pt>
 File: figs/ch2/mkz-model.png Graphic file (type png)
 
 <use figs/ch2/mkz-model.png>
-Package pdftex.def Info: figs/ch2/mkz-model.png used on input line 157.
+Package pdftex.def Info: figs/ch2/mkz-model.png used on input line 270.
 (pdftex.def)             Requested size: 195.12767pt x 115.44481pt.
 
-<figs/ch2/mkz-tf-tree.png, id=433, 393.47pt x 255.95625pt>
+<figs/ch2/mkz-tf-tree.png, id=555, 393.47pt x 255.95625pt>
 File: figs/ch2/mkz-tf-tree.png Graphic file (type png)
 
 <use figs/ch2/mkz-tf-tree.png>
-Package pdftex.def Info: figs/ch2/mkz-tf-tree.png used on input line 162.
+Package pdftex.def Info: figs/ch2/mkz-tf-tree.png used on input line 275.
 (pdftex.def)             Requested size: 177.78578pt x 115.6479pt.
+ [31 <./figs/ch2/mkz-cover.png>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[22 <./figs/ch2/mkz-cover.png>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+[32 <./figs/ch2/mkz-model.png> <./figs/ch2/mkz-tf-tree.png>]
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-) [23 <./figs/ch2/mkz-model.png> <./figs/ch2/mkz-tf-tree.png>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 240.
+)
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 353.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-Overfull \hbox (8.60294pt too wide) in paragraph at lines 255--256
+) [33]
+Overfull \hbox (8.60294pt too wide) in paragraph at lines 368--369
 []\T1/futs/m/n/12 This would spawn two ve-hi-cles: one red 2017 MKZ with model 
 name ve-hi-cle1 spawned
  []
 
-[24] <figs/ch2/toolkit-of-openaigym.png, id=468, 564.1075pt x 430.60875pt>
-File: figs/ch2/toolkit-of-openaigym.png Graphic file (type png)
-
-<use figs/ch2/toolkit-of-openaigym.png>
-Package pdftex.def Info: figs/ch2/toolkit-of-openaigym.png used on input line 2
-65.
-(pdftex.def)             Requested size: 216.81pt x 165.49905pt.
- [25 <./figs/ch2/toolkit-of-openaigym.png>]
-Underfull \vbox (badness 6268) has occurred while \output is active []
-
- [26]
-[27]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28])
-[29]
+) [34]
 \openout2 = `content/03-SystemDesign.aux'.
 
  (./content/03-SystemDesign.tex
 Chapter 3
+<figs/ch3/standard-architecture.png, id=598, 416.55624pt x 441.65pt>
+File: figs/ch3/standard-architecture.png Graphic file (type png)
 
-Overfull \hbox (5.73552pt too wide) in paragraph at lines 13--14
-\T1/futs/m/n/12 pre-vi-ous sec-tion: learning-by-demonstration, which is able t
-o gen-er-ate com-mands which
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [30
+<use figs/ch3/standard-architecture.png>
+Package pdftex.def Info: figs/ch3/standard-architecture.png used on input line 
+9.
+(pdftex.def)             Requested size: 216.81pt x 229.87495pt.
+ [35
 
 
 
-]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [31]
-<figs/ch3/architecture.png, id=502, 392.46625pt x 522.95375pt>
+ <./figs/ch3/standard-architecture.png>] <figs/ch3/architecture.png, id=610, 39
+2.46625pt x 522.95375pt>
 File: figs/ch3/architecture.png Graphic file (type png)
 
 <use figs/ch3/architecture.png>
-Package pdftex.def Info: figs/ch3/architecture.png used on input line 24.
+Package pdftex.def Info: figs/ch3/architecture.png used on input line 26.
 (pdftex.def)             Requested size: 216.81pt x 288.90219pt.
- [32 <./figs/ch3/architecture.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [33]
-<figs/ch3/frenet-1.png, id=513, 357.335pt x 525.965pt>
-File: figs/ch3/frenet-1.png Graphic file (type png)
-
-<use figs/ch3/frenet-1.png>
-Package pdftex.def Info: figs/ch3/frenet-1.png used on input line 52.
-(pdftex.def)             Requested size: 216.81pt x 319.12872pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figs/ch3/frenet-2.png, id=514, 346.29375pt x 506.89375pt>
-File: figs/ch3/frenet-2.png Graphic file (type png)
-
-<use figs/ch3/frenet-2.png>
-Package pdftex.def Info: figs/ch3/frenet-2.png used on input line 60.
-(pdftex.def)             Requested size: 216.81pt x 317.3647pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figs/ch3/frenet-3.png, id=515, 265.99374pt x 502.87875pt>
-File: figs/ch3/frenet-3.png Graphic file (type png)
-
-<use figs/ch3/frenet-3.png>
-Package pdftex.def Info: figs/ch3/frenet-3.png used on input line 66.
-(pdftex.def)             Requested size: 216.81pt x 409.90012pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figs/ch3/frenet-4.png, id=516, 386.44376pt x 504.88625pt>
-File: figs/ch3/frenet-4.png Graphic file (type png)
-
-<use figs/ch3/frenet-4.png>
-Package pdftex.def Info: figs/ch3/frenet-4.png used on input line 77.
-(pdftex.def)             Requested size: 216.81pt x 283.25822pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 6268) has occurred while \output is active []
-
- [34]
-<figs/ch3/frenet-5.png, id=523, 383.4325pt x 495.8525pt>
-File: figs/ch3/frenet-5.png Graphic file (type png)
-
-<use figs/ch3/frenet-5.png>
-Package pdftex.def Info: figs/ch3/frenet-5.png used on input line 86.
-(pdftex.def)             Requested size: 216.81pt x 280.38417pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figs/ch3/frenet-6.png, id=524, 266.9975pt x 480.79625pt>
-File: figs/ch3/frenet-6.png Graphic file (type png)
-
-<use figs/ch3/frenet-6.png>
-Package pdftex.def Info: figs/ch3/frenet-6.png used on input line 92.
-(pdftex.def)             Requested size: 216.81pt x 390.43323pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figs/ch3/frenet-7.png, id=525, 728.7225pt x 492.84125pt>
-File: figs/ch3/frenet-7.png Graphic file (type png)
-
-<use figs/ch3/frenet-7.png>
-Package pdftex.def Info: figs/ch3/frenet-7.png used on input line 103.
-(pdftex.def)             Requested size: 216.81pt x 146.62772pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1337,41 +1376,187 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35 <./figs/ch3/frenet-1.png>] [36 <./figs/ch3/frenet-2.png>] [37 <./figs/ch3/
-frenet-3.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [36]
+[37 <./figs/ch3/architecture.png>] [38]
+<figs/ch3/state-machine.png, id=627, 402.50375pt x 422.57875pt>
+File: figs/ch3/state-machine.png Graphic file (type png)
 
- [38 <./figs/ch3/frenet-4.png>] [39 <./figs/ch3/frenet-5.png>] [40 <./figs/ch3/
-frenet-6.png>] [41 <./figs/ch3/frenet-7.png>]
-Overfull \hbox (21.2899pt too wide) in paragraph at lines 159--161
-[]\T1/futs/m/n/12 3) Steer-ing Con-troller ($\FML/futmi/m/it/12 yaw[]ontroller:
-py$\T1/futs/m/n/12 ) The steer-ing con-troller cal-cu-lates the amount
+<use figs/ch3/state-machine.png>
+Package pdftex.def Info: figs/ch3/state-machine.png used on input line 69.
+(pdftex.def)             Requested size: 303.53267pt x 318.6678pt.
+ [39 <./figs/ch3/state-machine.png>]
+Overfull \hbox (1.87837pt too wide) in paragraph at lines 79--80
+[]\T1/futs/b/n/12 More re-li-able: \T1/futs/m/n/12 A well-calibrated FSM is usu
+-ally more re-li-able, com-pared to some
  []
 
-) [42]
+<figs/ch3/center-line.png, id=636, 462.72874pt x 378.41376pt>
+File: figs/ch3/center-line.png Graphic file (type png)
+
+<use figs/ch3/center-line.png>
+Package pdftex.def Info: figs/ch3/center-line.png used on input line 91.
+(pdftex.def)             Requested size: 216.81pt x 177.30594pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[40] [41 <./figs/ch3/center-line.png>]
+<figs/ch3/traj-generation.png, id=653, 496.85625pt x 308.15125pt>
+File: figs/ch3/traj-generation.png Graphic file (type png)
+
+<use figs/ch3/traj-generation.png>
+Package pdftex.def Info: figs/ch3/traj-generation.png used on input line 104.
+(pdftex.def)             Requested size: 216.81pt x 134.46788pt.
+
+<figs/ch3/curve-in-cartesian.png, id=655, 357.335pt x 525.965pt>
+File: figs/ch3/curve-in-cartesian.png Graphic file (type png)
+
+<use figs/ch3/curve-in-cartesian.png>
+Package pdftex.def Info: figs/ch3/curve-in-cartesian.png used on input line 116
+.
+(pdftex.def)             Requested size: 108.405pt x 159.56436pt.
+ [42 <./figs/ch3/traj-generation.png>]
+<figs/ch3/curve-in-cartesian-with-waypoints.png, id=664, 346.29375pt x 506.8937
+5pt>
+File: figs/ch3/curve-in-cartesian-with-waypoints.png Graphic file (type png)
+ <use figs/ch3/curve-in-cartesian-with-waypoints.png>
+Package pdftex.def Info: figs/ch3/curve-in-cartesian-with-waypoints.png used on
+ input line 127.
+(pdftex.def)             Requested size: 118.49393pt x 173.44756pt.
+
+<figs/ch3/waypoints-in-cartesian.png, id=665, 265.99374pt x 502.87875pt>
+File: figs/ch3/waypoints-in-cartesian.png Graphic file (type png)
+
+<use figs/ch3/waypoints-in-cartesian.png>
+Package pdftex.def Info: figs/ch3/waypoints-in-cartesian.png used on input line
+ 132.
+(pdftex.def)             Requested size: 91.74358pt x 173.44756pt.
+
+Overfull \hbox (1.884pt too wide) in paragraph at lines 125--134
+ []$[]$ $[]$ 
+ []
+
+<figs/ch3/curve-in-frenet.png, id=667, 386.44376pt x 504.88625pt>
+File: figs/ch3/curve-in-frenet.png Graphic file (type png)
+
+<use figs/ch3/curve-in-frenet.png>
+Package pdftex.def Info: figs/ch3/curve-in-frenet.png used on input line 142.
+(pdftex.def)             Requested size: 108.405pt x 141.6291pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[43 <./figs/ch3/curve-in-cartesian.png> <./figs/ch3/curve-in-cartesian-with-way
+points.png> <./figs/ch3/waypoints-in-cartesian.png>]
+<figs/ch3/curve-in-frenet-with-waypoints.png, id=676, 383.4325pt x 495.8525pt>
+File: figs/ch3/curve-in-frenet-with-waypoints.png Graphic file (type png)
+
+<use figs/ch3/curve-in-frenet-with-waypoints.png>
+Package pdftex.def Info: figs/ch3/curve-in-frenet-with-waypoints.png used on in
+put line 153.
+(pdftex.def)             Requested size: 134.12148pt x 173.44756pt.
+
+<figs/ch3/waypoints-in-frenet.png, id=677, 266.9975pt x 480.79625pt>
+File: figs/ch3/waypoints-in-frenet.png Graphic file (type png)
+
+<use figs/ch3/waypoints-in-frenet.png>
+Package pdftex.def Info: figs/ch3/waypoints-in-frenet.png used on input line 15
+8.
+(pdftex.def)             Requested size: 96.31863pt x 173.44756pt.
+
+Overfull \hbox (1.884pt too wide) in paragraph at lines 151--160
+ []$[]$ $[]$ 
+ []
+
+[44 <./figs/ch3/curve-in-frenet.png> <./figs/ch3/curve-in-frenet-with-waypoints
+.png> <./figs/ch3/waypoints-in-frenet.png>]
+<figs/ch3/frenet-final.png, id=686, 728.7225pt x 492.84125pt>
+File: figs/ch3/frenet-final.png Graphic file (type png)
+
+<use figs/ch3/frenet-final.png>
+Package pdftex.def Info: figs/ch3/frenet-final.png used on input line 175.
+(pdftex.def)             Requested size: 299.2118pt x 202.35622pt.
+
+<figs/ch3/location-on-center-line.png, id=687, 595.22375pt x 550.055pt>
+File: figs/ch3/location-on-center-line.png Graphic file (type png)
+
+<use figs/ch3/location-on-center-line.png>
+Package pdftex.def Info: figs/ch3/location-on-center-line.png used on input lin
+e 190.
+(pdftex.def)             Requested size: 218.96689pt x 202.35622pt.
+ [45 <./figs/ch3/frenet-final.png>]
+[46 <./figs/ch3/location-on-center-line.png>]
+File: figs/ch3/frenet-final.png Graphic file (type png)
+ <use figs/ch3/frenet-final.png>
+Package pdftex.def Info: figs/ch3/frenet-final.png used on input line 220.
+(pdftex.def)             Requested size: 299.2118pt x 202.35622pt.
+
+Underfull \vbox (badness 1502) has occurred while \output is active []
+
+ [47]
+File: figs/ch3/frenet-final.png Graphic file (type png)
+
+<use figs/ch3/frenet-final.png>
+Package pdftex.def Info: figs/ch3/frenet-final.png used on input line 229.
+(pdftex.def)             Requested size: 299.2118pt x 202.35622pt.
+) [48]
 \openout2 = `content/04-DeepReinforcementLearning.aux'.
 
- (./content/04-DeepReinforcementLearning.tex
+
+(./content/04-DeepReinforcementLearning.tex
 Chapter 4
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 6910) has occurred while \output is active []
 
- [43
+ [49
 
 
 
 ]
-<figs/ch4/Highway-Display.png, id=577, 773.89125pt x 395.4775pt>
+<figs/ch4/Highway-Display.png, id=718, 773.89125pt x 395.4775pt>
 File: figs/ch4/Highway-Display.png Graphic file (type png)
 
 <use figs/ch4/Highway-Display.png>
-Package pdftex.def Info: figs/ch4/Highway-Display.png used on input line 25.
+Package pdftex.def Info: figs/ch4/Highway-Display.png used on input line 27.
 (pdftex.def)             Requested size: 216.81pt x 110.79329pt.
- [44 <./figs/ch4/Highway-Display.png>]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [45]
-Overfull \hbox (6.661pt too wide) in paragraph at lines 65--66
+ [50]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [51 <./figs/ch4/Highway-Display.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [52]
+Overfull \hbox (6.26294pt too wide) in paragraph at lines 45--46
+[]\T1/futs/m/n/12 Those el-e-ments were put to-gether in a RL frame-work, and t
+he pol-icy ob-tained, learned
+ []
+
+<figs/ch4/acc-drl.png, id=733, 733.74126pt x 472.76625pt>
+File: figs/ch4/acc-drl.png Graphic file (type png)
+
+<use figs/ch4/acc-drl.png>
+Package pdftex.def Info: figs/ch4/acc-drl.png used on input line 49.
+(pdftex.def)             Requested size: 216.81pt x 139.69566pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53]
+[54 <./figs/ch4/acc-drl.png>]
+Underfull \vbox (badness 2443) has occurred while \output is active []
+
+ [55]
+Overfull \hbox (6.661pt too wide) in paragraph at lines 98--99
 []\T1/futs/m/n/12 For bet-ter con-ver-gence of the DQN, in-stead of es-ti-mat-i
 ng both $\FML/futmi/m/it/12 q\T1/futs/m/n/12 (\FML/futmi/m/it/12 S[]; A[]\T1/fu
 ts/m/n/12 )$ and $\FML/futmi/m/it/12 q\T1/futs/m/n/12 (\FML/futmi/m/it/12 S[]; 
@@ -1381,68 +1566,124 @@ a[]\T1/futs/m/n/12 )$
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [46]
+ [56]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [47]
-[48]
-Underfull \vbox (badness 2384) has occurred while \output is active []
-
- [49]
-Underfull \vbox (badness 6268) has occurred while \output is active []
-
- [50]
+ [57]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [51]
+ [58]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [52]
-<figs/ch4/deepmind-atari-network.jpg, id=645, 640.3925pt x 480.79625pt>
+ [59]
+[60]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [61]
+[62] <figs/ch4/deepmind-atari-network.jpg, id=803, 640.3925pt x 480.79625pt>
 File: figs/ch4/deepmind-atari-network.jpg Graphic file (type jpg)
 
 <use figs/ch4/deepmind-atari-network.jpg>
 Package pdftex.def Info: figs/ch4/deepmind-atari-network.jpg used on input line
- 183.
+ 216.
 (pdftex.def)             Requested size: 216.81pt x 162.77159pt.
-) [53 <./figs/ch4/deepmind-atari-network.jpg>]
+) [63 <./figs/ch4/deepmind-atari-network.jpg>]
 \openout2 = `content/05-Results.aux'.
 
  (./content/05-Results.tex
 Chapter 5
-[54
+[64
 
 
 
-] [55] <figs/magic.png, id=658, 409.53pt x 409.53pt>
+] <figs/magic.png, id=813, 409.53pt x 409.53pt>
 File: figs/magic.png Graphic file (type png)
  <use figs/magic.png>
-Package pdftex.def Info: figs/magic.png used on input line 46.
-(pdftex.def)             Requested size: 216.81pt x 216.8124pt.
+Package pdftex.def Info: figs/magic.png used on input line 24.
+(pdftex.def)             Requested size: 433.62pt x 433.6498pt.
+
+[65 <./figs/magic.png>]
+<figs/ch5/agent1-reward-history-epoch-1000-a.png, id=818, 578.16pt x 433.62pt>
+File: figs/ch5/agent1-reward-history-epoch-1000-a.png Graphic file (type png)
+
+<use figs/ch5/agent1-reward-history-epoch-1000-a.png>
+Package pdftex.def Info: figs/ch5/agent1-reward-history-epoch-1000-a.png used o
+n input line 53.
+(pdftex.def)             Requested size: 433.62pt x 325.2142pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[56]
-Underfull \vbox (badness 7168) has occurred while \output is active []
 
- [57 <./figs/magic.png>]) [58]
+Overfull \hbox (6.87943pt too wide) in paragraph at lines 58--59
+[]\T1/futs/m/n/12 Fig. [][]5.2[][] pro-vides the plot of the to-tal ac-cu-mu-la
+ted re-wards i.e., value func-tion achieved
+ []
+
+File: figs/magic.png Graphic file (type png)
+<use figs/magic.png>
+Package pdftex.def Info: figs/magic.png used on input line 64.
+(pdftex.def)             Requested size: 216.81pt x 216.8124pt.
+ [66]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+<figs/ch5/agent1-reward-history-epoch-1000-b.png, id=826, 578.16pt x 433.62pt>
+File: figs/ch5/agent1-reward-history-epoch-1000-b.png Graphic file (type png)
+
+<use figs/ch5/agent1-reward-history-epoch-1000-b.png>
+Package pdftex.def Info: figs/ch5/agent1-reward-history-epoch-1000-b.png used o
+n input line 79.
+(pdftex.def)             Requested size: 433.62pt x 325.2142pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (6.87943pt too wide) in paragraph at lines 84--85
+[]\T1/futs/m/n/12 Fig. [][]5.4[][] pro-vides the plot of the to-tal ac-cu-mu-la
+ted re-wards i.e., value func-tion achieved
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [67 <./figs/ch5/agent1-reward-history-epoch-1000-a.png>] [68] [69 <./figs/ch5/
+agent1-reward-history-epoch-1000-b.png>]
+<figs/ch5/agent2-vehicle-reward-history-epoch-3000-std-track.png, id=844, 462.5
+28pt x 346.896pt>
+File: figs/ch5/agent2-vehicle-reward-history-epoch-3000-std-track.png Graphic f
+ile (type png)
+
+<use figs/ch5/agent2-vehicle-reward-history-epoch-3000-std-track.png>
+Package pdftex.def Info: figs/ch5/agent2-vehicle-reward-history-epoch-3000-std-
+track.png used on input line 111.
+(pdftex.def)             Requested size: 433.62pt x 325.23007pt.
+
+Overfull \hbox (6.87943pt too wide) in paragraph at lines 116--117
+[]\T1/futs/m/n/12 Fig. [][]5.5[][] pro-vides the plot of the to-tal ac-cu-mu-la
+ted re-wards i.e., value func-tion achieved
+ []
+
+[70 <./figs/ch5/agent2-vehicle-reward-history-epoch-3000-std-track.png>])
+[71]
 \openout2 = `content/06-Conclusion.aux'.
 
  (./content/06-Conclusion.tex
 Chapter 6
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1117) has occurred while \output is active []
 
- [59
+ [72
 
 
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [60])
-[61]
+ [73]
+[74]) [75]
 \openout2 = `content/07-Futurework.aux'.
 
  (./content/07-Futurework.tex
@@ -1450,123 +1691,64 @@ Chapter 7
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [62
+ [76
 
 
 
 ])
-[63]
-\openout2 = `app/app_pprofile.aux'.
-
- (./app/app_pprofile.texpdfTeX warning (ext4): destination with the same identi
-fier (name{chapter.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1 \chapter{Pprofile}
-                      
-Appendix A
-) [64
-
-
-
-]
-\openout2 = `app/app_specimens.aux'.
-
- (./app/app_specimens.texpdfTeX warning (ext4): destination with the same ident
-ifier (name{chapter.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1 \chapter{Specimens}
-                       
-Appendix B
-) [65
-
-
-
-]
-\openout2 = `app/app_thesis_prep.aux'.
-
- (./app/app_thesis_prep.texpdfTeX warning (ext4): destination with the same ide
-ntifier (name{chapter.3}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1 \chapter{Preparation of this document}
-                                          
-Appendix C
-
-Underfull \hbox (badness 10000) in paragraph at lines 5--12
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--15
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--20
-
- []
-
-) [66
-
-
-
-]
-\openout2 = `app/app_figs.aux'.
-
- (./app/app_figs.texpdfTeX warning (ext4): destination with the same identifier
- (name{chapter.4}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.1 \chapter{Figures}
-                     
-Appendix D
-) [67
-
-
-
-] (./thesis.bbl
-Complete References
+[77] (./thesis.bbl
+Bibliography
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [68
+ [78
 
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [69]
+ [79]
 Underfull \hbox (badness 2393) in paragraph at lines 179--184
 []\T1/futs/m/n/12 D. Dol-gov and E. H. Dur-fee. Graph-i-cal mod-els in lo-cal, 
 asym-met-ric multi-
  []
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 286.
- [70]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 286.
- (./thesis.aux (./content/01-Introduction.aux)
-(./content/02-Simulation.aux) (./content/03-SystemDesign.aux)
-(./content/04-DeepReinforcementLearning.aux) (./content/05-Results.aux)
-(./content/06-Conclusion.aux) (./content/07-Futurework.aux)
-(./app/app_pprofile.aux) (./app/app_specimens.aux) (./app/app_thesis_prep.aux)
-(./app/app_figs.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 286.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 286.
+
+Underfull \hbox (badness 4543) in paragraph at lines 209--213
+[]\T1/futs/m/n/12 M. Buehler K. Iag-nemma and S. Singh. |   []   |   []   |   [
+]   |   []   |   []
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [80])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 299.
+
+[81]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
+ (./thesis.aux (./content/01-Introduction.aux) (./content/02-Simulation.aux) (.
+/content/03-SystemDesign.aux) (./content/04-DeepReinforcementLearning.aux)
+(./content/05-Results.aux) (./content/06-Conclusion.aux)
+(./content/07-Futurework.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 5664FBD50C9A11FEA4B566EDD14487E5;2180.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 286.
+(rerunfilecheck)             Checksum: DC3AA051FB55D0D2C3829A916394A9E5;2381.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 299.
  ) 
 Here is how much of TeX's memory you used:
- 12344 strings out of 492995
- 180825 string characters out of 6132704
- 298317 words of memory out of 5000000
- 15164 multiletter control sequences out of 15000+600000
+ 12493 strings out of 492995
+ 184693 string characters out of 6132704
+ 298648 words of memory out of 5000000
+ 15274 multiletter control sequences out of 15000+600000
  94407 words of font info for 112 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 44i,11n,53p,1497b,1011s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,14n,53p,1497b,1778s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1584,10 +1766,10 @@ st/fonts/type1/adobe/utopia/putri8a.pfb></usr/local/texlive/2017/texmf-dist/fon
 ts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/urw/avantgar/uagd8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/
 urw/avantgar/uagk8a.pfb>
-Output written on thesis.pdf (79 pages, 1762113 bytes).
+Output written on thesis.pdf (91 pages, 2917844 bytes).
 PDF statistics:
- 824 PDF objects out of 1000 (max. 8388607)
- 691 compressed objects within 7 object streams
- 216 named destinations out of 1000 (max. 500000)
- 1923 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1008 PDF objects out of 1200 (max. 8388607)
+ 837 compressed objects within 9 object streams
+ 271 named destinations out of 1000 (max. 500000)
+ 1999 words of extra memory for PDF output out of 10000 (max. 10000000)
 

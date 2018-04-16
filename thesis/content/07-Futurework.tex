@@ -1,20 +1,20 @@
 \chapter{Future Work}
 
-Given this thesis mainly covers the basic Deep Q-Learning algorithm, it leaves plenty of room for further exploration into the fancier algorithm. The admin/base layer will need to prevent user interference and act as a ?final check? to algorithm and control commands that the user level wishes to execute. The user layer will need to allow users to integrate their computers, sensors, and other hardware into the user level and allow them to control their tests. A study on sensor fusion and techniques can be carried out to determine the optimal method for continuous integration and fusion of added LIDARs, radars, and other sensors. Development of a Hardware-In-the-Loop (HIL) simulation environment can greatly help to expedite testing and verification of researchers? tests before they are carried out.
+The main results of this paper show that a Deep Q-Network agent can be trained to make decisions in autonomous driving, without the need of any hand crafted features. The generality of the method was demonstrated by applying it to a highway environment with longitudinal motion control and combined longitudinal and lateral motion control. In both cases, the trained agents handled all episodes without collisions. % Another important conclusion is that, for the presented method, applying a CNN to high level input that represents interchangeable objects can both speed up the learning process and increase the performance of the trained agent.
+
+Topics for future work include to further analyze the generality of this method by applying it to other cases, such as crossings and roundabouts, and to systematically investigate the impact of different parameters and network architectures. Moreover, it would be interesting to apply prioritized experience replay [29], which is a method where important experiences are repeated more frequently during the training process. This could potentially improve and speed up the learning process.
 
 For future work on hardware, an analysis and testing of several different brands and models of LIDAR, radar, ultrasonic, and cameras can be carried out. This will further assist in determining what actual products will be adequate for the scope of the platform to be developed, particularly what is best to outfit the base sensor suite with. Research into developing a standard platform conversion kit that could be adaptable to a variety of autonomous base vehicles would be great for bringing research platform capability to those who want it.
 
-For an AVRP, technology will always be improving and the needs of the researcher will always be varying and changing. This in turn will require constant research and learning in order to keep the systems of an AVRP up to date and functional for its users.
+For an Autonomous Driving System, technology will always be improving and the needs of the researcher will always be varying and changing. This in turn will require constant research and learning in order to keep the systems of an Autonomous Driving System up to date and functional for its users.
 
-\section{Improvement}
-
-There are at least two aspects we can improve in the next stage,
+Besides, there are at least two aspects we can improve in the next stage,
 
 \begin{enumerate}
 
-    \item \textbf{Tuned Reward Functions:} In this thesis, the learning process is highly relying on the difenition of the reward function.
+    \item \textbf{Tuned Reward Functions:} In this thesis, the learning process is highly relying on the regulation of the reward function.
     
-    \item \textbf{Better benchmarks:} In most of this thesis we used simple benchmarks, such as playing against random players. While testing against random is probably the first thing to test against (if you can't beat a random player your learning algorithm is not working), it would be better to find a few heuristics and better players that can be used for testing.
+    \item \textbf{Better benchmarks:} In most of this thesis we used simple benchmarks, such as playing against random agents. While testing against random is probably the first thing to test against (if you can't beat a random player your learning algorithm is not working), it would be better to find a few heuristics and better players that can be used for testing.
 
     \item \textbf{Incorporate other RL techniques:} The field of RL has been advancing fast in recent years. There are a few new and old techniques that I would like to try, such as asynchronous RL, double Q-learning, prioritized experience replay and Asynchronous Actor-Critic Agents (A3C).
 
