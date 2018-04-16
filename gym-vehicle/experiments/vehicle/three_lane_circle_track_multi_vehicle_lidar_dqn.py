@@ -328,26 +328,26 @@ def clear_monitor_files(training_dir):
 
 if __name__ == '__main__':
 
-    env = gym.make('GazeboStandardTrackMultiVehicleLidarNn-v0')
+    env = gym.make('GazeboThreeLaneCircleTrackMultiVehicleLidarNn-v0')
     
-    outdir = '../../results/vehicle-standard/'
+    outdir = '../../results/vehicle-3lane-circle/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
     plotter = LivePlot(outdir)
 
-    continue_execution = False
+    continue_execution = True
     #fill this if continue_execution=True
 
-    weights_path = '../../saved_weights/multi_vehicle_track_dqn_ep200.h5'
-    monitor_path = '../../saved_weights/multi_vehicle_track_dqn_ep200'
-    params_json  = '../../saved_weights/multi_vehicle_track_dqn_ep200.json'
+    weights_path = '../../saved_weights/multi_vehicle_3lane_circle_track_dqn_ep1000.h5'
+    monitor_path = '../../saved_weights/multi_vehicle_3lane_circle_track_dqn_ep1000'
+    params_json  = '../../saved_weights/multi_vehicle_3lane_circle_track_dqn_ep1000.json'
 
     if not continue_execution:
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 10000
+        epochs = 2000
         steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -370,7 +370,7 @@ if __name__ == '__main__':
         #ADD TRY CATCH fro this else
         with open(params_json) as outfile:
             d = json.load(outfile)
-            epochs = d.get('epochs')
+            epochs = d.get('epochs') * 10
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
             explorationRate = d.get('explorationRate')
@@ -381,15 +381,15 @@ if __name__ == '__main__':
             memorySize = d.get('memorySize')
             network_inputs = d.get('network_inputs')
             network_outputs = d.get('network_outputs')
-            network_layers = d.get('network_structure')
+            network_structure = d.get('network_structure')
             current_epoch = d.get('current_epoch')
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
-        deepQ.initNetworks(network_layers)
+        deepQ.initNetworks(network_structure)
         deepQ.loadWeights(weights_path)
 
         clear_monitor_files(outdir)
-        copy_tree(monitor_path, outdir)
+        # copy_tree(monitor_path, outdir)
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
 
@@ -447,14 +447,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel('../../saved_weights/multi_vehicle_standard_track_dqn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel('../../saved_weights/multi_vehicle_3lane_circle_track_dqn_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
                         # copy_tree(outdir, '../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open('../../saved_weights/multi_vehicle_standard_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open('../../saved_weights/multi_vehicle_3lane_circle_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 
