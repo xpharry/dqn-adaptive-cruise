@@ -21,6 +21,7 @@ from keras.regularizers import l2
 import memory
 import matplotlib
 import matplotlib.pyplot as plt
+import itertools
 
 
 class LivePlot(object):
@@ -44,6 +45,11 @@ class LivePlot(object):
         plt.ylabel(data_key)
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
+    def expand(self, lst, n):
+        lst = [[i]*n for i in lst]
+        lst = list(itertools.chain.from_iterable(lst))
+        return lst
+
     def plot(self, reward):
         # results = monitoring.load_results(self.outdir)
         # print(results)
@@ -54,6 +60,17 @@ class LivePlot(object):
         # if data !=  self._last_data:
         self._last_data = data
         plt.plot(data, color=self.line_color)
+
+        avg_data = []
+        average = 10
+        for i, val in enumerate(data):
+            if i%average==0:
+                if (i+average) < len(data):
+                    avg =  sum(data[i:i+average])/average
+                    avg_data.append(avg)
+        new_data = self.expand(avg_data,average)
+        plt.plot(new_data, color='red', linewidth=2.5) 
+
 
         # pause so matplotlib will display
         # may want to figure out matplotlib animation or use a different library in the future
@@ -313,7 +330,7 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboStandardTrackMultiVehicleLidarNn-v0')
     
-    outdir = '../../results/vehicle/'
+    outdir = '../../results/vehicle-standard/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -330,8 +347,8 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 1000
-        steps = 10000
+        epochs = 10000
+        steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
         minibatch_size = 64
@@ -340,7 +357,7 @@ if __name__ == '__main__':
         discountFactor = 0.99
         memorySize = 1000000
         network_inputs = 17
-        network_outputs = 27
+        network_outputs = 15
         network_structure = [300, 300]
         current_epoch = 0
 
@@ -430,14 +447,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel('../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel('../../saved_weights/multi_vehicle_standard_track_dqn_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
-                        copy_tree(outdir, '../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch))
+                        # copy_tree(outdir, '../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open('../../saved_weights/multi_vehicle_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open('../../saved_weights/multi_vehicle_standard_track_dqn_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 
@@ -452,7 +469,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.995  # epsilon decay
+        explorationRate *= 0.999  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.05, explorationRate)
 

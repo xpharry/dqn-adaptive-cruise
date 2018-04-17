@@ -53,9 +53,21 @@ add_task(
 )
 
 add_task(
+    id='GazeboCircleTrackMultiVehicleLidarNn-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-cicle.',
+)
+
+add_task(
+    id='GazeboThreeLaneCircleTrackMultiVehicleLidarNn-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-cicle3.',
+)
+
+add_task(
     id='GazeboStandardTrackMultiVehicleLidarNn-v0',
     group='gym-vehicle',
-    summary='Test5.',
+    summary='Test-vehicle-standard.',
 )
 
 registry.finalize()

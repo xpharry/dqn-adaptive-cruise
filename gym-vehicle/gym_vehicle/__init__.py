@@ -28,6 +28,16 @@ register(
     # More arguments here
 )
 register(
+    id='GazeboCircleTrackMultiVehicleLidarNn-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircleTrackMultiVehicleLidarNnEnv',
+    # More arguments here
+)
+register(
+    id='GazeboThreeLaneCircleTrackMultiVehicleLidarNn-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboThreeLaneCircleTrackMultiVehicleLidarNnEnv',
+    # More arguments here
+)
+register(
     id='GazeboStandardTrackMultiVehicleLidarNn-v0',
     entry_point='gym_vehicle.envs.vehicle:GazeboStandardTrackMultiVehicleLidarNnEnv',
     # More arguments here
