@@ -478,10 +478,10 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
         # define initial pose for later use
         # ************************************************
         init_pose0 = Pose()
-        init_pose0.position.x = -30.0
-        init_pose0.position.y = -6.0
+        init_pose0.position.x = 79.2 
+        init_pose0.position.y = 36.6
         init_pose0.position.z = 0.0
-        quat0 = self.phi2quat(0.0)
+        quat0 = self.phi2quat(1.57)
         init_pose0.orientation = quat0
 
         init_pose1 = Pose()
@@ -499,10 +499,10 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
         init_pose2.orientation = quat2
 
         init_pose3 = Pose()
-        init_pose3.position.x = 79.2
-        init_pose3.position.y = 36.6
+        init_pose3.position.x = -30.0
+        init_pose3.position.y = -6.0
         init_pose3.position.z = 0.0
-        quat3 = self.phi2quat(math.pi/2)
+        quat3 = self.phi2quat(0.0)
         init_pose3.orientation = quat3
 
         init_pose4 = Pose()

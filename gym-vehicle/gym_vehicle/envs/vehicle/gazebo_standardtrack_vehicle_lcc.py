@@ -394,21 +394,17 @@ class GazeboStandardtrackVehiclLccEnv(gazebo_env.GazeboEnv):
         state, done = self.construct_state()
 
         # 27 actions
-        speed_cmd = self.speeds[0]
-        add_on = [+2.0, +1.0, 0, -1.0, -2.0]
+        speed_cmd = 15
         chang_lane_cmds = ["Left", "Keep", "Right"]
 
         # print("cmd_speed = %f" % cmd_speed)
-        speed_cmd = self.speed_saturate(speed_cmd + add_on[action%len(add_on)])
-        chang_lane_cmd = chang_lane_cmds[action/len(add_on)]
+        chang_lane_cmd = chang_lane_cmds[action]
         self.cruise_speed_pub.publish(speed_cmd)
         self.change_lane_pub.publish(chang_lane_cmd)
 
         # 27 actions
         reward = 0
         if not done:
-            mid = len(add_on)/2
-            reward += -abs((action%len(add_on))-mid)*5 + mid*5
             mid = len(chang_lane_cmds)/2
             reward += -abs((action/len(add_on))-mid)*10
         else:
@@ -478,8 +474,8 @@ class GazeboStandardtrackVehiclLccEnv(gazebo_env.GazeboEnv):
         # define initial pose for later use
         # ************************************************
         init_pose0 = Pose()
-        init_pose0.position.x = -30.0
-        init_pose0.position.y = -6.0
+        init_pose0.position.x = 79.2
+        init_pose0.position.y = 36.6
         init_pose0.position.z = 0.0
         quat0 = self.phi2quat(0.0)
         init_pose0.orientation = quat0
@@ -499,8 +495,8 @@ class GazeboStandardtrackVehiclLccEnv(gazebo_env.GazeboEnv):
         init_pose2.orientation = quat2
 
         init_pose3 = Pose()
-        init_pose3.position.x = 79.2
-        init_pose3.position.y = 36.6
+        init_pose3.position.x = -30.0
+        init_pose3.position.y = -6.0
         init_pose3.position.z = 0.0
         quat3 = self.phi2quat(math.pi/2)
         init_pose3.orientation = quat3

@@ -373,17 +373,10 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
         return state, done
 
     def action_names(self, action):
-        i = action%5
-        j = action/5
-        action_move_forward = ["Accelerate +2.0 m/s",
-                               "Accelerate +1.0 m/s",
-                               "Keep current speed",
-                               "Decelerate -1.0 m/s",
-                               "Decelerate -2.0 m/s"]
         action_change_lane = ["Change to Left",
                               "Keep Lane",
                               "Change to Right"]
-        return action_move_forward[i] + " & " + action_change_lane[j]
+        return action_change_lane[action]
 
     def _seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -394,21 +387,17 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
         state, done = self.construct_state()
 
         # 27 actions
-        speed_cmd = self.speeds[0]
-        add_on = [+2.0, +1.0, 0, -1.0, -2.0]
+        speed_cmd = 15
         chang_lane_cmds = ["Left", "Keep", "Right"]
 
         # print("cmd_speed = %f" % cmd_speed)
-        speed_cmd = self.speed_saturate(speed_cmd + add_on[action%len(add_on)])
-        chang_lane_cmd = chang_lane_cmds[action/len(add_on)]
+        chang_lane_cmd = chang_lane_cmds[action]
         self.cruise_speed_pub.publish(speed_cmd)
         self.change_lane_pub.publish(chang_lane_cmd)
 
         # 27 actions
         reward = 0
         if not done:
-            mid = len(add_on)/2
-            reward += -abs((action%len(add_on))-mid)*5 + mid*5
             mid = len(chang_lane_cmds)/2
             reward += -abs((action/len(add_on))-mid)*10
         else:
