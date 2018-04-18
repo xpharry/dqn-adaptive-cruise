@@ -408,7 +408,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             self.travel_dist = 0
             self.travel_time = 0
 
-        if self.travel_dist >= 230.0 * LAPS:
+        if self.travel_dist >= 250.0 * LAPS:
             print("Safely finishing! :)")
             reward += 10000
             done = True
