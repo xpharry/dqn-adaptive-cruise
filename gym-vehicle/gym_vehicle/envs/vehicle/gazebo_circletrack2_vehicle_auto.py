@@ -282,7 +282,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         if self.base_path == None:
             return  cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
 
-        for i in range(6):
+        for i in range(5):
             if self.poses[i] == None:
                 return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
 

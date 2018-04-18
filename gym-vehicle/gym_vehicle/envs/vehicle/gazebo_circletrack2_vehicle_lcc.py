@@ -26,7 +26,7 @@ DISPLAY_STATE = False
 MAX_SPEED = 22.35  # m/sec; tune this
 COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
-LAPS = 1
+LAPS = 2
 
 class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
 
@@ -268,7 +268,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         if self.base_path == None:
             return  cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
 
-        for i in range(6):
+        for i in range(3):
             if self.poses[i] == None:
                 return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
 
@@ -366,7 +366,6 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         # 27 actions
         reward = 0
         if not done:
-            mid = len(add_on)/2
             mid = len(chang_lane_cmds)/2
             reward += -abs(action-mid)*10
         else:
