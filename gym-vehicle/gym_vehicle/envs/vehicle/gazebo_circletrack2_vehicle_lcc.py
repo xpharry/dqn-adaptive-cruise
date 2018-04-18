@@ -24,7 +24,7 @@ from gazebo_msgs.msg import ModelState, ModelStates
 DISPLAY_STATE = False
 
 MAX_SPEED = 22.35  # m/sec; tune this
-COLLISON_DIST = 5 # m
+COLLISON_DIST = 6 # m
 INIT_LANE_INDEX = 1
 LAPS = 2
 
@@ -38,7 +38,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         self.speeds = [0, 0, 0]
         self.poses = [None, None, None]
         self.lane_index = INIT_LANE_INDEX
-        self.lanes = [0, 0, 0]
+        self.lanes = [0, 0]
         self.travel_dist = 0
         self.travel_time = 0
         self.time_stamp = None
@@ -216,8 +216,6 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             ilane = 0
         elif d >= 4 and d < 8:
             ilane = 1
-        elif d >=8 and d < 12:
-            ilane = 2
         else:
             # print("error lane index: d = %f" % d)
             ilane = None
@@ -331,7 +329,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
                 print("The car is turned over!")
                 done = True
 
-        self.lanes = [0, 0, 0]
+        self.lanes = [0, 0]
         self.lanes[self.d_to_ilane(ego_d)] = 1
 
         is_changing_lane = (self.lane_index != self.d_to_ilane(ego_d))
