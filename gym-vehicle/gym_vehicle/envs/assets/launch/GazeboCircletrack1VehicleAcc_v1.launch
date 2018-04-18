@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="ego_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
+    <param name="target_model" value="ego"/>
+  </node>
+  <!-- Path planning -->
+  <node name="ego_path_updater" pkg="path_updater" type="path_updater.py" output="log">
+    <param name="lane_index" value="1"/>
+    <param name="cruise_speed" value="1"/>
+    <remap from="current_pose" to="/ego/current_pose" />
+    <remap from="final_path" to="/ego/final_path" />
+    <remap from="final_waypoints" to="/ego/final_waypoints" />
+    <remap from="final_path_points" to="/ego/final_path_points" />
+    <remap from="cruise_speed" to="/ego/cruise_speed" />
+    <remap from="change_lane" to="/ego/change_lane" />
+  </node>
+  <node name="ego_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/ego/current_pose" />
+    <remap from="final_waypoints" to="/ego/final_waypoints" />
+    <remap from="current_velocity" to="/ego/twist" />
+    <remap from="cmd_vel" to="/ego/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="mondeo1_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
+    <param name="target_model" value="mondeo1"/>
+  </node>
+  <!-- Path planning -->
+  <node name="mondeo1_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="1"/>
+    <param name="cruise_speed" value="10"/>
+    <remap from="current_pose" to="/mondeo1/current_pose" />
+    <remap from="final_path" to="/mondeo1/final_path" />
+    <remap from="final_waypoints" to="/mondeo1/final_waypoints" />
+    <remap from="final_path_points" to="/mondeo1/final_path_points" />
+  </node>
+  <node name="mondeo1_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mondeo1/current_pose" />
+    <remap from="final_waypoints" to="/mondeo1/final_waypoints" />
+    <remap from="current_velocity" to="/mondeo1/twist" />
+    <remap from="cmd_vel" to="/mondeo1/cmd_vel" />
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="mondeo2_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
+    <param name="target_model" value="mondeo2"/>
+  </node>
+  <!-- Path planning -->
+  <node name="mondeo2_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="1"/>
+    <param name="cruise_speed" value="10"/>
+    <remap from="current_pose" to="/mondeo2/current_pose" />
+    <remap from="final_path" to="/mondeo2/final_path" />
+    <remap from="final_waypoints" to="/mondeo2/final_waypoints" />
+    <remap from="final_path_points" to="/mondeo2/final_path_points" />
+  </node>
+  <node name="mondeo2_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mondeo2/current_pose" />
+    <remap from="final_waypoints" to="/mondeo2/final_waypoints" />
+    <remap from="current_velocity" to="/mondeo2/twist" />
+    <remap from="cmd_vel" to="/mondeo2/cmd_vel" />
+  </node>
+
+  <node name="des_velocity_pub2" pkg="des_velocity_pub2" type="des_velocity_pub2" output="log">
+    <remap from="des_speed" to="cruise_speed" />
+  </node>
+</launch>

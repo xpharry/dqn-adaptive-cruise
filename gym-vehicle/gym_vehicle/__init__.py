@@ -8,6 +8,11 @@ logger = logging.getLogger(__name__)
 
 # Catvehicle envs
 register(
+    id='GazeboCartPole-v0',
+    entry_point='gym_vehicle.envs.gazebo_cartpole:GazeboCartPolev0Env',
+    # More arguments here
+)
+register(
     id='GazeboCircuitLargeCatvehicleLidar-v0',
     entry_point='gym_vehicle.envs.catvehicle:GazeboCircuitLargeCatvehicleLidarEnv',
     # More arguments here
@@ -28,22 +33,43 @@ register(
     # More arguments here
 )
 register(
-    id='GazeboCircleTrackMultiVehicleLidarNn-v0',
-    entry_point='gym_vehicle.envs.vehicle:GazeboCircleTrackMultiVehicleLidarNnEnv',
+    id='GazeboCircletrack1VehicleAcc-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircletrack1VehicleAccEnv',
     # More arguments here
 )
 register(
-    id='GazeboThreeLaneCircleTrackMultiVehicleLidarNn-v0',
-    entry_point='gym_vehicle.envs.vehicle:GazeboThreeLaneCircleTrackMultiVehicleLidarNnEnv',
+    id='GazeboCircletrack1VehicleAcc-v1',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircletrackVehicleAccEnv',
     # More arguments here
 )
 register(
-    id='GazeboStandardTrackMultiVehicleLidarNn-v0',
-    entry_point='gym_vehicle.envs.vehicle:GazeboStandardTrackMultiVehicleLidarNnEnv',
+    id='GazeboCircletrack2VehicleLcc-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircletrack2VehicleLccEnv',
     # More arguments here
 )
 register(
-    id='GazeboCartPole-v0',
-    entry_point='gym_vehicle.envs.gazebo_cartpole:GazeboCartPolev0Env',
+    id='GazeboCircletrack2VehicleAuto-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircletrack2VehicleAutoEnv',
     # More arguments here
 )
+register(
+    id='GazeboCircletrack3VehicleLcc-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircletrack3VehicleLccEnv',
+    # More arguments here
+)
+register(
+    id='GazeboCircletrack3VehicleAuto-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboCircletrack3VehicleAutoEnv',
+    # More arguments here
+)
+register(
+    id='GazeboStandardtrackVehicleLcc-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboStandardtrackVehicleLccEnv',
+    # More arguments here
+)
+register(
+    id='GazeboStandardtrackVehicleLcc-v0',
+    entry_point='gym_vehicle.envs.vehicle:GazeboStandardtrackVehicleAutoEnv',
+    # More arguments here
+)
+
