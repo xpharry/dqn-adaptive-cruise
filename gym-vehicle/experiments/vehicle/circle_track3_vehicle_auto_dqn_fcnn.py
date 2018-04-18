@@ -330,16 +330,16 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboCircletrackVehicleAuto-v0')
     
-    outdir = '~/results/circle3_auto/'
+    outdir = '../../results/circle3_auto/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
     plotter = LivePlot(outdir)
 
-    continue_execution = True
+    continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '~/saved_models/circle3_auto/'
+    model_output = '../../saved_models/circle3_auto/'
     weights_path = model_output + 'circle3_fcnn_ep1000.h5'
     monitor_path = model_output + 'circle3_fcnn_ep1000'
     params_json  = model_output + 'circle3_fcnn_ep1000.json'

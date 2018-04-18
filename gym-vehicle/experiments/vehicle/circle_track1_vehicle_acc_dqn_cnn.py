@@ -330,7 +330,7 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboCircletrack1VehicleAcc-v0')
     
-    outdir = '~/results/circle1_acc/'
+    outdir = '../../results/circle1_acc/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
