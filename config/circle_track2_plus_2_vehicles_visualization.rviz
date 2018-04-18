@@ -25,7 +25,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: PointCloud
 Visualization Manager:
   Class: ""
   Displays:
@@ -280,6 +280,67 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_camera_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        perfect_gps:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        steer_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        steer_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        velodyne:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        velodyne_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_fr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rl:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wheel_rr:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: Ego
       Robot Description: /ego/robot_description
       TF Prefix: ego
@@ -479,7 +540,7 @@ Visualization Manager:
       Axis: Z
       Channel Name: intensity
       Class: rviz/PointCloud
-      Color: 0; 205; 255
+      Color: 255; 0; 0
       Color Transformer: FlatColor
       Decay Time: 0
       Enabled: true
@@ -495,7 +556,7 @@ Visualization Manager:
       Size (Pixels): 5
       Size (m): 0.00999999978
       Style: Points
-      Topic: /mondeo1/final_path_points
+      Topic: /fusion/final_path_points
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -525,7 +586,7 @@ Visualization Manager:
       Size (Pixels): 5
       Size (m): 0.00999999978
       Style: Points
-      Topic: /mondeo2/final_path_points
+      Topic: /mondeo/final_path_points
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -591,5 +652,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1855
-  X: 65
+  X: 1985
   Y: 24

@@ -43,7 +43,7 @@
     <remap from="current_pose" to="/fusion/current_pose" />
     <remap from="final_waypoints" to="/fusion/final_waypoints" />
     <remap from="current_velocity" to="/fusion/twist" />
-    <remap from="cmd_vel" to="/fusio1/cmd_vel" />
+    <remap from="cmd_vel" to="/fusion/cmd_vel" />
   </node>
 
   <!-- Continuously publish the vehicle's pose and odom -->
