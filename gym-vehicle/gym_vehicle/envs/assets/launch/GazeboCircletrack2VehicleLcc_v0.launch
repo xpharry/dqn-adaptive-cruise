@@ -27,7 +27,7 @@
 
   <!-- Continuously publish the vehicle's pose and odom -->
   <node name="fusion_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
-    <param name="target_model" value="fusion1"/>
+    <param name="target_model" value="fusion"/>
   </node>
   <!-- Path planning -->
   <node name="fusion_path_updater" pkg="path_updater" type="path_updater.py">
