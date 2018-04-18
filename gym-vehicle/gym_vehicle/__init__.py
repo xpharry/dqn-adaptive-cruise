@@ -68,7 +68,7 @@ register(
     # More arguments here
 )
 register(
-    id='GazeboStandardtrackVehicleLcc-v0',
+    id='GazeboStandardtrackVehicleAuto-v0',
     entry_point='gym_vehicle.envs.vehicle:GazeboStandardtrackVehicleAutoEnv',
     # More arguments here
 )

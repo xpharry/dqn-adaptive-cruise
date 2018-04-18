@@ -28,7 +28,7 @@ COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
 LAPS = 4
 
-class GazeboStandardtrackVehiclLccEnv(gazebo_env.GazeboEnv):
+class GazeboStandardtrackVehicleLccEnv(gazebo_env.GazeboEnv):
 
     def __init__(self):
         # Launch the simulation with the given launchfile name

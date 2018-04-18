@@ -339,7 +339,7 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '~/saved_weights/circle1_acc/'
+    model_output = '~/saved_models/circle1_acc/'
     weights_path = model_output + 'circle1_cnn_ep1000.h5'
     monitor_path = model_output + 'circle1_cnn_ep1000'
     params_json  = model_output + 'circle1_cnn_ep1000.json'
