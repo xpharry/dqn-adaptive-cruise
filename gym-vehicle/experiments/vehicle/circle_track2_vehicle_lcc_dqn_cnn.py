@@ -210,7 +210,7 @@ class DeepQ:
         return predicted[0]
 
     def getTargetQValues(self, state):
-        predicted = self.targetModel.predict(state.reshape(1, len(state)))
+        predicted = self.targetModel.predict(state.reshape(1, len(state), 1))
         return predicted[0]
 
     def getMaxQ(self, qValues):

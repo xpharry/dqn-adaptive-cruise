@@ -32,7 +32,7 @@
   <!-- Path planning -->
   <node name="fusion_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="0"/>
-    <param name="cruise_speed" value="5"/>
+    <param name="cruise_speed" value="10"/>
     <remap from="current_pose" to="/fusion/current_pose" />
     <remap from="final_path" to="/fusion/final_path" />
     <remap from="final_waypoints" to="/fusion/final_waypoints" />

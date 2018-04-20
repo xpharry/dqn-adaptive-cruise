@@ -67,7 +67,7 @@
     <remap from="cmd_vel" to="/mondeo2/cmd_vel" />
   </node>
 
-  <node name="des_velocity_pub2" pkg="des_velocity_pub2" type="des_velocity_pub2" output="log">
+  <node name="des_velocity_pub2" pkg="des_velocity_pub" type="des_velocity_pub2" output="log">
     <remap from="des_speed" to="cruise_speed" />
   </node>
 </launch>

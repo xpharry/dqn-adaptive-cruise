@@ -339,7 +339,7 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '~/saved_models/circle1_acc/'
+    model_output = '../../saved_models/circle1_acc/'
     weights_path = model_output + 'circle1_fcnn_ep1000.h5'
     monitor_path = model_output + 'circle1_fcnn_ep1000'
     params_json  = model_output + 'circle1_fcnn_ep1000.json'
@@ -350,7 +350,7 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 1000
+        epochs = 3000
         steps = 10000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -472,7 +472,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.997  # epsilon decay
+        explorationRate *= 0.998  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.05, explorationRate)
 

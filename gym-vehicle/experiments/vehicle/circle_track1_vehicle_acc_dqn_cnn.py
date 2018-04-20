@@ -14,6 +14,7 @@ import random
 import numpy as np
 from keras.models import Sequential, load_model
 from keras import optimizers
+from keras.layers import Conv1D, MaxPooling1D, Flatten
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
@@ -163,26 +164,20 @@ class DeepQ:
 
     def createModel(self, inputs, outputs, hiddenLayers, activationType, learningRate):
         model = Sequential()
-        if len(hiddenLayers) == 0:
-            model.add(Dense(self.output_size, input_shape=(self.input_size,), kernel_initializer='lecun_uniform'))
-            model.add(Activation("linear"))
-        else:
-            model.add(Dense(hiddenLayers[0], input_shape=(self.input_size,), kernel_initializer='lecun_uniform'))
-            if activationType == "LeakyReLU":
-                model.add(LeakyReLU(alpha=0.01))
-            else:
-                model.add(Activation(activationType))
-
-            for index in range(1, len(hiddenLayers)):
-                # print("adding layer "+str(index))
-                layerSize = hiddenLayers[index]
-                model.add(Dense(layerSize, kernel_initializer='lecun_uniform'))
-                if activationType == "LeakyReLU":
-                    model.add(LeakyReLU(alpha=0.01))
-                else:
-                    model.add(Activation(activationType))
-            model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
-            model.add(Activation("linear"))
+        model.add(Conv1D(32, 2, input_shape=(self.input_size, 1), kernel_initializer='lecun_uniform'))
+        model.add(Activation("relu"))
+        model.add(Conv1D(32, 2, kernel_initializer='lecun_uniform'))
+        model.add(Activation("relu"))
+        model.add(BatchNormalization())
+        model.add(MaxPooling1D(pool_size=2))
+        model.add(Dropout(0.4))
+        model.add(Flatten())
+        model.add(Dense(32, kernel_initializer='lecun_uniform'))
+        model.add(Activation("relu"))
+        model.add(Dense(64, kernel_initializer='lecun_uniform'))
+        model.add(Activation("relu"))
+        model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
+        model.add(Activation("linear"))
         optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
         model.compile(loss="mse", optimizer=optimizer)
         model.summary()
@@ -211,11 +206,11 @@ class DeepQ:
 
     # predict Q values for all the actions
     def getQValues(self, state):
-        predicted = self.model.predict(state.reshape(1, len(state)))
+        predicted = self.model.predict(state.reshape(1, len(state), 1))
         return predicted[0]
 
     def getTargetQValues(self, state):
-        predicted = self.targetModel.predict(state.reshape(1, len(state)))
+        predicted = self.targetModel.predict(state.reshape(1, len(state), 1))
         return predicted[0]
 
     def getMaxQ(self, qValues):
@@ -304,7 +299,7 @@ class DeepQ:
                 if isFinal:
                     X_batch = np.append(X_batch, np.array([newState.copy()]), axis=0)
                     Y_batch = np.append(Y_batch, np.array([[reward]*self.output_size]), axis=0)
-            self.model.fit(X_batch, Y_batch, batch_size=len(miniBatch), epochs=1, verbose=0)
+            self.model.fit(X_batch.reshape(X_batch.shape[0], X_batch.shape[1], 1), Y_batch, batch_size=len(miniBatch), epochs=1, verbose=0)
 
     def saveModel(self, path):
         self.model.save(path)
@@ -339,7 +334,8 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '~/saved_models/circle1_acc/'
+    model_output = '../../saved_models/circle1_acc/'
+    init_weights_path = model_output + 'circle1_cnn_initial.h5'
     weights_path = model_output + 'circle1_cnn_ep1000.h5'
     monitor_path = model_output + 'circle1_cnn_ep1000'
     params_json  = model_output + 'circle1_cnn_ep1000.json'
@@ -366,6 +362,11 @@ if __name__ == '__main__':
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
         deepQ.initNetworks(network_structure)
+
+        if os.path.exists(init_weights_path):
+            print("load initial weights ...")
+            deepQ.loadWeights(init_weights_path)
+
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
     else:

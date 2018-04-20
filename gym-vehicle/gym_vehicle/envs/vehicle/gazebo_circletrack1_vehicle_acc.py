@@ -260,7 +260,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         ego_s = ss[0]
         ego_d = dd[0]
 
-        if ego_d < 0 or ego_d >= 12:
+        if ego_d < 4 or ego_d >= 8:
             return cmp_dists + [self.speeds[0]] + cmp_speeds, True
 
         for i in range(1,3):
