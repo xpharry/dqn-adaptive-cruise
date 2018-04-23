@@ -336,7 +336,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         reward = 0
         if not done:
             mid = len(add_on)/2
-            reward += -abs(action-mid)*5 + mid*5
+            reward += -abs(action-mid)*10 + mid*10
         else:
             reward += -10000
             self.travel_dist = 0
@@ -358,7 +358,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         self.time_stamp = rospy.get_time()
 
         # speed
-        reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
+        # reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
 
         # by acc_dist
         reward += 10 * acc_dist
@@ -368,15 +368,8 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
             print("| Reward: %f \t\t|" % reward)
             print("|-------------------|")
 
-        if self.travel_time >= 20.0 * LAPS:
-            print(self.travel_time)
-            print("Time Out! :(")
-            done = True
-            self.travel_dist = 0
-            self.travel_time = 0
-
-        if self.travel_dist >= 230.0 * LAPS:
-            print("Safely finishing! :)")
+        if self.travel_time >= 25.0 * LAPS:
+            print("Time Out! Safely done! :D")
             reward += 10000
             done = True
             self.travel_dist = 0
