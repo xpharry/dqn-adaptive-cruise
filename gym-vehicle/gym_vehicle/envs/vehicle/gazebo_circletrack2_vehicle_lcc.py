@@ -365,7 +365,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         reward = 0
         if not done:
             mid = len(chang_lane_cmds)/2
-            reward += -abs(action-mid)*10
+            reward += -abs(action-mid)*100 + 100
         else:
             reward += -10000
             self.travel_dist = 0
@@ -387,10 +387,10 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         self.time_stamp = rospy.get_time()
 
         # speed
-        reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
+        # reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
 
         # change lane reward
-        reward += self.change_lane_reward
+        reward += self.change_lane_reward * 10
 
         # by acc_dist
         reward += 10 * acc_dist
@@ -401,14 +401,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             print("|-----------------------------------------------|")
 
         if self.travel_time >= 25.0 * LAPS:
-            print("Time Out! :(")
-            done = True
-            self.travel_dist = 0
-            self.travel_time = 0
-
-        if self.travel_dist >= 250.0 * LAPS:
-            print("Safely finishing! :)")
-            reward += 10000
+            print("Time Out! Safely done! :D")
             done = True
             self.travel_dist = 0
             self.travel_time = 0
