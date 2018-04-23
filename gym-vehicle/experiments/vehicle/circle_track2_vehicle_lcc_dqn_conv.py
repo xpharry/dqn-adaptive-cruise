@@ -325,7 +325,7 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboCircletrack2VehicleLcc-v0')
     
-    outdir = '../../results/circle2_lcc/'
+    outdir = '../../results/circle2_lcc_conv/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -334,10 +334,10 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '../../saved_models/circle2_lcc/'
-    weights_path = model_output + 'circle2_fcnn_ep1000.h5'
-    monitor_path = model_output + 'circle2_fcnn_ep1000'
-    params_json  = model_output + 'circle2_fcnn_ep1000.json'
+    model_output = '../../saved_models/circle2_lcc_conv/'
+    weights_path = model_output + 'circle2_conv_ep1000.h5'
+    monitor_path = model_output + 'circle2_conv_ep1000'
+    params_json  = model_output + 'circle2_conv_ep1000.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
         
