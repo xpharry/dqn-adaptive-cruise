@@ -365,7 +365,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         reward = 0
         if not done:
             mid = len(chang_lane_cmds)/2
-            reward += -abs(action-mid)*100 + 100
+            reward += -abs(action-mid)*100 + 50
         else:
             reward += -10000
             self.travel_dist = 0
@@ -393,7 +393,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         reward += self.change_lane_reward * 10
 
         # by acc_dist
-        reward += 10 * acc_dist
+        reward += 5 * acc_dist
 
         if DISPLAY_STATE:
             print("| Action: %s\t|" % self.action_names(action))
