@@ -183,7 +183,8 @@ class DeepQ:
                     model.add(Activation(activationType))
             model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
             model.add(Activation("linear"))
-        optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
+        # optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
+        optimizer = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss="mse", optimizer=optimizer)
         model.summary()
         return model
@@ -359,7 +360,7 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 5
+        network_inputs = 2
         network_outputs = 5
         network_structure = [300, 300]
         current_epoch = 0

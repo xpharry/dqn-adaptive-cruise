@@ -156,7 +156,8 @@ class DeepQ:
                     model.add(Dropout(dropout))
             model.add(Dense(self.output_size, kernel_initializer='lecun_uniform', bias=bias))
             model.add(Activation("linear"))
-        optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
+        # optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
+        optimizer = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss="mse", optimizer=optimizer)
         model.summary()
         return model
@@ -339,10 +340,10 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '../../saved_models/circle1_acc_dense2/'
-    weights_path = model_output + 'circle1_dense2_ep1000.h5'
-    monitor_path = model_output + 'circle1_dense2_ep1000'
-    params_json  = model_output + 'circle1_dense2_ep1000.json'
+    model_output = outdir # '../../saved_models/circle1_acc_dense2/'
+    weights_path = model_output + 'circle1_dense2_init.h5'
+    monitor_path = model_output + 'circle1_dense2_init'
+    params_json  = model_output + 'circle1_dense2_init.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
 
@@ -359,7 +360,7 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 5
+        network_inputs = 2
         network_outputs = 5
         network_structure = [100, 70, 50, 70, 100]
         current_epoch = 0
@@ -376,7 +377,7 @@ if __name__ == '__main__':
             epochs = d.get('epochs')
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
-            explorationRate = d.get('explorationRate')
+            explorationRate = 0.5 # d.get('explorationRate')
             minibatch_size = d.get('minibatch_size')
             learnStart = d.get('learnStart')
             learningRate = d.get('learningRate')
@@ -384,15 +385,15 @@ if __name__ == '__main__':
             memorySize = d.get('memorySize')
             network_inputs = d.get('network_inputs')
             network_outputs = d.get('network_outputs')
-            network_layers = d.get('network_structure')
-            current_epoch = d.get('current_epoch')
+            network_structure = d.get('network_structure')
+            current_epoch = 0 # d.get('current_epoch')
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
-        deepQ.initNetworks(network_layers)
+        deepQ.initNetworks(network_structure)
         deepQ.loadWeights(weights_path)
 
         clear_monitor_files(outdir)
-        copy_tree(monitor_path, outdir)
+        # copy_tree(monitor_path, outdir)
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
 
@@ -450,14 +451,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel(model_output+'circle1_fcnn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel(model_output+'circle1_dense2_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
                         # copy_tree(outdir, model_output+'circle1_fcnn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open(model_output+'circle1_fcnn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open(model_output+'circle1_dense2_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 
@@ -474,7 +475,7 @@ if __name__ == '__main__':
 
         explorationRate *= 0.998  # epsilon decay
         # explorationRate -= (2.0/epochs)
-        explorationRate = max(0.05, explorationRate)
+        explorationRate = max(0.01, explorationRate)
 
     # env.monitor.close()
     env.close()
