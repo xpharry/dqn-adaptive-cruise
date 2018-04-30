@@ -19,6 +19,19 @@ Chris~Urmson etc.
   challenge.
 \newblock {\em Journal of Field Robotics}, 25, 2008.
 
+\bibitem{Nissan2013}
+A.~Mukminin.
+\newblock Semi-autonomous nissan leaf cleared for road test in japan, 2013.
+
+\bibitem{ACC2002}
+H.~Sudou and T.~Hashizume.
+\newblock Adaptive cruise control system.
+
+\bibitem{LaneControl2012}
+D.~Spero T. Pilutti~M. Rupp and P.~Joh.
+\newblock {\em Autonomous lane control system}.
+\newblock Ford Global Technologies LLC, 2012.
+
 \bibitem{Mnih2015AtariNature}
 V.~Mni et~al.
 \newblock Human-level control through deep reinforcement learning.
@@ -42,31 +55,6 @@ M.~R. Dogar and S.~S. Srinivasa.
 \newblock A planning framework for non-prehensile manipulation under clutter
   and uncertainty.
 \newblock {\em Autonomous Robots}, 2012.
-
-\bibitem{IROS2016}
-K.~T. Yu M. Bauza~N. Fazeli and A.~Rodriguez.
-\newblock More than a million ways to be pushed: A high-fidelity experimental
-  data set of planar pushing.
-\newblock {\em International Conference on Intelligent Robots and Systems
-  (IROS)}, 2016.
-
-\bibitem{Visual1995}
-H.~Murase and S.~K. Nayar.
-\newblock Visual learning and recognition of 3-d objects from appearance.
-\newblock {\em International Journal of Computer Vision (IJCV)}, 1995.
-
-\bibitem{ObjectRecognition2009}
-A.~Collet D. Berenson S.~S. Srinivasa and D.~Ferguson.
-\newblock Object recognition and full pose registration from a single image for
-  robotic manipulation.
-\newblock {\em International Conference on Robotics and Automation (ICRA)},
-  2009.
-
-\bibitem{DynamicsDoor2013}
-F.~Endres J.Trinkle and W.~Burgard.
-\newblock Learning the dynamics of doors for robotic manipulation.
-\newblock {\em nternational Conference on Intelligent Robots and Systems
-  (IROS)}, 2013.
 
 \bibitem{FieldersNature2003}
 P.~McLeod~N. Reed and Z.~Dienes.
@@ -156,32 +144,6 @@ J.~R. Kok and N.~Vlassis.
 \newblock In R.~Greiner and D.~Schuurmans, editors, {\em Sparse Cooperative
   Q-learning}, pages 481--488, Banff, Canada, July 2004. ACM.
 
-\bibitem{JointAction2003}
-N.~Fulda and D.~Ventura.
-\newblock Dynamic joint action perception for q-learning agents.
-\newblock {\em International Conference on Machine Learning and Applications},
-  2003.
-
-\bibitem{Multi-agentCooperation2001}
-P.~Xuan~V. Lesser and S.~Zilberstein.
-\newblock Communication decisions in multi-agent cooperation: model and
-  experiments.
-\newblock In {\em the Fifth International Conference on Autonomous Agents},
-  pages 616--623, Montreal, Canada, 2001. ACM.
-
-\bibitem{Communicative2002}
-D.~V. Pynadath and M.~Tambe.
-\newblock The communicative multiagent team decision problem: Analyzing
-  teamwork theories and models.
-\newblock {\em Journal of AI research}, 16:389--423, 2002.
-
-\bibitem{Makov2004}
-D.~Dolgov and E.~H. Durfee.
-\newblock Graphical models in local, asymmetric multi-agent markov decision
-  processes.
-\newblock {\em Proceedings of the Third International Joint Conference on
-  Autonomous Agents and Multiagent Systems (AAMAS-04)}, 2004.
-
 \bibitem{jmeSim2012}
 A.~Haber, M.~McGill, and C.~Sammut.
 \newblock jmesim: An open source, multi platform robotics simulator.
@@ -204,6 +166,16 @@ K.~Wyobek E. Berger H.~V. der Loos and K.~Salisbury.
   design of an intrinsically safe personal robot.
 \newblock {\em roc. of the IEEE Intl. Conf. on Robotics and Automation (ICRA)},
   2008.
+
+\bibitem{Sutton1998RL}
+R.~S. Sutton and A.~G. Barto.
+\newblock {\em Reinforcement Learning: An Introduction}.
+\newblock MIT Press, 1998.
+
+\bibitem{RLsurvey2013}
+J.~Kober~J. A.Bagnell and J.~Peters.
+\newblock Reinforcement learning in robotics: A survey.
+\newblock {\em The International Journal of Robotics Research}, 2013.
 
 \bibitem{DARPA2009}
 M.~Buehler~K. Iagnemma and S.~Singh.
@@ -240,9 +212,10 @@ J.~Ziegler~M. Werling and J.~Schroder.
   obstacle sensitive cost function.
 \newblock {\em IEEE Intelligent Vehicles Symposium}, 2008.
 
-\bibitem{Sutton1998RL}
-R.~S. Sutton and A.~G. Barto.
-\newblock {\em Reinforcement Learning: An Introduction}.
-\newblock MIT Press, 1998.
+\bibitem{PurePursuit1992}
+R.~Craig Coulter.
+\newblock Implementation of the pure pursuit path tracking algorithm.
+\newblock Technical Report CMU-RI-TR-92-01, Carnegie Mellon University,
+  Pittsburgh, PA, January 1992.
 
 \end{thebibliography}

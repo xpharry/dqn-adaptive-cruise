@@ -7,64 +7,63 @@
 \contentsline {chapter}{\tocchapter {Chapter}{1}{Introduction}}{1}{chapter.1}
 \contentsline {section}{\tocsection {}{}{Motivation and Background}}{1}{section.1.1}
 \contentsline {section}{\tocsection {}{}{Literation Review}}{3}{section.1.2}
-\contentsline {section}{\tocsection {}{}{Thesis Outline}}{8}{section.1.3}
-\contentsline {chapter}{\tocchapter {Chapter}{2}{Simulated Environment}}{12}{chapter.2}
-\contentsline {section}{\tocsection {}{}{ROS}}{14}{section.2.1}
-\contentsline {subsection}{\tocsubsection {}{2.1.1}{Implementation}}{15}{subsection.2.1.1}
-\contentsline {subsection}{\tocsubsection {}{2.1.2}{Collaborative Development}}{16}{subsection.2.1.2}
-\contentsline {subsection}{\tocsubsection {}{2.1.3}{Visualization and Monitoring}}{17}{subsection.2.1.3}
-\contentsline {subsection}{\tocsubsection {}{2.1.4}{Transformations}}{18}{subsection.2.1.4}
-\contentsline {section}{\tocsection {}{}{Gazebo}}{19}{section.2.2}
-\contentsline {subsection}{\tocsubsection {}{2.2.1}{Architecture}}{21}{subsection.2.2.1}
-\contentsline {subsection}{\tocsubsection {}{2.2.2}{Physics Engine}}{22}{subsection.2.2.2}
-\contentsline {subsection}{\tocsubsection {}{2.2.3}{Visualization}}{22}{subsection.2.2.3}
-\contentsline {subsection}{\tocsubsection {}{2.2.4}{Customized Environment}}{23}{subsection.2.2.4}
-\contentsline {subsection}{\tocsubsection {}{2.2.5}{Test Bed for Algorithm Design}}{26}{subsection.2.2.5}
-\contentsline {section}{\tocsection {}{}{OpenAI-Gym}}{26}{section.2.3}
-\contentsline {subsection}{\tocsubsection {}{2.3.1}{Design For Environment}}{27}{subsection.2.3.1}
-\contentsline {subsection}{\tocsubsection {}{2.3.2}{Interfacing with ROS and Gazebo}}{27}{subsection.2.3.2}
-\contentsline {subsection}{\tocsubsection {}{2.3.3}{Example Use: Train a Cart-pole agent}}{29}{subsection.2.3.3}
-\contentsline {section}{\tocsection {}{}{Vehicle Model: DBW Kit}}{30}{section.2.4}
-\contentsline {subsection}{\tocsubsection {}{2.4.1}{URDF Models}}{31}{subsection.2.4.1}
-\contentsline {subsection}{\tocsubsection {}{2.4.2}{Simulated CAN Message Interface}}{32}{subsection.2.4.2}
-\contentsline {subsection}{\tocsubsection {}{2.4.3}{Simulating Multiple Vehicles}}{33}{subsection.2.4.3}
-\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{35}{chapter.3}
-\contentsline {section}{\tocsection {}{}{Motion Planner}}{37}{section.3.1}
-\contentsline {subsection}{\tocsubsection {}{3.1.1}{Longitudinal Control: Adaptive Cruise Control}}{37}{subsection.3.1.1}
-\contentsline {subsection}{\tocsubsection {}{3.1.2}{Lateral Control: Lane Change Control}}{38}{subsection.3.1.2}
-\contentsline {section}{\tocsection {}{}{Trajectory Generator}}{40}{section.3.2}
-\contentsline {subsection}{\tocsubsection {}{3.2.1}{Trajectory Planning}}{40}{subsection.3.2.1}
-\contentsline {subsection}{\tocsubsection {}{3.2.2}{A road-aligned coordinate system: Frenet Coordinate}}{41}{subsection.3.2.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Frenet Coordinates}}{42}{figure.caption.21}
-\contentsline {subsection}{\tocsubsection {}{3.2.3}{Reference path generation}}{45}{subsection.3.2.3}
-\contentsline {section}{\tocsection {}{}{Path Flowing}}{47}{section.3.3}
-\contentsline {section}{\tocsection {}{}{Drive By Wire}}{47}{section.3.4}
-\contentsline {section}{\tocsection {}{}{Experiment}}{48}{section.3.5}
-\contentsline {subsection}{\tocsubsection {}{3.5.1}{Lane Keep}}{48}{subsection.3.5.1}
-\contentsline {subsection}{\tocsubsection {}{3.5.2}{Lane Change}}{48}{subsection.3.5.2}
+\contentsline {section}{\tocsection {}{}{Thesis Outline}}{7}{section.1.3}
+\contentsline {chapter}{\tocchapter {Chapter}{2}{Simulated Environment}}{9}{chapter.2}
+\contentsline {section}{\tocsection {}{}{ROS}}{11}{section.2.1}
+\contentsline {subsection}{\tocsubsection {}{2.1.1}{Implementation}}{12}{subsection.2.1.1}
+\contentsline {subsection}{\tocsubsection {}{2.1.2}{Collaborative Development}}{13}{subsection.2.1.2}
+\contentsline {subsection}{\tocsubsection {}{2.1.3}{Visualization and Monitoring}}{14}{subsection.2.1.3}
+\contentsline {subsection}{\tocsubsection {}{2.1.4}{Transformations}}{15}{subsection.2.1.4}
+\contentsline {section}{\tocsection {}{}{Gazebo}}{16}{section.2.2}
+\contentsline {subsection}{\tocsubsection {}{2.2.1}{Architecture}}{18}{subsection.2.2.1}
+\contentsline {subsection}{\tocsubsection {}{2.2.2}{Physics Engine}}{19}{subsection.2.2.2}
+\contentsline {subsection}{\tocsubsection {}{2.2.3}{Visualization}}{19}{subsection.2.2.3}
+\contentsline {subsection}{\tocsubsection {}{2.2.4}{Customized Environment}}{20}{subsection.2.2.4}
+\contentsline {subsection}{\tocsubsection {}{2.2.5}{Test Bed for Algorithm Design}}{23}{subsection.2.2.5}
+\contentsline {section}{\tocsection {}{}{OpenAI-Gym}}{23}{section.2.3}
+\contentsline {subsection}{\tocsubsection {}{2.3.1}{Design For Environment}}{24}{subsection.2.3.1}
+\contentsline {subsection}{\tocsubsection {}{2.3.2}{Interfacing with ROS and Gazebo}}{24}{subsection.2.3.2}
+\contentsline {subsection}{\tocsubsection {}{2.3.3}{Example Use: Train a Cart-pole agent}}{26}{subsection.2.3.3}
+\contentsline {section}{\tocsection {}{}{Vehicle Model}}{28}{section.2.4}
+\contentsline {subsection}{\tocsubsection {}{2.4.1}{URDF Models}}{28}{subsection.2.4.1}
+\contentsline {subsection}{\tocsubsection {}{2.4.2}{Simulated CAN Message Interface}}{29}{subsection.2.4.2}
+\contentsline {subsection}{\tocsubsection {}{2.4.3}{Simulating Multiple Vehicles}}{31}{subsection.2.4.3}
+\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{32}{chapter.3}
+\contentsline {section}{\tocsection {}{}{Behavior Planner}}{35}{section.3.1}
+\contentsline {subsection}{\tocsubsection {}{3.1.1}{Longitudinal Control: Adaptive Cruise Control}}{35}{subsection.3.1.1}
+\contentsline {subsection}{\tocsubsection {}{3.1.2}{Lateral Control: Lane Control}}{36}{subsection.3.1.2}
+\contentsline {section}{\tocsection {}{}{Path Planner}}{37}{section.3.2}
+\contentsline {subsection}{\tocsubsection {}{3.2.1}{Reference Path Generator}}{37}{subsection.3.2.1}
+\contentsline {subsection}{\tocsubsection {}{3.2.2}{A road-aligned coordinate system: Frenet Coordinate}}{39}{subsection.3.2.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Frenet Coordinates}}{39}{figure.caption.21}
+\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path Selecting and Optimizing}}{43}{subsection.3.2.3}
+\contentsline {section}{\tocsection {}{}{Path Following}}{44}{section.3.3}
+\contentsline {section}{\tocsection {}{}{Drive By Wire}}{48}{section.3.4}
 \contentsline {chapter}{\tocchapter {Chapter}{4}{Deep Q-Learning}}{49}{chapter.4}
 \contentsline {section}{\tocsection {}{}{General Architecture}}{49}{section.4.1}
 \contentsline {section}{\tocsection {}{}{Reinforcement Learning for Longitudinal Motion}}{51}{section.4.2}
 \contentsline {section}{\tocsection {}{}{Reinforcement Learning for Lateral Motion}}{54}{section.4.3}
 \contentsline {section}{\tocsection {}{}{Q Learning}}{55}{section.4.4}
-\contentsline {section}{\tocsection {}{}{Policy Representation}}{59}{section.4.5}
+\contentsline {section}{\tocsection {}{}{Policy Representation}}{58}{section.4.5}
 \contentsline {subsection}{\tocsubsection {}{4.5.1}{State}}{59}{subsection.4.5.1}
 \contentsline {subsection}{\tocsubsection {}{4.5.2}{Actions}}{59}{subsection.4.5.2}
-\contentsline {subsection}{\tocsubsection {}{4.5.3}{Reward Function}}{60}{subsection.4.5.3}
+\contentsline {subsection}{\tocsubsection {}{4.5.3}{Reward Function}}{59}{subsection.4.5.3}
 \contentsline {subsection}{\tocsubsection {}{4.5.4}{Relay Memory}}{61}{subsection.4.5.4}
-\contentsline {section}{\tocsection {}{}{Deep Neural Network Layer}}{62}{section.4.6}
+\contentsline {section}{\tocsection {}{}{Deep Neural Network}}{62}{section.4.6}
 \contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{64}{chapter.5}
 \contentsline {section}{\tocsection {}{}{Simulation Setup}}{64}{section.5.1}
 \contentsline {section}{\tocsection {}{}{Training for Longitudinal Motion only}}{65}{section.5.2}
 \contentsline {subsection}{\tocsubsection {}{5.2.1}{Case 1: The neighboring vehicles are at constant speeds.}}{66}{subsection.5.2.1}
 \contentsline {subsection}{\tocsubsection {}{5.2.2}{Case 2: The neighboring vehicles are at erratic speeds.}}{67}{subsection.5.2.2}
-\contentsline {section}{\tocsection {}{}{Training for Combined Motion}}{68}{section.5.3}
-\contentsline {section}{\tocsection {}{}{Main Evaluation}}{71}{section.5.4}
-\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{72}{chapter.6}
-\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{72}{section.6.1}
-\contentsline {section}{\tocsection {}{}{Analysis}}{72}{section.6.2}
-\contentsline {section}{\tocsection {}{}{Reflection}}{74}{section.6.3}
-\contentsline {subsection}{\tocsubsection {}{6.3.1}{Diffculties}}{74}{subsection.6.3.1}
-\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{74}{subsection.6.3.2}
-\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{76}{chapter.7}
-\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{78}{chapter*.38}
+\contentsline {section}{\tocsection {}{}{Training for Lateral Motion only}}{68}{section.5.3}
+\contentsline {subsection}{\tocsubsection {}{5.3.1}{Case 1: The neighboring vehicles are at constant speeds.}}{69}{subsection.5.3.1}
+\contentsline {subsection}{\tocsubsection {}{5.3.2}{Case 2: The neighboring vehicles are at erratic speeds.}}{71}{subsection.5.3.2}
+\contentsline {section}{\tocsection {}{}{Training for Combined Motion}}{72}{section.5.4}
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{76}{chapter.6}
+\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{76}{section.6.1}
+\contentsline {section}{\tocsection {}{}{Analysis}}{76}{section.6.2}
+\contentsline {section}{\tocsection {}{}{Reflection}}{78}{section.6.3}
+\contentsline {subsection}{\tocsubsection {}{6.3.1}{Diffculties}}{78}{subsection.6.3.1}
+\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{78}{subsection.6.3.2}
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{80}{chapter.7}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{82}{chapter*.41}

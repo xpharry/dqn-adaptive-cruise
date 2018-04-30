@@ -10,44 +10,49 @@ A level-1 auxiliary file: content/06-Conclusion.aux
 A level-1 auxiliary file: content/07-Futurework.aux
 The style file: unsrt.bst
 Database file #1: refs/my_reference.bib
-You've used 40 entries,
+Warning--entry type for "ACC2002" isn't style-file defined
+--line 32 of file refs/my_reference.bib
+Warning--entry type for "Nissan2013" isn't style-file defined
+--line 49 of file refs/my_reference.bib
+You've used 37 entries,
             1791 wiz_defined-function locations,
-            691 strings with 11157 characters,
-and the built_in function-call counts, 7518 in all, are:
-= -- 693
-> -- 303
+            672 strings with 10244 characters,
+and the built_in function-call counts, 6702 in all, are:
+= -- 608
+> -- 271
 < -- 6
-+ -- 116
-- -- 76
-* -- 332
-:= -- 1235
-add.period$ -- 123
-call.type$ -- 40
-change.case$ -- 39
++ -- 105
+- -- 68
+* -- 287
+:= -- 1102
+add.period$ -- 111
+call.type$ -- 37
+change.case$ -- 35
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 402
-empty$ -- 732
-format.name$ -- 76
-if$ -- 1709
+cite$ -- 37
+duplicate$ -- 356
+empty$ -- 666
+format.name$ -- 68
+if$ -- 1523
 int.to.chr$ -- 0
-int.to.str$ -- 40
-missing$ -- 41
-newline$ -- 203
-num.names$ -- 42
-pop$ -- 127
+int.to.str$ -- 37
+missing$ -- 34
+newline$ -- 186
+num.names$ -- 39
+pop$ -- 123
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 218
+skip$ -- 194
 stack$ -- 0
-substring$ -- 293
-swap$ -- 95
+substring$ -- 236
+swap$ -- 84
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 66
-width$ -- 42
-write$ -- 422
+while$ -- 58
+width$ -- 39
+write$ -- 385
+(There were 2 warnings)

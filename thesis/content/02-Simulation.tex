@@ -172,9 +172,9 @@ The design and implementation of new algorithms can be a difficult task that bec
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{OpenAI-Gym}
 
-Reinforcement learning assumes that there is an agent that is situated in an environment. Each step, the agent takes an action, and it receives an observation and reward from the environment. An RL algorithm seeks to maximize some measure of the agent?s total reward, as the agent interacts with the environment. In the RL literature, the environment is formalized as a partially observable Markov decision process (POMDP) [12].
+Reinforcement learning assumes that there is an agent that is situated in an environment. Each step, the agent takes an action, and it receives an observation and reward from the environment. An RL algorithm seeks to maximize some measure of the agent's total reward, as the agent interacts with the environment. In the RL literature, the environment is formalized as a partially observable Markov decision process (POMDP) \cite{Sutton1998RL}.
 
-OpenAI Gym focuses on the episodic setting of reinforcement learning, where the agent?s experience is broken down into a series of episodes. In each episode, the agent?s initial state is randomly sampled from a distribution, and the interaction proceeds until the environment reaches a terminal state. The goal in episodic reinforcement learning is to maximize the expectation of total reward per episode, and to achieve a high level of performance in as few episodes as possible.
+OpenAI Gym focuses on the episodic setting of reinforcement learning, where the agent's experience is broken down into a series of episodes. In each episode, the agent's initial state is randomly sampled from a distribution, and the interaction proceeds until the environment reaches a terminal state. The goal in episodic reinforcement learning is to maximize the expectation of total reward per episode, and to achieve a high level of performance in as few episodes as possible.
 
 OpenAI Gym aims to combine the best elements of these previous benchmark collections, in a software package that is maximally convenient and accessible. It includes a diverse collection of Environments (POMDPs) with a common interface, and this collection will grow over time. The environments are versioned in a way that will ensure that results remain meaningful and reproducible as the software is updated.
 
@@ -182,11 +182,11 @@ OpenAI Gym aims to combine the best elements of these previous benchmark collect
 
 The design of OpenAI Gym is based on the experience developing and comparing reinforcement learning algorithms, and the experience using previous benchmark collections. Below, we will summarize some of our design decisions.
 
-Two core concepts in Reinforcement Learning are the agent and the environment. OpenAi Gym's design focuses on providing an abstraction for the environment, but not for the agent. This choice was to maximize convenience for users and allow them to implement different styles of agent interface. First, one could imagine an "online learning" style, where the agent takes (observation, reward, done) as an input at each time-step and performs learning updates incrementally. In an alternative "batch update" style, a agent is called with observation as input, and the reward information is collected separately by the RL algorithm, and later it is used to compute an update. By only specifying the agent interface, it is allowed to write customized agents with either of these styles.
+Two core concepts in Reinforcement Learning are the agent and the environment. OpenAi Gym's design focuses on providing an abstraction for the environment, but not for the agent. This choice was to maximize convenience for users and allow them to implement different styles of agent interface. First, one could imagine an ``online learning'' style, where the agent takes (observation, reward, done) as an input at each time-step and performs learning updates incrementally. In an alternative ``batch update'' style, a agent is called with observation as input, and the reward information is collected separately by the RL algorithm, and later it is used to compute an update. By only specifying the agent interface, it is allowed to write customized agents with either of these styles.
 
 \subsection{Interfacing with ROS and Gazebo}
 
-In the context of robotics, reinforcement learning offers a framework for the design of sophisticated and hard-to-engineer behaviors [2]. The challenge is to build a simple environment where this machine learning techniques can be validated, and later applied in a real scenario.
+In the context of robotics, reinforcement learning offers a framework for the design of sophisticated and hard-to-engineer behaviors \cite{RLsurvey2013}. The challenge is to build a simple environment where this machine learning techniques can be validated, and later applied in a real scenario.
 
 OpenAI Gym leaves interfaces to write customized agents, which makes it possible to integrate the Gym API with robotic hardware, validating reinforcement learning algorithms in real environments. Real-world operation is achieved combining Gazebo simulator with ROS.
 
@@ -205,40 +205,41 @@ The physics engine needs a robot definition in order to simulate it, which is pr
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{figs/ch2/cartpole-epoch-1200}
+\includegraphics[width=0.8\textwidth]{figs/ch2/cartpole-in-gazebo}
 \caption{A Cart-pole model created in Gazebo.}
 \label{fig:cartpole-in-gazebo}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{figs/ch2/cartpole-epoch-1200}
-\caption{A Cart-pole model created in ROS-Rviz.}
+\includegraphics[width=0.8\textwidth]{figs/ch2/cartpole-in-rviz}
+\caption{A Cart-pole model displayed in ROS-Rviz.}
 \label{fig:cartpole-in-rviz}
 \end{figure}
 
-Before we dive into a complex autonomous driving problem on highways, it is helpful to apply the Integrated OpenAI Gym on a simple enough problem, for example, Cart-Pole problem. In this problem or game, the pole needs to keep its balance purely relying on moving the cart in a one-degree axes. A Cart-Pole model was created in Gazebo as shown in Fig. \ref{fig:cartpole-in-gazebo}. 
+Before we dive into a complex autonomous driving problem on highways, it is helpful to apply the Integrated OpenAI Gym on a simple enough problem, for example, Cart-Pole problem. In this problem or game, the pole needs to keep its balance purely relying on moving the cart in a one-degree axes. A Cart-Pole model was created in Gazebo as shown in Fig. \ref{fig:cartpole-in-gazebo}. The acceptable state follows that the cart is with $\pm 2.4$ meters range and pole is with $\pm 12$ degree angle range. Otherwise, it loses balance and will be initialized to the initial position and angle.
 
 After the controller interface and the \textit{TF} tree are correctly defined, the model and the motion can be monitored in ROS-rviz, as shown in Fig. \ref{fig:cartpole-in-rviz}. 
 
 A Q-Learning Algorithm is applied and the policy are defined as below.
 
-\textbf{State Space}
-
-\textbf{Action Space}
-
-\textbf{Reward Function}
-
-The hyperparameters are set as below,
-
 \begin{itemize}
-\item{Epochs:} 1000.
-\item{Learning Rate:} 0.005.
-\item{Initial Exploration Rate:} 1.
-\item{Final Exploration Rate:} 0.05.
+\item \textbf{State Space:} [$pos_{cart}$, $vel_{cart}$, $pos_{pole}$, $vel_{pole}$]
+
+\item \textbf{Action Space:} [$vel_{cart} + 1$, $vel_{cart} - 1$]
+
+\item \textbf{Reward Function:} Each step it gains a 1 point reward until it loses balance and reinitialize.
 \end{itemize}
 
-As shown in Fig. \ref{fig:cartpole-result}, the accumulated reward in each episode was gradually increasing and had a huge jump when it came to Episode 1200. After that, it had a satisfying ability to keep balance for a considerable period of time.
+where $pos_{cart}$ is the position along the translation axes, $vel_{cart}$ is the linear velocity, $pos_{pole}$ is the angle of the pole compared to the initial pose,  and $vel_{pole}$ is the angular velocity of the pole.
+
+The Neural Network applied here has one layer with 10 units. The other hyperparameters in the experiment are set as below,
+
+\begin{itemize}
+\item{Epochs:} 2000.
+\item{Learning Rate in policy gradient:} 0.01.
+\item{Learning Rate in value gradient:} 0.1.
+\end{itemize}
 
 \begin{figure}[h]
 \centering
@@ -247,16 +248,18 @@ As shown in Fig. \ref{fig:cartpole-result}, the accumulated reward in each episo
 \label{fig:cartpole-result}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Vehicle Model: DBW Kit}
+As shown in Fig. \ref{fig:cartpole-result}, the accumulated reward in each episode was gradually increasing and had a huge jump when it came to Episode 1200. After that, it had a satisfying ability to keep balance for a considerable period of time.
 
-A well performed vehicle model kit, ADAS Kit Gazebo/ROS Simulator, is adopted here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vehicle Model}
+
+A well performed vehicle model kit, Dataspeed ADAS Kit Gazebo/ROS Simulator, is adopted here.
 
 \subsection{URDF Models}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{figs/ch2/mkz-cover}
+\includegraphics[width=0.8\textwidth]{figs/ch2/mkz-cover}
 \caption{4 vehicle models in ADAS Kit.}
 \label{mkz-models}.
 \end{figure}
@@ -281,7 +284,7 @@ Four URDF models representing the different vehicles supported by the Dataspeed 
 
 \subsection{Simulated CAN Message Interface}
 
-The simulator emulates the CAN message interface to the real ADAS Kit. Therefore, there are only two ROS topics used to interact with the simulated vehicle: can bus dbw  can tx to send CAN messages to the vehicle, and can bus dbw  can rx to receive feedback data from the vehicle. These topics and their corresponding message types are listed in Table 2.1.
+The simulator emulates the CAN message interface to the real ADAS Kit. Therefore, there are only two ROS topics used to interact with the simulated vehicle: $can\_bus\_dbw / can\_tx$ to send CAN messages to the vehicle, and $can\_bus\_dbw / can\_rx$ to receive feedback data from the vehicle. These topics and their corresponding message types are listed in Table \ref{table:dbw1}.
 
 \begin{table}[h!]
 \centering
@@ -289,16 +292,16 @@ The simulator emulates the CAN message interface to the real ADAS Kit. Therefore
  \hline
  Topic Name & Msg Type \\ [0.5ex] 
  \hline
- $~<name>/can_bus_dbw/can_rx$ & $can_msgs/Frame$  \\ 
+ $~<name>/can\_bus\_dbw/can\_rx$ & $can\_msgs/Frame$  \\ 
  \hline
- $~<name>/can_bus_dbw/can_tx$ & $can_msgs/Frame$ \\ [1ex] 
+ $~<name>/can\_bus\_dbw/can\_tx$ & $can\_msgs/Frame$ \\ [1ex] 
  \hline \\
 \end{tabular}
 \caption{CAN message topics to interact with simulated ADAS Kit.}
-\label{table:1}
+\label{table:dbw1}
 \end{table}
 
-The simulator only implements a subset of the complete Dataspeed CAN message specification. The supported command messages are listed in Table 2.2, and the supported report messages are listed in Table 3. See the ADAS Kit datasheets for complete CAN message information.
+The simulator only implements a subset of the complete Dataspeed CAN message specification. The supported command messages are listed in Table \ref{table:dbw3}, and the supported report messages are listed in Table \ref{table:dbw3}. See the ADAS Kit datasheets for complete CAN message information.
 
 \begin{table}[h!]
 \centering
@@ -316,7 +319,7 @@ The simulator only implements a subset of the complete Dataspeed CAN message spe
  \hline \\
 \end{tabular}
 \caption{Command CAN messages supported by the ADAS Kit simulator.}
-\label{table:2}
+\label{table:dbw2}
 \end{table}
 
 \begin{table}[h!]
@@ -340,7 +343,7 @@ Brake Info & 0x074 & 50 Hz \\ [1ex]
  \hline \\
 \end{tabular}
 \caption{Report CAN messages supported by the ADAS Kit simulator.}
-\label{table:3}
+\label{table:dbw3}
 \end{table}
 
 
@@ -365,7 +368,7 @@ color: green
 model: fusion
 \end{lstlisting}
 
-This would spawn two vehicles: one red 2017 MKZ with model name vehicle1 spawned at (0.0, -2.0, 0.0) and one green 2013 Fusion with model name vehicle2 spawned at (0.0, 2.0, 0.0). Both vehicles would have the default values of the parameters not set in the individual dictionaries.
+This would spawn two vehicles: one red 2017 MKZ with model name $\textbf{vehicle1}$ spawned at $(0.0, -2.0, 0.0)$ and one green 2013 Fusion with model name $\textbf{vehicle2}$ spawned at $(0.0, 2.0, 0.0)$. Both vehicles would have the default values of the parameters not set in the individual dictionaries.
 
 
 

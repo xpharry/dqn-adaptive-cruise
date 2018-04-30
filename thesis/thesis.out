@@ -12,28 +12,27 @@
 \BOOKMARK [1][]{section.2.1}{ROS}{chapter.2}% 12
 \BOOKMARK [1][]{section.2.2}{Gazebo}{chapter.2}% 13
 \BOOKMARK [1][]{section.2.3}{OpenAI-Gym}{chapter.2}% 14
-\BOOKMARK [1][]{section.2.4}{Vehicle Model: DBW Kit}{chapter.2}% 15
+\BOOKMARK [1][]{section.2.4}{Vehicle Model}{chapter.2}% 15
 \BOOKMARK [0][]{chapter.3}{Chapter 3. System Design}{}% 16
-\BOOKMARK [1][]{section.3.1}{Motion Planner}{chapter.3}% 17
-\BOOKMARK [1][]{section.3.2}{Trajectory Generator}{chapter.3}% 18
-\BOOKMARK [1][]{section.3.3}{Path Flowing}{chapter.3}% 19
+\BOOKMARK [1][]{section.3.1}{Behavior Planner}{chapter.3}% 17
+\BOOKMARK [1][]{section.3.2}{Path Planner}{chapter.3}% 18
+\BOOKMARK [1][]{section.3.3}{Path Following}{chapter.3}% 19
 \BOOKMARK [1][]{section.3.4}{Drive By Wire}{chapter.3}% 20
-\BOOKMARK [1][]{section.3.5}{Experiment}{chapter.3}% 21
-\BOOKMARK [0][]{chapter.4}{Chapter 4. Deep Q-Learning}{}% 22
-\BOOKMARK [1][]{section.4.1}{General Architecture}{chapter.4}% 23
-\BOOKMARK [1][]{section.4.2}{Reinforcement Learning for Longitudinal Motion}{chapter.4}% 24
-\BOOKMARK [1][]{section.4.3}{Reinforcement Learning for Lateral Motion}{chapter.4}% 25
-\BOOKMARK [1][]{section.4.4}{Q Learning}{chapter.4}% 26
-\BOOKMARK [1][]{section.4.5}{Policy Representation}{chapter.4}% 27
-\BOOKMARK [1][]{section.4.6}{Deep Neural Network Layer}{chapter.4}% 28
-\BOOKMARK [0][]{chapter.5}{Chapter 5. Results}{}% 29
-\BOOKMARK [1][]{section.5.1}{Simulation Setup}{chapter.5}% 30
-\BOOKMARK [1][]{section.5.2}{Training for Longitudinal Motion only}{chapter.5}% 31
-\BOOKMARK [1][]{section.5.3}{Training for Combined Motion}{chapter.5}% 32
-\BOOKMARK [1][]{section.5.4}{Main Evaluation}{chapter.5}% 33
-\BOOKMARK [0][]{chapter.6}{Chapter 6. Conclusions}{}% 34
-\BOOKMARK [1][]{section.6.1}{Free-Form Visualization}{chapter.6}% 35
-\BOOKMARK [1][]{section.6.2}{Analysis}{chapter.6}% 36
-\BOOKMARK [1][]{section.6.3}{Reflection}{chapter.6}% 37
-\BOOKMARK [0][]{chapter.7}{Chapter 7. Future Work}{}% 38
-\BOOKMARK [0][]{chapter*.38}{Bibliography}{}% 39
+\BOOKMARK [0][]{chapter.4}{Chapter 4. Deep Q-Learning}{}% 21
+\BOOKMARK [1][]{section.4.1}{General Architecture}{chapter.4}% 22
+\BOOKMARK [1][]{section.4.2}{Reinforcement Learning for Longitudinal Motion}{chapter.4}% 23
+\BOOKMARK [1][]{section.4.3}{Reinforcement Learning for Lateral Motion}{chapter.4}% 24
+\BOOKMARK [1][]{section.4.4}{Q Learning}{chapter.4}% 25
+\BOOKMARK [1][]{section.4.5}{Policy Representation}{chapter.4}% 26
+\BOOKMARK [1][]{section.4.6}{Deep Neural Network}{chapter.4}% 27
+\BOOKMARK [0][]{chapter.5}{Chapter 5. Results}{}% 28
+\BOOKMARK [1][]{section.5.1}{Simulation Setup}{chapter.5}% 29
+\BOOKMARK [1][]{section.5.2}{Training for Longitudinal Motion only}{chapter.5}% 30
+\BOOKMARK [1][]{section.5.3}{Training for Lateral Motion only}{chapter.5}% 31
+\BOOKMARK [1][]{section.5.4}{Training for Combined Motion}{chapter.5}% 32
+\BOOKMARK [0][]{chapter.6}{Chapter 6. Conclusions}{}% 33
+\BOOKMARK [1][]{section.6.1}{Free-Form Visualization}{chapter.6}% 34
+\BOOKMARK [1][]{section.6.2}{Analysis}{chapter.6}% 35
+\BOOKMARK [1][]{section.6.3}{Reflection}{chapter.6}% 36
+\BOOKMARK [0][]{chapter.7}{Chapter 7. Future Work}{}% 37
+\BOOKMARK [0][]{chapter*.41}{Bibliography}{}% 38
