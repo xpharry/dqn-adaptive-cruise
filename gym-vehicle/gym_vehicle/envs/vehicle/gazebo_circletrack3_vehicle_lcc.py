@@ -23,7 +23,7 @@ from gazebo_msgs.msg import ModelState, ModelStates
 
 DISPLAY_STATE = False
 
-MAX_SPEED = 22.35  # m/sec; tune this
+MAX_SPEED = 25.0  # m/sec; tune this
 COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
 LAPS = 4
@@ -294,15 +294,15 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
-        cmp_dists = [80, -80, 80, -80, 80, -80]
-        cmp_speeds = [100, 0, 100, 0, 100, 0]
+        cmp_dists = [80, 80, 80, 80, 80, 80]
+        cmp_speeds = [0, 100, 0, 100, 0, 100]
 
         if self.base_path == None:
-            return  cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
+            return  [6.0] + cmp_dists + [self.speeds[0]] + cmp_speeds, False
 
-        for i in range(6):
+        for i in range(7):
             if self.poses[i] == None:
-                return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
+                return [6.0] + cmp_dists + [self.speeds[0]] + cmp_speeds, False
 
         ss = []
         dd = []
@@ -320,7 +320,7 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
         ego_d = dd[0]
 
         if ego_d < 0 or ego_d >= 12:
-            return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], True
+            return [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, True
 
         for i in range(1, 7):
             s = ss[i]
@@ -335,17 +335,30 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
 
         done = False
 
+        if self.d_to_ilane(ego_d) == 0:
+            cmp_dists[0] = -5.0
+            cmp_dists[1] = 5.0
+            cmp_speeds[0] = 100.0
+            cmp_speeds[1] = 0.0
+        elif self.d_to_ilane(ego_d) == 2:
+            cmp_dists[4] = -5.0
+            cmp_dists[5] = 5.0
+            cmp_speeds[0] = 100.0
+            cmp_speeds[1] = 0.0
+        else:
+            pass
+
         if DISPLAY_STATE:
             print("\n")
             print("|----------------- Current State ---------------|")
             print("| Compared Dist:                                |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
-            print("|---------------|----- Ego -----|---------------|")
             print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
+            print("|---------------|----- Ego -----|---------------|")
+            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
             print("| Compared Speed:                               |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
-            print("|---------------| %f \t|---------------|" % (self.speeds[0]))
             print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
+            print("|---------------| %f \t|---------------|" % (self.speeds[0]))
+            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
             print("|-----------------------------------------------|")
             print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
             print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
@@ -368,7 +381,7 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
 
         is_changing_lane = (self.lane_index != self.d_to_ilane(ego_d))
 
-        state = cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [is_changing_lane]
+        state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
 
         return state, done
 
@@ -395,11 +408,16 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
         self.cruise_speed_pub.publish(speed_cmd)
         self.change_lane_pub.publish(chang_lane_cmd)
 
+        # if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
+        #     done = True
+        # if self.d_to_ilane(state[0]) == 2 and chang_lane_cmd == "Right":
+        #     done = True       
+
         # 27 actions
         reward = 0
         if not done:
             mid = len(chang_lane_cmds)/2
-            reward += -abs((action/len(add_on))-mid)*10
+            #reward += -abs(action-mid)*10
         else:
             reward += -10000
             self.travel_dist = 0
@@ -421,10 +439,10 @@ class GazeboCircletrack3VehicleLccEnv(gazebo_env.GazeboEnv):
         self.time_stamp = rospy.get_time()
 
         # speed
-        reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
+        # reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
 
         # change lane reward
-        reward += self.change_lane_reward
+        reward += self.change_lane_reward * 100
 
         # by acc_dist
         reward += 10 * acc_dist

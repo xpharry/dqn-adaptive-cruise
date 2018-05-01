@@ -157,6 +157,7 @@ class DeepQ:
             model.add(Dense(self.output_size, kernel_initializer='lecun_uniform', bias=bias))
             model.add(Activation("linear"))
         optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
+        # optimizer = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss="mse", optimizer=optimizer)
         model.summary()
         return model
@@ -336,13 +337,13 @@ if __name__ == '__main__':
     
     plotter = LivePlot(outdir)
 
-    continue_execution = False
+    continue_execution = True
     #fill this if continue_execution=True
 
-    model_output = '../../saved_models/circle2_lcc_dense2/'
-    weights_path = model_output + 'circle2_dense2_ep1000.h5'
-    monitor_path = model_output + 'circle2_dense2_ep1000'
-    params_json  = model_output + 'circle2_dense2_ep1000.json'
+    model_output = outdir # '../../saved_models/circle2_lcc_dense2/'
+    weights_path = model_output + 'circle2_dense2_ep10000.h5'
+    monitor_path = model_output + 'circle2_dense2_ep10000'
+    params_json  = model_output + 'circle2_dense2_ep10000.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
         
@@ -356,10 +357,10 @@ if __name__ == '__main__':
         explorationRate = 1
         minibatch_size = 64
         learnStart = 64
-        learningRate = 0.00025
+        learningRate = 0.00005
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 16
+        network_inputs = 14
         network_outputs = 3
         network_structure = [100, 70, 50, 70, 100]
         current_epoch = 0
@@ -373,7 +374,7 @@ if __name__ == '__main__':
         #ADD TRY CATCH fro this else
         with open(params_json) as outfile:
             d = json.load(outfile)
-            epochs = d.get('epochs') * 10
+            epochs = d.get('epochs') * 4
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
             explorationRate = d.get('explorationRate')
@@ -450,14 +451,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel(model_output+'circle2_fcnn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel(model_output+'circle2_dense2_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
                         # copy_tree(outdir, model_output+'circle2_fcnn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open(model_output+'circle2_fcnn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open(model_output+'circle2_dense2_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 
@@ -472,7 +473,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.998  # epsilon decay
+        explorationRate *= 0.9995  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.05, explorationRate)
 

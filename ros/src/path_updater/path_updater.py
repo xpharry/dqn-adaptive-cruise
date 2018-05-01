@@ -81,7 +81,7 @@ class pathUpdater(object):
         signal = msg.data
         reward = 0
         new_timestamp = rospy.get_time()
-        if self.lane_timestamp == None or new_timestamp - self.lane_timestamp > 5:
+        if self.lane_timestamp == None or new_timestamp - self.lane_timestamp > 1:
             if signal == "Keep":
                 self.lane_timestamp = new_timestamp
                 reward = 10
@@ -123,7 +123,7 @@ class pathUpdater(object):
         """
         Continuously publish local path paths with target velocities
         """
-        rate = rospy.Rate(10)
+        rate = rospy.Rate(50)
 
         self.ilane = int(rospy.get_param("~lane_index", '0'))
         self.cruise_speed = int(rospy.get_param("~cruise_speed", '10'))

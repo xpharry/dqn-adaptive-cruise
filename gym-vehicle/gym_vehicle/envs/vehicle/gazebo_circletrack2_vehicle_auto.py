@@ -43,6 +43,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         self.travel_time = 0
         self.time_stamp = None
         self.prev_ego_pose = None
+        self.prev_speed = 10
         self.change_lane_reward = 0
 
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
@@ -276,15 +277,15 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
-        cmp_dists = [80, -80, 80, -80, 80, -80]
-        cmp_speeds = [100, 0, 100, 0, 100, 0]
+        cmp_dists = [80, 80, 80, 80, 80, 80]
+        cmp_speeds = [0, 100, 0, 100, 0, 100]
 
         if self.base_path == None:
-            return  cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
+            return  cmp_dists + cmp_speeds, False
 
         for i in range(5):
             if self.poses[i] == None:
-                return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
+                return cmp_dists + cmp_speeds, False
 
         ss = []
         dd = []
@@ -302,7 +303,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         ego_d = dd[0]
 
         if ego_d < 0 or ego_d >= 12:
-            return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], True
+            return cmp_dists + cmp_speeds, True
 
         for i in range(1, 5):
             s = ss[i]
@@ -313,21 +314,34 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
                 continue
             if abs(delta_s) < abs(cmp_dists[rp]):
                 cmp_dists[rp] = delta_s
-                cmp_speeds[rp] = self.speeds[i]
+                cmp_speeds[rp] = self.speeds[i] - self.speeds[0]
 
         done = False
+
+        if self.d_to_ilane(ego_d) == 0:
+            cmp_dists[0] = 5.0
+            cmp_dists[1] = 5.0
+            cmp_speeds[0] = 100.0
+            cmp_speeds[1] = 0.0
+        elif self.d_to_ilane(ego_d) == 1:
+            cmp_dists[4] = 5.0
+            cmp_dists[5] = 5.0
+            cmp_speeds[4] = 100.0
+            cmp_speeds[5] = 0.0
+        else:
+            pass
 
         if DISPLAY_STATE:
             print("\n")
             print("|----------------- Current State ---------------|")
             print("| Compared Dist:                                |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
-            print("|---------------|----- Ego -----|---------------|")
             print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
+            print("|---------------|----- Ego -----|---------------|")
+            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
             print("| Compared Speed:                               |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
-            print("|---------------| %f \t|---------------|" % (self.speeds[0]))
             print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
+            print("|---------------| %f \t|---------------|" % (self.speeds[0]))
+            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
             print("|-----------------------------------------------|")
             print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
             print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
@@ -346,11 +360,11 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
                 done = True
 
         self.lanes = [0, 0, 0]
-        self.lanes[self.d_to_ilane(ego_d)] = 1
+        # self.lanes[self.d_to_ilane(ego_d)] = 1
 
         is_changing_lane = (self.lane_index != self.d_to_ilane(ego_d))
 
-        state = cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [is_changing_lane]
+        state = cmp_dists + cmp_speeds
 
         return state, done
 
@@ -376,7 +390,8 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         state, done = self.construct_state()
 
         # 27 actions
-        speed_cmd = self.speeds[0]
+        # speed_cmd = self.speeds[0]
+        speed_cmd = self.prev_speed
         add_on = [+2.0, +1.0, 0, -1.0, -2.0]
         chang_lane_cmds = ["Left", "Keep", "Right"]
 
@@ -386,17 +401,25 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         self.cruise_speed_pub.publish(speed_cmd)
         self.change_lane_pub.publish(chang_lane_cmd)
 
-        # 27 actions
+        self.prev_speed = speed_cmd
+
         reward = 0
+
+        if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
+            done = True
+        if self.d_to_ilane(state[0]) == 1 and chang_lane_cmd == "Right":
+            done = True
+
         if not done:
             mid = len(add_on)/2
-            reward += -abs((action%len(add_on))-mid)*5 + mid*5
+            reward += -abs((action%len(add_on))-mid)*5
             mid = len(chang_lane_cmds)/2
-            reward += -abs((action/len(add_on))-mid)*10
+            reward += -abs((action/len(add_on))-mid)*5
         else:
             reward += -10000
             self.travel_dist = 0
             self.travel_time = 0
+            return np.asarray(state), reward, done, {}
 
         if self.prev_ego_pose == None:
             acc_dist = 0
@@ -414,13 +437,13 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         self.time_stamp = rospy.get_time()
 
         # speed
-        reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
+        reward += 10.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
 
         # change lane reward
-        reward += self.change_lane_reward
+        # reward += self.change_lane_reward
 
         # by acc_dist
-        reward += 10 * acc_dist
+        reward += 10.0 * acc_dist
 
         if DISPLAY_STATE:
             print("| Action: %s\t|" % self.action_names(action))
@@ -429,13 +452,14 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         if self.travel_time >= 25.0 * LAPS:
             print("Time Out! :(")
+            reward += -10000
             done = True
             self.travel_dist = 0
             self.travel_time = 0
 
-        if self.travel_dist >= 230.0 * LAPS:
+        if self.travel_dist >= 280 * LAPS:
             print("Safely finishing! :)")
-            reward += 10000
+            reward += 5000
             done = True
             self.travel_dist = 0
             self.travel_time = 0
