@@ -9,7 +9,7 @@
   <!-- Path planning -->
   <node name="ego_path_updater" pkg="path_updater" type="path_updater2.py" output="log">
     <param name="lane_index" value="1"/>
-    <param name="cruise_speed" value="10"/>
+    <param name="cruise_speed" value="6"/>
     <remap from="current_pose" to="/ego/current_pose" />
     <remap from="final_path" to="/ego/final_path" />
     <remap from="final_waypoints" to="/ego/final_waypoints" />
@@ -32,7 +32,7 @@
   <!-- Path planning -->
   <node name="fusion1_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="0"/>
-    <param name="cruise_speed" value="12"/>
+    <param name="cruise_speed" value="10"/>
     <remap from="current_pose" to="/fusion1/current_pose" />
     <remap from="final_path" to="/fusion1/final_path" />
     <remap from="final_waypoints" to="/fusion1/final_waypoints" />
@@ -53,7 +53,7 @@
   <!-- Path planning -->
   <node name="fusion2_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="0"/>
-    <param name="cruise_speed" value="12"/>
+    <param name="cruise_speed" value="10"/>
     <remap from="current_pose" to="/fusion2/current_pose" />
     <remap from="final_path" to="/fusion2/final_path" />
     <remap from="final_waypoints" to="/fusion2/final_waypoints" />
@@ -74,7 +74,7 @@
   <!-- Path planning -->
   <node name="mondeo1_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="1"/>
-    <param name="cruise_speed" value="10"/>
+    <param name="cruise_speed" value="5"/>
     <remap from="current_pose" to="/mondeo1/current_pose" />
     <remap from="final_path" to="/mondeo1/final_path" />
     <remap from="final_waypoints" to="/mondeo1/final_waypoints" />
@@ -95,7 +95,7 @@
   <!-- Path planning -->
   <node name="mondeo2_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="1"/>
-    <param name="cruise_speed" value="10"/>
+    <param name="cruise_speed" value="5"/>
     <remap from="current_pose" to="/mondeo2/current_pose" />
     <remap from="final_path" to="/mondeo2/final_path" />
     <remap from="final_waypoints" to="/mondeo2/final_waypoints" />

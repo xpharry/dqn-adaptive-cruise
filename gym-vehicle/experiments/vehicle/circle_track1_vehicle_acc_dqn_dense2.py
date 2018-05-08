@@ -360,7 +360,7 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 2
+        network_inputs = 3
         network_outputs = 5
         network_structure = [100, 70, 50, 70, 100]
         current_epoch = 0

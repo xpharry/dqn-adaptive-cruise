@@ -12,8 +12,8 @@ int main(int argc, char **argv) {
     ros::Rate loop_rate(20);
 
     // speed = 2 + 2 * sin(w*t)
-    double speed_mag = 2;
-    double bias = 3;
+    double speed_mag = 5;
+    double bias = 10;
     double omega = 2 * M_PI / 3.6;
 
     double begin = ros::Time::now().toSec();

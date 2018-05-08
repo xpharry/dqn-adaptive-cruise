@@ -21,7 +21,7 @@ from sensor_msgs.msg import LaserScan
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
-DISPLAY_STATE = False
+DISPLAY_STATE = True
 
 MAX_SPEED = 25.0  # m/sec; tune this
 COLLISON_DIST = 5 # m
@@ -234,11 +234,11 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         cmp_speeds = [0, 100]
 
         if self.base_path == None:
-            return  [80, 100], False
+            return  [80, 100, 100], False
 
         for i in range(2):
             if self.poses[i] == None:
-                return [80, 100], False
+                return [80, 100, 100], False
 
         ss = []
         dd = []
@@ -254,7 +254,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         ego_d = dd[0]
 
         if ego_d < 4 or ego_d >= 8:
-            return [80, 100], True
+            return [5, 0, 0], True
 
         for i in range(1,2):
             s = ss[i]
@@ -288,16 +288,20 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
             print("| Average Speed: %f \t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
             print("|-------------------|")
 
-        if abs(cmp_dists[0]) < COLLISON_DIST or abs(cmp_dists[1]) < COLLISON_DIST:
+        if abs(cmp_dists[1]) < 10:
             print("Collision detected!")
             done = True
+
+        if abs(cmp_dists[1]) > 60:
+            print("Following failed!")
+            done = True        
 
         for i in range(2):
             if self.poses[i].pose.position.z > 0.5:
                 print("Car %d is turned over!" % (i))
                 done = True
 
-        state = [cmp_dists[0], cmp_speeds[0]-self.speeds[0]]
+        state = [cmp_dists[1], self.speeds[0], self.speeds[1]]
 
         return state, done
 
@@ -318,20 +322,19 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         state, done = self.construct_state()
 
         # 9 actions
-        # speed_cmd = self.speeds[0]
-        speed_cmd = self.prev_speed
+        speed_cmd = self.speeds[0]
+        # speed_cmd = self.prev_speed
         add_on = [+2.0, +1.0, 0, -1.0, -2.0]
 
         # print("cmd_speed = %f" % cmd_speed)
         speed_cmd = self.speed_saturate(speed_cmd + add_on[action])
         self.cruise_speed_pub.publish(speed_cmd)
 
-        self.prev_speed = speed_cmd
+        # self.prev_speed = speed_cmd
 
         # 9 actions
         reward = 0
         if done:
-            # reward += -10000
             self.travel_dist = 0
             self.travel_time = 0
             return np.asarray(state), reward, done, {}
@@ -352,10 +355,17 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         self.time_stamp = rospy.get_time()
 
         # speed
-        # vreward += 10 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
+        # reward += 1.0 * self.speeds[0]
 
         # by acc_dist
-        reward += 1.0 * acc_dist - 5.0 * (state[0] - 20)
+        reward += 1.0 # * acc_dist
+
+        # if state[0] <= 10:
+        #     reward += -100 / state[0]
+
+        # delta_s = self.compute_delta_s(self.poses[0], self.poses[1])
+        # if delta_s > 60:
+        #     done = True
 
         # if DISPLAY_STATE:
         #     print("| Action: %s\t|" % self.action_names(action))
@@ -368,12 +378,12 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         #     self.travel_dist = 0
         #     self.travel_time = 0
 
-        if self.travel_dist > 360 * LAPS:
-            print("Safely done! :D")
-            # reward += 10000
-            done = True
-            self.travel_dist = 0
-            self.travel_time = 0
+        # if self.travel_dist > 360 * LAPS:
+        #     print("Safely done! :D")
+        #     # reward += 10000
+        #     done = True
+        #     self.travel_dist = 0
+        #     self.travel_time = 0
 
         return np.asarray(state), reward, done, {}
 

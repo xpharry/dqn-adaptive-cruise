@@ -339,7 +339,7 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = '../../saved_models/circle2_auto_dense/'
+    model_output = outdir # '../../saved_models/circle2_auto_dense/'
     weights_path = model_output + 'circle2_dense_ep1000.h5'
     monitor_path = model_output + 'circle2_dense_ep1000'
     params_json  = model_output + 'circle2_dense_ep1000.json'
@@ -350,7 +350,7 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 5000
+        epochs = 10000
         steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -359,7 +359,7 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 12
+        network_inputs = 14
         network_outputs = 15
         network_structure = [300, 300]
         current_epoch = 0
@@ -472,9 +472,9 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.998  # epsilon decay
+        explorationRate *= 0.999  # epsilon decay
         # explorationRate -= (2.0/epochs)
-        explorationRate = max(0.05, explorationRate)
+        explorationRate = max(0.01, explorationRate)
 
     # env.monitor.close()
     env.close()

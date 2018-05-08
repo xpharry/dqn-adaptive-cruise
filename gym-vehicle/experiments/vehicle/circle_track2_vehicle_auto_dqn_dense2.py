@@ -14,7 +14,6 @@ import random
 import numpy as np
 from keras.models import Sequential, load_model
 from keras import optimizers
-from keras.layers import Conv1D, MaxPooling1D, Flatten
 from keras.layers.core import Dense, Dropout, Activation
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
@@ -164,20 +163,26 @@ class DeepQ:
 
     def createModel(self, inputs, outputs, hiddenLayers, activationType, learningRate):
         model = Sequential()
-        model.add(Conv1D(32, 2, input_shape=(self.input_size, 1), kernel_initializer='lecun_uniform'))
-        model.add(Activation("relu"))
-        model.add(Conv1D(32, 2, kernel_initializer='lecun_uniform'))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization())
-        model.add(MaxPooling1D(pool_size=1))
-        model.add(Dropout(0.4))
-        model.add(Flatten())
-        model.add(Dense(32, kernel_initializer='lecun_uniform'))
-        model.add(Activation("relu"))
-        model.add(Dense(64, kernel_initializer='lecun_uniform'))
-        model.add(Activation("relu"))
-        model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
-        model.add(Activation("linear"))
+        if len(hiddenLayers) == 0:
+            model.add(Dense(self.output_size, input_shape=(self.input_size,), kernel_initializer='lecun_uniform'))
+            model.add(Activation("linear"))
+        else:
+            model.add(Dense(hiddenLayers[0], input_shape=(self.input_size,), kernel_initializer='lecun_uniform'))
+            if activationType == "LeakyReLU":
+                model.add(LeakyReLU(alpha=0.01))
+            else:
+                model.add(Activation(activationType))
+
+            for index in range(1, len(hiddenLayers)):
+                # print("adding layer "+str(index))
+                layerSize = hiddenLayers[index]
+                model.add(Dense(layerSize, kernel_initializer='lecun_uniform'))
+                if activationType == "LeakyReLU":
+                    model.add(LeakyReLU(alpha=0.01))
+                else:
+                    model.add(Activation(activationType))
+            model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
+            model.add(Activation("linear"))
         optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
         model.compile(loss="mse", optimizer=optimizer)
         model.summary()
@@ -206,11 +211,11 @@ class DeepQ:
 
     # predict Q values for all the actions
     def getQValues(self, state):
-        predicted = self.model.predict(state.reshape(1, len(state), 1))
+        predicted = self.model.predict(state.reshape(1, len(state)))
         return predicted[0]
 
     def getTargetQValues(self, state):
-        predicted = self.targetModel.predict(state.reshape(1, len(state), 1))
+        predicted = self.targetModel.predict(state.reshape(1, len(state)))
         return predicted[0]
 
     def getMaxQ(self, qValues):
@@ -299,7 +304,7 @@ class DeepQ:
                 if isFinal:
                     X_batch = np.append(X_batch, np.array([newState.copy()]), axis=0)
                     Y_batch = np.append(Y_batch, np.array([[reward]*self.output_size]), axis=0)
-            self.model.fit(X_batch.reshape(X_batch.shape[0], X_batch.shape[1], 1), Y_batch, batch_size=len(miniBatch), epochs=1, verbose=0)
+            self.model.fit(X_batch, Y_batch, batch_size=len(miniBatch), epochs=1, verbose=0)
 
     def saveModel(self, path):
         self.model.save(path)
@@ -323,22 +328,21 @@ def clear_monitor_files(training_dir):
 
 if __name__ == '__main__':
 
-    env = gym.make('GazeboCircletrack1VehicleAcc-v0')
+    env = gym.make('GazeboCircletrack2VehicleAuto-v0')
     
-    outdir = '../../results/circle1_acc_conv/'
+    outdir = '../../results/circle2_auto_dense/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
     plotter = LivePlot(outdir)
 
-    continue_execution = False
+    continue_execution = True
     #fill this if continue_execution=True
 
-    model_output = outdir # s'../../saved_models/circle1_acc_conv/'
-    init_weights_path = model_output + 'circle1_conv_initial.h5'
-    weights_path = model_output + 'circle1_conv_ep1000.h5'
-    monitor_path = model_output + 'circle1_conv_ep1000'
-    params_json  = model_output + 'circle1_conv_ep1000.json'
+    model_output = outdir # '../../saved_models/circle2_auto_dense/'
+    weights_path = model_output + 'circle2_dense_ep5000.h5'
+    monitor_path = model_output + 'circle2_dense_ep5000'
+    params_json  = model_output + 'circle2_dense_ep5000.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
 
@@ -346,8 +350,8 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 2000
-        steps = 10000
+        epochs = 5000
+        steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
         minibatch_size = 64
@@ -355,18 +359,13 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 3
-        network_outputs = 5
+        network_inputs = 14
+        network_outputs = 15
         network_structure = [300, 300]
         current_epoch = 0
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
         deepQ.initNetworks(network_structure)
-
-        if os.path.exists(init_weights_path):
-            print("load initial weights ...")
-            deepQ.loadWeights(init_weights_path)
-
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
     else:
@@ -374,10 +373,10 @@ if __name__ == '__main__':
         #ADD TRY CATCH fro this else
         with open(params_json) as outfile:
             d = json.load(outfile)
-            epochs = d.get('epochs')
+            epochs = d.get('epochs') * 2
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
-            explorationRate = d.get('explorationRate')
+            explorationRate = 0.5 # d.get('explorationRate')
             minibatch_size = d.get('minibatch_size')
             learnStart = d.get('learnStart')
             learningRate = d.get('learningRate')
@@ -385,15 +384,15 @@ if __name__ == '__main__':
             memorySize = d.get('memorySize')
             network_inputs = d.get('network_inputs')
             network_outputs = d.get('network_outputs')
-            network_layers = d.get('network_structure')
+            network_structure = d.get('network_structure')
             current_epoch = d.get('current_epoch')
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
-        deepQ.initNetworks(network_layers)
+        deepQ.initNetworks(network_structure)
         deepQ.loadWeights(weights_path)
 
         clear_monitor_files(outdir)
-        copy_tree(monitor_path, outdir)
+        # copy_tree(monitor_path, outdir)
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
 
@@ -451,14 +450,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel(model_output+'circle1_cnn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel(model_output+'circle2_fcnn_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
-                        # copy_tree(outdir, model_output+'circle1_fcnn_ep'+str(epoch))
+                        # copy_tree(outdir, model_output+'circle2_fcnn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open(model_output+'circle1_cnn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open(model_output+'circle2_fcnn_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 
@@ -473,9 +472,9 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.997  # epsilon decay
+        explorationRate *= 0.99  # epsilon decay
         # explorationRate -= (2.0/epochs)
-        explorationRate = max(0.05, explorationRate)
+        explorationRate = max(0.01, explorationRate)
 
     # env.monitor.close()
     env.close()

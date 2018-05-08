@@ -81,7 +81,7 @@ class pathUpdater(object):
         signal = msg.data
         reward = 0
         new_timestamp = rospy.get_time()
-        if self.lane_timestamp == None or new_timestamp - self.lane_timestamp > 1:
+        if self.lane_timestamp == None or new_timestamp - self.lane_timestamp > 0:
             if signal == "Keep":
                 self.lane_timestamp = new_timestamp
                 reward = 10

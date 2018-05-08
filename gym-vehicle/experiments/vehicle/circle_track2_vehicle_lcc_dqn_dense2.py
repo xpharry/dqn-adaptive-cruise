@@ -337,7 +337,7 @@ if __name__ == '__main__':
     
     plotter = LivePlot(outdir)
 
-    continue_execution = True
+    continue_execution = False
     #fill this if continue_execution=True
 
     model_output = outdir # '../../saved_models/circle2_lcc_dense2/'
@@ -357,7 +357,7 @@ if __name__ == '__main__':
         explorationRate = 1
         minibatch_size = 64
         learnStart = 64
-        learningRate = 0.00005
+        learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
         network_inputs = 14
@@ -473,7 +473,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.9995  # epsilon decay
+        explorationRate *= 0.998  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.05, explorationRate)
 
