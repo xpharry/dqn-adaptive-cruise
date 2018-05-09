@@ -32,7 +32,7 @@
   <!-- Path planning -->
   <node name="fusion_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="1"/>
-    <param name="cruise_speed" value="5"/>
+    <param name="cruise_speed" value="0"/>
     <remap from="current_pose" to="/fusion/current_pose" />
     <remap from="final_path" to="/fusion/final_path" />
     <remap from="final_waypoints" to="/fusion/final_waypoints" />
@@ -47,13 +47,13 @@
   </node>-->
 
   <!-- Continuously publish the vehicle's pose and odom -->
-  <!--<node name="mondeo_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
+  <node name="mondeo_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
     <param name="target_model" value="mondeo"/>
-  </node> -->
+  </node>
   <!-- Path planning -->
-  <!--<node name="mondeo_path_updater" pkg="path_updater" type="path_updater.py">
+  <node name="mondeo_path_updater" pkg="path_updater" type="path_updater.py">
     <param name="lane_index" value="1"/>
-    <param name="cruise_speed" value="10"/>
+    <param name="cruise_speed" value="0"/>
     <remap from="current_pose" to="/mondeo/current_pose" />
     <remap from="final_path" to="/mondeo/final_path" />
     <remap from="final_waypoints" to="/mondeo/final_waypoints" />
@@ -65,6 +65,27 @@
     <remap from="final_waypoints" to="/mondeo/final_waypoints" />
     <remap from="current_velocity" to="/mondeo/twist" />
     <remap from="cmd_vel" to="/mondeo/cmd_vel" />
-  </node> -->
+  </node>
+
+  <!-- Continuously publish the vehicle's pose and odom -->
+  <node name="mkz_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="log">
+    <param name="target_model" value="mkz"/>
+  </node>
+  <!-- Path planning -->
+  <node name="mkz_path_updater" pkg="path_updater" type="path_updater.py">
+    <param name="lane_index" value="1"/>
+    <param name="cruise_speed" value="0"/>
+    <remap from="current_pose" to="/mkz/current_pose" />
+    <remap from="final_path" to="/mkz/final_path" />
+    <remap from="final_waypoints" to="/mkz/final_waypoints" />
+    <remap from="final_path_points" to="/mkz/final_path_points" />
+  </node>
+  <node name="mkz_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">
+    <param name="linear_interpolate_mode" value="True"/>
+    <remap from="current_pose" to="/mkz/current_pose" />
+    <remap from="final_waypoints" to="/mkz/final_waypoints" />
+    <remap from="current_velocity" to="/mkz/twist" />
+    <remap from="cmd_vel" to="/mkz/cmd_vel" />
+  </node>
 
 </launch>

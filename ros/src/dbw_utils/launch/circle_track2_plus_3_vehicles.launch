@@ -5,7 +5,7 @@
   <include file="$(find dbw_utils)/launch/dbw_mkz_gazebo.launch" >
     <arg name="use_camera_control" value="true" />
     <arg name="world_name" value="$(find dbw_utils)/worlds/empty_world.world" />
-    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/circle_track2_plus_1_vehicle.yaml" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/circle_track2_plus_3_vehicles.yaml" />
   </include>
 
   <!-- Waypoint loader playing a role as global path planner -->
@@ -30,8 +30,24 @@
     <arg name="vehicle_ns" value="fusion" />
   </include>
 
+  <!-- Mondeo -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mondeo" />
+  </include>
+
+  <!-- Mkz -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz" />
+  </include>
+
   <!-- Display -->
   <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
-  <node pkg="rviz" type="rviz" name="multi_vehicle_rviz" args="-d $(find utility)../../../config/circle_track2_plus_1_vehicle_visualization.rviz" respawn="true" />
+  <node pkg="rviz" type="rviz" name="multi_vehicle_rviz" args="-d $(find utility)../../../config/circle_track2_plus_3_vehicles_visualization.rviz" respawn="true" />
 
 </launch>

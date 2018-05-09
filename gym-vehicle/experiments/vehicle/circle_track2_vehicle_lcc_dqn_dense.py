@@ -350,7 +350,7 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 5000
+        epochs = 10000
         steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -359,7 +359,7 @@ if __name__ == '__main__':
         learningRate = 0.00025
         discountFactor = 0.99
         memorySize = 1000000
-        network_inputs = 5
+        network_inputs = 14
         network_outputs = 3
         network_structure = [300, 300]
         current_epoch = 0
@@ -474,7 +474,7 @@ if __name__ == '__main__':
 
         explorationRate *= 0.999  # epsilon decay
         # explorationRate -= (2.0/epochs)
-        explorationRate = max(0.05, explorationRate)
+        explorationRate = max(0.01, explorationRate)
 
     # env.monitor.close()
     env.close()
