@@ -360,6 +360,8 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         # by acc_dist
         reward += 1.0 # * acc_dist
 
+        reward += -(action%len(add_on) - len(add_on)/2) * 0.2
+
         # if state[0] <= 10:
         #     reward += -100 / state[0]
 

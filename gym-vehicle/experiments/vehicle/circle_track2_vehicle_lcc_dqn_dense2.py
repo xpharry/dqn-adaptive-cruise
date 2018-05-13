@@ -41,7 +41,7 @@ class LivePlot(object):
         #styling options
         matplotlib.rcParams['toolbar'] = 'None'
         plt.style.use('ggplot')
-        plt.xlabel("")
+        plt.xlabel("episode")
         plt.ylabel(data_key)
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
@@ -341,9 +341,9 @@ if __name__ == '__main__':
     #fill this if continue_execution=True
 
     model_output = outdir # '../../saved_models/circle2_lcc_dense2/'
-    weights_path = model_output + 'circle2_dense2_ep10000.h5'
-    monitor_path = model_output + 'circle2_dense2_ep10000'
-    params_json  = model_output + 'circle2_dense2_ep10000.json'
+    weights_path = model_output + 'circle2_dense2_ep20000.h5'
+    monitor_path = model_output + 'circle2_dense2_ep20000'
+    params_json  = model_output + 'circle2_dense2_ep20000.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
         
@@ -351,7 +351,7 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 5000
+        epochs = 10000
         steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -374,7 +374,7 @@ if __name__ == '__main__':
         #ADD TRY CATCH fro this else
         with open(params_json) as outfile:
             d = json.load(outfile)
-            epochs = d.get('epochs') * 4
+            epochs = d.get('epochs') * 3
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
             explorationRate = d.get('explorationRate')
@@ -468,14 +468,14 @@ if __name__ == '__main__':
                 print("updating target network")
 
         list_rewards.append(cumulated_reward)
-        if(epoch%20==0):
+        if(epoch%5==0):
             plotter.plot(list_rewards)
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.998  # epsilon decay
+        explorationRate *= 0.9999  # epsilon decay
         # explorationRate -= (2.0/epochs)
-        explorationRate = max(0.05, explorationRate)
+        explorationRate = max(0.01, explorationRate)
 
     # env.monitor.close()
     env.close()

@@ -21,7 +21,7 @@ from sensor_msgs.msg import LaserScan
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
-DISPLAY_STATE = True
+DISPLAY_STATE = False
 
 MAX_SPEED = 25  # m/sec; tune this
 COLLISON_DIST = 5 # m
@@ -44,6 +44,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         self.prev_ego_pose = None
         self.time_steps = 0
         self.prev_speed = 10
+        self.prev_state = None
         self.change_lane_reward = 0
 
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
@@ -302,6 +303,12 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
 
         if ego_d < 0 or ego_d >= 8:
             state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+            # if self.prev_state == None:
+            #     stacked_state = state + state + state + state
+            #     self.prev_state = [state, state, state, state]
+            # else:
+            #     stacked_state = self.prev_state[1] + self.prev_state[2] + self.prev_state[3] + state
+            #     self.prev_state = [self.prev_state[1], self.prev_state[2], self.prev_state[3], state]
             return state, True
 
         for i in range(1, 4):
@@ -349,7 +356,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
             print("|-----------------------------------------------|")
 
-        if abs(cmp_dists[2]) < COLLISON_DIST*2 or abs(cmp_dists[3]) < COLLISON_DIST*2 self.speeds[0] < 0.5:
+        if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST or (self.time_steps > 5 and self.speeds[0] < 1.0):
             print("Collision detected!")
             done = True
 
@@ -363,6 +370,13 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         is_changing_lane = (self.ego_lane != self.d_to_ilane(ego_d))
 
         state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+
+        # if self.prev_state == None:
+        #     stacked_state = state + state + state + state
+        #     self.prev_state = [state, state, state, state]
+        # else:
+        #     stacked_state = self.prev_state[1] + self.prev_state[2] + self.prev_state[3] + state
+        #     self.prev_state = [self.prev_state[1], self.prev_state[2], self.prev_state[3], state]
 
         return state, done
 
@@ -401,7 +415,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
 
         # 3 actions
         if done:
-            # reward += -100
+            reward = -200
             self.travel_dist = 0
             self.travel_time = 0
             self.prev_ego_pose = None
@@ -433,6 +447,9 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         reward += 1 # 10 * acc_dist
         self.time_steps += 1
 
+        # if chang_lane_cmd == "Left" or chang_lane_cmd == "Right":
+        #     reward += -0.2
+
         if DISPLAY_STATE:
             print("| Action: %s\t|" % action)
             print("| Reward: %f \t\t\t\t|" % reward)
@@ -444,8 +461,9 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         #     self.travel_dist = 0
         #     self.travel_time = 0
 
-        if self.time_steps >= 100:
+        if self.time_steps >= 80:
             print("Good job!")
+            # reward += 100
             done = True
             self.travel_dist = 0
             self.travel_time = 0

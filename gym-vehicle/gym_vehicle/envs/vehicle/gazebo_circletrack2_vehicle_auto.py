@@ -24,7 +24,7 @@ from gazebo_msgs.msg import ModelState, ModelStates
 DISPLAY_STATE = True
 
 MAX_SPEED = 22.35  # m/sec; tune this
-COLLISON_DIST = 5 # m
+COLLISON_DIST = 10 # m
 INIT_LANE_INDEX = 1
 LAPS = 3
 
@@ -321,14 +321,14 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         done = False
 
         if self.d_to_ilane(ego_d) == 0:
-            cmp_dists[0] = 10.0
-            cmp_dists[1] = 10.0
-            cmp_speeds[0] = 20.0
+            cmp_dists[0] = 5.0
+            cmp_dists[1] = 5.0
+            cmp_speeds[0] = 0.0
             cmp_speeds[1] = 0.0
         elif self.d_to_ilane(ego_d) == 1:
-            cmp_dists[4] = 10.0
-            cmp_dists[5] = 10.0
-            cmp_speeds[4] = 20.0
+            cmp_dists[4] = 5.0
+            cmp_dists[5] = 5.0
+            cmp_speeds[4] = 0.0
             cmp_speeds[5] = 0.0
         else:
             pass
@@ -422,15 +422,16 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         reward = 0
 
-        # if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
-        #     done = True
-        # if self.d_to_ilane(state[0]) == 1 and chang_lane_cmd == "Right":
-        #     done = True
+        if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
+            done = True
+        if self.d_to_ilane(state[0]) == 1 and chang_lane_cmd == "Right":
+            done = True
 
         if done:
             # reward += -10000
             self.travel_dist = 0
             self.travel_time = 0
+            self.prev_ego_pose = None
             return np.asarray(state), reward, done, {}
 
         reward += -(action%len(add_on) - len(add_on)/2) * 0.2
