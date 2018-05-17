@@ -1,13 +1,13 @@
 - ego:
-    x: 42.6
-    y: 36.6
+    x: -36.0
+    y: -2.0
     z: 0.0
-    yaw: 1.57
+    yaw: 0.0
     model: mondeo
     color: white
     pub_tf: true
 - fusion:
-    x: 0.0
+    x: -10.0
     y: -2.0
     z: 0.0
     yaw: 0.0

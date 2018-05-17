@@ -21,12 +21,12 @@ from sensor_msgs.msg import LaserScan
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
-DISPLAY_STATE = True
+DISPLAY_STATE = False
 
 MAX_SPEED = 25.0  # m/sec; tune this
 COLLISON_DIST = 5 # m
 INIT_LANE_INDEX = 1
-LAPS = 2
+LAPS = 1
 
 class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
 
@@ -35,11 +35,13 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         gazebo_env.GazeboEnv.__init__(self, "GazeboCircletrack1VehicleAcc_v1.launch")
 
         self.base_path = None
+        self.maps_s = None
         self.speeds = [0, 0]
         self.poses = [None, None]
         self.travel_dist = 0
         self.travel_time = 0
         self.time_stamp = None
+        self.time_steps = 0
         self.prev_ego_pose = None
         self.prev_speed = 10
         self.change_lane_reward = 0
@@ -62,6 +64,19 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
     def base_path_cb(self, msg):
         """ Store the given map """
         self.base_path = msg
+        # frenet transform
+        self.maps_s = []
+        map_s = 0
+        self.maps_s.append(map_s)
+        map_x_prev = self.base_path.poses[0].pose.position.x
+        map_y_prev = self.base_path.poses[0].pose.position.y
+        for i in range(1, len(self.base_path.poses)):
+            map_x = self.base_path.poses[i].pose.position.x
+            map_y = self.base_path.poses[i].pose.position.y
+            map_s += self.euclidean_distance(map_x, map_y, map_x_prev, map_y_prev)
+            self.maps_s.append(map_s)
+            map_x_prev = map_x
+            map_y_prev = map_y
 
     def ego_vel_cb(self, data):
         self.speeds[0] = data.twist.linear.x
@@ -189,6 +204,29 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
 
         return frenet_s, frenet_d
 
+    # Transform from Frenet s,d coordinates to Cartesian x,y
+    def get_xy(self, s, d, maps_s, poses):
+        prev_wp = -1
+
+        while prev_wp < len(maps_s)-1 and s > maps_s[prev_wp+1]:
+            prev_wp += 1
+
+        wp2 = (prev_wp+1) % len(maps_s)
+
+        heading = math.atan2((poses[wp2].pose.position.y-poses[prev_wp].pose.position.y), (poses[wp2].pose.position.x-poses[prev_wp].pose.position.x))
+        # the x,y,s along the segment
+        seg_s = s-maps_s[prev_wp]
+
+        seg_x = poses[prev_wp].pose.position.x + seg_s*math.cos(heading)
+        seg_y = poses[prev_wp].pose.position.y + seg_s*math.sin(heading)
+
+        perp_heading = heading-math.pi/2
+
+        x = seg_x + d*math.cos(perp_heading)
+        y = seg_y + d*math.sin(perp_heading)
+
+        return x, y
+
     def d_to_ilane(self, d):
         if d >= 0 and d < 4:
             ilane = 0
@@ -231,14 +269,14 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
 
     def construct_state(self):
         cmp_dists = [80, 80]
-        cmp_speeds = [0, 100]
+        cmp_speeds = [0, 20]
 
         if self.base_path == None:
-            return  [80, 100, 100], False
+            return  [80, 0, 0], False
 
         for i in range(2):
             if self.poses[i] == None:
-                return [80, 100, 100], False
+                return [80, 0, 0], False
 
         ss = []
         dd = []
@@ -253,9 +291,6 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         ego_s = ss[0]
         ego_d = dd[0]
 
-        if ego_d < 4 or ego_d >= 8:
-            return [5, 0, 0], True
-
         for i in range(1,2):
             s = ss[i]
             d = dd[i]
@@ -266,6 +301,56 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
             if abs(delta_s) < abs(cmp_dists[rp]):
                 cmp_dists[rp] = abs(delta_s)
                 cmp_speeds[rp] = self.speeds[i]
+
+        # a car is coming backward
+        if abs(cmp_dists[0]) < 40:
+            # ************************************************
+            # Pause simulation to make observation
+            # ************************************************
+            rospy.wait_for_service('/gazebo/pause_physics')
+            try:
+                self.pause()
+            except rospy.ServiceException as e:
+                print("/gazebo/pause_physics service call failed")
+
+            # ************************************************
+            # define initial pose for later use
+            # ************************************************
+            mondeo_s = ego_s + 40
+            mondeo_d = ego_d
+            new_x, new_y = self.get_xy(mondeo_s, mondeo_d, self.maps_s, self.base_path.poses)
+            index = self.closest_waypoint_index(new_x, new_y, self.base_path.poses)  
+            next_x = self.base_path.poses[(index+1)/len(self.base_path.poses)].pose.position.x
+            next_y = self.base_path.poses[(index+1)/len(self.base_path.poses)].pose.position.y
+
+            new_pose = Pose()
+            new_pose.position.x = new_x
+            new_pose.position.y = new_y
+            new_pose.position.z = 0.0
+            new_pose.orientation = self.phi2quat(math.atan2(next_y-new_y, next_x-new_x) - math.pi/2)
+
+            # ************************************************
+            # set initial model state
+            # ************************************************
+            model_state_x = ModelState()
+            model_state_x.model_name = "mondeo"
+            model_state_x.pose = new_pose
+            rospy.wait_for_service('/gazebo/set_model_state')
+            try:
+                set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
+                ret = set_model_state(model_state_x)
+                # print(ret.status_message)
+            except rospy.ServiceException as e:
+                print("Service \'set_model_state\' call failed: %s" % e)
+
+            # ************************************************
+            # Unpause simulation to make observation
+            # ************************************************
+            rospy.wait_for_service('/gazebo/unpause_physics')
+            try:
+                self.unpause()
+            except rospy.ServiceException as e:
+                print("/gazebo/unpause_physics service call failed")
 
         done = False
 
@@ -288,20 +373,20 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
             print("| Average Speed: %f \t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
             print("|-------------------|")
 
-        if abs(cmp_dists[1]) < 10:
+        if self.time_steps > 1 and abs(cmp_dists[1]) < 10:
             print("Collision detected!")
-            done = True
-
-        if abs(cmp_dists[1]) > 60:
-            print("Following failed!")
-            done = True        
+            done = True  
 
         for i in range(2):
             if self.poses[i].pose.position.z > 0.5:
                 print("Car %d is turned over!" % (i))
                 done = True
 
-        state = [cmp_dists[1], self.speeds[0], self.speeds[1]]
+        if ego_d < 4 or ego_d >= 8:
+            print("Off lane!")
+            done = True
+
+        state = [cmp_dists[1], self.speeds[0], self.speeds[1]-self.speeds[0]]
 
         return state, done
 
@@ -335,8 +420,11 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         # 9 actions
         reward = 0
         if done:
+            reward += -200
             self.travel_dist = 0
             self.travel_time = 0
+            self.prev_ego_pose = None
+            self.time_steps = 0
             return np.asarray(state), reward, done, {}
 
         if self.prev_ego_pose == None:
@@ -358,9 +446,13 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         # reward += 1.0 * self.speeds[0]
 
         # by acc_dist
-        reward += 1.0 # * acc_dist
+        reward += 1.0 * acc_dist
 
         reward += -(action%len(add_on) - len(add_on)/2) * 0.2
+
+        reward += 2 * self.speeds[0]/MAX_SPEED
+
+        self.time_steps += 1
 
         # if state[0] <= 10:
         #     reward += -100 / state[0]
@@ -374,11 +466,11 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         #     print("| Reward: %f \t\t|" % reward)
         #     print("|-------------------|")
 
-        # if self.travel_time >= 25.0 * LAPS:
-        #     print("Time Out!")
-        #     done = True
-        #     self.travel_dist = 0
-        #     self.travel_time = 0
+        if self.travel_time >= 40.0 * LAPS:
+            print("Time Out!")
+            done = True
+            self.travel_dist = 0
+            self.travel_time = 0
 
         # if self.travel_dist > 360 * LAPS:
         #     print("Safely done! :D")
@@ -420,12 +512,19 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         quat1 = self.phi2quat(0.0)
         init_pose1.orientation = quat1
 
+        init_twist0 = Twist()
+        init_twist0.linear.x = 10.0
+
+        init_twist1 = Twist()
+        init_twist1.linear.x = 10.0
+
         # ************************************************
         # set initial model state
         # ************************************************
         model_state0 = ModelState()
         model_state0.model_name = "ego"
         model_state0.pose = init_pose0
+        model_state0.twist = init_twist0
         rospy.wait_for_service('/gazebo/set_model_state')
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -437,6 +536,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         model_state1 = ModelState()
         model_state1.model_name = "mondeo"
         model_state1.pose = init_pose1
+        model_state1.twist = init_twist1
         rospy.wait_for_service('/gazebo/set_model_state')
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -457,6 +557,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         # ************************************************
         # construct state
         # ************************************************
-        state, done = self.construct_state()
+        # state, done = self.construct_state()
+        state = [30.0, 10.0, 0]
 
         return np.asarray(state)

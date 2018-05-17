@@ -21,7 +21,7 @@ from sensor_msgs.msg import LaserScan
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
-DISPLAY_STATE = True
+DISPLAY_STATE = False
 
 MAX_SPEED = 22.35  # m/sec; tune this
 COLLISON_DIST = 10 # m
@@ -44,6 +44,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         self.time_stamp = None
         self.prev_ego_pose = None
         self.prev_speed = 10
+        self.time_steps = 0
         self.change_lane_reward = 0
 
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
@@ -355,6 +356,9 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
+        # elif self.time_steps > 5  and self.speeds[0] < 2.0:
+        #     print("Too slow ...")
+        #     done = True
 
         for i in range(5):
             if self.poses[i].pose.position.z > 0.5:
@@ -392,8 +396,8 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         state, done = self.construct_state()
 
         # 27 actions
-        # speed_cmd = self.speeds[0]
-        speed_cmd = self.prev_speed
+        speed_cmd = self.speeds[0]
+        # speed_cmd = self.prev_speed
         chang_lane_cmd = None
         add_on = [+2.0, +1.0, 0, -1.0, -2.0]
         chang_lane_cmds = ["Left", "Keep", "Right"]
@@ -418,7 +422,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         #     chang_lane_cmd = "Right"
         #     self.change_lane_pub.publish(chang_lane_cmd)
 
-        self.prev_speed = speed_cmd
+        # self.prev_speed = speed_cmd
 
         reward = 0
 
@@ -432,6 +436,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             self.travel_dist = 0
             self.travel_time = 0
             self.prev_ego_pose = None
+            self.time_steps = 0
             return np.asarray(state), reward, done, {}
 
         reward += -(action%len(add_on) - len(add_on)/2) * 0.2
@@ -460,8 +465,11 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         # change lane reward
         # reward += self.change_lane_reward
 
+        reward += -abs(state[3]-state[4]) / (state[3]+state[4])
+
         # by acc_dist
-        reward += 1.0 * acc_dist
+        reward += 1.0 # * acc_dist
+        self.time_steps += 1
 
         if DISPLAY_STATE:
             print("| Action: %s\t|" % action)

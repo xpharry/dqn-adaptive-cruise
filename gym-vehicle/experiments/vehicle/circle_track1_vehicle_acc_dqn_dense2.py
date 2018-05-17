@@ -473,7 +473,7 @@ if __name__ == '__main__':
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.998  # epsilon decay
+        explorationRate *= 0.995  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.01, explorationRate)
 

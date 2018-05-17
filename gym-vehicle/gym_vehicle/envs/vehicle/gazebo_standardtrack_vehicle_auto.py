@@ -24,7 +24,7 @@ from gazebo_msgs.msg import ModelState, ModelStates
 DISPLAY_STATE = False
 
 MAX_SPEED = 22.35  # m/sec; tune this
-COLLISON_DIST = 5 # m
+COLLISON_DIST = 10 # m
 INIT_LANE_INDEX = 1
 LAPS = 4
 
@@ -43,6 +43,7 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
         self.travel_time = 0
         self.time_stamp = None
         self.prev_ego_pose = None
+        self.time_steps = 0
         self.change_lane_reward = 0
 
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
@@ -294,15 +295,17 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
-        cmp_dists = [80, -80, 80, -80, 80, -80]
-        cmp_speeds = [100, 0, 100, 0, 100, 0]
+        cmp_dists = [80, 80, 80, 80, 80, 80]
+        cmp_speeds = [0, 20, 0, 20, 0, 20]
+
+        ego_d = 6.0
 
         if self.base_path == None:
-            return  cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
+            return  [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, False
 
         for i in range(6):
             if self.poses[i] == None:
-                return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], False
+                return [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, False
 
         ss = []
         dd = []
@@ -320,7 +323,7 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
         ego_d = dd[0]
 
         if ego_d < 0 or ego_d >= 12:
-            return cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [0], True
+            return [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, True
 
         for i in range(1, 7):
             s = ss[i]
@@ -330,22 +333,35 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
             if rp == -1:
                 continue
             if abs(delta_s) < abs(cmp_dists[rp]):
-                cmp_dists[rp] = delta_s
+                cmp_dists[rp] = abs(delta_s)
                 cmp_speeds[rp] = self.speeds[i]
 
         done = False
+
+        if self.d_to_ilane(ego_d) == 0:
+            cmp_dists[0] = 5.0
+            cmp_dists[1] = 5.0
+            cmp_speeds[0] = 0.0
+            cmp_speeds[1] = 0.0
+        elif self.d_to_ilane(ego_d) == 2:
+            cmp_dists[4] = 5.0
+            cmp_dists[5] = 5.0
+            cmp_speeds[4] = 0.0
+            cmp_speeds[5] = 0.0
+        else:
+            pass
 
         if DISPLAY_STATE:
             print("\n")
             print("|----------------- Current State ---------------|")
             print("| Compared Dist:                                |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
-            print("|---------------|----- Ego -----|---------------|")
             print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
+            print("|---------------|----- Ego -----|---------------|")
+            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
             print("| Compared Speed:                               |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
-            print("|---------------| %f \t|---------------|" % (self.speeds[0]))
             print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
+            print("|---------------| %f \t|---------------|" % (self.speeds[0]))
+            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
             print("|-----------------------------------------------|")
             print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
             print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
@@ -357,6 +373,9 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
         if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
+        # elif self.time_steps > 5  and self.speeds[0] < 2.0:
+        #     print("Too slow ...")
+        #     done = True
 
         for i in range(7):
             if self.poses[i].pose.position.z > 0.5:
@@ -368,7 +387,7 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
 
         is_changing_lane = (self.lane_index != self.d_to_ilane(ego_d))
 
-        state = cmp_dists + [self.speeds[0]] + cmp_speeds + self.lanes + [is_changing_lane]
+        state =  [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
 
         return state, done
 
@@ -406,15 +425,26 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
 
         # 27 actions
         reward = 0
-        if not done:
-            mid = len(add_on)/2
-            reward += -abs((action%len(add_on))-mid)*5 + mid*5
-            mid = len(chang_lane_cmds)/2
-            reward += -abs((action/len(add_on))-mid)*10
-        else:
-            reward += -10000
+
+        if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
+            print("hit left wall")
+            done = True
+        if self.d_to_ilane(state[0]) == 2 and chang_lane_cmd == "Right":
+            print("hit right wall")
+            done = True
+
+        if done:
+            # reward += -10000
             self.travel_dist = 0
             self.travel_time = 0
+            self.prev_ego_pose = None
+            self.time_steps = 0
+            return np.asarray(state), reward, done, {}
+
+        reward += -(action%len(add_on) - len(add_on)/2) * 0.2
+
+        if chang_lane_cmd == "Left" or chang_lane_cmd == "Right":
+            reward += -0.5
 
         if self.prev_ego_pose == None:
             acc_dist = 0
@@ -432,31 +462,32 @@ class GazeboStandardtrackVehicleAutoEnv(gazebo_env.GazeboEnv):
         self.time_stamp = rospy.get_time()
 
         # speed
-        reward += 1.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
+        # reward += 10.0 * (MAX_SPEED - abs(MAX_SPEED - self.speeds[0]))
 
         # change lane reward
-        reward += self.change_lane_reward
+        # reward += self.change_lane_reward
 
         # by acc_dist
-        reward += 10 * acc_dist
+        reward += 1.0 * acc_dist
+        self.time_steps += 1
 
         if DISPLAY_STATE:
-            print("| Action: %s\t|" % self.action_names(action))
+            print("| Action: %s\t|" % action)
             print("| Reward: %f \t\t\t\t|" % reward)
             print("|-----------------------------------------------|")
 
-        if self.travel_time >= 40.0 * LAPS:
-            print("Time Out! :(")
-            done = True
-            self.travel_dist = 0
-            self.travel_time = 0
+        # if self.travel_time >= 40.0 * LAPS:
+        #     print("Time Out! :(")
+        #     done = True
+        #     self.travel_dist = 0
+        #     self.travel_time = 0
 
-        if self.travel_dist >= 376.0 * LAPS:
-            print("Safely finishing! :)")
-            reward += 10000
-            done = True
-            self.travel_dist = 0
-            self.travel_time = 0
+        # if self.travel_dist >= 376.0 * LAPS:
+        #     print("Safely finishing! :)")
+        #     reward += 10000
+        #     done = True
+        #     self.travel_dist = 0
+        #     self.travel_time = 0
 
         return np.asarray(state), reward, done, {}
 

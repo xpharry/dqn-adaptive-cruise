@@ -25,7 +25,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: PointCloud
 Visualization Manager:
   Class: ""
   Displays:
@@ -201,56 +201,6 @@ Visualization Manager:
           Value: true
         mondeo1/base_footprint:
           Value: true
-        mondeo1/base_link:
-          Value: true
-        mondeo1/front_camera:
-          Value: true
-        mondeo1/front_camera_optical:
-          Value: true
-        mondeo1/perfect_gps:
-          Value: true
-        mondeo1/steer_fl:
-          Value: true
-        mondeo1/steer_fr:
-          Value: true
-        mondeo1/velodyne:
-          Value: true
-        mondeo1/velodyne_base_link:
-          Value: true
-        mondeo1/wheel_fl:
-          Value: true
-        mondeo1/wheel_fr:
-          Value: true
-        mondeo1/wheel_rl:
-          Value: true
-        mondeo1/wheel_rr:
-          Value: true
-        mondeo2/base_footprint:
-          Value: true
-        mondeo2/base_link:
-          Value: true
-        mondeo2/front_camera:
-          Value: true
-        mondeo2/front_camera_optical:
-          Value: true
-        mondeo2/perfect_gps:
-          Value: true
-        mondeo2/steer_fl:
-          Value: true
-        mondeo2/steer_fr:
-          Value: true
-        mondeo2/velodyne:
-          Value: true
-        mondeo2/velodyne_base_link:
-          Value: true
-        mondeo2/wheel_fl:
-          Value: true
-        mondeo2/wheel_fr:
-          Value: true
-        mondeo2/wheel_rl:
-          Value: true
-        mondeo2/wheel_rr:
-          Value: true
         world:
           Value: true
       Marker Scale: 1
@@ -321,45 +271,7 @@ Visualization Manager:
               fusion2/velodyne:
                 {}
           mondeo1/base_footprint:
-            mondeo1/base_link:
-              mondeo1/steer_fl:
-                mondeo1/wheel_fl:
-                  {}
-              mondeo1/steer_fr:
-                mondeo1/wheel_fr:
-                  {}
-              mondeo1/wheel_rl:
-                {}
-              mondeo1/wheel_rr:
-                {}
-            mondeo1/front_camera_optical:
-              mondeo1/front_camera:
-                {}
-            mondeo1/perfect_gps:
-              {}
-            mondeo1/velodyne_base_link:
-              mondeo1/velodyne:
-                {}
-          mondeo2/base_footprint:
-            mondeo2/base_link:
-              mondeo2/steer_fl:
-                mondeo2/wheel_fl:
-                  {}
-              mondeo2/steer_fr:
-                mondeo2/wheel_fr:
-                  {}
-              mondeo2/wheel_rl:
-                {}
-              mondeo2/wheel_rr:
-                {}
-            mondeo2/front_camera_optical:
-              mondeo2/front_camera:
-                {}
-            mondeo2/perfect_gps:
-              {}
-            mondeo2/velodyne_base_link:
-              mondeo2/velodyne:
-                {}
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -388,67 +300,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera_optical:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        perfect_gps:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        steer_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        steer_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        velodyne:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        velodyne_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_rl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_rr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: Fusion1
       Robot Description: /fusion1/robot_description
       TF Prefix: fusion1
@@ -465,67 +316,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_camera_optical:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        perfect_gps:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        steer_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        steer_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        velodyne:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        velodyne_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_fl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_fr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_rl:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        wheel_rr:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: Fusion2
       Robot Description: /fusion2/robot_description
       TF Prefix: fusion2

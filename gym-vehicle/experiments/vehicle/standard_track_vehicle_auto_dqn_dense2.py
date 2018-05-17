@@ -41,7 +41,7 @@ class LivePlot(object):
         #styling options
         matplotlib.rcParams['toolbar'] = 'None'
         plt.style.use('ggplot')
-        plt.xlabel("episode")
+        plt.xlabel("")
         plt.ylabel(data_key)
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
@@ -328,9 +328,9 @@ def clear_monitor_files(training_dir):
 
 if __name__ == '__main__':
 
-    env = gym.make('GazeboCircletrack2VehicleLcc-v0')
+    env = gym.make('GazeboStandardtrackVehicleAuto-v0')
     
-    outdir = '../../results/circle2_lcc_dense/'
+    outdir = '../../results/standard_auto/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -339,18 +339,18 @@ if __name__ == '__main__':
     continue_execution = False
     #fill this if continue_execution=True
 
-    model_output = outdir # '../../saved_models/circle2_lcc_dense/'
-    weights_path = model_output + 'circle2_dense_ep1000.h5'
-    monitor_path = model_output + 'circle2_dense_ep1000'
-    params_json  = model_output + 'circle2_dense_ep1000.json'
+    model_output = outdir # '~/saved_weights/standard_auto/'
+    weights_path = model_output + 'standard_dense2_ep.h5'
+    monitor_path = model_output + 'standard_dense2_ep'
+    params_json  = model_output + 'standard_dense2_ep.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
-        
+
     if not continue_execution:
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 10000
+        epochs = 100000
         steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -360,12 +360,14 @@ if __name__ == '__main__':
         discountFactor = 0.99
         memorySize = 1000000
         network_inputs = 14
-        network_outputs = 3
-        network_structure = [300, 300]
+        network_outputs = 15
+        network_structure = [100, 70, 50, 100]
         current_epoch = 0
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
         deepQ.initNetworks(network_structure)
+        if os.path.isfile(weights_path):
+            deepQ.loadWeights(weights_path)
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
     else:
@@ -373,7 +375,7 @@ if __name__ == '__main__':
         #ADD TRY CATCH fro this else
         with open(params_json) as outfile:
             d = json.load(outfile)
-            epochs = d.get('epochs') * 10
+            epochs = d.get('epochs')
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
             explorationRate = d.get('explorationRate')
@@ -384,15 +386,15 @@ if __name__ == '__main__':
             memorySize = d.get('memorySize')
             network_inputs = d.get('network_inputs')
             network_outputs = d.get('network_outputs')
-            network_structure = d.get('network_structure')
+            network_layers = d.get('network_structure')
             current_epoch = d.get('current_epoch')
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
-        deepQ.initNetworks(network_structure)
+        deepQ.initNetworks(network_layers)
         deepQ.loadWeights(weights_path)
 
         clear_monitor_files(outdir)
-        # copy_tree(monitor_path, outdir)
+        copy_tree(monitor_path, outdir)
         # env.monitor.start(outdir, force=True, seed=None)
         gym.wrappers.Monitor(env, outdir, force=True)
 
@@ -450,14 +452,14 @@ if __name__ == '__main__':
                     print("EP "+str(epoch)+" - {} timesteps".format(t+1)+" - last100 Steps : "+str((sum(last100Scores)/len(last100Scores)))+" - Cumulated R: "+str(cumulated_reward)+"   Eps="+str(round(explorationRate, 2))+"     Time: %d:%02d:%02d" % (h, m, s))
                     if epoch % 100 == 0:
                         # save model weights and monitoring data every 100 epochs.
-                        deepQ.saveModel(model_output+'circle2_fcnn_ep'+str(epoch)+'.h5')
+                        deepQ.saveModel(model_output+'standard_dense2_ep'+str(epoch)+'.h5')
                         # env.monitor.flush()
-                        # copy_tree(outdir, model_output+'circle2_fcnn_ep'+str(epoch))
+                        # copy_tree(outdir, model_output+'standard_fcnn_ep'+str(epoch))
                         # save simulation parameters.
                         parameter_keys = ['epochs', 'steps', 'updateTargetNetwork', 'explorationRate', 'minibatch_size', 'learnStart', 'learningRate', 'discountFactor', 'memorySize', 'network_inputs', 'network_outputs', 'network_structure', 'current_epoch']
                         parameter_values = [epochs, steps, updateTargetNetwork, explorationRate, minibatch_size, learnStart, learningRate, discountFactor, memorySize, network_inputs, network_outputs, network_structure, epoch]
                         parameter_dictionary = dict(zip(parameter_keys, parameter_values))
-                        with open(model_output+'circle2_fcnn_ep'+str(epoch)+'.json', 'w') as outfile:
+                        with open(model_output+'standard_dense2_ep'+str(epoch)+'.json', 'w') as outfile:
                             json.dump(parameter_dictionary, outfile)
                 break
 

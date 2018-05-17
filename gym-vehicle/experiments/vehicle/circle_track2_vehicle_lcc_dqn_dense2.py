@@ -182,6 +182,7 @@ class DeepQ:
                     model.add(LeakyReLU(alpha=0.01))
                 else:
                     model.add(Activation(activationType))
+            # model.add(Dropout(0.5))
             model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
             model.add(Activation("linear"))
         optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
@@ -337,13 +338,13 @@ if __name__ == '__main__':
     
     plotter = LivePlot(outdir)
 
-    continue_execution = False
+    continue_execution = True
     #fill this if continue_execution=True
 
     model_output = outdir # '../../saved_models/circle2_lcc_dense2/'
-    weights_path = model_output + 'circle2_dense2_ep20000.h5'
-    monitor_path = model_output + 'circle2_dense2_ep20000'
-    params_json  = model_output + 'circle2_dense2_ep20000.json'
+    weights_path = model_output + 'circle2_dense2_ep9400.h5'
+    monitor_path = model_output + 'circle2_dense2_ep9400'
+    params_json  = model_output + 'circle2_dense2_ep9400.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
         
@@ -351,7 +352,7 @@ if __name__ == '__main__':
         #Each time we take a sample and update our weights it is called a mini-batch.
         #Each time we run through the entire dataset, it's called an epoch.
         #PARAMETER LIST
-        epochs = 10000
+        epochs = 50000
         steps = 2000
         updateTargetNetwork = 10000
         explorationRate = 1
@@ -374,7 +375,7 @@ if __name__ == '__main__':
         #ADD TRY CATCH fro this else
         with open(params_json) as outfile:
             d = json.load(outfile)
-            epochs = d.get('epochs') * 3
+            epochs = d.get('epochs')
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
             explorationRate = d.get('explorationRate')
@@ -406,6 +407,7 @@ if __name__ == '__main__':
     start_time = time.time()
 
     list_rewards = []
+    list_epochs = []
 
     #start iterating from 'current epoch'.
 
@@ -468,6 +470,7 @@ if __name__ == '__main__':
                 print("updating target network")
 
         list_rewards.append(cumulated_reward)
+        list_epochs.append(epoch)
         if(epoch%5==0):
             plotter.plot(list_rewards)
         if(epoch%100==0):

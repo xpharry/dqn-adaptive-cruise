@@ -21,10 +21,10 @@ from sensor_msgs.msg import LaserScan
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.msg import ModelState, ModelStates
 
-DISPLAY_STATE = False
+DISPLAY_STATE = True
 
 MAX_SPEED = 25  # m/sec; tune this
-COLLISON_DIST = 5 # m
+COLLISON_DIST = 10 # m
 INIT_LANE_INDEX = 1
 LAPS = 1
 
@@ -35,8 +35,8 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         gazebo_env.GazeboEnv.__init__(self, "GazeboCircletrack2VehicleLcc_v0.launch")
 
         self.base_path = None
-        self.speeds = [0, 0, 0, 0]
-        self.poses = [None, None, None, None]
+        self.speeds = [0, 0, 0]
+        self.poses = [None, None, None]
         self.ego_lane = INIT_LANE_INDEX
         self.travel_dist = 0
         self.travel_time = 0
@@ -46,18 +46,19 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         self.prev_speed = 10
         self.prev_state = None
         self.change_lane_reward = 0
+        self.flag = 0
 
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
 
         rospy.Subscriber('/ego/twist', TwistStamped, self.ego_vel_cb)
         rospy.Subscriber('/fusion/twist', TwistStamped, self.fusion_vel_cb)
         rospy.Subscriber('/mondeo/twist', TwistStamped, self.mondeo_vel_cb)
-        rospy.Subscriber('/mkz/twist', TwistStamped, self.mkz_vel_cb)
+        # rospy.Subscriber('/mkz/twist', TwistStamped, self.mkz_vel_cb)
 
         rospy.Subscriber('/ego/current_pose', PoseStamped, self.ego_pose_cb)
         rospy.Subscriber('/fusion/current_pose', PoseStamped, self.fusion_pose_cb)
         rospy.Subscriber('/mondeo/current_pose', PoseStamped, self.mondeo_pose_cb)
-        rospy.Subscriber('/mkz/current_pose', PoseStamped, self.mkz_pose_cb)
+        # rospy.Subscriber('/mkz/current_pose', PoseStamped, self.mkz_pose_cb)
 
         rospy.Subscriber('/ego/current_lane', Int32, self.cur_lane_cb)
         rospy.Subscriber('/ego/chang_lane_reward', Int32, self.change_lane_reward_cb)
@@ -86,8 +87,8 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
     def mondeo_vel_cb(self, data):
         self.speeds[2] = data.twist.linear.x
 
-    def mkz_vel_cb(self, data):
-        self.speeds[3] = data.twist.linear.x
+    # def mkz_vel_cb(self, data):
+    #     self.speeds[3] = data.twist.linear.x
 
     def ego_pose_cb(self, data):
         self.poses[0] = data
@@ -98,8 +99,8 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
     def mondeo_pose_cb(self, data):
         self.poses[2] = data
 
-    def mkz_pose_cb(self, data):
-        self.poses[3] = data
+    # def mkz_pose_cb(self, data):
+    #     self.poses[3] = data
 
     def cur_lane_cb(self, msg):
         self.ego_lane = msg.data
@@ -270,25 +271,25 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
-        cmp_dists = [80, 80, 80, 80, 80, 80]
-        cmp_speeds = [0, 100, 0, 100, 0, 100]
+        cmp_dists = [-80, 80, -80, 80, -80, 80]
+        cmp_speeds = [0, 0, 0, 0, 0, 0]
 
         ego_d = 6.0
 
         if self.base_path == None:
             print("base_path == None")
-            state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+            state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
             return state, False
 
-        for i in range(4):
+        for i in range(3):
             if self.poses[i] == None:
                 print("self.poses[%d] == None" % i)
-                state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+                state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
                 return state, False
 
         ss = []
         dd = []
-        for i in range(4):
+        for i in range(3):
             x = self.poses[i].pose.position.x
             y = self.poses[i].pose.position.y
             psi = self.quat2phi(self.poses[i].pose.orientation)
@@ -302,7 +303,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         ego_d = dd[0]
 
         if ego_d < 0 or ego_d >= 8:
-            state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+            state = [self.speeds[0] / MAX_SPEED] + [-1] + cmp_dists + cmp_speeds
             # if self.prev_state == None:
             #     stacked_state = state + state + state + state
             #     self.prev_state = [state, state, state, state]
@@ -311,7 +312,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             #     self.prev_state = [self.prev_state[1], self.prev_state[2], self.prev_state[3], state]
             return state, True
 
-        for i in range(1, 4):
+        for i in range(1, 3):
             s = ss[i]
             d = dd[i]
             delta_s = self.compute_delta_s(self.poses[0], self.poses[i])
@@ -319,19 +320,19 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             if rp == -1:
                 continue
             if abs(delta_s) < abs(cmp_dists[rp]):
-                cmp_dists[rp] = abs(delta_s)
-                cmp_speeds[rp] = self.speeds[i]
+                cmp_dists[rp] = delta_s
+                cmp_speeds[rp] = self.speeds[i] - self.speeds[0]
 
         done = False
 
         if self.d_to_ilane(ego_d) == 0:
-            cmp_dists[0] = 5.0
-            cmp_dists[1] = 5.0
+            cmp_dists[0] = -10.0
+            cmp_dists[1] = 10.0
             cmp_speeds[0] = 0.0
             cmp_speeds[1] = 0.0
         elif self.d_to_ilane(ego_d) == 1:
-            cmp_dists[4] = 5.0
-            cmp_dists[5] = 5.0
+            cmp_dists[4] = -10.0
+            cmp_dists[5] = 10.0
             cmp_speeds[4] = 0.0
             cmp_speeds[5] = 0.0
         else:
@@ -356,11 +357,11 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
             print("|-----------------------------------------------|")
 
-        if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST or (self.time_steps > 5 and self.speeds[0] < 1.0):
+        if abs(cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
 
-        for i in range(4):
+        for i in range(3):
             if self.poses[i].pose.position.z > 0.5:
                 print("The car is turned over!")
                 done = True
@@ -369,7 +370,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
 
         is_changing_lane = (self.ego_lane != self.d_to_ilane(ego_d))
 
-        state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+        state = [self.speeds[0] / MAX_SPEED] + [self.ego_lane] + cmp_dists + cmp_speeds
 
         # if self.prev_state == None:
         #     stacked_state = state + state + state + state
@@ -403,19 +404,24 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         self.cruise_speed_pub.publish(speed_cmd)
         self.change_lane_pub.publish(chang_lane_cmd)
 
+        if abs(state[4]) < 10:
+            print("Too slow to dangerous!")
+            return np.asarray(state), 0, True, {}
+
         reward = 0
-        if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
-            print("hit left wall")
+
+        if (abs(state[2]) < 5 or abs(state[3]) < 5) and chang_lane_cmd == "Left":
+            print("Change to left but collision detected!")
             done = True
             # reward += -1
-        if self.d_to_ilane(state[0]) == 1 and chang_lane_cmd == "Right":
-            print("hit right wall")
+        if (abs(state[6]) < 5 or abs(state[7]) < 5) and chang_lane_cmd == "Right":
+            print("Change to right but collision detected!")
             done = True 
             # reward += -1
 
         # 3 actions
         if done:
-            reward = -200
+            reward = -100
             self.travel_dist = 0
             self.travel_time = 0
             self.prev_ego_pose = None
@@ -444,7 +450,21 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         # reward += self.change_lane_reward
 
         # by acc_dist
-        reward += 1 # 10 * acc_dist
+        reward += 1.0 * acc_dist
+
+        #reward += -(action%len(add_on) - len(add_on)/2) * 0.2
+
+        reward += -1.0 * (action - len(chang_lane_cmds)/2)
+
+        #reward += 2 * self.speeds[0]/MAX_SPEED
+
+        if state[1] == 0 and chang_lane_cmd == "Left":
+            print("Warning, left wall ...")
+            reward += -1.0
+        if state[1] == 1 and chang_lane_cmd == "Right":
+            print("Warning, right wall ...")
+            reward += -1.0
+
         self.time_steps += 1
 
         # if chang_lane_cmd == "Left" or chang_lane_cmd == "Right":
@@ -455,20 +475,28 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
             print("| Reward: %f \t\t\t\t|" % reward)
             print("|-----------------------------------------------|")
 
+        if self.travel_dist >= 100:
+            print("Time Out! Safely done! :D")
+            done = True
+            self.travel_dist = 0
+            self.travel_time = 0
+            self.prev_ego_pose = None
+            self.time_steps = 0
+
         # if self.travel_time >= 25.0 * LAPS:
         #     print("Time Out! Safely done! :D")
         #     done = True
         #     self.travel_dist = 0
         #     self.travel_time = 0
 
-        if self.time_steps >= 80:
-            print("Good job!")
-            # reward += 100
-            done = True
-            self.travel_dist = 0
-            self.travel_time = 0
-            self.prev_ego_pose = None
-            self.time_steps = 0
+        # if self.time_steps >= 80:
+        #     print("Good job!")
+        #     # reward += 100
+        #     done = True
+        #     self.travel_dist = 0
+        #     self.travel_time = 0
+        #     self.prev_ego_pose = None
+        #     self.time_steps = 0
 
         return np.asarray(state), reward, done, {}
 
@@ -480,42 +508,112 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         # ************************************************
         # Pause simulation to make observation
         # ************************************************
-        rospy.wait_for_service('/gazebo/pause_physics')
-        try:
-            self.pause()
-        except rospy.ServiceException as e:
-            print("/gazebo/pause_physics service call failed")
+        # rospy.wait_for_service('/gazebo/pause_physics')
+        # try:
+        #     self.pause()
+        # except rospy.ServiceException as e:
+        #     print("/gazebo/pause_physics service call failed")
 
         # ************************************************
         # define initial pose for later use
         # ************************************************
-        init_pose0 = Pose()
-        init_pose0.position.x = -36.0
-        init_pose0.position.y = -6.0
-        init_pose0.position.z = 0.0
-        quat0 = self.phi2quat(0.0)
-        init_pose0.orientation = quat0
+        if self.flag % 2 == 0:
+            init_pose0 = Pose()
+            init_pose0.position.x = -36.0
+            init_pose0.position.y = -2.0
+            init_pose0.position.z = 0.0
+            quat0 = self.phi2quat(0.0)
+            init_pose0.orientation = quat0
+        else:
+            init_pose0 = Pose()
+            init_pose0.position.x = -36.0
+            init_pose0.position.y = -6.0
+            init_pose0.position.z = 0.0
+            quat0 = self.phi2quat(0.0)
+            init_pose0.orientation = quat0
 
-        init_pose1 = Pose()
-        init_pose1.position.x = -10.0
-        init_pose1.position.y = -6.0
-        init_pose1.position.z = 0.0
-        quat1 = self.phi2quat(0.0)
-        init_pose1.orientation = quat1
+        case_num = self.flag / 2
+        if case_num < 10:
+            init_pose1 = Pose()
+            init_pose1.position.x = -20.0 - case_num % 10 * 2
+            if self.flag % 2 == 0:
+                init_pose1.position.y = -6.0
+            else:
+                init_pose1.position.y = -2.0
+            init_pose1.position.z = 0.0
+            quat1 = self.phi2quat(0.0)
+            init_pose1.orientation = quat1
 
-        init_pose2 = Pose()
-        init_pose2.position.x = 30.0
-        init_pose2.position.y = -2.0
-        init_pose2.position.z = 0.0
-        quat2 = self.phi2quat(0.0)
-        init_pose2.orientation = quat2
+            init_pose2 = Pose()
+            init_pose2.position.x = 0.0
+            init_pose2.position.y = 79.2
+            init_pose2.position.z = 0.0
+            quat2 = self.phi2quat(3.14)
+            init_pose2.orientation = quat2
+        elif case_num < 20:
+            init_pose1 = Pose()
+            init_pose1.position.x = 0.0 - case_num % 10 * 2
+            init_pose1.position.y = -2.0
+            init_pose1.position.z = 0.0
+            quat1 = self.phi2quat(0.0)
+            init_pose1.orientation = quat1
 
-        init_pose3 = Pose()
-        init_pose3.position.x = 65.0
-        init_pose3.position.y = 6.0
-        init_pose3.position.z = 0.0
-        quat3 = self.phi2quat(0.70)
-        init_pose3.orientation = quat3
+            init_pose2 = Pose()
+            init_pose2.position.x = 0.0
+            init_pose2.position.y = 79.2
+            init_pose2.position.z = 0.0
+            quat2 = self.phi2quat(3.14)
+            init_pose2.orientation = quat2
+        elif case_num < 30:
+            init_pose1 = Pose()
+            init_pose1.position.x = -10.0 + case_num % 10 * 2
+            init_pose1.position.y = -6.0
+            init_pose1.position.z = 0.0
+            quat1 = self.phi2quat(0.0)
+            init_pose1.orientation = quat1
+
+            init_pose2 = Pose()
+            init_pose2.position.x = 0.0
+            init_pose2.position.y = 79.2
+            init_pose2.position.z = 0.0
+            quat2 = self.phi2quat(3.14)
+            init_pose2.orientation = quat2
+        elif case_num < 40:
+            init_pose1 = Pose()
+            init_pose1.position.x = -20.0 + case_num % 10
+            init_pose1.position.y = -2.0
+            init_pose1.position.z = 0.0
+            quat1 = self.phi2quat(0.0)
+            init_pose1.orientation = quat1
+
+            init_pose2 = Pose()
+            init_pose2.position.x = 30.0 + case_num % 10
+            init_pose2.position.y = -6.0
+            init_pose2.position.z = 0.0
+            quat2 = self.phi2quat(0.0)
+        else:
+            init_pose1 = Pose()
+            init_pose1.position.x = -20.0 + case_num % 10
+            init_pose1.position.y = -6.0
+            init_pose1.position.z = 0.0
+            quat1 = self.phi2quat(0.0)
+            init_pose1.orientation = quat1
+
+            init_pose2 = Pose()
+            init_pose2.position.x = 30.0 + case_num % 10
+            init_pose2.position.y = -2.0
+            init_pose2.position.z = 0.0
+            quat2 = self.phi2quat(0.0)
+
+        self.flag += 1
+        self.flag = self.flag % 100
+
+        # init_pose3 = Pose()
+        # init_pose3.position.x = 65.0
+        # init_pose3.position.y = 6.0
+        # init_pose3.position.z = 0.0
+        # quat3 = self.phi2quat(0.70)
+        # init_pose3.orientation = quat3
 
         # ************************************************
         # set initial model state
@@ -523,6 +621,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         model_state0 = ModelState()
         model_state0.model_name = "ego"
         model_state0.pose = init_pose0
+        # model_state0.twist.linear.x = 10
         rospy.wait_for_service('/gazebo/set_model_state')
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -534,6 +633,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         model_state1 = ModelState()
         model_state1.model_name = "fusion"
         model_state1.pose = init_pose1
+        # model_state1.twist.linear.x = 5
         rospy.wait_for_service('/gazebo/set_model_state')
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -545,6 +645,7 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         model_state2 = ModelState()
         model_state2.model_name = "mondeo"
         model_state2.pose = init_pose2
+        # model_state0.twist.linear.x = 7
         rospy.wait_for_service('/gazebo/set_model_state')
         try:
             set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -553,25 +654,25 @@ class GazeboCircletrack2VehicleLccEnv(gazebo_env.GazeboEnv):
         except rospy.ServiceException as e:
             print("Service \'set_model_state\' call failed: %s" % e)
 
-        model_state3 = ModelState()
-        model_state3.model_name = "mkz"
-        model_state3.pose = init_pose3
-        rospy.wait_for_service('/gazebo/set_model_state')
-        try:
-            set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
-            ret = set_model_state(model_state3)
-            # print(ret.status_message)
-        except rospy.ServiceException as e:
-            print("Service \'set_model_state\' call failed: %s" % e)
+        # model_state3 = ModelState()
+        # model_state3.model_name = "mkz"
+        # model_state3.pose = init_pose3
+        # rospy.wait_for_service('/gazebo/set_model_state')
+        # try:
+        #     set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
+        #     ret = set_model_state(model_state3)
+        #     # print(ret.status_message)
+        # except rospy.ServiceException as e:
+        #     print("Service \'set_model_state\' call failed: %s" % e)
 
         # ************************************************
         # Unpause simulation to make observation
         # ************************************************
-        rospy.wait_for_service('/gazebo/unpause_physics')
-        try:
-            self.unpause()
-        except rospy.ServiceException as e:
-            print("/gazebo/unpause_physics service call failed")
+        # rospy.wait_for_service('/gazebo/unpause_physics')
+        # try:
+        #     self.unpause()
+        # except rospy.ServiceException as e:
+        #     print("/gazebo/unpause_physics service call failed")
 
         # ************************************************
         # construct state
