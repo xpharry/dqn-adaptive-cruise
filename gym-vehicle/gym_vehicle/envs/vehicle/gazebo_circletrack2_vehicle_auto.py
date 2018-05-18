@@ -278,17 +278,21 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
-        cmp_dists = [80, 80, 80, 80, 80, 80]
-        cmp_speeds = [0, 20, 0, 20, 0, 20]
+        cmp_dists = [-80, 80, -80, 80, -80, 80]
+        cmp_speeds = [0, 0, 0, 0, 0, 0]
 
         ego_d = 6.0
 
         if self.base_path == None:
-            return  [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, False
+            print("base_path == None")
+            state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
+            return state, False
 
         for i in range(5):
             if self.poses[i] == None:
-                return [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, False
+                print("self.poses[%d] == None" % i)
+                state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
+                return state, False
 
         ss = []
         dd = []
@@ -305,8 +309,15 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         ego_s = ss[0]
         ego_d = dd[0]
 
-        if ego_d < 0 or ego_d >= 8:
-            return [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds, True
+        if ego_d < 0 or ego_d > 8:
+            state = [self.speeds[0] / MAX_SPEED] + [-1] + cmp_dists + cmp_speeds
+            # if self.prev_state == None:
+            #     stacked_state = state + state + state + state
+            #     self.prev_state = [state, state, state, state]
+            # else:
+            #     stacked_state = self.prev_state[1] + self.prev_state[2] + self.prev_state[3] + state
+            #     self.prev_state = [self.prev_state[1], self.prev_state[2], self.prev_state[3], state]
+            return state, True
 
         for i in range(1, 5):
             s = ss[i]
@@ -316,19 +327,19 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             if rp == -1:
                 continue
             if abs(delta_s) < abs(cmp_dists[rp]):
-                cmp_dists[rp] = abs(delta_s)
-                cmp_speeds[rp] = self.speeds[i]
+                cmp_dists[rp] = delta_s
+                cmp_speeds[rp] = self.speeds[i] - self.speeds[0]
 
         done = False
 
         if self.d_to_ilane(ego_d) == 0:
-            cmp_dists[0] = 5.0
-            cmp_dists[1] = 5.0
+            cmp_dists[0] = -10.0
+            cmp_dists[1] = 10.0
             cmp_speeds[0] = 0.0
             cmp_speeds[1] = 0.0
         elif self.d_to_ilane(ego_d) == 1:
-            cmp_dists[4] = 5.0
-            cmp_dists[5] = 5.0
+            cmp_dists[4] = -10.0
+            cmp_dists[5] = 10.0
             cmp_speeds[4] = 0.0
             cmp_speeds[5] = 0.0
         else:
@@ -353,24 +364,27 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
             print("|-----------------------------------------------|")
 
-        if abs(cmp_dists[2]) < COLLISON_DIST or abs(cmp_dists[3]) < COLLISON_DIST:
+        if abs(cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
-        # elif self.time_steps > 5  and self.speeds[0] < 2.0:
-        #     print("Too slow ...")
-        #     done = True
 
         for i in range(5):
             if self.poses[i].pose.position.z > 0.5:
                 print("The car is turned over!")
                 done = True
 
-        self.lanes = [0, 0, 0]
-        # self.lanes[self.d_to_ilane(ego_d)] = 1
+        self.ego_lane = self.d_to_ilane(ego_d)
 
-        is_changing_lane = (self.lane_index != self.d_to_ilane(ego_d))
+        is_changing_lane = (self.ego_lane != self.d_to_ilane(ego_d))
 
-        state = [ego_d] + cmp_dists + [self.speeds[0]] + cmp_speeds
+        state = [self.speeds[0] / MAX_SPEED] + [self.ego_lane] + cmp_dists + cmp_speeds
+
+        # if self.prev_state == None:
+        #     stacked_state = state + state + state + state
+        #     self.prev_state = [state, state, state, state]
+        # else:
+        #     stacked_state = self.prev_state[1] + self.prev_state[2] + self.prev_state[3] + state
+        #     self.prev_state = [self.prev_state[1], self.prev_state[2], self.prev_state[3], state]
 
         return state, done
 
@@ -424,15 +438,23 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         # self.prev_speed = speed_cmd
 
+        if abs(state[4]) < 10:
+            print("Too slow to dangerous!")
+            return np.asarray(state), 0, True, {}
+
         reward = 0
 
-        if self.d_to_ilane(state[0]) == 0 and chang_lane_cmd == "Left":
+        if (abs(state[2]) < 5 or abs(state[3]) < 5) and chang_lane_cmd == "Left":
+            print("Change to left but collision detected!")
             done = True
-        if self.d_to_ilane(state[0]) == 1 and chang_lane_cmd == "Right":
-            done = True
+            # reward += -1
+        if (abs(state[6]) < 5 or abs(state[7]) < 5) and chang_lane_cmd == "Right":
+            print("Change to right but collision detected!")
+            done = True 
+            # reward += -1
 
         if done:
-            # reward += -10000
+            reward += -100
             self.travel_dist = 0
             self.travel_time = 0
             self.prev_ego_pose = None
@@ -465,10 +487,22 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         # change lane reward
         # reward += self.change_lane_reward
 
-        reward += -abs(state[3]-state[4]) / (state[3]+state[4])
-
         # by acc_dist
-        reward += 1.0 # * acc_dist
+        reward += 1.0 * acc_dist
+
+        reward += -(action%len(add_on) - len(add_on)/2) * 0.5
+
+        reward += -1.0 * (action/len(add_on) - len(chang_lane_cmds)/2)
+
+        #reward += 2 * self.speeds[0]/MAX_SPEED
+
+        if state[1] == 0 and chang_lane_cmd == "Left":
+            print("Warning, left wall ...")
+            reward += -1.0
+        if state[1] == 1 and chang_lane_cmd == "Right":
+            print("Warning, right wall ...")
+            reward += -1.0
+
         self.time_steps += 1
 
         if DISPLAY_STATE:
