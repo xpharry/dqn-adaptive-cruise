@@ -9,6 +9,7 @@ import gym_vehicle
 import time
 from distutils.dir_util import copy_tree
 import os
+import csv
 import json
 import random
 import numpy as np
@@ -406,6 +407,11 @@ if __name__ == '__main__':
     start_time = time.time()
 
     list_rewards = []
+    list_epochs = []
+
+    fname = outdir + 'reward_history.csv'
+    wfile = open(fname, 'w+')
+    writer = csv.writer(wfile, delimiter=' ')
 
     #start iterating from 'current epoch'.
 
@@ -468,6 +474,9 @@ if __name__ == '__main__':
                 print("updating target network")
 
         list_rewards.append(cumulated_reward)
+        list_epochs.append(epoch)
+        writer.writerow([epoch, cumulated_reward])
+
         if(epoch%20==0):
             plotter.plot(list_rewards)
         if(epoch%100==0):
