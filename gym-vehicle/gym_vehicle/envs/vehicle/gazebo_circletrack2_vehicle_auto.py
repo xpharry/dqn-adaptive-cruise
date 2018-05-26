@@ -24,7 +24,7 @@ from gazebo_msgs.msg import ModelState, ModelStates
 DISPLAY_STATE = False
 
 MAX_SPEED = 22.35  # m/sec; tune this
-COLLISON_DIST = 10 # m
+COLLISON_DIST = 8 # m
 INIT_LANE_INDEX = 1
 LAPS = 3
 
@@ -35,8 +35,8 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         gazebo_env.GazeboEnv.__init__(self, "GazeboCircletrack2VehicleAuto_v0.launch")
 
         self.base_path = None
-        self.speeds = [0, 0, 0, 0, 0]
-        self.poses = [None, None, None, None, None]
+        self.speeds = [0, 0, 0]
+        self.poses = [None, None, None]
         self.lane_index = INIT_LANE_INDEX
         self.lanes = [0, 0, 0]
         self.travel_dist = 0
@@ -46,19 +46,22 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         self.prev_speed = 10
         self.time_steps = 0
         self.change_lane_reward = 0
+        self.cmp_dists = [-80, 80, -80, 80, -80, 80]
+        self.cmp_speeds = [0, 0, 0, 0, 0, 0]
+        self.flag = 0
 
         rospy.Subscriber('/base_path', Path, self.base_path_cb)
 
         rospy.Subscriber('/ego/twist', TwistStamped, self.ego_vel_cb)
         rospy.Subscriber('/fusion1/twist', TwistStamped, self.fusion1_vel_cb)
-        rospy.Subscriber('/fusion2/twist', TwistStamped, self.fusion2_vel_cb)
-        rospy.Subscriber('/mondeo1/twist', TwistStamped, self.mondeo1_vel_cb)
+        # rospy.Subscriber('/fusion2/twist', TwistStamped, self.fusion2_vel_cb)
+        # rospy.Subscriber('/mondeo1/twist', TwistStamped, self.mondeo1_vel_cb)
         rospy.Subscriber('/mondeo2/twist', TwistStamped, self.mondeo2_vel_cb)
 
         rospy.Subscriber('/ego/current_pose', PoseStamped, self.ego_pose_cb)
         rospy.Subscriber('/fusion1/current_pose', PoseStamped, self.fusion1_pose_cb)
-        rospy.Subscriber('/fusion2/current_pose', PoseStamped, self.fusion2_pose_cb)
-        rospy.Subscriber('/mondeo1/current_pose', PoseStamped, self.mondeo1_pose_cb)
+        # rospy.Subscriber('/fusion2/current_pose', PoseStamped, self.fusion2_pose_cb)
+        # rospy.Subscriber('/mondeo1/current_pose', PoseStamped, self.mondeo1_pose_cb)
         rospy.Subscriber('/mondeo2/current_pose', PoseStamped, self.mondeo2_pose_cb)
 
         rospy.Subscriber('/ego/current_lane', Int32, self.cur_lane_cb)
@@ -85,14 +88,14 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
     def fusion1_vel_cb(self, data):
         self.speeds[1] = data.twist.linear.x
 
-    def fusion2_vel_cb(self, data):
-        self.speeds[2] = data.twist.linear.x
+    # def fusion2_vel_cb(self, data):
+    #     self.speeds[2] = data.twist.linear.x
 
-    def mondeo1_vel_cb(self, data):
-        self.speeds[3] = data.twist.linear.x
+    # def mondeo1_vel_cb(self, data):
+    #     self.speeds[3] = data.twist.linear.x
 
     def mondeo2_vel_cb(self, data):
-        self.speeds[4] = data.twist.linear.x
+        self.speeds[2] = data.twist.linear.x
 
     def ego_pose_cb(self, data):
         self.poses[0] = data
@@ -100,14 +103,14 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
     def fusion1_pose_cb(self, data):
         self.poses[1] = data
 
-    def fusion2_pose_cb(self, data):
-        self.poses[2] = data
+    # def fusion2_pose_cb(self, data):
+    #     self.poses[2] = data
 
-    def mondeo1_pose_cb(self, data):
-        self.poses[3] = data
+    # def mondeo1_pose_cb(self, data):
+    #     self.poses[3] = data
 
     def mondeo2_pose_cb(self, data):
-        self.poses[4] = data
+        self.poses[2] = data
 
     def cur_lane_cb(self, msg):
         self.lane_index = msg.data
@@ -278,25 +281,25 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             return -1
 
     def construct_state(self):
-        cmp_dists = [-80, 80, -80, 80, -80, 80]
-        cmp_speeds = [0, 0, 0, 0, 0, 0]
+        self.cmp_dists = [-80, 80, -80, 80, -80, 80]
+        self.cmp_speeds = [0, 0, 0, 0, 0, 0]
 
-        ego_d = 6.0
+        state = [1, 1, 0, 0, 0] # vel, dist_front, vel_diff_front, left_lane, right_lane,
 
         if self.base_path == None:
             print("base_path == None")
-            state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
+            # state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
             return state, False
 
-        for i in range(5):
+        for i in range(3):
             if self.poses[i] == None:
                 print("self.poses[%d] == None" % i)
-                state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
+                # state = [self.speeds[0] / MAX_SPEED] + [1] + cmp_dists + cmp_speeds
                 return state, False
 
         ss = []
         dd = []
-        for i in range(5):
+        for i in range(3):
             x = self.poses[i].pose.position.x
             y = self.poses[i].pose.position.y
             psi = self.quat2phi(self.poses[i].pose.orientation)
@@ -310,7 +313,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         ego_d = dd[0]
 
         if ego_d < 0 or ego_d > 8:
-            state = [self.speeds[0] / MAX_SPEED] + [-1] + cmp_dists + cmp_speeds
+            # state = [self.speeds[0] / MAX_SPEED] + [-1] + cmp_dists + cmp_speeds
             # if self.prev_state == None:
             #     stacked_state = state + state + state + state
             #     self.prev_state = [state, state, state, state]
@@ -319,43 +322,41 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             #     self.prev_state = [self.prev_state[1], self.prev_state[2], self.prev_state[3], state]
             return state, True
 
-        for i in range(1, 5):
+        for i in range(1, 3):
             s = ss[i]
             d = dd[i]
             delta_s = self.compute_delta_s(self.poses[0], self.poses[i])
             rp = self.check_relative_postion(delta_s, ego_d, d)
             if rp == -1:
                 continue
-            if abs(delta_s) < abs(cmp_dists[rp]):
-                cmp_dists[rp] = delta_s
-                cmp_speeds[rp] = self.speeds[i] - self.speeds[0]
+            if abs(delta_s) < abs(self.cmp_dists[rp]):
+                self.cmp_dists[rp] = delta_s
+                self.cmp_speeds[rp] = self.speeds[i] - self.speeds[0]
 
         done = False
 
-        if self.d_to_ilane(ego_d) == 0:
-            cmp_dists[0] = -10.0
-            cmp_dists[1] = 10.0
-            cmp_speeds[0] = 0.0
-            cmp_speeds[1] = 0.0
-        elif self.d_to_ilane(ego_d) == 1:
-            cmp_dists[4] = -10.0
-            cmp_dists[5] = 10.0
-            cmp_speeds[4] = 0.0
-            cmp_speeds[5] = 0.0
-        else:
-            pass
+        # if self.d_to_ilane(ego_d) == 0:
+        #     self.cmp_dists[0] = -10.0
+        #     self.cmp_dists[1] = 10.0
+        #     self.cmp_speeds[0] = 0.0
+        #     self.cmp_speeds[1] = 0.0
+        # else:
+        #     self.cmp_dists[4] = -10.0
+        #     self.cmp_dists[5] = 10.0
+        #     self.cmp_speeds[4] = 0.0
+        #     self.cmp_speeds[5] = 0.0
 
         if DISPLAY_STATE:
             print("\n")
             print("|----------------- Current State ---------------|")
             print("| Compared Dist:                                |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_dists[1], cmp_dists[3], cmp_dists[5]))
+            print("| %f \t| %f \t| %f \t|" % (self.cmp_dists[1], self.cmp_dists[3], self.cmp_dists[5]))
             print("|---------------|----- Ego -----|---------------|")
-            print("| %f \t| %f \t| %f \t|" % (cmp_dists[0], cmp_dists[2], cmp_dists[4]))
+            print("| %f \t| %f \t| %f \t|" % (self.cmp_dists[0], self.cmp_dists[2], self.cmp_dists[4]))
             print("| Compared Speed:                               |")
-            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[1], cmp_speeds[3], cmp_speeds[5]))
+            print("| %f \t| %f \t| %f \t|" % (self.cmp_speeds[1], self.cmp_speeds[3], self.cmp_speeds[5]))
             print("|---------------| %f \t|---------------|" % (self.speeds[0]))
-            print("| %f \t| %f \t| %f \t|" % (cmp_speeds[0], cmp_speeds[2], cmp_speeds[4]))
+            print("| %f \t| %f \t| %f \t|" % (self.cmp_speeds[0], self.cmp_speeds[2], cmp_speeds[4]))
             print("|-----------------------------------------------|")
             print("| Current Lane: %d \t\t\t|" % (self.d_to_ilane(ego_d)))
             print("| Travel Distance: %f \t\t\t|" % (self.travel_dist))
@@ -364,11 +365,11 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             print("| Average Speed: %f \t\t\t|" % (0 if self.travel_time == 0 else self.travel_dist/self.travel_time))
             print("|-----------------------------------------------|")
 
-        if abs(cmp_dists[3]) < COLLISON_DIST:
+        if abs(self.cmp_dists[3]) < COLLISON_DIST:
             print("Collision detected!")
             done = True
 
-        for i in range(5):
+        for i in range(3):
             if self.poses[i].pose.position.z > 0.5:
                 print("The car is turned over!")
                 done = True
@@ -377,7 +378,14 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         is_changing_lane = (self.ego_lane != self.d_to_ilane(ego_d))
 
-        state = [self.speeds[0] / MAX_SPEED] + [self.ego_lane] + cmp_dists + cmp_speeds
+        c_l = 1
+        c_r = 1
+        if (abs(self.cmp_dists[0]) < 30 or abs(self.cmp_dists[1]) < 30):
+            c_l = 0
+        if (abs(self.cmp_dists[4]) < 30 or abs(self.cmp_dists[5]) < 30):
+            c_r = 0
+
+        state = [self.speeds[0]/MAX_SPEED, self.cmp_dists[3]/80, self.cmp_speeds[3]/MAX_SPEED, c_l, c_r]
 
         # if self.prev_state == None:
         #     stacked_state = state + state + state + state
@@ -414,12 +422,28 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         # speed_cmd = self.prev_speed
         chang_lane_cmd = None
         add_on = [+2.0, +1.0, 0, -1.0, -2.0]
-        chang_lane_cmds = ["Left", "Keep", "Right"]
+        chang_lane_cmds = ["Left", "Right"]
 
-        speed_cmd = self.speed_saturate(speed_cmd + add_on[action%len(add_on)])
-        chang_lane_cmd = chang_lane_cmds[action/len(add_on)]
-        self.cruise_speed_pub.publish(speed_cmd)
-        self.change_lane_pub.publish(chang_lane_cmd)
+        reward = 0
+
+        if action < 5:
+            speed_cmd = self.speed_saturate(speed_cmd + add_on[action])
+            self.cruise_speed_pub.publish(speed_cmd)
+        else:
+            chang_lane_cmd = chang_lane_cmds[action-len(add_on)]
+            self.cruise_speed_pub.publish(speed_cmd)
+
+            if state[3] == 0 and chang_lane_cmd == "Left":
+                print("Change to left but failed!")
+                # done = True
+                reward += -2
+                chang_lane_cmd = "Keep"
+            if state[4] == 0 and chang_lane_cmd == "Right":
+                print("Change to right but failed!")
+                # done = True 
+                reward += -2
+                chang_lane_cmd = "Keep"
+            self.change_lane_pub.publish(chang_lane_cmd)
 
         # if action == 0:
         #     self.cruise_speed_pub.publish(speed_cmd)
@@ -438,20 +462,13 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         # self.prev_speed = speed_cmd
 
-        if abs(state[4]) < 10:
-            print("Too slow to dangerous!")
+        if abs(self.cmp_dists[2]) < 10:
+            print("Too slow!")
+            self.travel_dist = 0
+            self.travel_time = 0
+            self.prev_ego_pose = None
+            self.time_steps = 0
             return np.asarray(state), 0, True, {}
-
-        reward = 0
-
-        if (abs(state[2]) < 5 or abs(state[3]) < 5) and chang_lane_cmd == "Left":
-            print("Change to left but collision detected!")
-            done = True
-            # reward += -1
-        if (abs(state[6]) < 5 or abs(state[7]) < 5) and chang_lane_cmd == "Right":
-            print("Change to right but collision detected!")
-            done = True 
-            # reward += -1
 
         if done:
             reward += -100
@@ -460,11 +477,6 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             self.prev_ego_pose = None
             self.time_steps = 0
             return np.asarray(state), reward, done, {}
-
-        reward += -(action%len(add_on) - len(add_on)/2) * 0.2
-
-        if chang_lane_cmd == "Left" or chang_lane_cmd == "Right":
-            reward += -0.5
 
         if self.prev_ego_pose == None:
             acc_dist = 0
@@ -494,14 +506,10 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         reward += -1.0 * (action/len(add_on) - len(chang_lane_cmds)/2)
 
-        #reward += 2 * self.speeds[0]/MAX_SPEED
+        # reward += 2 * self.speeds[0]/MAX_SPEED
 
-        if state[1] == 0 and chang_lane_cmd == "Left":
-            print("Warning, left wall ...")
-            reward += -1.0
-        if state[1] == 1 and chang_lane_cmd == "Right":
-            print("Warning, right wall ...")
-            reward += -1.0
+        # if self.cmp_dists[3] < 20:
+        #     reward += -1.0 * (20 - self.cmp_dists[3])
 
         self.time_steps += 1
 
@@ -544,6 +552,12 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         # define initial pose for later use
         # ************************************************
         init_pose0 = Pose()
+        # if self.flag == 0:
+        #     init_pose0.position.x = 38.6
+        #     self.flag = 1
+        # else:
+        #     init_pose0.position.x = 42.6
+        #     self.flag = 0
         init_pose0.position.x = 42.6
         init_pose0.position.y = 36.6
         init_pose0.position.z = 0.0
@@ -603,27 +617,27 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         except rospy.ServiceException as e:
             print("Service \'set_model_state\' call failed: %s" % e)
 
-        model_state2 = ModelState()
-        model_state2.model_name = "fusion2"
-        model_state2.pose = init_pose2
-        rospy.wait_for_service('/gazebo/set_model_state')
-        try:
-            set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
-            ret = set_model_state(model_state2)
-            # print(ret.status_message)
-        except rospy.ServiceException as e:
-            print("Service \'set_model_state\' call failed: %s" % e)
+        # model_state2 = ModelState()
+        # model_state2.model_name = "fusion2"
+        # model_state2.pose = init_pose2
+        # rospy.wait_for_service('/gazebo/set_model_state')
+        # try:
+        #     set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
+        #     ret = set_model_state(model_state2)
+        #     # print(ret.status_message)
+        # except rospy.ServiceException as e:
+        #     print("Service \'set_model_state\' call failed: %s" % e)
 
-        model_state3 = ModelState()
-        model_state3.model_name = "mondeo1"
-        model_state3.pose = init_pose3
-        rospy.wait_for_service('/gazebo/set_model_state')
-        try:
-            set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
-            ret = set_model_state(model_state3)
-            # print(ret.status_message)
-        except rospy.ServiceException as e:
-            print("Service \'set_model_state\' call failed: %s" % e)
+        # model_state3 = ModelState()
+        # model_state3.model_name = "mondeo1"
+        # model_state3.pose = init_pose3
+        # rospy.wait_for_service('/gazebo/set_model_state')
+        # try:
+        #     set_model_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
+        #     ret = set_model_state(model_state3)
+        #     # print(ret.status_message)
+        # except rospy.ServiceException as e:
+        #     print("Service \'set_model_state\' call failed: %s" % e)
 
         model_state4 = ModelState()
         model_state4.model_name = "mondeo2"

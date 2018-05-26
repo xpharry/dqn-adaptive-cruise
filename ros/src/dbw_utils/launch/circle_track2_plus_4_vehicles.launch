@@ -31,20 +31,20 @@
   </include>
 
   <!-- Fusion2 -->
-  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+  <!--<include file="$(find dbw_mkz_can)/launch/dbw.launch" >
     <arg name="live" value="false" />
     <arg name="load_urdf" value="false" />
     <arg name="can_ns" value="can_bus_dbw" />
     <arg name="vehicle_ns" value="fusion2" />
-  </include>
+  </include>-->
 
   <!-- mondeo1 -->
-  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+  <!--<include file="$(find dbw_mkz_can)/launch/dbw.launch" >
     <arg name="live" value="false" />
     <arg name="load_urdf" value="false" />
     <arg name="can_ns" value="can_bus_dbw" />
     <arg name="vehicle_ns" value="mondeo1" />
-  </include>
+  </include>-->
 
   <!-- mondeo2 -->
   <include file="$(find dbw_mkz_can)/launch/dbw.launch" >

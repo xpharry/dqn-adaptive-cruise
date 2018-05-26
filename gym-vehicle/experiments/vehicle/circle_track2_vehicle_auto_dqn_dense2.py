@@ -9,6 +9,7 @@ import gym_vehicle
 import time
 from distutils.dir_util import copy_tree
 import os
+import csv
 import json
 import random
 import numpy as np
@@ -41,7 +42,7 @@ class LivePlot(object):
         #styling options
         matplotlib.rcParams['toolbar'] = 'None'
         plt.style.use('ggplot')
-        plt.xlabel("")
+        plt.xlabel("episode")
         plt.ylabel(data_key)
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
@@ -181,7 +182,7 @@ class DeepQ:
                     model.add(LeakyReLU(alpha=0.01))
                 else:
                     model.add(Activation(activationType))
-            model.add(Dropout(0.5))
+            #model.add(Dropout(0.5))
             model.add(Dense(self.output_size, kernel_initializer='lecun_uniform'))
             model.add(Activation("linear"))
         optimizer = optimizers.RMSprop(lr=learningRate, rho=0.9, epsilon=1e-06)
@@ -337,13 +338,13 @@ if __name__ == '__main__':
     
     plotter = LivePlot(outdir)
 
-    continue_execution = True
+    continue_execution = False
     #fill this if continue_execution=True
 
     model_output = outdir # '../../saved_models/circle2_auto_dense/'
-    weights_path = model_output + 'circle2_fcnn_ep29700.h5'
-    monitor_path = model_output + 'circle2_fcnn_ep29700'
-    params_json  = model_output + 'circle2_fcnn_ep29700.json'
+    weights_path = model_output + 'circle2_fcnn_ep38000.h5'
+    monitor_path = model_output + 'circle2_fcnn_ep38000'
+    params_json  = model_output + 'circle2_fcnn_ep38000.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
 
@@ -359,9 +360,9 @@ if __name__ == '__main__':
         learnStart = 64
         learningRate = 0.00025
         discountFactor = 0.99
-        memorySize = 1000000
-        network_inputs = 14
-        network_outputs = 15
+        memorySize = 100000
+        network_inputs = 5
+        network_outputs = 7
         network_structure = [100, 70, 50, 70, 100]
         current_epoch = 0
 
@@ -377,7 +378,7 @@ if __name__ == '__main__':
             epochs = d.get('epochs')
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
-            explorationRate = 0.2 # d.get('explorationRate')
+            explorationRate = 1.0 # d.get('explorationRate')
             minibatch_size = d.get('minibatch_size')
             learnStart = d.get('learnStart')
             learningRate = d.get('learningRate')
@@ -406,6 +407,11 @@ if __name__ == '__main__':
     start_time = time.time()
 
     list_rewards = []
+    list_epochs = []
+
+    fname = outdir + 'reward_history.csv'
+    wfile = open(fname, 'w+')
+    writer = csv.writer(wfile, delimiter=' ')
 
     #start iterating from 'current epoch'.
 
@@ -468,12 +474,15 @@ if __name__ == '__main__':
                 print("updating target network")
 
         list_rewards.append(cumulated_reward)
+        list_epochs.append(epoch)
+        writer.writerow([epoch, cumulated_reward])
+
         if(epoch%20==0):
             plotter.plot(list_rewards)
         if(epoch%100==0):
             plotter.save(outdir, epoch)
 
-        explorationRate *= 0.9999  # epsilon decay
+        explorationRate *= 0.9995  # epsilon decay
         # explorationRate -= (2.0/epochs)
         explorationRate = max(0.01, explorationRate)
 
