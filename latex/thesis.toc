@@ -1,9 +1,7 @@
 \contentsline {chapter}{\tocchapter {Chapter}{}{List of Tables}}{vi}{Doc-Start}
 \contentsline {chapter}{\tocchapter {Chapter}{}{List of Figures}}{vii}{Doc-Start}
 \contentsline {chapter}{\tocchapter {Chapter}{}{Acknowledgements}}{ix}{chapter*.1}
-\contentsline {section}{\tocsection {}{}{Acknowledgements}}{ix}{section.0.1}
 \contentsline {chapter}{\tocchapter {Chapter}{}{Abstract}}{x}{chapter*.2}
-\contentsline {section}{\tocsection {}{}{Abstract}}{x}{section.0.2}
 \contentsline {chapter}{\tocchapter {Chapter}{1}{Introduction}}{1}{chapter.1}
 \contentsline {section}{\tocsection {}{}{Motivation and Background}}{1}{section.1.1}
 \contentsline {section}{\tocsection {}{}{Literation Review}}{3}{section.1.2}
@@ -36,34 +34,30 @@
 \contentsline {subsection}{\tocsubsection {}{3.2.1}{Reference Path Generator}}{37}{subsection.3.2.1}
 \contentsline {subsection}{\tocsubsection {}{3.2.2}{A road-aligned coordinate system: Frenet Coordinate}}{39}{subsection.3.2.2}
 \contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Frenet Coordinates}}{39}{figure.caption.21}
-\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path Selecting and Optimizing}}{43}{subsection.3.2.3}
+\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path Selecting and Optimizing}}{42}{subsection.3.2.3}
 \contentsline {section}{\tocsection {}{}{Path Following}}{44}{section.3.3}
 \contentsline {section}{\tocsection {}{}{Drive By Wire}}{48}{section.3.4}
-\contentsline {chapter}{\tocchapter {Chapter}{4}{Deep Q-Learning}}{49}{chapter.4}
-\contentsline {section}{\tocsection {}{}{General Architecture}}{49}{section.4.1}
+\contentsline {chapter}{\tocchapter {Chapter}{4}{Deep Q-Learning}}{50}{chapter.4}
+\contentsline {section}{\tocsection {}{}{General Architecture}}{50}{section.4.1}
 \contentsline {section}{\tocsection {}{}{Reinforcement Learning for Longitudinal Motion}}{51}{section.4.2}
 \contentsline {section}{\tocsection {}{}{Reinforcement Learning for Lateral Motion}}{54}{section.4.3}
 \contentsline {section}{\tocsection {}{}{Q Learning}}{55}{section.4.4}
-\contentsline {section}{\tocsection {}{}{Policy Representation}}{58}{section.4.5}
+\contentsline {section}{\tocsection {}{}{Policy Representation}}{59}{section.4.5}
 \contentsline {subsection}{\tocsubsection {}{4.5.1}{State}}{59}{subsection.4.5.1}
-\contentsline {subsection}{\tocsubsection {}{4.5.2}{Actions}}{59}{subsection.4.5.2}
-\contentsline {subsection}{\tocsubsection {}{4.5.3}{Reward Function}}{59}{subsection.4.5.3}
-\contentsline {subsection}{\tocsubsection {}{4.5.4}{Relay Memory}}{61}{subsection.4.5.4}
-\contentsline {section}{\tocsection {}{}{Deep Neural Network}}{62}{section.4.6}
-\contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{64}{chapter.5}
-\contentsline {section}{\tocsection {}{}{Simulation Setup}}{64}{section.5.1}
-\contentsline {section}{\tocsection {}{}{Training for Longitudinal Motion only}}{65}{section.5.2}
-\contentsline {subsection}{\tocsubsection {}{5.2.1}{Case 1: The neighboring vehicles are at constant speeds.}}{66}{subsection.5.2.1}
-\contentsline {subsection}{\tocsubsection {}{5.2.2}{Case 2: The neighboring vehicles are at erratic speeds.}}{67}{subsection.5.2.2}
-\contentsline {section}{\tocsection {}{}{Training for Lateral Motion only}}{68}{section.5.3}
-\contentsline {subsection}{\tocsubsection {}{5.3.1}{Case 1: The neighboring vehicles are at constant speeds.}}{69}{subsection.5.3.1}
-\contentsline {subsection}{\tocsubsection {}{5.3.2}{Case 2: The neighboring vehicles are at erratic speeds.}}{71}{subsection.5.3.2}
-\contentsline {section}{\tocsection {}{}{Training for Combined Motion}}{72}{section.5.4}
-\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{76}{chapter.6}
-\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{76}{section.6.1}
-\contentsline {section}{\tocsection {}{}{Analysis}}{76}{section.6.2}
-\contentsline {section}{\tocsection {}{}{Reflection}}{78}{section.6.3}
-\contentsline {subsection}{\tocsubsection {}{6.3.1}{Diffculties}}{78}{subsection.6.3.1}
-\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{78}{subsection.6.3.2}
-\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{80}{chapter.7}
-\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{82}{chapter*.41}
+\contentsline {subsection}{\tocsubsection {}{4.5.2}{Actions}}{60}{subsection.4.5.2}
+\contentsline {subsection}{\tocsubsection {}{4.5.3}{Reward Function}}{60}{subsection.4.5.3}
+\contentsline {subsection}{\tocsubsection {}{4.5.4}{Relay Memory}}{62}{subsection.4.5.4}
+\contentsline {section}{\tocsection {}{}{Deep Neural Network}}{63}{section.4.6}
+\contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{65}{chapter.5}
+\contentsline {section}{\tocsection {}{}{Simulation Setup}}{65}{section.5.1}
+\contentsline {section}{\tocsection {}{}{Training for Longitudinal Motion only}}{66}{section.5.2}
+\contentsline {section}{\tocsection {}{}{Training for Combined Motion}}{69}{section.5.3}
+\contentsline {section}{\tocsection {}{}{Main Evaluation}}{72}{section.5.4}
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{73}{chapter.6}
+\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{73}{section.6.1}
+\contentsline {section}{\tocsection {}{}{Analysis}}{73}{section.6.2}
+\contentsline {section}{\tocsection {}{}{Reflection}}{74}{section.6.3}
+\contentsline {subsection}{\tocsubsection {}{6.3.1}{Difficulties}}{74}{subsection.6.3.1}
+\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{75}{subsection.6.3.2}
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{77}{chapter.7}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{79}{chapter*.36}

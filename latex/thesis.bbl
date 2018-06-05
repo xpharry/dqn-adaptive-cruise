@@ -218,4 +218,9 @@ R.~Craig Coulter.
 \newblock Technical Report CMU-RI-TR-92-01, Carnegie Mellon University,
   Pittsburgh, PA, January 1992.
 
+\bibitem{Replay2015}
+T.~Schaul et~al.
+\newblock Prioritized experience replay.
+\newblock {\em CoRR}, 1511(05952), 2015.
+
 \end{thebibliography}

@@ -1,11 +1,10 @@
 \chapter{Introduction}
 
-
-\section{Motivation and Background}
-
 % Autonomous Vehicle
 
 An autonomous vehicle has great potential to improve driving safety, comfort and efficiency and can be widely applied in a variety of fields, such as road transportation, agriculture, planetary exploration, military purpose and so on \cite {WANG2015727}. The past three decades have witnessed the rapid development of autonomous vehicle technologies, which have attracted considerable interest and efforts from academia, industry, and governments. Particularly in the past decade, contributing to significant advances in sensing, computer technologies, and artificial intelligence, the autonomous vehicle has become an extraordinarily active research field. During this period, several well-known projects and competitions for autonomous vehicles have already exhibited autonomous vehicles' great potentials in the areas ranging from unstructured environments to the on-road driving environments \cite{AutonomousStructured} \cite{DrivingUrban2008}.
+
+\section{Motivation and Background}
 
 % Highway Driving
 
@@ -14,7 +13,7 @@ Complex functions like highly autonomous driving with combined longitudinal and 
 Autonomous highway driving means the autonomous control of the complex driving tasks of highway driving, like driving at a safe speed selected by the driver, changing lanes or overtaking front vehicles depending on the traffic circumstances, automatically reducing speed as necessary or stopping the vehicle in the right most lane in case of an emergency. Japanese Toyota Motor have already demonstrated their advanced highway driving support system prototype in real traffic operation. The two vehicles  communicate each other, keeping their lane and following the preceding vehicle to maintain a safety distance \cite{Nissan2013}.
 
 % Simulator
-An important aspect in developing an autonomous driving system is the development of a simulator. To get to mass production, autonomous vehicles must drive 10 billion kilometers for proof of concept. With 100 vehicles driving 24 hours seven days a week , this would still mean 225 years of driving. Simulators can accelerate that and reduce costs. Both Uber and Waymo recently gave a glimpse into the workings of their simulators, with which they ``drive'' billions kilometer per year.
+An important aspect in developing an autonomous driving system is the development of a simulator. To get to mass production, autonomous vehicles must drive 10 billion kilometers for proof of concept. With 100 vehicles driving 24 hours seven days a week , this would still mean 225 years of driving. Simulators can accelerate that and reduce costs \cite{Appolo}. Both Uber and Waymo recently gave a glimpse into the workings of their simulators, with which they ``drive'' billions kilometer per year.
 
 % Adaptive Cruise Control
 
@@ -68,38 +67,38 @@ Chapter 2 details the stack architecture of the simulating environment and the i
 Chapter 3 dives into the autonomous driving system. Chapter 3 is laid out as follows:
 
 \begin{itemize}
-\item \textbf {Section 3.1 Behavior Planning:} 
-\item \textbf {Section 3.2 Path Planning:}
-\item \textbf {Section 3.3 Path Flowing:}
-\item \textbf {Section 3.4 Drive By Wire:} 
+\item \textbf {Section 3.1 Behavior Planning:} A description of the planning module on behavior selecting.
+\item \textbf {Section 3.2 Path Planning:} A description of the planning module on path generating and selecting.
+\item \textbf {Section 3.3 Path Flowing:} A description of the lane keeping or path following module.
+\item \textbf {Section 3.4 Drive By Wire:} A description of the drive by wire vehicle.
 \end{itemize}
 
 Chapter 4 describes the core algorithm in the framework, namely Deep Q-Learning. Chapter 4 is a follows:
 
 \begin{itemize}
-\item \textbf {Section 4.1 Architecture:} 
-\item \textbf {Section 4.2 Reinforcement Learning for Longitudinal Motion:}
-\item \textbf {Section 4.3 Reinforcement Learning for Lateral Motion:}
-\item \textbf {Section 4.4 Q Learning:} 
-\item \textbf {Section 4.5 Policy Representation}
-\item \textbf {Section 4.6 Deep Neural Network}
+\item \textbf {Section 4.1 Architecture.} 
+\item \textbf {Section 4.2 Reinforcement Learning for Longitudinal Motion.}
+\item \textbf {Section 4.3 Reinforcement Learning for Lateral Motion.}
+\item \textbf {Section 4.4 Q Learning.} 
+\item \textbf {Section 4.5 Policy Representation.}
+\item \textbf {Section 4.6 Deep Neural Network.}
 \end{itemize}
 
 Chapter 5 displays the experiment results in some basic scenarios. Chapter 5 sections are as follows:
 
 \begin{itemize}
-\item \textbf {Section 5.1 Simulation Setup:} 
-\item \textbf {Section 5.2 Training for Longitudinal Motion:}
-\item \textbf {Section 5.3 Training for Lateral Motion:}
-\item \textbf {Section 5.4 Training for Combined Motion:} 
+\item \textbf {Section 5.1 Simulation Setup:} Explanation of how the simulation is set by parameters.
+\item \textbf {Section 5.2 Training for Longitudinal Motion:} An experiment on ACC agent.
+\item \textbf {Section 5.3 Training for Combined Motion:} An experiment on ACC and LCC agent.
+\item \textbf {Section 5.4 Main Evaluation:} Analysis on the results and indication of the performance.
 \end{itemize}
 
 Chapter 6 contains the conclusion. Chapter 6 sections are as follows:
 
 \begin{itemize}
-\item \textbf {Section 6.1 Free-Form Visualization:} 
-\item \textbf {Section 6.2 Analysis:} 
-\item \textbf {Section 6.2 Reflection:} 
+\item \textbf {Section 6.1 Free-Form Visualization.} 
+\item \textbf {Section 6.2 Analysis.} 
+\item \textbf {Section 6.2 Reflection.} 
 \end{itemize}
 
 Chapter 7 indicates several promising areas for future work. 

@@ -26,7 +26,7 @@ OpenAI was founded in late 2015 as a non-profit with a mission to "build safe ar
 
 The usual basic requirements to robot simulators are an accurate physics simulation (such as object velocity, inertia, friction, position and orientation, etc.), high quality rendering (for shape, dimensions, colors, and texture of objects), integration with the Robot Operating System (ROS) framework and multi-platform performability. It provides great opportunities for modeling robots and their sensors together with developing robot control algorithms, realizing mobile robot simulation, visualization, locomotion and navigation in a realistic 3D environment. As mentioned in the paper \cite{jmeSim2012}, the high graphical fidelity in a robot simulation is important because the sensory input to the robot perceptual algorithms comes from virtual sensors, which are also provided by the simulation. For example, virtual cameras use the simulator rendering engine to obtain their images. If images from a simulated camera have incorrect similarity to real camera ones, then it is not possible to use them for object recognition and localization.
 
-To avoid such a sort of problems, we use the robust and high graphical quality robot simulator --- Gazebo, which is an open source robotic simulation package that closely integrated with ROS. Gazebo uses the open source OGRE rendering engine, which produces good graphics fidelity, although it also employs the Open Dynamics Engine (ODE), which is estimated as sufficiently slow physics engine \cite{jmeSim2012}.
+To avoid such a sort of problems, we use the robust and high graphical quality robot simulator --- Gazebo, which is an open source robotic simulation package that closely integrated with ROS. Gazebo uses the open source OGRE rendering engine, which produces good graphics fidelity, although it also employs the Open Dynamics Engine (ODE), which is estimated as slow physics engine \cite{jmeSim2012}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{ROS}
@@ -61,7 +61,7 @@ A node sends a message by publishing it to a given topic, which is simply a stri
 
 \subsection{Collaborative Development}
 
-Due to the vast scope of robotics and artificial intelligence, collaboration between modules is necessary in order to build large systems. To support collaborative development, the ROS software system is organized into packages. Our definition of "package" is deliberately open-ended: a ROS package is simply a directory which contains an XML file describing the package and stating any dependencies.
+Due to the vast scope of robotics and artificial intelligence, collaboration between modules is necessary in order to build large systems. To support collaborative development, the ROS software system is organized into packages. Here the definition of "package" is deliberately open-ended: a ROS package is simply a directory which contains an XML file describing the package and stating any dependencies.
 
 A collection of ROS packages is a directory tree with ROS packages at the leaves: a ROS package repository may thus contain an arbitrarily complex scheme of subdirectories. For example, one ROS repository has root directories including "nav", "vision" and "motion planning" each of which contains many packages as subdirectories.
 
@@ -88,7 +88,7 @@ For example, the \textit{tf} system can be used to easily generate point clouds 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gazebo}
 
-Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments, which makes it possible to rapidly test algorithms, design robots, perform regression testing, and train AI system using realistic scenarios. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs. Fig. \label{fig:pr2} gives a typical display of Gazebo and in the window is a PR2 robot \cite{PR2008} with its LIDAR sensor range displayed in blue.
+Gazebo is a 3D dynamic simulator with the ability to accurately and efficiently simulate populations of robots in complex indoor and outdoor environments, which makes it possible to rapidly test algorithms, design robots, perform regression testing, and train AI system using realistic scenarios. While similar to game engines, Gazebo offers physics simulation at a much higher degree of fidelity, a suite of sensors, and interfaces for both users and programs. Fig. \ref{fig:pr2} gives a typical display of Gazebo and in the window is a PR2 robot \cite{PR2008} with its LIDAR sensor range displayed in blue.
 
 \begin{figure}[h]
 \centering
@@ -131,7 +131,7 @@ This architecture is graphically depicted in Fig. \ref{fig:gazebo-structure}. Th
 
 \subsection{Physics Engine}
 
-The Open Dynamics Engine, created by Russel Smith is a widely used physics engine in the open source community. It is designed to simulate the dynamics and kinematics associated with articulated rigid bodies. This engine includes many features such as numerous joints, collision detection, mass and rotational functions, and many geometries including arbitrary triangle meshes. Gazebo utilizes these features by providing a layer of abstraction situated between ODE and Gazebo models. This layer allows easy creation of both normal and abstract objects such as laser rays and ground planes while maintaining all the functionality provided by ODE. With this internal abstraction, it is possible to replace the underlying physics engine, should a better alternative become available.
+The Open Dynamics Engine, created by Russel Smith is a widely used physics engine in the open source community. It is designed to simulate the dynamics and kinematics associated with articulated rigid bodies. This engine includes many features such as numerous joints, collision detection, mass and rotational functions, and many geometries including arbitrary triangle meshes. Gazebo utilizes these features by providing a layer of abstraction situated between ODE and Gazebo models. This layer allows easy creation of both normal and abstract objects such as laser rays and ground planes while maintaining all the functionality provided by ODE. %With this internal abstraction, it is possible to replace the underlying physics engine, should a better alternative become available.
 
 \subsection{Visualization}
 
@@ -188,7 +188,7 @@ Two core concepts in Reinforcement Learning are the agent and the environment. O
 
 In the context of robotics, reinforcement learning offers a framework for the design of sophisticated and hard-to-engineer behaviors \cite{RLsurvey2013}. The challenge is to build a simple environment where this machine learning techniques can be validated, and later applied in a real scenario.
 
-OpenAI Gym leaves interfaces to write customized agents, which makes it possible to integrate the Gym API with robotic hardware, validating reinforcement learning algorithms in real environments. Real-world operation is achieved combining Gazebo simulator with ROS.
+OpenAI Gym leaves interfaces to write customized agents, which makes it possible to integrate the Gym API with robotic hardware, validating reinforcement learning algorithms in real environments. The robotic operation is achieved combining Gazebo simulator with ROS.
 
 \begin{figure}[h]
 \centering
@@ -244,7 +244,7 @@ The Neural Network applied here has one layer with 10 units. The other hyperpara
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{figs/ch2/cartpole-epoch-1200}
-\caption{Reward history of training A Cart-Pole Agent.}
+\caption{Reward history of training A Cart-Pole Agent. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)}
 \label{fig:cartpole-result}
 \end{figure}
 
