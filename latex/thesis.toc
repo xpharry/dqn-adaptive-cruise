@@ -51,13 +51,13 @@
 \contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{65}{chapter.5}
 \contentsline {section}{\tocsection {}{}{Simulation Setup}}{65}{section.5.1}
 \contentsline {section}{\tocsection {}{}{Training for Longitudinal Motion only}}{66}{section.5.2}
-\contentsline {section}{\tocsection {}{}{Training for Combined Motion}}{69}{section.5.3}
-\contentsline {section}{\tocsection {}{}{Main Evaluation}}{72}{section.5.4}
-\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{73}{chapter.6}
-\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{73}{section.6.1}
-\contentsline {section}{\tocsection {}{}{Analysis}}{73}{section.6.2}
-\contentsline {section}{\tocsection {}{}{Reflection}}{74}{section.6.3}
-\contentsline {subsection}{\tocsubsection {}{6.3.1}{Difficulties}}{74}{subsection.6.3.1}
-\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{75}{subsection.6.3.2}
-\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{77}{chapter.7}
-\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{79}{chapter*.36}
+\contentsline {section}{\tocsection {}{}{Training for Combined Motion}}{70}{section.5.3}
+\contentsline {section}{\tocsection {}{}{Main Evaluation}}{74}{section.5.4}
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{76}{chapter.6}
+\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{76}{section.6.1}
+\contentsline {section}{\tocsection {}{}{Analysis}}{76}{section.6.2}
+\contentsline {section}{\tocsection {}{}{Reflection}}{77}{section.6.3}
+\contentsline {subsection}{\tocsubsection {}{6.3.1}{Difficulties}}{77}{subsection.6.3.1}
+\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{78}{subsection.6.3.2}
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{80}{chapter.7}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{82}{chapter*.39}

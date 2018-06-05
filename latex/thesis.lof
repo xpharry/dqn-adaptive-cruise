@@ -33,8 +33,11 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Training environment for Adaptive Cruise Control.\relax }}{67}{figure.caption.32}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces The reward history of training for Adaptive Cruise Control.\relax }}{68}{figure.caption.33}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Training environment for Adaptive Cruise Control.\relax }}{70}{figure.caption.34}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The reward history of training for full autonomous highway driving.\relax }}{71}{figure.caption.35}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The action distribution after 1400 episodes' training.\relax }}{69}{figure.caption.34}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The action distribution after 1400 episodes' training.\relax }}{70}{figure.caption.35}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Training environment for Adaptive Cruise Control.\relax }}{71}{figure.caption.36}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces The reward history of training for full autonomous highway driving. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)\relax }}{73}{figure.caption.37}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces The reward history of training for full autonomous highway driving. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)\relax }}{74}{figure.caption.38}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
