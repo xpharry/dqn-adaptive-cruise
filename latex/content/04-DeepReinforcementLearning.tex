@@ -18,7 +18,7 @@ Our system follows the basic RL structure. The agent performs an action $A_t$ gi
 
 \end{itemize}
 
-The ego vehicle continuously detects the vehicles around itself as shown in Fig \ref{fig:highway}. The vehicle $i (i = 0,1,...,5)$ do not represent any specific vehicle but a detected vehicle in that area. For example, Vehicle 0 and Vehicle 1 represent vehicles in the left lane of the ego vehicle and Vehicle 0 is behind and Vehicle 1 is in front of it. When there are multiple vehicles in the same area, only the closest is considered. 
+The ego vehicle continuously detects the space information in 6 areas around itself as shown in Fig \ref{fig:highway} and the maximal detecting range is 80 meters in front and behind. The variable $s_i (i = 0,1,...,5)$ represents the detected vehicle distance or obstacle distance along the path with the ego vehicle. If none is detected in the range of 80 meters, 80 would be put in the variable. For example, Vehicle 0 is located in the left lane of the ego vehicle and is in front of it. Vehicle 0 is defined in Area 0. When there are multiple vehicles in the same area, only the closest is considered. Later we can use the information to check the state of the left lane or the right lane. A function is provided to compute if the lane change is safe or not.
 
 \begin{figure}[h]
 \centering
@@ -28,6 +28,21 @@ The ego vehicle continuously detects the vehicles around itself as shown in Fig 
 \end{figure}
 
 Once one episode ends, the next episode starts with the state of environment and the value function reset.
+
+The general architecture is as shown in Fig. \ref{fig:diagram}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figs/ch4/diagram}
+\caption{A general architecture of training.}
+\label{fig:diagram}
+\end{figure}
+
+OpenAI and Gazebo are providing online environment state information including vehicle's state information. With the global path or the map given, we construct an array indicating the poses and velocities from the point of view of the ego vehicle with the detecting range.
+
+The preprocessor is to simplify and separate the in lane information for ACC and neighboring lane information for LC. Finally the state array to be fed into the Deep Network is a small and normalized array. The first three items ``v", ``s" and ``$v_{rel}$" are representing the speed of the ego vehicle $v_{ego}$, the distance between the ego vehicle and the preceding vehicle $s_{pre} - s_{ego}$ and the relative speed between the two, $v_{rel} = v_{pre} - v_{ego}$. The three are key variables for adaptive cruise control. The remaining two, $l$ and $r$, indicate the availabilities of the left lane and the right lane. The two are binary variables with ``True" representing that the lane is safe to reach. We define that only when there no vehicle detected within some range to the ego vehicle the target lane is thought to be available. Here we set 30 meters as the range limit. With this setting, we don't need to consider adaptive control problems when changing lane. After it change to a new lane, the first three variables will also update to the state in the new lane and it will have enough time to adjust its speed with ACC.
+
+The Deep Network will be trained to output Q-values for different classes of activities. The action with highest Q-value will be thrown into OpenAI / Gazebo to generate the next state.
 
 \section{Reinforcement Learning for Longitudinal Motion}
 
@@ -52,7 +67,7 @@ Put into context, Fig. \ref{fig:acc-rl} shows that using RL simplifies the desig
 
 Lateral motion control without longitudinal motion control hardly exists. Besides parking another good example of low speed combined longitudinal and lateral control is the traffic jam assist system. At speeds between zero and 40 or 60 km/h (depending on OEMs), the traffic jam assist system keeps pace with the traffic flow and helps to steer the car within certain constraints. It also accelerates and brakes autonomously. The system is based on the functionality of the adaptive cruise control with stop \& go, extended by adding the lateral control of steering and lane guidance. The function is based on the built-in radar sensors, a wide-angle video camera and the ultrasonic sensors of the parking system.
 
-In this section, we describe the design of the Lane Control layer and, more precisely, the design of the policy to select the most efficient and safest lane for each vehicle according to their current state and action. Lane changes are stressful maneuvers for drivers, particularly during high-speed traffic flows. As designed in the last Chapter, the Lane Control system is using a Finite State Machine (FSM) and hence RL is only responsible for choosing the optimal behavior or next Finite State. The action space consists of three actions, Change to Left, Keep Lane and Change to Right. To make such kind of decision, the agent needs to be aware of the nearby vehicle's position and state in both its current lane and nearby lane. We maintain an array combining both a 6-sized relative position array and a 6-sized relative velocity array which captures enough space and temporal information for the Lateral Control agent. With the array, we can easily check if the neighboring lane is available to reach.
+In this section, we describe the design of the Lane Control layer and, more precisely, the design of the policy to select the most efficient and safest lane for each vehicle according to their current state and action. Lane changes are stressful maneuvers for drivers, particularly during high-speed traffic flows. As designed in the last Chapter, the Lane Control system is using a Finite State Machine (FSM) and hence RL is only responsible for choosing the optimal behavior or next Finite State. The action space consists of three actions, Change to Left, Keep Lane and Change to Right. To make such kind of decision, the agent needs to be aware of the nearby vehicle's position and state in both its current lane and nearby lane. We maintain an array combining a 6-dimensional relative position array which captures space information in 6 nearby locations as shown in Fig. \ref{fig:highway} for the Lateral Control agent. With the array, we can easily check if the neighboring lane is available to reach.
 
 \section{Q Learning}
 
@@ -62,7 +77,7 @@ Q-learning is one of the popular RL methods which searches for the optimal polic
 q_\pi(s,a) = \mathbb{E}_\pi \left[ \sum _{k=0}^{\infty} \gamma ^k r_{t+k+1} | S_t = s, A_t = a \right]
 \end{equation}
 
-For the given state $s$ and action $a$, where $r_t$ is the reward received at the time step $t$. The Q-value function is the expected sum of the future rewards which indicates how good the action $a$ is given the state $s$ under the policy of the agent $\pi$. The contribution to the Q-value function decays exponentially with the discounting factor $\pi$ for the rewards with far-off future. For the given Q-value function, the greedy policy is obtained as
+For the given state $s$ and action $a$, where $r_t$ is the reward received at the time step $t$. The Q-value function is the expected sum of the future rewards which indicates how good the action $a$ is given the state $s$ under the policy of the agent $\pi$. The contribution to the Q-value function decays exponentially with the discounting factor $\gamma$ for the rewards with far-off future. For the given Q-value function, the greedy policy is obtained as
 
 \begin{equation} \label{eq:402}
 \pi(s) = arg \max_a q_{\pi} (s, a) 
@@ -201,21 +216,17 @@ Usually, a total of 15 controller parameters serve to define the available polic
 
 The reward should be appropriately defined by a system designer in Adaptive Cruise System or Lane Control System.
 
-In order to ensure the reliability of the adaptive cruise control, it is crucial to use the properly defined reward function. In our model, there is conflict between two intuitive objectives for cruise control: 1) collision should be avoided no matter what happens and 2) the vehicle should get out of the risky situation quickly. If it is unbalanced, the agent becomes either too conservative or reckless. Therefore, we should use the reward function which balances two conflicting objectives. Taking this into consideration, we propose the following reward function
+In order to ensure the reliability of the adaptive cruise control, it is crucial to use the properly defined reward function. In our model, there is conflict between two intuitive objectives for cruise control: 1) collision should be avoided no matter what happens and 2) the vehicle should finish the trip quickly. If it is unbalanced, the agent becomes either too conservative or reckless. Therefore, we should use the reward function which balances two conflicting objectives. Taking this into consideration, we propose the following reward function
 
 \begin{equation} \label{eq:reward-func1}
 r_t = \alpha * r_s + \beta *  r_{action} + r_{collision}
 \end{equation}
 
-where $r_s$ is the incremental travel distance along the path of the ego vehicle at the time step $t$ and $r_{action}$  is the reward (or penalty if negative) of the action at the time step $t$. The first term $ \alpha * r_s $ in the reward function encourages the vehicle to drive as fast as possible within the speed limit to achieve higher reward. It guides the vehicle to drive without deceleration if the preceding vehicle is far from the ego vehicle. The second term $\beta *  r_{action}$ is to penalize frequent speed changes. On the other hand, the term $r_{collision}$ indicates the penalty that the agent receives when the accident occurs. Once the collision happens, a huge penalty is received and the episode ends here. The constants $\alpha$ and $\beta$ are the weight parameters that controls the trade-off between two objectives.
+where $r_s$ is the incremental travel distance along the path of the ego vehicle at the time step $t$ and $r_{action}$  is the reward (or penalty if negative) of the action at the time step $t$. The first term $ \alpha * r_s $ in the reward function encourages the vehicle to drive as fast as possible within the speed limit to achieve high reward. It guides the vehicle to drive without deceleration if the preceding vehicle is far from the ego vehicle. The second term $\beta *  r_{action}$ is to penalize frequent speed changes. On the other hand, the term $r_{collision}$ indicates the penalty that the agent receives when the accident occurs. Once the collision happens, a huge penalty is received and the episode ends here. The constants $\alpha$ and $\beta$ are the weight parameters that controls the trade-off between two objectives.
 
-As for the lane control, it is all about timing of changing to the next finite state defined in previous chapter. The reward function should be designed to encourage the ego vehicle to change to a safer lane than the current one. When the current lane is safe enough it is then encouraged to keep in the lane since it is not reasonable to change lanes quite often.
+As for the lane control, it is all about timing of changing to the next finite state defined in previous chapter. The reward function should be designed to encourage the ego vehicle to change to a safer lane than the current one. When the current lane is safe enough or the preceding car is far away enough, it is then encouraged to keep in the lane since it is not reasonable to change lanes quite often.
 
-\begin{equation} \label{eq:reward-func2}
-r_t = \alpha * r_s + \beta *  r_{action} + \phi * r_{lanechane}+ r_{collision}
-\end{equation}
-
-where parameters are almost the same as in the previous equation except that $\beta *  r_{action}$ is to penalize frequent speed and lane changes and a new item $\phi * r_{lanechane}$ is added to reflect if lane changing results. The factor $\phi$ indicates its weight in the whole reward. If the lane change action is not in a right timing (i.e. the target lane is stamped not reachable) it would lead to a failure and a penalty would be given by $r_{lanechane}$.
+The reward function for the ACC and LC agent is almost the same as in Eq. \ref{eq:reward-func1} except that the second item $\beta *  r_{action}$ is dealing with more actions and is to penalize frequent speed and lane changes. The lane change actions have been forbidden when the target lane is not available (vehicles or obstacles are detected in some specified ranges which might potentially leads to an accident). The agent would make lane changes in different scenarios namely with different state arrays. It would get penalty when hitting the forbidden changing lane trigger. Also every time it changes lane successfully, it gives a price. After all these, the agent is expected to learn to change lanes when safe and efficient.
 
 \subsection{Relay Memory}
 
@@ -225,7 +236,14 @@ Combined with deep learning, experience replay has enabled impressive performanc
 
 \section{Deep Neural Network}
 
-Many of the successes in DRL have been based on scaling up prior work in RL to high-dimensional problems. This is due to the learning of low-dimensional feature representations and the powerful function approximation properties of neural networks. By means of representation learning, DRL can deal efficiently with the curse of dimensionality, unlike tabular and traditional non-parametric methods. For instance, fully connected neural networks (FCNNs) can be used as components of RL agents, allowing them to learn directly from raw, high-dimensional visual or lidar range inputs. In general, DRL is based on training deep neural networks to approximate the optimal policy $\pi$, and/or the optimal value functions $V^\star$.
+Many of the successes in DRL have been based on scaling up prior work in RL to high-dimensional problems. This is due to the learning of low-dimensional feature representations and the powerful function approximation properties of neural networks. By means of representation learning, DRL can deal efficiently with the curse of dimensionality, unlike tabular and traditional non-parametric methods. For instance, fully connected neural networks (FCNNs) can be used as components of RL agents, allowing them to learn directly from raw, high-dimensional visual or lidar range inputs. In general, DRL is based on training deep neural networks to approximate the optimal policy $\pi$, and/or the optimal value functions $V^\star$. For example, in this thesis a Deep Neural Network is trained to map the state and action arrays to Q-values which points to the optimal policy, as shown in Fig. \ref{fig:dqn-architecture}. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{figs/ch4/architecture-of-deep-q-network}
+\caption{Architecture of Deep Q-Network.}
+\label{fig:dqn-architecture}
+\end{figure}
 
 Although there have been DRL successes with gradient free methods, the vast majority of current works rely on gradients and hence the backpropagation algorithm. The primary motivation is that when available, gradients provide a strong learning signal. In reality, these gradients are estimated based on approximations, through sampling or otherwise, and as such we have to craft algorithms with useful inductive biases in order for them to be tractable.The other benefit of backpropagation is to view the optimization of the expected return as the optimization of a stochastic function. This function can comprise of several parts' models, policies and value functions, which can be combined in various ways. The individual parts, such as value functions, may not directly optimize the expected return, but can instead embody useful information about the RL domain. For example, using a differentiable model and policy, it is possible to forward propagate and backpropagate through entire rollouts; on the other hand, inaccuracies can accumulate.
 

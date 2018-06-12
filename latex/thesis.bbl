@@ -23,6 +23,10 @@ Chris~Urmson etc.
 A.~Mukminin.
 \newblock Semi-autonomous nissan leaf cleared for road test in japan, 2013.
 
+\bibitem{Appolo2017}
+Mario Herger.
+\newblock Baidu's open source self-driving platform apollo in detail, Oct 2017.
+
 \bibitem{ACC2002}
 H.~Sudou and T.~Hashizume.
 \newblock Adaptive cruise control system.
@@ -217,6 +221,12 @@ R.~Craig Coulter.
 \newblock Implementation of the pure pursuit path tracking algorithm.
 \newblock Technical Report CMU-RI-TR-92-01, Carnegie Mellon University,
   Pittsburgh, PA, January 1992.
+
+\bibitem{IRL}
+Andrew~Y. Ng and Stuart~J. Russell.
+\newblock Algorithms for inverse reinforcement learning.
+\newblock {\em Proceedings of the Seventeenth International Conference on
+  Machine Learning}, pages 663--670, June 29-July 02 2000.
 
 \bibitem{Replay2015}
 T.~Schaul et~al.
