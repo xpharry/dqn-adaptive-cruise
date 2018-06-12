@@ -1,0 +1,47 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Toyota's advanced highway driving support system.\relax }}{2}{figure.caption.3}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces How an agent interacts with the environment.\relax }}{5}{figure.caption.4}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Architecture of the simulation environment.\relax }}{11}{figure.caption.5}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Communication pipeline.\relax }}{14}{figure.caption.6}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Gazebo for robot simulation.\relax }}{18}{figure.caption.7}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Gazebo for robot simulation.\relax }}{19}{figure.caption.8}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Simplified software architecture used in OpenAI Gym for robotics.\relax }}{26}{figure.caption.9}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces A Cart-pole model created in Gazebo.\relax }}{27}{figure.caption.10}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces A Cart-pole model displayed in ROS-Rviz.\relax }}{27}{figure.caption.11}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Reward history of training A Cart-Pole Agent. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)\relax }}{29}{figure.caption.12}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces 4 vehicle models in ADAS Kit.\relax }}{30}{figure.caption.13}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Simulation model and corresponding TF tree.\relax }}{30}{figure.caption.14}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Standard Architecture of Autonomous Vehicle.\relax }}{33}{figure.caption.18}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Standard Architecture of Autonomous Vehicle Control.\relax }}{35}{figure.caption.19}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The finite state machine for lateral motion control.\relax }}{37}{figure.caption.20}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces The global route and the waypoints.\relax }}{39}{figure.caption.21}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Reference path generation in Frenet coordinate.\relax }}{41}{figure.caption.22}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces A curve road in Cartesian coordinate.\relax }}{41}{figure.caption.23}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces A curve road in Cartesian coordinate with waypoints.\relax }}{42}{figure.caption.24}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Curve in Frenet coordinate system.\relax }}{42}{figure.caption.25}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces A curve road in Frenet coordinate with waypoints.\relax }}{43}{figure.caption.26}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Comparison display in Frenet and Cartesian coordinate systems.\relax }}{44}{figure.caption.27}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Vehicle localization on the center line. (a) Center waypoints and center line segments, (b) localization on the center line.\relax }}{45}{figure.caption.28}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Global coordinate system (Xglobal, Yglobal), local coordinate system (xlocal, Ylocal).\relax }}{46}{figure.caption.29}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Geometric explanation of Pure-Pursuit.\relax }}{49}{figure.caption.30}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces A general highway case display.\relax }}{53}{figure.caption.31}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces A general architecture of training.\relax }}{53}{figure.caption.32}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Reinforcement applied on ACC system.\relax }}{56}{figure.caption.33}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Architecture of Deep Q-Network.\relax }}{66}{figure.caption.34}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Training environment for Adaptive Cruise Control.\relax }}{70}{figure.caption.35}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces The reward history of training for Adaptive Cruise Control.\relax }}{71}{figure.caption.36}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The action distribution after training.\relax }}{72}{figure.caption.37}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The speed variance after training.\relax }}{73}{figure.caption.38}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Training environment for Adaptive Cruise Control.\relax }}{74}{figure.caption.39}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces The reward history of training for full autonomous highway driving. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)\relax }}{76}{figure.caption.40}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces The action distribution after training.\relax }}{77}{figure.caption.41}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces The speed variance after training.\relax }}{78}{figure.caption.42}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

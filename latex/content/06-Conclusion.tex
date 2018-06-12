@@ -1,0 +1,56 @@
+%Conclusions
+\chapter{Conclusions}
+
+This chapter concludes the results intuitively, analyses the implementation and summarizes the difficulties and pipelines for future use.
+
+\section{Free-Form Visualization}
+
+Some Youtube video have been uploaded with the following links,
+
+\begin{itemize}
+	\item https://youtu.be/RcjZSAFbHV0 
+	\item https://youtu.be/nEqEXBDs2Co 
+\end{itemize}
+
+and it shows how it performs after enough training. It shows a capacity to stay in the lane adjusting its speed and choose a good timing to change lanes.
+
+\section{Analysis}
+
+As mentioned in Chapter 5, the simple reward functions were designed in a simple way. Naturally, the choice of reward function strongly affects the resulting behavior. For example, when no penalty was given for a lane change, the agent found solutions where it constantly demanded lane changes in opposite directions, which made the vehicle drive in between two lanes. In this study, a simple reward function worked well, but for other cases a more careful design may be required. One way to determine a reward function is to use inverse reinforcement learning \cite{IRL}.
+
+The method presented in this thesis requires no such hand crafted features, and instead uses the measured state. An important remark is that when training an agent by using the method presented in this thesis, the agent will only be able to solve the type of situations that it is exposed to in the simulations. It is therefore important that the design of the simulated traffic environment covers the intended case. Furthermore, when using machine learning to produce a decision making function, it is hard to guarantee functional safety. Therefore, it is common to use an underlying safety layer, which verifies the safety of a planned trajectory before it is executed by the vehicle control system.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reflection}
+
+As experience which could be useful for future research on deep reinforcement learning, the difficulties and pipelines are summarized here.
+
+\subsection{Difficulties}
+
+The most difficult aspect of this thesis was that is extremely hard to stabilize reinforcement learning with non-linear function approximators. There are plenty of tricks that can be used and hyper-parameters that need to be tuned to get it to work, such as exploration policy, discount factor, learning rate, number of episodes, batch size, experience pool size and initial value.
+
+All these techniques and parameters were selected by trial and error, and no systematic grid search was done due to the high computational cost. More than once it seemed that the implementation of the algorithms and techniques was incorrect, and it turned out that the wrong parameters were being used. A ``simple'' change such as decreasing $\epsilon$, or changing the neural network optimizer made big changes in the performance of the value function.
+
+Also a huge difficulty of a reinforcement learning problem could be the time lag between the action and the reward. When training with grouped actions off of the heuristic reward function, the reward for a given action was immediate, and this network showed the best performance. The next best performance came from a network based off of grouped actions, where actions were only a few steps removed from the next reward. Our worst performance came from the networks trained to estimate actions, where actions were several dozen steps removed from the next rewards.
+
+\subsection{General Pipeline}
+
+In a Deep Q Network setting, there are several elements which we have to be careful to define.
+
+\begin{itemize}
+	
+    \item \textbf{Environment:} An environment defines what the agent interacts with. It receives states and actions and generate new states and plays a role as an online data generator. 
+    \item \textbf{State Space:} A state is the input of the Deep Q Network. In this thesis, the stats is an image or a pixel array. It will be trained by a Deep Neural Network and predict the next actions.
+    \item \textbf{Action Space:} An action space could be discrete and continuous. It defines the all classes that would be generated from the Deep Q Network. A bigger action space indicates a bigger room for an agent to learn and improve but also means a much complexity to train.
+    \item \textbf{Reward Function:} The reward function determines in which way we would like the agent to grow. For example, we would define a bigger reward for the car to stay in the middle of the road than in the side of the road. It can be a discrete or a continuous function.
+    \item \textbf{Deep Neural Network:} The Deep Neural Network is responsible to map the states to the Q values, which are corresponding to different actions by Q functions. 
+    \item \textbf{Fine tune the Hyperparameters:} By fine tuning the hyperparameters, we try to maximize the ability of the defined Deep Q Network. It can be subtle to modify the hyperparameter values which might change the output in different ways, like effecting the time of the convergence, the prediction accuracy, overfitting or underfitting and robustness.
+    
+\end{itemize}
+
+
+
+
+
+
+%\vfill

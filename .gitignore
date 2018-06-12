@@ -3,9 +3,19 @@
 build
 devel
 
+.DS_Store
+
 profile.tmp
 
 ~
+
+.log
+.aux
+.out
+.synctex.gz
+.blg
+.toc
+.lof
 
 *.swp
 *.pyc
@@ -14,3 +24,4 @@ profile.tmp
 .egg-info
 
 gym_vehicle.egg-info
+

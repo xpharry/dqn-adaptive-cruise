@@ -1,0 +1,236 @@
+\begin{thebibliography}{10}
+
+\bibitem{WANG2015727}
+R.~Wang et~al.
+\newblock Integrated optimal dynamics control of 4wd4ws electric ground vehicle
+  with tire-road frictional coefficient estimation.
+\newblock {\em Mechanical Systems and Signal Processing}, 60-61:727 -- 741,
+  2015.
+
+\bibitem{AutonomousStructured}
+A.~Vatavu R. Danescu~S. Nedevschi.
+\newblock Autonomous driving in structured and unstructured environments.
+\newblock In {\em Intelligent Vehicles Symposium}, Tokyo, Japan, September
+  2006. IEEE.
+
+\bibitem{DrivingUrban2008}
+Chris~Urmson etc.
+\newblock Autonomous driving in urban environments: Boss and the urban
+  challenge.
+\newblock {\em Journal of Field Robotics}, 25, 2008.
+
+\bibitem{Nissan2013}
+A.~Mukminin.
+\newblock Semi-autonomous nissan leaf cleared for road test in japan, 2013.
+
+\bibitem{Appolo2017}
+Mario Herger.
+\newblock Baidu's open source self-driving platform apollo in detail, Oct 2017.
+
+\bibitem{ACC2002}
+H.~Sudou and T.~Hashizume.
+\newblock Adaptive cruise control system.
+
+\bibitem{LaneControl2012}
+D.~Spero T. Pilutti~M. Rupp and P.~Joh.
+\newblock {\em Autonomous lane control system}.
+\newblock Ford Global Technologies LLC, 2012.
+
+\bibitem{Mnih2015AtariNature}
+V.~Mni et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock {\em Nature}, pages 529--533, 2015.
+
+\bibitem{OK-Robot-1987}
+O.~Khatib.
+\newblock A unified approach for motion and force control of robot
+  manipulators: The operational space formulation.
+\newblock {\em IEEE Journal on Robotics and Automation}, 1987.
+
+\bibitem{Predictive2014}
+B.~Boots~A. Byravan and D.~Fox.
+\newblock Learning predictive models of a depth camera and manipulator from raw
+  execution traces.
+\newblock {\em International Conference on Robotics and Automation (ICRA)},
+  2014.
+
+\bibitem{PlanningFramework2012}
+M.~R. Dogar and S.~S. Srinivasa.
+\newblock A planning framework for non-prehensile manipulation under clutter
+  and uncertainty.
+\newblock {\em Autonomous Robots}, 2012.
+
+\bibitem{FieldersNature2003}
+P.~McLeod~N. Reed and Z.~Dienes.
+\newblock Psychophysics: How fielders arrive in time to catch the ball.
+\newblock {\em Nature}, 2003.
+
+\bibitem{AutonomousLand1989}
+D.~Pomerleau.
+\newblock Alvinn: an autonomous land vehicle in a neural network.
+\newblock {\em Neural Information Processing Systems (NIPS)}, 1989.
+
+\bibitem{LongrangeVision2009}
+R.~Hadsell P. Sermanet J. Ben A. Erkan M. Scoffier K. Kavukcuoglu~U. Muller and
+  Y.~LeCun.
+\newblock Learning long-range vision for autonomous off-road driving.
+\newblock {\em Journal of Field Robotics (JFR)}, 2009.
+
+\bibitem{RobotSoccer2009}
+M.~Riedmiller T. Gabel~R. Hafner and S.~Lange.
+\newblock Reinforcement learning for robot soccer.
+\newblock {\em Autonomous Robots}, 2009.
+
+\bibitem{Grasp2016}
+L.~Pinto and A.~Gupta.
+\newblock Supersizing self-supervision: Learning to grasp from 50k tries and
+  700 robot hours.
+\newblock {\em International Conference on Robotics and Automation (ICRA)},
+  2016.
+
+\bibitem{RooticGrasping2016}
+S.~Levine P. Pastor~A. Krizhevsky and D.~Quillen.
+\newblock Learning hand-eye coordination for robotic grasping with deep
+  learning and large-scale data collection.
+\newblock {\em International Symposium on Experimental Robotics (ISER)}, 2016.
+
+\bibitem{Visuomotor2016}
+S.~Levine C. Finn~T. Darrell and P.~Abbeel.
+\newblock End-to-end training of deep visuomotor policies.
+\newblock {\em Journal of Machine Learning Research (JMLR)}, 2016.
+
+\bibitem{PolicySearch2011}
+M.~Deisenroth and C.~E. Rasmussen.
+\newblock Pilco: A model-based and data-efficient approach to policy search.
+\newblock {\em nternational Conference on Machine Learning (ICML)}, 2011.
+
+\bibitem{HeliNg2007}
+P.~Abbeel A. Coates~M. Quigley and A.~Y. Ng.
+\newblock An application of reinforcement learning to aerobatic helicopter
+  flight.
+\newblock {\em Neural Informa- tion Processing Systems (NIPS)}, 2007.
+
+\bibitem{Trajectory2012}
+Y.~Tassa~T. Erez and E.~Todorov.
+\newblock Synthesis and stabilization of complex behaviors through online
+  trajectory optimization.
+\newblock {\em International Conference on Intelligent Robots and Systems
+  (IROS)}, 2012.
+
+\bibitem{Deepmpc2015}
+I.~Lenz~R. Knepper and A.~Saxena.
+\newblock Deepmpc: Learning deep latent features for model predictive control.
+\newblock {\em Robotics Science and Systems (RSS)}, 2015.
+
+\bibitem{CACC1999}
+C.~Unsal~P. Kachroo and J.~S.
+\newblock Simulation study of multiple intelligent vehicle control using
+  stochastic learning automata.
+\newblock {\em IEEE Transactions on Systems, Man and Cybernetics - Part A :
+  Systems and Humans}, 29(1):120--128, 1999.
+
+\bibitem{DistributedRL-Traffic2000}
+M.~D. Pendrith.
+\newblock Distributed reinforcement learning for a traffic engineering
+  application.
+\newblock {\em the fourth international conference on Autonomous Agents}, pages
+  404 -- 411, 2000.
+
+\bibitem{GameControl2005}
+R.~Emery-Montermerlo.
+\newblock Game-theoretic control for robot teams.
+\newblock Technical report, Technical Report CMU-RI-TR-05-36, Robotics
+  Institute, Carnegie Mellon University, August 2005.
+
+\bibitem{Sparse2004}
+J.~R. Kok and N.~Vlassis.
+\newblock Proc. of the 21st int. conf. on machine learning.
+\newblock In R.~Greiner and D.~Schuurmans, editors, {\em Sparse Cooperative
+  Q-learning}, pages 481--488, Banff, Canada, July 2004. ACM.
+
+\bibitem{jmeSim2012}
+A.~Haber, M.~McGill, and C.~Sammut.
+\newblock jmesim: An open source, multi platform robotics simulator.
+\newblock {\em ICRA Workshop on Open Source Software}, 01 2012.
+
+\bibitem{ROS2009}
+A.Y. Quigley M. Conley K. Gerkey B. P. Faust J. Foote T. Leibs J. Wheeler
+  R.~Ng.
+\newblock Ros: an open-source robot operating system.
+\newblock {\em ICRA Workshop on Open Source Software}, 2009.
+
+\bibitem{STAIR2007}
+M.~Quigley~E. Berger and A.~Y. Ng.
+\newblock Stair: Hardware and software architecture.
+\newblock In {\em AAAI 2007 Robotics Workshop}, Vancouver, B.C, August 2007.
+
+\bibitem{PR2008}
+K.~Wyobek E. Berger H.~V. der Loos and K.~Salisbury.
+\newblock Towards a personal robotics development platform: Rationale and
+  design of an intrinsically safe personal robot.
+\newblock {\em roc. of the IEEE Intl. Conf. on Robotics and Automation (ICRA)},
+  2008.
+
+\bibitem{Sutton1998RL}
+R.~S. Sutton and A.~G. Barto.
+\newblock {\em Reinforcement Learning: An Introduction}.
+\newblock MIT Press, 1998.
+
+\bibitem{RLsurvey2013}
+J.~Kober~J. A.Bagnell and J.~Peters.
+\newblock Reinforcement learning in robotics: A survey.
+\newblock {\em The International Journal of Robotics Research}, 2013.
+
+\bibitem{DARPA2009}
+M.~Buehler~K. Iagnemma and S.~Singh.
+\newblock {\em The DARPA Urban Challenge --- Autonomous Vehicles in City
+  Traffic}.
+\newblock Springer, Berlin, Germany, 2009.
+
+\bibitem{FullyAD}
+J.~Levinson J. Askeland J. Becker J. Dolson D. Held S. Kammel J. Kolter D.
+  Langer O. Pink V. Pratt M. Sokolsky G. Stanek D. Stavens A. Teichman~M.
+  Werling and S.~Thrun.
+\newblock Towards fully autonomous driving: Systems and algorithms.
+\newblock {\em Proc. IEEE Intell. Veh. Symp}, pages 163--168, 2011.
+
+\bibitem{BerthaDrive2014}
+U.~Franke N. Appenrodt C. G. Keller E. Kaus R. G. Herrtwich C. Rabe D. Pfeiffer
+  F. Lindner F. Stein F. Erbs M. Enzweiler C. Kn{\"o}ppel J. Hipp M. Haueis M.
+  Trepte C. Brenk A. Tamke M. Ghanaat M. Braun A. Joos H. Fritz H. Mock M.~Hein
+  J.~Ziegler P. Bender M. Schreiber H. Lategahn T. Strauss C. Stiller T.~Dang
+  and E.~Zeeb.
+\newblock Making bertha drive --- an autonomous journey on a historic route.
+\newblock {\em IEEE Intell. Transportation Syst. Mag.}, 6(2):8--20, 2014.
+
+\bibitem{PROUD2014}
+A.~Broggi P. Cerri S. Debattisti M. Laghi P. Medici~M. Panciroli and
+  A.~Prioletti.
+\newblock Proud --- public road urban driverless test: Architecture and
+  results.
+\newblock {\em Proc. IEEE Intell. Veh. Symp}, pages 648--654, 2014.
+
+\bibitem{Frenet2008}
+J.~Ziegler~M. Werling and J.~Schroder.
+\newblock Navigating car-like robots in unstructured environments using an
+  obstacle sensitive cost function.
+\newblock {\em IEEE Intelligent Vehicles Symposium}, 2008.
+
+\bibitem{PurePursuit1992}
+R.~Craig Coulter.
+\newblock Implementation of the pure pursuit path tracking algorithm.
+\newblock Technical Report CMU-RI-TR-92-01, Carnegie Mellon University,
+  Pittsburgh, PA, January 1992.
+
+\bibitem{IRL}
+Andrew~Y. Ng and Stuart~J. Russell.
+\newblock Algorithms for inverse reinforcement learning.
+\newblock {\em Proceedings of the Seventeenth International Conference on
+  Machine Learning}, pages 663--670, June 29-July 02 2000.
+
+\bibitem{Replay2015}
+T.~Schaul et~al.
+\newblock Prioritized experience replay.
+\newblock {\em CoRR}, 1511(05952), 2015.
+
+\end{thebibliography}

@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: thesis.aux
+A level-1 auxiliary file: content/01-Introduction.aux
+A level-1 auxiliary file: content/02-Simulation.aux
+A level-1 auxiliary file: content/03-SystemDesign.aux
+A level-1 auxiliary file: content/04-DeepReinforcementLearning.aux
+A level-1 auxiliary file: content/05-Results.aux
+A level-1 auxiliary file: content/06-Conclusion.aux
+A level-1 auxiliary file: content/07-Futurework.aux
+The style file: unsrt.bst
+Database file #1: refs/my_reference.bib
+Warning--entry type for "Appolo2017" isn't style-file defined
+--line 22 of file refs/my_reference.bib
+Warning--entry type for "ACC2002" isn't style-file defined
+--line 76 of file refs/my_reference.bib
+Warning--entry type for "Nissan2013" isn't style-file defined
+--line 93 of file refs/my_reference.bib
+You've used 40 entries,
+            1791 wiz_defined-function locations,
+            692 strings with 10600 characters,
+and the built_in function-call counts, 7283 in all, are:
+= -- 661
+> -- 287
+< -- 7
++ -- 112
+- -- 72
+* -- 314
+:= -- 1186
+add.period$ -- 119
+call.type$ -- 40
+change.case$ -- 38
+chr.to.int$ -- 0
+cite$ -- 40
+duplicate$ -- 387
+empty$ -- 728
+format.name$ -- 72
+if$ -- 1662
+int.to.chr$ -- 0
+int.to.str$ -- 40
+missing$ -- 36
+newline$ -- 200
+num.names$ -- 42
+pop$ -- 134
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 218
+stack$ -- 0
+substring$ -- 264
+swap$ -- 96
+text.length$ -- 7
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 63
+width$ -- 42
+write$ -- 415
+(There were 3 warnings)

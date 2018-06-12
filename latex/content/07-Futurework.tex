@@ -1,0 +1,17 @@
+\chapter{Future Work}
+
+The main results of this thesis show that a Deep Q-Network agent can be trained to make decisions in autonomous driving, without carefully preprocessed features. The generality of the method was demonstrated by applying it to a highway environment with longitudinal motion control and combined longitudinal and lateral motion control. In both cases, the trained agents are learning to stay safe and to change lanes with episodes. Collisions are rarely happen after enough long training. 
+
+Topics for future work include to further analyze the generality of this method by applying it to other cases, such as crossings and roundabouts, and to systematically investigate the impact of different parameters and network architectures. Moreover, it would be interesting to apply prioritized experience replay \cite{Replay2015}, which is a method where important experiences are repeated more frequently during the training process. This could potentially improve and speed up the learning process.
+
+For an Autonomous Driving System, technology will always be improving and the needs of the researcher will always be varying and changing. This in turn will require constant research and learning in order to keep the systems of an Autonomous Driving System up to date and functional for its users.
+
+Besides, there are at least following aspects we can improve in the next stage,
+
+\begin{enumerate}
+
+    \item \textbf{Tuned Reward Functions:} In this thesis, the learning process is highly relying on the regulation of the reward function.
+
+    \item \textbf{Incorporate other RL techniques:} The field of RL has been advancing fast in recent years. There are a few new and old techniques that I would like to try, such as asynchronous RL, double Q-learning, prioritized experience replay and Asynchronous Actor-Critic Agents (A3C).
+
+\end{enumerate}

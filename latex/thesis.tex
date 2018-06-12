@@ -1,0 +1,305 @@
+%%%%%%%%%%%%%%%%%%%%%% Version Information %%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% This LaTeX2e thesis template is based on the nuthesis-template
+% provided by Miguel A. Lerma. It was renamed and edited to meet the
+% requirements given in the Thesis-Dissertation Instructions of the
+% School of Graduate Studies of Case Western Reserve University by
+% Initial Version: Frank Ernst (Dr. rer. nat. habil., Professor). 
+%   Version dated 2006-08-23.
+% Latest Version: Roger French (Professor). 
+%  SDLE Center Authors: Nicholas Wheeler, Myles Murray, Heather Lemire
+%  Version dated 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DISCLAIMER %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The author of the thesis remains responsible for fulfilling all
+% requirements.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DESCRIPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% cwru-cse-thesis.tex is the master file that compiles the whole thesis.
+% Individual chapter files located in 'content' folder
+% Appendix files located in 'app' folder
+% bibtex file for references located in 'refs' folder
+% figure files go in the 'figs' folder
+% the 'input' folder has style files for tex compiling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[tikz,help,12pt,onepage,reqno]{input/CWRU-Thesis}
+
+
+
+%%%%%%%%%%%%%
+% EQUATIONS %
+%%%%%%%%%%%%%
+
+% ArgMin
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+
+% ArgMax
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% Uncomment *one* of the following lines if you are tired of TeX's
+% Computer Modern fonts:
+\usepackage{fourier} 
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+
+% Graphics.
+\usepackage[pdftex]{graphicx}
+\usepackage{subfig}
+\usepackage{pdflscape} % landscape environment
+%\usepackage{subfigure}
+\usepackage{longtable}
+
+% The following makes graphicx work with pdf and jpg files. Files with
+% same names and different extensions will be recognized in sequential
+% order.
+\DeclareGraphicsExtensions{.png, .jpg, .pdf} 
+
+% PDFPages imports entire PDF pages.
+%\usepackage[draft]{pdfpages} % not sure that this actually works
+\usepackage[final]{pdfpages}
+
+% Sets pdftex to included versions up to 1.6
+%\pdfminorversion=6
+\pdfoptionpdfminorversion=6
+
+% Chapterbib enables separate bibliographies after each chapter.
+%\usepackage[sectionbib]{chapterbib}
+%\usepackage[rootbib]{chapterbib}
+
+\usepackage{verbatim} %for comment environment
+
+% % to allow underscore in text, doesn't work if you actually use
+% % underscores in the latex doc
+% \usepackage{underscore}
+% \begingroup
+%   \lccode`\~=`\_
+% \lowercase{\endgroup
+%   \pdfstringdefDisableCommands{\let~\relax}%
+% }
+
+% Wrapfig wraps tables and figures.
+\usepackage{wrapfig} 
+\usepackage{multirow}
+
+% footnotes in tables
+\usepackage{threeparttable}
+% \usepackage{footnote}
+% \makesavenoteenv{tabular} % makes tables handle footnotes correctly
+
+% Your packages can go here:
+\usepackage{input/KL-Typing-Aids}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{red},
+  keywordstyle=\color{blue}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author and title
+\author{\uppercase{Peng Xu}}
+\title{A Learning based Adaptive Cruise and Lane Control System}
+
+\degree{Master of Science}  
+% Default: Doctor of Philosophy.
+
+%\adviser{Dr. Roger H. French}     
+% Optional -- Default: Empty.
+
+\department{\deecs}     
+% No Default.
+
+\graduationmonth{August}      
+% The default is January, May, or August depending on current date.
+
+\graduationyear{2018}
+% Default: current year.
+% CAUTION: next January could be *next* year.
+
+
+%\includeonly{05-Background, 06-Methods}
+% Use \includeonly to select the chapters to include if you are using
+% the \include command below. This way you can latex only a the part
+% you are working on, which is faster than latexing the entire thesis.
+
+% Margin kerning.
+\input input/protcode.tex
+
+%	%------------------- Markup
+	% new commands for markup/editing purposes
+	% make a \newcommand for your self, this rhf set is for Roger (rhf) and Dan (dmd)
+	\usepackage{xcolor}
+	\usepackage{ulem}
+		% color names = red, green, blue, cyan, magenta, yellow, black, gray, white,  
+		%   darkgray, lightgray, brown, lime, olive, orange, pink,  purple, teal, violet
+		%   
+			%-------------------------
+				% rhf = Roger markup
+			\newcommand{\rhf}{\textcolor{red}} % for rhf = Roger is red text
+			\newcommand{\rhfcomm}[1]{
+			       \colorbox{yellow}{#1} % Roger is yellow highlight
+			       }
+			\newcommand{\rhfstr}[1]{
+				\sout{#1} %Roger's strikethrough
+			}
+			%-------------------------
+			
+\usepackage{hyperref} % enables hyper links in the document's pdf file output
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Margin kerning.
+\setprotcode \font
+{\it \setprotcode \font}
+{\bf \setprotcode \font}
+{\bf \it \setprotcode \font}
+
+% % To turn off hyphen protrusion at end of line, set to "0".
+\pdfprotrudechars=1 
+
+\frontmatter
+%\pagenumbering{roman}
+
+% Title page.
+\maketitle		
+
+% Page for signatures of the committee members.
+%For the final turn in, you do not need this page signed, just dated.
+% to date this page, cludgy way to do it is replace Signature/Date with the Date
+%Found in the CWRU-thesis.cls file, line 327
+\signaturepage
+\sign[Adviser]{Dr. Wyatt Newman}{Chair}{\deecs}
+\sign{Dr. Francis Merat}{Member}{\deecs}
+\sign{Dr. Kathryn Daltorio}{Member}{\dmae}
+
+%\sign{\fe}{Member}{\deecs} %if pre programed can use short name thing
+
+% Copyright page. You do not need a copyright page unless
+% you are applying for a copyright.
+%\copyrightpage 
+
+% Dedication page (optional). Please indicate linebreaks by "\\".
+\dedication{Dedicated to my parents.}
+
+% Preface (optional).
+%\preface
+%\input{03-Preface}
+
+% Table of Contents will be automatically generated and placed here.
+\tableofcontents
+
+% List of Tables and List of Figures will be automatically generated
+% and placed here.
+\listoftables	
+%\subfiglabelskip=0pt % suppresses spacing after empty subfiglabel set
+                     % to 0pt; for use with subfigure.sty
+\listoffigures		
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acknowledgements (optional).
+\acknowledgements
+\input{content/00-Acknowledgements}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstracts must not exceed 350 words in dissertations and 150
+% words in other theses.
+\abstract
+\input{content/00-Abstract} 
+
+\mainmatter             
+\pagenumbering{arabic} 
+
+% Change hyperlink color to a bluish hue that is fairly visible, but
+% not disturbing in long lists of references, and will also print well
+% in black and white. Up to this point, the hyperlink color was black
+% (default) to avoid that the tables of contents, figures, and tables
+% entirely appear in color.
+\definecolor{felinkcolor}{rgb}{0,0,0.5}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{content/01-Introduction}
+\include{content/02-Simulation}
+\include{content/03-SystemDesign}
+\include{content/04-DeepReinforcementLearning}
+\include{content/05-Results}
+\include{content/06-Conclusion}
+\include{content/07-Futurework}
+%\include{10-Summary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \appendix
+% \include{app/app_pprofile} % HHP profile
+% \include{app/app_specimens} % master list
+% \include{app/app_thesis_prep} % programs used to generate this document
+% \include{app/app_figs} % list of microscope figures used in text
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% To have a bibliography for the whole document, plus individual bibs,
+% put \bibliography commands in the included chapters plus in the root
+% file; use \usepackage[rootbib]{chapterbib}; run LaTeX; run BibTeX on
+% the root file; change to \usepackage{chapterbib}; run LaTeX; run
+% BibTeX on each included file; run LaTeX; run LaTeX. An `overall'
+% bibliography only makes sense for various `named' bibliography
+% styles; a style with numbering will give separate and unrelated
+% numbers in each bibliography.
+\renewcommand{\bibname}{Bibliography}
+\bibliographystyle{unsrt} %if you have problems with the style, consult the CWRU-thesis.cls file
+\markright{\textit{Bibliography}}
+%\renewcommand{\chaptername}{}
+\bibliography{refs/my_reference}
+%if latex throws errors with the .bbl file, fix the problem in the .bib, and delete the .bbl before trying to recompile
+%also, if the tex runs but says bib?, you can hit enter and get everything but the bibliography
+
+%\end{document}
+%\end
+
+
+%%% Local Variables: 
+%%% mode: tex-pdf
+%%% TeX-master: t
+%%% End: 
+
+
+%\documentclass{article}
+%\usepackage{units} %For use of \nicefrac{}{} to create units
+%\usepackage{fixltx2e} %For use of \textsubscript{}
+
+%%To widen the text columns from the default 'article' settings:
+%\setlength{\hoffset}{25pt}
+%\setlength{\marginparwidth}{0pt}
+%\setlength{\oddsidemargin}{0pt}
+%\setlength{\textwidth}{400pt}
+
+%\begin{document}
+
+%\title{Acrylic Durability for Long-Lived Low-Cost PV Systems}
+%\author{Myles Murray}
+%\maketitle
+%\newpage
+%\tableofcontents
+%\newpage 
+%
+
+
+%\enddocument
+\end{document}
+
+				
+
+
