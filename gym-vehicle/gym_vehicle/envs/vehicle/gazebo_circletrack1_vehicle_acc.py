@@ -456,7 +456,7 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         # by acc_dist
         reward += 1.0 * acc_dist
 
-        reward += -(action%len(add_on) - len(add_on)/2) * 0.5
+        reward += -2.0 * abs(action - len(add_on)/2)
 
         # reward += 2 * self.speeds[0]/MAX_SPEED
 
@@ -480,12 +480,14 @@ class GazeboCircletrack1VehicleAccEnv(gazebo_env.GazeboEnv):
         #     self.travel_dist = 0
         #     self.travel_time = 0
 
-        # if self.travel_dist > 360 * LAPS:
-        #     print("Safely done! :D")
-        #     # reward += 10000
-        #     done = True
-        #     self.travel_dist = 0
-        #     self.travel_time = 0
+        if self.time_steps > 500:
+            print("Safely done! :D")
+            # reward += 10000
+            done = True
+            self.travel_dist = 0
+            self.travel_time = 0
+            self.prev_ego_pose = None
+            self.time_steps = 0
 
         return np.asarray(state), reward, done, {}
 

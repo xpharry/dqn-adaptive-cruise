@@ -36,6 +36,7 @@
     <remap from="current_pose" to="/mondeo/current_pose" />
     <remap from="final_path" to="/mondeo/final_path" />
     <remap from="final_waypoints" to="/mondeo/final_waypoints" />
+    <remap from="cruise_speed" to="/mondeo/cruise_speed" />
     <remap from="final_path_points" to="/mondeo/final_path_points" />
   </node>
   <node name="mondeo_waypoint_follower" pkg="waypoint_follower" type="pure_pursuit" output="log">

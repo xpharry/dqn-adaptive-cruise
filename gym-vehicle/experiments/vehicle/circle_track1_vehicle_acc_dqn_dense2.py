@@ -42,7 +42,7 @@ class LivePlot(object):
         #styling options
         matplotlib.rcParams['toolbar'] = 'None'
         plt.style.use('ggplot')
-        plt.xlabel("")
+        plt.xlabel("episode")
         plt.ylabel(data_key)
         fig = plt.gcf().canvas.set_window_title('simulation_graph')
 
@@ -70,7 +70,7 @@ class LivePlot(object):
                     avg =  sum(data[i:i+average])/average
                     avg_data.append(avg)
         new_data = self.expand(avg_data,average)
-        plt.plot(new_data, color='red', linewidth=2.5) 
+        # plt.plot(new_data, color='red', linewidth=2.5) 
 
 
         # pause so matplotlib will display
@@ -332,7 +332,7 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboCircletrack1VehicleAcc-v0')
     
-    outdir = '../../results/circle1_acc_dense2/'
+    outdir = '../../results/circle1_acc_dense2_0607/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -342,9 +342,9 @@ if __name__ == '__main__':
     #fill this if continue_execution=True
 
     model_output = outdir # '../../saved_models/circle1_acc_dense2/'
-    weights_path = model_output + 'circle1_dense2_init.h5'
-    monitor_path = model_output + 'circle1_dense2_init'
-    params_json  = model_output + 'circle1_dense2_init.json'
+    weights_path = model_output + 'circle1_dense2_ep1400.h5'
+    monitor_path = model_output + 'circle1_dense2_ep1400'
+    params_json  = model_output + 'circle1_dense2_ep1400.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
 
@@ -378,7 +378,7 @@ if __name__ == '__main__':
             epochs = d.get('epochs')
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
-            explorationRate = 0.5 # d.get('explorationRate')
+            explorationRate = d.get('explorationRate')
             minibatch_size = d.get('minibatch_size')
             learnStart = d.get('learnStart')
             learningRate = d.get('learningRate')
@@ -387,7 +387,7 @@ if __name__ == '__main__':
             network_inputs = d.get('network_inputs')
             network_outputs = d.get('network_outputs')
             network_structure = d.get('network_structure')
-            current_epoch = 0 # d.get('current_epoch')
+            current_epoch = d.get('current_epoch')
 
         deepQ = DeepQ(network_inputs, network_outputs, memorySize, discountFactor, learningRate, learnStart)
         deepQ.initNetworks(network_structure)
@@ -418,8 +418,10 @@ if __name__ == '__main__':
     for epoch in xrange(current_epoch+1, epochs+1, 1):
         observation = env.reset()
         cumulated_reward = 0
+        keep_ratio = 0
 
         # number of timesteps
+        t = 0
         for t in xrange(steps):
             # env.render()
             qValues = deepQ.getQValues(observation)
@@ -433,6 +435,9 @@ if __name__ == '__main__':
                 highest_reward = cumulated_reward
 
             deepQ.addMemory(observation, action, reward, newObservation, done)
+            writer.writerow([t, action, reward])
+            if action == 2:
+                keep_ratio += 1
 
             if stepCounter >= learnStart:
                 if stepCounter <= updateTargetNetwork:
@@ -475,7 +480,7 @@ if __name__ == '__main__':
 
         list_rewards.append(cumulated_reward)
         list_epochs.append(epoch)
-        writer.writerow([epoch, cumulated_reward])
+        writer.writerow([epoch, float(keep_ratio)/(t+1), cumulated_reward])
 
         if(epoch%20==0):
             plotter.plot(list_rewards)

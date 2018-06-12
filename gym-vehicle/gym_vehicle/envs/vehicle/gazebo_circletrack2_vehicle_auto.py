@@ -23,8 +23,8 @@ from gazebo_msgs.msg import ModelState, ModelStates
 
 DISPLAY_STATE = False
 
-MAX_SPEED = 22.35  # m/sec; tune this
-COLLISON_DIST = 8 # m
+MAX_SPEED = 25  # m/sec; tune this
+COLLISON_DIST = 10 # m
 INIT_LANE_INDEX = 1
 LAPS = 3
 
@@ -418,8 +418,8 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         state, done = self.construct_state()
 
         # 27 actions
-        speed_cmd = self.speeds[0]
-        # speed_cmd = self.prev_speed
+        # speed_cmd = self.speeds[0]
+        speed_cmd = self.prev_speed
         chang_lane_cmd = None
         add_on = [+2.0, +1.0, 0, -1.0, -2.0]
         chang_lane_cmds = ["Left", "Right"]
@@ -436,14 +436,16 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
             if state[3] == 0 and chang_lane_cmd == "Left":
                 print("Change to left but failed!")
                 # done = True
-                reward += -2
+                reward += -5
                 chang_lane_cmd = "Keep"
             if state[4] == 0 and chang_lane_cmd == "Right":
                 print("Change to right but failed!")
                 # done = True 
-                reward += -2
+                reward += -5
                 chang_lane_cmd = "Keep"
             self.change_lane_pub.publish(chang_lane_cmd)
+
+        self.prev_speed = speed_cmd
 
         # if action == 0:
         #     self.cruise_speed_pub.publish(speed_cmd)
@@ -462,7 +464,7 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
 
         # self.prev_speed = speed_cmd
 
-        if abs(self.cmp_dists[2]) < 10:
+        if abs(self.cmp_dists[2]) < COLLISON_DIST:
             print("Too slow!")
             self.travel_dist = 0
             self.travel_time = 0
@@ -502,9 +504,10 @@ class GazeboCircletrack2VehicleAutoEnv(gazebo_env.GazeboEnv):
         # by acc_dist
         reward += 1.0 * acc_dist
 
-        reward += -(action%len(add_on) - len(add_on)/2) * 0.5
-
-        reward += -1.0 * (action/len(add_on) - len(chang_lane_cmds)/2)
+        if action < 5:
+            reward += -1.0 * abs(action - len(add_on)/2)
+        else:
+            reward += -2.0
 
         # reward += 2 * self.speeds[0]/MAX_SPEED
 

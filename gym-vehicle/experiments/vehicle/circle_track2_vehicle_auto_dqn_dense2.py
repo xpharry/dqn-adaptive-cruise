@@ -332,7 +332,7 @@ if __name__ == '__main__':
 
     env = gym.make('GazeboCircletrack2VehicleAuto-v0')
     
-    outdir = '../../results/circle2_auto_dense2/'
+    outdir = '../../results/circle2_auto_dense2_0602/'
     if not os.path.exists(outdir):
         os.mkdir(outdir, 0755)
     
@@ -342,9 +342,9 @@ if __name__ == '__main__':
     #fill this if continue_execution=True
 
     model_output = outdir # '../../saved_models/circle2_auto_dense/'
-    weights_path = model_output + 'circle2_fcnn_ep38000.h5'
-    monitor_path = model_output + 'circle2_fcnn_ep38000'
-    params_json  = model_output + 'circle2_fcnn_ep38000.json'
+    weights_path = model_output + 'circle2_fcnn_ep1300.h5'
+    monitor_path = model_output + 'circle2_fcnn_ep1300'
+    params_json  = model_output + 'circle2_fcnn_ep1300.json'
     if not os.path.exists(model_output):
         os.mkdir(model_output, 0755)
 
@@ -378,7 +378,7 @@ if __name__ == '__main__':
             epochs = d.get('epochs')
             steps = d.get('steps')
             updateTargetNetwork = d.get('updateTargetNetwork')
-            explorationRate = 1.0 # d.get('explorationRate')
+            explorationRate = 0.1 # d.get('explorationRate')
             minibatch_size = d.get('minibatch_size')
             learnStart = d.get('learnStart')
             learningRate = d.get('learningRate')
@@ -433,6 +433,7 @@ if __name__ == '__main__':
                 highest_reward = cumulated_reward
 
             deepQ.addMemory(observation, action, reward, newObservation, done)
+            writer.writerow([t, newObservation[0], action, reward])
 
             if stepCounter >= learnStart:
                 if stepCounter <= updateTargetNetwork:
