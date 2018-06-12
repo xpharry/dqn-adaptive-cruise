@@ -1,0 +1,56 @@
+- ego:
+    x: 42.6
+    y: 36.6
+    z: 0.0
+    yaw: 1.57
+    model: mondeo
+    color: white
+    pub_tf: true
+- mondeo1:
+    x: 0.0
+    y: -6.0
+    z: 0.0
+    yaw: 0.0
+    model: mondeo
+    color: {r: 0.0, g: 0.8, b: 1.0}
+    pub_tf: true
+- mondeo2:
+    x: 0.0
+    y: 79.2
+    z: 0.0
+    yaw: 3.14
+    model: mondeo
+    color: {r: 0.0, g: 0.8, b: 1.0}
+    pub_tf: true
+- fusion1:
+    x: 0.0
+    y: -2.0
+    z: 0.0
+    yaw: 0.0
+    model: fusion
+    color: red
+    pub_tf: true
+- fusion2:
+    x: 0.0
+    y: 75.2
+    z: 0.0
+    yaw: 3.14
+    model: fusion
+    color: red
+    pub_tf: true
+- mkz1:
+    x: 0.0
+    y: -10.0
+    z: 0.0
+    yaw: 0.0
+    model: mkz
+    color: green
+    pub_tf: true
+- mkz2:
+    x: 0.0
+    y: 83.2
+    z: 0.0
+    yaw: 3.14
+    model: mkz
+    color: green
+    pub_tf: true

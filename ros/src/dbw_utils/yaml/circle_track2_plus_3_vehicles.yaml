@@ -1,0 +1,32 @@
+- ego:
+    x: -36.0
+    y: -6.0
+    z: 0.0
+    yaw: 0.0
+    model: mondeo
+    color: white
+    pub_tf: true
+- fusion:
+    x: -10.0
+    y: -6.0
+    z: 0.0
+    yaw: 0.0
+    model: fusion
+    color: {r: 0.0, g: 0.8, b: 1.0}
+    pub_tf: true
+- mondeo:
+    x: 30.0
+    y: -2.0
+    z: 0.0
+    yaw: 0.0
+    model: mondeo
+    color: green
+    pub_tf: true
+- mkz:
+    x: 65.0
+    y: 6.0
+    z: 0.0
+    yaw: 0.70
+    model: mkz
+    color: blue
+    pub_tf: true

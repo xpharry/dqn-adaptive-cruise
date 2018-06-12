@@ -133,6 +133,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(des_velocity_pub src/des_velocity_pub.cpp)
+add_executable(des_velocity_pub2 src/des_velocity_pub2.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -146,6 +147,7 @@ add_executable(des_velocity_pub src/des_velocity_pub.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(des_velocity_pub   ${catkin_LIBRARIES})
+target_link_libraries(des_velocity_pub2   ${catkin_LIBRARIES})
 
 #############
 ## Install ##

@@ -9,7 +9,6 @@ profile.tmp
 
 ~
 
-
 .log
 .aux
 .out
@@ -17,3 +16,12 @@ profile.tmp
 .blg
 .toc
 .lof
+
+*.swp
+*.pyc
+*.py~
+.DS_Store
+.egg-info
+
+gym_vehicle.egg-info
+
