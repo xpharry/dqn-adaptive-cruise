@@ -1,8 +1,8 @@
-# Auto Vehicle
+# Adaptive Cruise Control and Lane Control using Deep Q-Learning
 
 ## Overview
 
-This work ...
+The work aims at design of a learning based autonomous driving system mainly on adaptive cruise control (ACC) and lane control (LC). In this study a simulated highway environment is created for the vehicles to capture online training data. A Deep Q-Learning algorithm is proposed to train two agents respectively, an ACC agent and an integrated agent (ACC and LC). The results show behavioral adaptation with an ACC in terms of the speed of the preceding vehicle and emergence brake and LC in terms of two lanes. The learning based system has a nice adaption in different scenarios and can be reinforced by continuous training.
 
 ## Installation
 
