@@ -7,7 +7,7 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Architecture of the simulation environment.\relax }}{11}{figure.caption.5}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Communication pipeline.\relax }}{14}{figure.caption.6}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Gazebo for robot simulation.\relax }}{18}{figure.caption.7}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Gazebo for robot simulation.\relax }}{19}{figure.caption.8}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Gazebo's architecture.\relax }}{19}{figure.caption.8}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Simplified software architecture used in OpenAI Gym for robotics.\relax }}{26}{figure.caption.9}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces A Cart-pole model created in Gazebo.\relax }}{27}{figure.caption.10}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces A Cart-pole model displayed in ROS-Rviz.\relax }}{27}{figure.caption.11}
@@ -16,10 +16,10 @@
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Simulation model and corresponding TF tree.\relax }}{30}{figure.caption.14}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Standard Architecture of Autonomous Vehicle.\relax }}{33}{figure.caption.18}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Standard Architecture of Autonomous Vehicle Control.\relax }}{35}{figure.caption.19}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architecture of Autonomous Vehicle Control.\relax }}{35}{figure.caption.19}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces The finite state machine for lateral motion control.\relax }}{37}{figure.caption.20}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces The global route and the waypoints.\relax }}{39}{figure.caption.21}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Reference path generation in Frenet coordinate.\relax }}{41}{figure.caption.22}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Reference path generation.\relax }}{41}{figure.caption.22}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces A curve road in Cartesian coordinate.\relax }}{41}{figure.caption.23}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces A curve road in Cartesian coordinate with waypoints.\relax }}{42}{figure.caption.24}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Curve in Frenet coordinate system.\relax }}{42}{figure.caption.25}
@@ -38,8 +38,8 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces The reward history of training for Adaptive Cruise Control.\relax }}{71}{figure.caption.36}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces The action distribution after training.\relax }}{72}{figure.caption.37}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces The speed variance after training.\relax }}{73}{figure.caption.38}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Training environment for Adaptive Cruise Control.\relax }}{74}{figure.caption.39}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces The reward history of training for full autonomous highway driving. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)\relax }}{76}{figure.caption.40}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Training environment for Adaptive Cruise Control and Lane Control.\relax }}{74}{figure.caption.39}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces The reward history of training for Adaptive Cruise Control and Lane Control. (Blue line: the rewards of each time step; Red line: the rewards of every 10 time steps)\relax }}{76}{figure.caption.40}
 \contentsline {figure}{\numberline {5.7}{\ignorespaces The action distribution after training.\relax }}{77}{figure.caption.41}
 \contentsline {figure}{\numberline {5.8}{\ignorespaces The speed variance after training.\relax }}{78}{figure.caption.42}
 \addvspace {10\p@ }
