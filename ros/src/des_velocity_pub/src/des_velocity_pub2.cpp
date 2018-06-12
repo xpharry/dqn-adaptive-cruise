@@ -9,14 +9,15 @@
 using namespace std;
 
 double MAX_SPEED = 22.35;
+double MIN_SPEED = 8;
 
 // saturation function, values -1 to 1
 double sat(double x) {
     if (x > MAX_SPEED) {
         return MAX_SPEED;
     }
-    if (x < 0.0) {
-        return 0.0;
+    if (x < MIN_SPEED) {
+        return MIN_SPEED;
     }
     return x;
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find dbw_utils)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_utils)/worlds/empty_world.world" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/circle_track3_plus_6_vehicles.yaml" />
+  </include>
+
+  <!-- Waypoint loader playing a role as global path planner -->
+  <node pkg="path_loader" type="path_loader.py" name="path_loader">
+    <param name="fpath" value="$(find path_loader)../../../data/circle_track_map.csv" />
+    <param name="frame_id" value="/world" />
+  </node>
+
+  <!-- ego -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="ego" />
+  </include>
+
+  <!-- Fusion1 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="fusion1" />
+  </include>
+
+  <!-- Fusion2 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="fusion2" />
+  </include>
+
+  <!-- mondeo1 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mondeo1" />
+  </include>
+
+  <!-- mondeo2 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mondeo2" />
+  </include>
+
+  <!-- MKZ1 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz1" />
+  </include>
+
+  <!-- MKZ2 -->
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+    <arg name="vehicle_ns" value="mkz2" />
+  </include>
+
+  <!-- Display -->
+  <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
+  <node pkg="rviz" type="rviz" name="multi_vehicle_rviz" args="-d $(find utility)../../../config/circle_track3_plus_6_vehicles_visualization.rviz" respawn="true" />
+
+</launch>
