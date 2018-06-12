@@ -50,7 +50,7 @@ void model_state_CB(const gazebo_msgs::ModelStates& model_states)
     //double randval = distribution(generator);
     //ROS_INFO("randval =%f",randval);
   } else {
-    ROS_WARN("state of model not found");
+    // ROS_WARN("state of model not found");
   }
 } 
 

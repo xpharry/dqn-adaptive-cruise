@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<launch>
+  <include file="$(find dbw_mkz_gazebo)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_utils)/worlds/test_track.world" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/single_vehicle_test_track.yaml" />
+  </include>
+  
+  <include file="$(find dbw_mkz_can)/launch/dbw.launch" >
+    <arg name="live" value="false" />
+    <arg name="load_urdf" value="false" />
+    <arg name="can_ns" value="can_bus_dbw" />
+  </include>
+
+    <!-- Continuously publish the vehicle's pose and odom -->
+	<node name="gazebo_state_pub" pkg="gazebo_state_pub" type="gazebo_state_pub" output="screen">
+		<param name="target_model" value="vehicle"/>
+	</node>
+
+    <!-- Display -->
+	<!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utility)../../../config/lane_keep.rviz" output="screen"/>
+
+    <!-- A des_velocity_pub playing a role of speed controller -->
+	<node name="des_velocity_pub" pkg="des_velocity_pub" type="des_velocity_pub">
+		<remap from="/des_speed" to="/vehicle/des_speed" />
+	</node>
+
+    <!-- Waypoint follower -->
+    <arg name="linear_interpolate_mode" default="True"/>
+	<!-- rosrun waypoint_follower pure_pursuit -->
+    <node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
+		<param name="linear_interpolate_mode" value="$(arg linear_interpolate_mode)"/>
+		<remap from="current_pose" to="/vehicle/current_pose" />
+		<remap from="current_velocity" to="/vehicle/twist" />
+		<remap from="cmd_vel" to="/vehicle/cmd_vel" />
+	</node>
+
+    <!-- Waypoint loader playing a role as global path planner -->
+    <node pkg="path_loader" type="path_loader.py" name="path_loader">
+        <param name="fpath" value="$(find path_loader)../../../data/test_track.csv" />
+        <param name="frame_id" value="/world" />
+    </node>
+
+    <node pkg="path_updater" type="path_updater.py" name="path_updater" output="screen">
+    	<remap from="current_pose" to="/vehicle/current_pose" />
+    </node>
+</launch>

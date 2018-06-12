@@ -4,3 +4,5 @@
 .DS_Store
 .egg-info
 
+saved_models
+results

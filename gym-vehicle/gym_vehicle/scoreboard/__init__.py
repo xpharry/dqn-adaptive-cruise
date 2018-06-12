@@ -52,4 +52,52 @@ add_task(
     summary='Test4.',
 )
 
+add_task(
+    id='GazeboCircletrack1VehicleAcc-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-circle1-acc-v0.',
+)
+
+add_task(
+    id='GazeboCircletrack1VehicleAcc-v1',
+    group='gym-vehicle',
+    summary='Test-vehicle-circle1-acc-v1.',
+)
+
+add_task(
+    id='GazeboCircletrack2VehicleLcc-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-circle2-lcc.',
+)
+
+add_task(
+    id='GazeboCircletrack2VehicleAuto-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-circle2-auto.',
+)
+
+add_task(
+    id='GazeboCircletrack3VehicleLcc-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-circle3-lcc.',
+)
+
+add_task(
+    id='GazeboCircletrack3VehicleAuto-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-circle3-auto.',
+)
+
+add_task(
+    id='GazeboStandardtrackVehicleLcc-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-standard-lcc.',
+)
+
+add_task(
+    id='GazeboStandardtrackVehicleAuto-v0',
+    group='gym-vehicle',
+    summary='Test-vehicle-standard-auto.',
+)
+
 registry.finalize()

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <include file="$(find dbw_utils)/launch/dbw_mkz_gazebo.launch" >
+    <arg name="use_camera_control" value="true" />
+    <arg name="world_name" value="$(find dbw_utils)/worlds/empty_world.world" />
+    <arg name="sim_param_file" value="$(find dbw_utils)/yaml/multi_vehicle.yaml" />
+  </include>
+
+
+  <!-- Waypoint loader playing a role as global path planner -->
+  <node pkg="path_loader" type="path_loader.py" name="path_loader">
+    <param name="fpath" value="$(find path_loader)../../../data/standard_track_map.csv" />
+    <param name="frame_id" value="/world" />
+  </node>
+
+  <!-- Display -->
+  <!--<node name="gzclient" pkg="gazebo_ros" type="gzclient" output="screen"/>-->
+  <node pkg="rviz" type="rviz" name="multi_vehicle_rviz" args="-d $(find utility)../../../config/multi_vehicle_path_following_visualization.rviz" respawn="true" />
+
+</launch>

@@ -36,7 +36,7 @@ class PathLoader(object):
         self.lane_line2_points_pub = rospy.Publisher('/lane_line2_points', PointCloud, queue_size=1, latch=True)
         self.lane_line3_points_pub = rospy.Publisher('/lane_line3_points', PointCloud, queue_size=1, latch=True)
 
-        self.new_path_loader(rospy.get_param('~path'))
+        self.new_path_loader(rospy.get_param('~fpath'))
 
         rospy.spin()
 
@@ -173,6 +173,17 @@ class PathLoader(object):
 
         return x, y
 
+    def save_lane_line(self, fname, maps_s, d, poses):
+        with open(fname, 'w') as wfile:
+            writer = csv.writer(wfile, delimiter=' ')
+            for i in range(len(maps_s)):
+                if i == 0:
+                    x, y = self.get_xy(maps_s[i]+0.00001, d, maps_s, poses)
+                else:
+                    x, y = self.get_xy(maps_s[i], d, maps_s, poses)
+
+                writer.writerow([x, y, 0, 0])
+
     def draw_lane_lines(self, poses):
         maps_s = []
         maps_s.append(0)
@@ -229,6 +240,8 @@ class PathLoader(object):
 
             lane_lines.append(lane_line)
             lane_lines_points.append(lane_line_points)
+
+        # self.save_lane_line(rospy.get_param('~new_fpath'), maps_s, -6, poses)
 
         return lane_lines, lane_lines_points
 
