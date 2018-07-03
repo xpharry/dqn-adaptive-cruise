@@ -27,6 +27,13 @@ A.~Mukminin.
 Mario Herger.
 \newblock Baidu's open source self-driving platform apollo in detail, Oct 2017.
 
+\bibitem{Dosovitskiy17}
+Alexey Dosovitskiy, German Ros, Felipe Codevilla, Antonio Lopez, and Vladlen
+  Koltun.
+\newblock {CARLA}: {An} open urban driving simulator.
+\newblock In {\em Proceedings of the 1st Annual Conference on Robot Learning},
+  pages 1--16, 2017.
+
 \bibitem{ACC2002}
 H.~Sudou and T.~Hashizume.
 \newblock Adaptive cruise control system.

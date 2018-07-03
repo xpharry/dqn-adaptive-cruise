@@ -7,7 +7,7 @@
 \contentsline {section}{\tocsection {}{}{Literation Review}}{3}{section.1.2}
 \contentsline {section}{\tocsection {}{}{Thesis Outline}}{7}{section.1.3}
 \contentsline {chapter}{\tocchapter {Chapter}{2}{Simulated Environment}}{10}{chapter.2}
-\contentsline {section}{\tocsection {}{}{ROS}}{12}{section.2.1}
+\contentsline {section}{\tocsection {}{}{ROS}}{13}{section.2.1}
 \contentsline {subsection}{\tocsubsection {}{2.1.1}{Implementation}}{13}{subsection.2.1.1}
 \contentsline {subsection}{\tocsubsection {}{2.1.2}{Collaborative Development}}{14}{subsection.2.1.2}
 \contentsline {subsection}{\tocsubsection {}{2.1.3}{Visualization and Monitoring}}{15}{subsection.2.1.3}
@@ -20,44 +20,44 @@
 \contentsline {subsection}{\tocsubsection {}{2.2.5}{Test Bed for Algorithm Design}}{24}{subsection.2.2.5}
 \contentsline {section}{\tocsection {}{}{OpenAI-Gym}}{24}{section.2.3}
 \contentsline {subsection}{\tocsubsection {}{2.3.1}{Design For Environment}}{25}{subsection.2.3.1}
-\contentsline {subsection}{\tocsubsection {}{2.3.2}{Interfacing with ROS and Gazebo}}{25}{subsection.2.3.2}
+\contentsline {subsection}{\tocsubsection {}{2.3.2}{Interfacing with ROS and Gazebo}}{26}{subsection.2.3.2}
 \contentsline {subsection}{\tocsubsection {}{2.3.3}{Example Use: Train a Cart-pole agent}}{27}{subsection.2.3.3}
-\contentsline {section}{\tocsection {}{}{Vehicle Model}}{29}{section.2.4}
-\contentsline {subsection}{\tocsubsection {}{2.4.1}{URDF Models}}{29}{subsection.2.4.1}
+\contentsline {section}{\tocsection {}{}{Vehicle Model}}{30}{section.2.4}
+\contentsline {subsection}{\tocsubsection {}{2.4.1}{URDF Models}}{30}{subsection.2.4.1}
 \contentsline {subsection}{\tocsubsection {}{2.4.2}{Simulated CAN Message Interface}}{30}{subsection.2.4.2}
 \contentsline {subsection}{\tocsubsection {}{2.4.3}{Simulating Multiple Vehicles}}{32}{subsection.2.4.3}
-\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{33}{chapter.3}
-\contentsline {section}{\tocsection {}{}{Behavior Planner}}{36}{section.3.1}
-\contentsline {subsection}{\tocsubsection {}{3.1.1}{Longitudinal Control: Adaptive Cruise Control}}{36}{subsection.3.1.1}
-\contentsline {subsection}{\tocsubsection {}{3.1.2}{Lateral Control: Lane Control}}{37}{subsection.3.1.2}
-\contentsline {section}{\tocsection {}{}{Path Planner}}{38}{section.3.2}
-\contentsline {subsection}{\tocsubsection {}{3.2.1}{Reference Path Generator}}{38}{subsection.3.2.1}
-\contentsline {subsection}{\tocsubsection {}{3.2.2}{A road-aligned coordinate system: Frenet Coordinate}}{40}{subsection.3.2.2}
-\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Frenet Coordinates}}{40}{figure.caption.22}
-\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path Selecting and Optimizing}}{43}{subsection.3.2.3}
-\contentsline {section}{\tocsection {}{}{Path Following}}{45}{section.3.3}
-\contentsline {section}{\tocsection {}{}{Drive By Wire}}{49}{section.3.4}
-\contentsline {chapter}{\tocchapter {Chapter}{4}{Deep Q-Learning}}{51}{chapter.4}
-\contentsline {section}{\tocsection {}{}{General Architecture}}{51}{section.4.1}
-\contentsline {section}{\tocsection {}{}{Reinforcement Learning for Longitudinal Motion}}{54}{section.4.2}
-\contentsline {section}{\tocsection {}{}{Reinforcement Learning for Lateral Motion}}{57}{section.4.3}
-\contentsline {section}{\tocsection {}{}{Q Learning}}{58}{section.4.4}
-\contentsline {section}{\tocsection {}{}{Policy Representation}}{62}{section.4.5}
-\contentsline {subsection}{\tocsubsection {}{4.5.1}{State}}{62}{subsection.4.5.1}
-\contentsline {subsection}{\tocsubsection {}{4.5.2}{Actions}}{62}{subsection.4.5.2}
-\contentsline {subsection}{\tocsubsection {}{4.5.3}{Reward Function}}{63}{subsection.4.5.3}
-\contentsline {subsection}{\tocsubsection {}{4.5.4}{Relay Memory}}{65}{subsection.4.5.4}
-\contentsline {section}{\tocsection {}{}{Deep Neural Network}}{65}{section.4.6}
-\contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{68}{chapter.5}
-\contentsline {section}{\tocsection {}{}{Simulation Setup}}{68}{section.5.1}
-\contentsline {section}{\tocsection {}{}{Training for Single-lane Motion}}{69}{section.5.2}
-\contentsline {section}{\tocsection {}{}{Training for Multi-lane Motion}}{73}{section.5.3}
-\contentsline {section}{\tocsection {}{}{Main Evaluation}}{78}{section.5.4}
-\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{80}{chapter.6}
-\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{80}{section.6.1}
-\contentsline {section}{\tocsection {}{}{Analysis}}{80}{section.6.2}
-\contentsline {section}{\tocsection {}{}{Reflection}}{81}{section.6.3}
-\contentsline {subsection}{\tocsubsection {}{6.3.1}{Difficulties}}{81}{subsection.6.3.1}
-\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{82}{subsection.6.3.2}
-\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{84}{chapter.7}
-\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{86}{chapter*.43}
+\contentsline {chapter}{\tocchapter {Chapter}{3}{System Design}}{34}{chapter.3}
+\contentsline {section}{\tocsection {}{}{Behavior Planner}}{37}{section.3.1}
+\contentsline {subsection}{\tocsubsection {}{3.1.1}{Longitudinal Control: Adaptive Cruise Control}}{37}{subsection.3.1.1}
+\contentsline {subsection}{\tocsubsection {}{3.1.2}{Lateral Control: Lane Control}}{38}{subsection.3.1.2}
+\contentsline {section}{\tocsection {}{}{Path Planner}}{40}{section.3.2}
+\contentsline {subsection}{\tocsubsection {}{3.2.1}{Reference Path Generator}}{40}{subsection.3.2.1}
+\contentsline {subsection}{\tocsubsection {}{3.2.2}{A road-aligned coordinate system: Frenet Coordinate}}{41}{subsection.3.2.2}
+\contentsline {subsubsection}{\tocsubsubsection {}{3.2.2.0}{Frenet Coordinates}}{42}{figure.caption.22}
+\contentsline {subsection}{\tocsubsection {}{3.2.3}{Path Selecting and Optimizing}}{45}{subsection.3.2.3}
+\contentsline {section}{\tocsection {}{}{Path Following}}{47}{section.3.3}
+\contentsline {section}{\tocsection {}{}{Drive By Wire}}{51}{section.3.4}
+\contentsline {chapter}{\tocchapter {Chapter}{4}{Deep Q-Learning}}{52}{chapter.4}
+\contentsline {section}{\tocsection {}{}{General Architecture}}{52}{section.4.1}
+\contentsline {section}{\tocsection {}{}{Reinforcement Learning for Longitudinal Motion}}{56}{section.4.2}
+\contentsline {section}{\tocsection {}{}{Reinforcement Learning for Lateral Motion}}{58}{section.4.3}
+\contentsline {section}{\tocsection {}{}{Q Learning}}{59}{section.4.4}
+\contentsline {section}{\tocsection {}{}{Policy Representation}}{63}{section.4.5}
+\contentsline {subsection}{\tocsubsection {}{4.5.1}{State}}{63}{subsection.4.5.1}
+\contentsline {subsection}{\tocsubsection {}{4.5.2}{Actions}}{63}{subsection.4.5.2}
+\contentsline {subsection}{\tocsubsection {}{4.5.3}{Reward Function}}{64}{subsection.4.5.3}
+\contentsline {subsection}{\tocsubsection {}{4.5.4}{Relay Memory}}{66}{subsection.4.5.4}
+\contentsline {section}{\tocsection {}{}{Deep Neural Network}}{66}{section.4.6}
+\contentsline {chapter}{\tocchapter {Chapter}{5}{Results}}{69}{chapter.5}
+\contentsline {section}{\tocsection {}{}{Simulation Setup}}{69}{section.5.1}
+\contentsline {section}{\tocsection {}{}{Training for Single-lane Motion}}{70}{section.5.2}
+\contentsline {section}{\tocsection {}{}{Training for Multi-lane Motion}}{74}{section.5.3}
+\contentsline {section}{\tocsection {}{}{Main Evaluation}}{79}{section.5.4}
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Conclusions}}{83}{chapter.6}
+\contentsline {section}{\tocsection {}{}{Free-Form Visualization}}{83}{section.6.1}
+\contentsline {section}{\tocsection {}{}{Analysis}}{83}{section.6.2}
+\contentsline {section}{\tocsection {}{}{Reflection}}{84}{section.6.3}
+\contentsline {subsection}{\tocsubsection {}{6.3.1}{Difficulties}}{84}{subsection.6.3.1}
+\contentsline {subsection}{\tocsubsection {}{6.3.2}{General Pipeline}}{85}{subsection.6.3.2}
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Future Work}}{87}{chapter.7}
+\contentsline {chapter}{\tocchapter {Chapter}{}{Bibliography}}{89}{chapter*.47}

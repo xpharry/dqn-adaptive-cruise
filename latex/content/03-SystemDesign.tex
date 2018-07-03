@@ -38,6 +38,7 @@ The framework proposed above is general and can be applied to a variety of drivi
 \item \textbf{Lane Control:} Automatically switch between Lane Keep mode and Change Lane mode with a good timing.
 \item \textbf{Trajectory / Path Generating:} Given the decision making result of ACC and LC, generating a trajectory (a series of waypoints containing the pose and velocity information) for the Motion Control layer to excute.
 \item \textbf{Path Following:} Detecting and determining a path/lane to follow, and following it.
+\item \textbf{Emergency Stop / Object Avoidance:} The learning based Behavior Selector is expected to work well at most time. As safety needs to be ensured 100\% an Obstacle Avoidance is needed to take over the motion control and make the vehicle to stop immediately when the safe distance is not maintained (like only 10 meters left with the preceding vehicle).
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -49,9 +50,9 @@ The framework proposed above is general and can be applied to a variety of drivi
 We define the following variables to represent the relative motion of the autonomous vehicle (referred to as the ``ego vehicle'') and the vehicle located ahead in the same lane as the autonomous vehicle (referred to as the ``preceding vehicle").
 
 \begin{itemize}
-\item $\epsilon_{ego} = [d_t, v_t]$ is the state of the ego vehicle at time \textit{t}, where $d_t \in R^+$ is the longitudinal position of the ego vehicle in a road-aligned coordinate system, and $v_t \in R^+$ is the longitudinal velocity of the ego vehicle.
+\item $\epsilon_{ego} = [d_t, v_t]$ is the state of the ego vehicle at time \textit{t}, where $d_t \in R^+$ is the longitudinal position of the ego vehicle in a road-aligned coordinate system \cite{Frenet2008}, and $v_t \in R^+$ is the longitudinal velocity of the ego vehicle.
 \item $\epsilon_{pre} = [d_t^p, v_t^p]$ is the state of the preceding vehicle at time \textit{t}, where $d_t \in R^+$ is the longitudinal position of the preceding vehicle in a road-aligned coordinate system, and $v_t \in R^+$ is the longitudinal velocity of the preceding vehicle.
-\item $z_t =  [d_t^{pr}, v_t^p, v_t]$ are the features representing the current driving situation at time \textit{t} , to be used by the driver model to generate an appropriate acceleration command. $d_t^{pr} = d_t^p - d_t$ is the relative distance to the preceding vehicle.
+\item $z_t =  [d_t^{pr}, v_t^p, v_t]$ are the features representing the current driving situation at time \textit{t} , to be used by the driver model to generate an appropriate acceleration command. $d_t^{pr} = d_t^p - d_t$ is the distance to the preceding vehicle.
 \end{itemize}
 
 At each time step \textit{t} , the driver model generates an acceleration command. This acceleration command is used by the trajectory generator to compute a target velocity as a reference. The controller solves a constrained optimization problem over the prediction horizon , and generates a planned velocity sequence which guarantees the safety of the vehicle.
@@ -72,7 +73,7 @@ We define a one-dimensional array with boolean values to represent the lateral p
 \label{fig:fsm}
 \end{figure}
 
-At each time step \textit{t} , the driver model, with the information above together with the other vehicle in its left and right lanes, generates a change lane or a keep lane command. The proposed algorithm will encourage the ego vehicle to change to a different lane neighboring to it when the target lane has better driving condition and to keep the current lane if else. To avoid conflict two lane changing commands which are too close, the lateral control would stay the current state for a period of time for the lane change to finish. Within the time period, new lane change or lane keep commands would be ignored. By this idea, it becomes a rule-based controller, sometimes referred to as ``Finite state machine (FSM)'', as shown in Fig. \ref{fig:fsm}. FSM has its own advantages, including:
+At each time step \textit{t} , the driver model, with the information above together with the other vehicle in its left and right lanes, generates a change lane or a keep lane command. The proposed algorithm will encourage the ego vehicle to change to a different lane neighboring to it when the lane has better driving condition (less cars in the lane or the cars in that lane are further away than in the current one) and to keep the current lane if else. To avoid conflict two lane changing commands which are within a too short time range, for instance, 1 second, the lateral control would stay the current state for a period of time for the lane change to finish. Within the time period, new lane change or lane keep commands would be ignored. By this idea, it becomes a rule-based controller, sometimes referred to as ``Finite state machine (FSM)'', as shown in Fig. \ref{fig:fsm}. FSM has its own advantages, including:
 
 \begin{enumerate}
 \item \textbf {Clear in structure:} the controller is based on "if-then-else" logic, which is explicitly readable, so that the controller's behavior can be relatively easily predicted; 
@@ -94,7 +95,7 @@ The proposed Reference Path Generator is used to generate a safe and comfortable
 \label{fig:center-line}
 \end{figure}
 
-The dynamic path planning process includes three stages: center line construction, path candidate generation, and path selection. These are performed on the basis of perceived information. The center line of the road is constructed from the center waypoints, which are several waypoints captured from the map and aligned to the center line of the lane, using the method of cubic spline fitting. The path candidates, which are also described by the cubic spline, are generated by adjusting the lateral offset to the center line using the information for the current vehicle position, speed, and direction in a road-aligned coordinate system. During path selection, the costs of static safety, comfortability, and dynamic safety are taken into account, and are combined with information on road edges, and static and moving obstacles for selecting the optimal path. Our method provides not only the selected path, but also the appropriate speed for the vehicle maneuvering system. In this project, the proposed dynamic path planning algorithm is executed 50 times per second, and a new path is generated from the current vehicle position at every time step. 
+The dynamic path planning process includes three stages: center line construction, path candidate generation, and path selection. These are performed on the basis of perceived information. The center line of the road is constructed from the center waypoints, which are several waypoints captured from the map and aligned to the center line of the lane, using the method of cubic spline fitting \cite{Frenet2008}. The path candidates, which are also described by the cubic spline, are generated by adjusting the lateral offset to the center line using the information for the current vehicle position, speed, and direction in a road-aligned coordinate system. During path selection, the costs of static safety, comfortability, and dynamic safety are taken into account, and are combined with information on road edges, and static and moving obstacles for selecting the optimal path. Our method provides not only the selected path, but also the appropriate speed for the vehicle maneuvering system. In this project, the proposed dynamic path planning algorithm is executed 50 times per second, and a new path is generated from the current vehicle position at every time step. 
 
 \subsection{A road-aligned coordinate system: Frenet Coordinate}
 
@@ -182,7 +183,7 @@ Straight lines are so much easier than curved ones.
 
 \subsection{Path Selecting and Optimizing}
 
-The path is the trajectory guiding the vehicle to follow a global route and avoid obstacles. The arc length $s$ indicates the traveling distance on the global route, and the offset $\rho$ can be used to measure the distance between the vehicle and the road edge.
+The path is the trajectory guiding the vehicle to follow a global route and avoid obstacles \cite{Trajectory2012}. The arc length $s$ indicates the traveling distance on the global route, and the offset $\rho$ can be used to measure the distance between the vehicle and the road edge.
 
 To use the direction and curvature of the center line, it is necessary to find the position of the vehicle on the reference waypoints. We first map the vehicle position from the Cartesian coordinate system to the Frenet coordinate system, and then determine the closest point of the center line $p_0$, which has the minimum distance $\rho_{min}$. In this paper, a method combining quadratic minimization and Newton's method is used to find $p_0$.
 
@@ -193,7 +194,14 @@ To use the direction and curvature of the center line, it is necessary to find t
 \label{fig:loc-line}
 \end{figure}
 
-To generate path candidates, the curvature of each path is determined by the lateral offset $d$ of the path, based on the curvature of the center line. As shown in Fig. \ref{fig:loc-line} (a), $p_{init}$ is the original point on the center line. $p_{start}$ and $p_{end}$ are the start and end points on the center line, respectively, for one step of planning. $p_{veh}$ is the start point of the vehicle. $p_1$ to $p_5$ are the end points of five path candidates, and are indicated by $r_1$ to $r_5$. It is obvious that only $r_2$; $r_4$, and $r_5$ are available and free of obstacles. The reason for this availability lies with the differences between the offset from the path candidate to the center line and the offset from the obstacle to the center line. Meanwhile, the positions of the obstacle and the vehicle on the center line can be expressed by the arc length $s$.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/ch3/path_selection}
+\caption{Path candidates in the Frenet coordinate system.}
+\label{fig:path_select}
+\end{figure}
+
+To generate path candidates, the curvature of each path is determined by the lateral offset $d$ of the path, based on the curvature of the center line. As shown in Fig. \ref{fig:path_select}, $p_{init}$ is the original point on the center line. $p_{start}$ and $p_{end}$ are the start and end points on the center line, respectively, for one step of planning. $p_{veh}$ is the start point of the vehicle. $p_1$ to $p_5$ are the end points of five path candidates, and are indicated by $r_1$ to $r_5$. It is obvious that only $r_2$; $r_4$, and $r_5$ are available and free of obstacles. The reason for this availability lies with the differences between the offset from the path candidate to the center line and the offset from the obstacle to the center line. Meanwhile, the positions of the obstacle and the vehicle on the center line can be expressed by the arc length $s$.
 
 Path candidates are generated in the Frenet coordinate system, but path planning results must be mapped into a Cartesian coordinate system to convey to the maneuvering system. Path candidate points in the Cartesian coordinate system can be represented with respect to the arc length of the center line.
 
@@ -209,7 +217,7 @@ The path following layer is implemented by referring to the existing Pure Pursui
 \label{fig:purepursuit-cord}
 \end{figure}
 
-Fig. \ref{fig:purepursuit-cord} shows the global coordinate system and the local coordinate system the origin of which is located at the center of the rear wheels. We used $X_{global}$, $Y_{global}$ to represent the global coordinate, and $x_{local}$, $y_{local}$ to represent the local coordinate. Ignoring the motion of $z$ axis, we can express the motion state of the vehicle as position and orientation (heading), $q = [x,y,\theta]$. The kinematic model of the robotic vehicle is expressed as:
+Fig. \ref{fig:purepursuit-cord} shows the global coordinate system and the local coordinate system. The origin of the local coordinate system is located at the center of the rear wheels. We used $X_{global}$, $Y_{global}$ to represent the global coordinate, and $x_{local}$, $y_{local}$ to represent the local coordinate. Ignoring the motion of $z$ axis, we can express the motion state of the vehicle as position and orientation (heading), $q = [x,y,\theta]$. The kinematic model of the robotic vehicle is expressed as:
 
 \begin{equation} \label{eq:pp1}
 \dot{x} = v \cos(\theta)

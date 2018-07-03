@@ -9,6 +9,8 @@ A simplified highway environment would be created to train deep learning models 
 
 The simulated environment is constructed based on ROS and Gazebo and the Reinforcement Learning Algorithms are implemented by OpenAI-Gym. An open source car model kit, Drive-by-Wire (DBW) Kit, is adopted to play the role of the autonomous vehicle. An overall architecture of the simulation environment is shown as Fig. \ref{fig:sim-env}.
 
+OpenAI-Gym here can be treated as the brain which is responsible for making decisions and generate actions. The action in each step will be sent to ROS and ROS will use a Subscriber and Publisher protocol to exchange signals and sensor feedback with Gazebo (if we see Gazebo as a set of sensors). The path planner is implemented in ROS and publish reference waypoints continuously. The DBW Kit plays a role of the low level actuator and accepts commands like throttle, brake and steering. According the variables in Gazebo (or from the sensors) would update and be sent back to the brain, OpenAI-Gym and ready for the next iteration.
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/ch2/simulation-architecture}
@@ -139,7 +141,7 @@ A well designed simulator usually provides some form of user interface, and Gaze
 
 OpenGL is a standard library for the creation of 2D and 3D interactive applications. It is platform independent, highly scalable, stable, and continually evolving. More importantly, many features in OpenGL have been implemented in graphic card hardware thereby freeing the CPU for other work such as the computationally expensive dynamics engine.
 
-GLUT is a simple window system independent toolkit for OpenGL applications. Scenes rendered using OpenGL are displayed in windows created by GLUT. This toolkit also provides mechanisms for user interaction with Gazebo via standard input devices such as keyboards and mice. GLUT was chosen as the default windowing toolkit be- cause it is lightweight, easy to use, and platform independent.
+GLUT is a simple window system independent toolkit for OpenGL applications. Scenes rendered using OpenGL are displayed in windows created by GLUT. This toolkit also provides mechanisms for user interaction with Gazebo via standard input devices such as keyboards and mice. GLUT was chosen as the default windowing toolkit because it is lightweight, easy to use, and platform independent.
 
 \subsection{Customized Environment}
 
@@ -182,7 +184,7 @@ OpenAI Gym aims to combine the best elements of these previous benchmark collect
 
 The design of OpenAI Gym is based on the experience developing and comparing reinforcement learning algorithms, and the experience using previous benchmark collections. Below, we will summarize some of our design decisions.
 
-Two core concepts in Reinforcement Learning are the agent and the environment. OpenAi Gym's design focuses on providing an abstraction for the environment, but not for the agent. This choice was to maximize convenience for users and allow them to implement different styles of agent interface. First, one could imagine an ``online learning'' style, where the agent takes (observation, reward, done) as an input at each time-step and performs learning updates incrementally. In an alternative ``batch update'' style, a agent is called with observation as input, and the reward information is collected separately by the RL algorithm, and later it is used to compute an update. By only specifying the agent interface, it is allowed to write customized agents with either of these styles.
+Two core concepts in Reinforcement Learning are the agent and the environment. OpenAI Gym's design focuses on providing an abstraction for the environment, but not for the agent. This choice was to maximize convenience for users and allow them to implement different styles of agent interface. First, one could imagine an ``online learning'' style, where the agent takes (observation, reward, done) as an input at each time-step and performs learning updates incrementally. In an alternative ``batch update'' style, a agent is called with observation as input, and the reward information is collected separately by the RL algorithm, and later it is used to compute an update. By only specifying the agent interface, it is allowed to write customized agents with either of these styles.
 
 \subsection{Interfacing with ROS and Gazebo}
 

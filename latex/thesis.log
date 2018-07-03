@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  12 JUN 2018 14:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  28 JUN 2018 23:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1080,7 +1080,7 @@ Package xcolor Warning: Incompatible color definition on input line 29.
 Package xcolor Warning: Incompatible color definition on input line 30.
 
 
-Package xcolor Warning: Incompatible color definition on input line 32.
+Package xcolor Warning: Incompatible color definition on input line 31.
 
 
 Package xcolor Warning: Incompatible color definition on input line 33.
@@ -1092,7 +1092,7 @@ Package xcolor Warning: Incompatible color definition on input line 34.
 Package xcolor Warning: Incompatible color definition on input line 35.
 
 
-Package xcolor Warning: Incompatible color definition on input line 37.
+Package xcolor Warning: Incompatible color definition on input line 36.
 
 
 Package xcolor Warning: Incompatible color definition on input line 38.
@@ -1115,11 +1115,24 @@ Package xcolor Warning: Incompatible color definition on input line 43.
 
 Package xcolor Warning: Incompatible color definition on input line 44.
 
+[8]
+
+Package xcolor Warning: Incompatible color definition on input line 45.
+
+
+Package xcolor Warning: Incompatible color definition on input line 46.
+
+
+Package xcolor Warning: Incompatible color definition on input line 47.
+
+
+Package xcolor Warning: Incompatible color definition on input line 48.
+
 )
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
- [8] [9]
+ [9]
 Acknowledgements
 (./content/00-Acknowledgements.tex) [10
 
@@ -1135,7 +1148,7 @@ Chapter 1
 [1
 
 
-] <figs/ch1/highway-toyota.png, id=333, 592.2125pt x 365.365pt>
+] <figs/ch1/highway-toyota.png, id=342, 592.2125pt x 365.365pt>
 File: figs/ch1/highway-toyota.png Graphic file (type png)
 
 <use figs/ch1/highway-toyota.png>
@@ -1148,7 +1161,7 @@ e-ment learn-ing to achieve
  []
 
 [3]
-<figs/ch1/Reinforcement_learning_diagram.png, id=353, 796.9775pt x 770.88pt>
+<figs/ch1/Reinforcement_learning_diagram.png, id=363, 796.9775pt x 770.88pt>
 File: figs/ch1/Reinforcement_learning_diagram.png Graphic file (type png)
 
 <use figs/ch1/Reinforcement_learning_diagram.png>
@@ -1183,17 +1196,6 @@ Overfull \hbox (11.07098pt too wide) in paragraph at lines 70--71
 
  (./content/02-Simulation.tex
 Chapter 2
-<figs/ch2/simulation-architecture.png, id=421, 390.45876pt x 402.50375pt>
-File: figs/ch2/simulation-architecture.png Graphic file (type png)
-
-<use figs/ch2/simulation-architecture.png>
-Package pdftex.def Info: figs/ch2/simulation-architecture.png used on input lin
-e 14.
-(pdftex.def)             Requested size: 303.53267pt x 312.90756pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1202,55 +1204,65 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-Underfull \vbox (badness 4316) has occurred while \output is active []
+<figs/ch2/simulation-architecture.png, id=435, 390.45876pt x 402.50375pt>
+File: figs/ch2/simulation-architecture.png Graphic file (type png)
 
- [11 <./figs/ch2/simulation-architecture.png>] [12]
-LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <12> not available
-(Font)              Font shape `T1/pag/b/n' tried instead on input line 46.
-LaTeX Font Info:    Font shape `T1/pag/b/n' in size <12> not available
-(Font)              Font shape `T1/pag/db/n' tried instead on input line 46.
-
+<use figs/ch2/simulation-architecture.png>
+Package pdftex.def Info: figs/ch2/simulation-architecture.png used on input lin
+e 16.
+(pdftex.def)             Requested size: 303.53267pt x 312.90756pt.
+ [11 <./figs/ch2/simulation-architecture.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [12]
+LaTeX Font Info:    Font shape `T1/pag/bx/n' in size <12> not available
+(Font)              Font shape `T1/pag/b/n' tried instead on input line 48.
+LaTeX Font Info:    Font shape `T1/pag/b/n' in size <12> not available
+(Font)              Font shape `T1/pag/db/n' tried instead on input line 48.
+
+Underfull \vbox (badness 5924) has occurred while \output is active []
+
  [13]
-<figs/ch2/ros-pipeline.png, id=449, 565.11125pt x 667.49374pt>
+<figs/ch2/ros-pipeline.png, id=459, 565.11125pt x 667.49374pt>
 File: figs/ch2/ros-pipeline.png Graphic file (type png)
 
 <use figs/ch2/ros-pipeline.png>
-Package pdftex.def Info: figs/ch2/ros-pipeline.png used on input line 58.
+Package pdftex.def Info: figs/ch2/ros-pipeline.png used on input line 60.
 (pdftex.def)             Requested size: 260.17464pt x 307.31566pt.
- [14 <./figs/ch2/ros-pipeline.png>] [15]
-[16] <figs/ch2/osrf.jpeg, id=469, 622.325pt x 468.75125pt>
-File: figs/ch2/osrf.jpeg Graphic file (type jpg)
 
-<use figs/ch2/osrf.jpeg>
-Package pdftex.def Info: figs/ch2/osrf.jpeg used on input line 95.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14] [15 <./figs/ch2/ros-pipeline.png>] [16]
+<figs/ch2/osrf.jpeg, id=479, 622.325pt x 468.75125pt>
+File: figs/ch2/osrf.jpeg Graphic file (type jpg)
+ <use figs/ch2/osrf.jpeg>
+Package pdftex.def Info: figs/ch2/osrf.jpeg used on input line 97.
 (pdftex.def)             Requested size: 346.89731pt x 261.29012pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[17]
-Overfull \hbox (6.80338pt too wide) in paragraph at lines 121--122
+[17] [18 <./figs/ch2/osrf.jpeg>]
+Overfull \hbox (6.80338pt too wide) in paragraph at lines 123--124
 \T1/futs/m/n/12 Gazebo's ar-chi-tec-ture has pro-gressed through a cou-ple it-e
 r-a-tions dur-ing which we learned
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [18 <./figs/ch2/osrf.jpeg>]
-<figs/ch2/gazebo-structure.png, id=478, 799.98875pt x 569.12625pt>
+<figs/ch2/gazebo-structure.png, id=489, 799.98875pt x 569.12625pt>
 File: figs/ch2/gazebo-structure.png Graphic file (type png)
 
 <use figs/ch2/gazebo-structure.png>
-Package pdftex.def Info: figs/ch2/gazebo-structure.png used on input line 125.
+Package pdftex.def Info: figs/ch2/gazebo-structure.png used on input line 127.
 (pdftex.def)             Requested size: 346.89731pt x 246.78635pt.
+
+Underfull \vbox (badness 3417) has occurred while \output is active []
+
  [19 <./figs/ch2/gazebo-structure.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 2384) has occurred while \output is active []
 
  [20]
-Overfull \hbox (9.66238pt too wide) in paragraph at lines 142--143
+Overfull \hbox (9.66238pt too wide) in paragraph at lines 144--145
 []\T1/futs/m/n/12 GLUT is a sim-ple win-dow sys-tem in-de-pen-dent toolkit for 
 OpenGL ap-pli-ca-tions. Scenes
  []
@@ -1265,115 +1277,111 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
-[24] <figs/ch2/toolkit-of-openaigym.png, id=515, 564.1075pt x 430.60875pt>
+[24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+<figs/ch2/toolkit-of-openaigym.png, id=530, 564.1075pt x 430.60875pt>
 File: figs/ch2/toolkit-of-openaigym.png Graphic file (type png)
 
 <use figs/ch2/toolkit-of-openaigym.png>
 Package pdftex.def Info: figs/ch2/toolkit-of-openaigym.png used on input line 1
-95.
+97.
 (pdftex.def)             Requested size: 346.89731pt x 264.80637pt.
- [25]
-Overfull \hbox (10.19833pt too wide) in paragraph at lines 200--201
+
+Overfull \hbox (10.19833pt too wide) in paragraph at lines 202--203
 []\T1/futs/m/n/12 The ar-chi-tec-ture con-sists of three main soft-ware blocks:
  Ope-nAI Gym, ROS and Gazebo
  []
 
-<figs/ch2/cartpole-in-gazebo.png, id=524, 1117.17375pt x 712.6625pt>
+[26 <./figs/ch2/toolkit-of-openaigym.png>]
+<figs/ch2/cartpole-in-gazebo.png, id=540, 1117.17375pt x 712.6625pt>
 File: figs/ch2/cartpole-in-gazebo.png Graphic file (type png)
 
 <use figs/ch2/cartpole-in-gazebo.png>
-Package pdftex.def Info: figs/ch2/cartpole-in-gazebo.png used on input line 208
+Package pdftex.def Info: figs/ch2/cartpole-in-gazebo.png used on input line 210
 .
 (pdftex.def)             Requested size: 346.89731pt x 221.29282pt.
- [26 <./figs/ch2/toolkit-of-openaigym.png>] <figs/ch2/cartpole-in-rviz.png, id=
-531, 693.59125pt x 485.815pt>
+
+<figs/ch2/cartpole-in-rviz.png, id=541, 693.59125pt x 485.815pt>
 File: figs/ch2/cartpole-in-rviz.png Graphic file (type png)
 
 <use figs/ch2/cartpole-in-rviz.png>
-Package pdftex.def Info: figs/ch2/cartpole-in-rviz.png used on input line 215.
+Package pdftex.def Info: figs/ch2/cartpole-in-rviz.png used on input line 217.
 (pdftex.def)             Requested size: 346.89731pt x 242.98103pt.
- [27 <./figs/ch2/cartpole-in-gazebo.png> <./figs/ch2/cartpole-in-rviz.png>]
-<figs/ch2/cartpole-epoch-1200.png, id=541, 462.528pt x 346.896pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[27 <./figs/ch2/cartpole-in-gazebo.png>] [28 <./figs/ch2/cartpole-in-rviz.png>]
+<figs/ch2/cartpole-epoch-1200.png, id=555, 462.528pt x 346.896pt>
 File: figs/ch2/cartpole-epoch-1200.png Graphic file (type png)
 
 <use figs/ch2/cartpole-epoch-1200.png>
 Package pdftex.def Info: figs/ch2/cartpole-epoch-1200.png used on input line 24
-6.
+8.
 (pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28]
-Overfull \hbox (13.79721pt too wide) in paragraph at lines 256--257
+Overfull \hbox (13.79721pt too wide) in paragraph at lines 258--259
 \T1/futs/m/n/12 A well per-formed ve-hi-cle model kit, Dataspeed ADAS Kit Gaze-
 bo/ROS Sim-u-la-tor, is adopted
  []
 
-<figs/ch2/mkz-cover.png, id=547, 674.52pt x 462.72874pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29 <./figs/ch2/cartpole-epoch-1200.png>]
+<figs/ch2/mkz-cover.png, id=562, 674.52pt x 462.72874pt>
 File: figs/ch2/mkz-cover.png Graphic file (type png)
 
 <use figs/ch2/mkz-cover.png>
-Package pdftex.def Info: figs/ch2/mkz-cover.png used on input line 262.
+Package pdftex.def Info: figs/ch2/mkz-cover.png used on input line 264.
 (pdftex.def)             Requested size: 346.89731pt x 237.97964pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (2.1349pt too wide) in paragraph at lines 267--268
-\T1/futs/m/n/12 Four URDF mod-els rep-re-sent-ing the dif-fer-ent ve-hi-cles su
-p-ported by the Dataspeed ADAS
- []
-
-<figs/ch2/mkz-model.png, id=550, 432.61626pt x 255.95625pt>
+<figs/ch2/mkz-model.png, id=565, 432.61626pt x 255.95625pt>
 File: figs/ch2/mkz-model.png Graphic file (type png)
 
 <use figs/ch2/mkz-model.png>
-Package pdftex.def Info: figs/ch2/mkz-model.png used on input line 273.
+Package pdftex.def Info: figs/ch2/mkz-model.png used on input line 275.
 (pdftex.def)             Requested size: 195.12767pt x 115.44481pt.
 
-<figs/ch2/mkz-tf-tree.png, id=551, 393.47pt x 255.95625pt>
+<figs/ch2/mkz-tf-tree.png, id=566, 393.47pt x 255.95625pt>
 File: figs/ch2/mkz-tf-tree.png Graphic file (type png)
 
 <use figs/ch2/mkz-tf-tree.png>
-Package pdftex.def Info: figs/ch2/mkz-tf-tree.png used on input line 278.
+Package pdftex.def Info: figs/ch2/mkz-tf-tree.png used on input line 280.
 (pdftex.def)             Requested size: 177.78578pt x 115.6479pt.
 
-Overfull \hbox (14.24287pt too wide) in paragraph at lines 287--288
+Overfull \hbox (14.24287pt too wide) in paragraph at lines 289--290
 \T1/futs/m/n/12 are only two ROS top-ics used to in-ter-act with the sim-u-late
 d ve-hi-cle: $\FML/futmi/m/it/12 can[]bus[]dbw\T1/futs/m/n/12 /\FML/futmi/m/it/
 12 can[]tx$
  []
 
-[29 <./figs/ch2/cartpole-epoch-1200.png>]
+[30 <./figs/ch2/mkz-cover.png>]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[30 <./figs/ch2/mkz-cover.png> <./figs/ch2/mkz-model.png> <./figs/ch2/mkz-tf-tr
-ee.png>] [31]
+[31 <./figs/ch2/mkz-model.png> <./figs/ch2/mkz-tf-tree.png>]
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 356.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 358.
 
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (9.935pt too wide) in paragraph at lines 371--372
+Overfull \hbox (9.935pt too wide) in paragraph at lines 373--374
 []\T1/futs/m/n/12 This would spawn two ve-hi-cles: one red 2017 MKZ with model 
 name $[]$ spawned
  []
 
 
-Overfull \hbox (32.188pt too wide) in paragraph at lines 371--372
+Overfull \hbox (32.188pt too wide) in paragraph at lines 373--374
 \T1/futs/m/n/12 at $(0\FML/futmi/m/it/12 :\T1/futs/m/n/12 0\FML/futmi/m/it/12 ;
  \FMS/futm/m/n/12 ^^@\T1/futs/m/n/12 2\FML/futmi/m/it/12 :\T1/futs/m/n/12 0\FML
 /futmi/m/it/12 ; \T1/futs/m/n/12 0\FML/futmi/m/it/12 :\T1/futs/m/n/12 0)$ and o
@@ -1383,12 +1391,12 @@ ts/m/n/12 0\FML/futmi/m/it/12 ; \T1/futs/m/n/12 0\FML/futmi/m/it/12 :\T1/futs/m
 /n/12 0)$.
  []
 
-) [32]
+[32]) [33]
 \openout2 = `content/03-SystemDesign.aux'.
 
  (./content/03-SystemDesign.tex
 Chapter 3
-<figs/ch3/auto-car-modules.png, id=598, 469.755pt x 434.1018pt>
+<figs/ch3/auto-car-modules.png, id=612, 469.755pt x 434.1018pt>
 File: figs/ch3/auto-car-modules.png Graphic file (type png)
 
 <use figs/ch3/auto-car-modules.png>
@@ -1403,12 +1411,12 @@ n-sors and dig-i-tal maps
 
 Underfull \vbox (badness 3657) has occurred while \output is active []
 
- [33
+ [34
 
 
 
  <./figs/ch3/auto-car-modules.png>]
-<figs/ch3/auto-car-flowchart.png, id=609, 469.755pt x 550.6974pt>
+<figs/ch3/auto-car-flowchart.png, id=624, 469.755pt x 550.6974pt>
 File: figs/ch3/auto-car-flowchart.png Graphic file (type png)
 
 <use figs/ch3/auto-car-flowchart.png>
@@ -1422,7 +1430,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34]
+ [35]
 Overfull \hbox (1.61552pt too wide) in paragraph at lines 38--39
 []\T1/futs/b/n/12 Lane Con-trol: \T1/futs/m/n/12 Au-to-mat-i-cally switch be-tw
 een Lane Keep mode and Change Lane
@@ -1431,170 +1439,197 @@ een Lane Keep mode and Change Lane
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35 <./figs/ch3/auto-car-flowchart.png>] [36]
-<figs/ch3/state-machine.png, id=626, 402.50375pt x 422.57875pt>
+ [36 <./figs/ch3/auto-car-flowchart.png>]
+Underfull \vbox (badness 2903) has occurred while \output is active []
+
+ [37]
+<figs/ch3/state-machine.png, id=642, 402.50375pt x 422.57875pt>
 File: figs/ch3/state-machine.png Graphic file (type png)
 
 <use figs/ch3/state-machine.png>
-Package pdftex.def Info: figs/ch3/state-machine.png used on input line 70.
+Package pdftex.def Info: figs/ch3/state-machine.png used on input line 71.
 (pdftex.def)             Requested size: 303.53267pt x 318.6678pt.
 
-Underfull \vbox (badness 5133) has occurred while \output is active []
 
- [37 <./figs/ch3/state-machine.png>]
-Overfull \hbox (1.87837pt too wide) in paragraph at lines 80--81
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 3029) has occurred while \output is active []
+
+ [38]
+Overfull \hbox (1.87837pt too wide) in paragraph at lines 81--82
 []\T1/futs/b/n/12 More re-li-able: \T1/futs/m/n/12 A well-calibrated FSM is usu
 -ally more re-li-able, com-pared to some
  []
 
-[38] <figs/ch3/center-line.png, id=644, 462.72874pt x 378.41376pt>
+[39 <./figs/ch3/state-machine.png>]
+<figs/ch3/center-line.png, id=659, 462.72874pt x 378.41376pt>
 File: figs/ch3/center-line.png Graphic file (type png)
 
 <use figs/ch3/center-line.png>
-Package pdftex.def Info: figs/ch3/center-line.png used on input line 92.
+Package pdftex.def Info: figs/ch3/center-line.png used on input line 93.
 (pdftex.def)             Requested size: 303.53267pt x 248.22948pt.
- [39 <./figs/ch3/center-line.png>]
-<figs/ch3/traj-generation.png, id=652, 496.85625pt x 308.15125pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40 <./figs/ch3/center-line.png>] [41]
+<figs/ch3/traj-generation.png, id=675, 496.85625pt x 308.15125pt>
 File: figs/ch3/traj-generation.png Graphic file (type png)
 
 <use figs/ch3/traj-generation.png>
-Package pdftex.def Info: figs/ch3/traj-generation.png used on input line 105.
+Package pdftex.def Info: figs/ch3/traj-generation.png used on input line 106.
 (pdftex.def)             Requested size: 303.53267pt x 188.25409pt.
+
+<figs/ch3/curve-in-cartesian.png, id=677, 357.335pt x 525.965pt>
+File: figs/ch3/curve-in-cartesian.png Graphic file (type png)
+
+<use figs/ch3/curve-in-cartesian.png>
+Package pdftex.def Info: figs/ch3/curve-in-cartesian.png used on input line 118
+.
+(pdftex.def)             Requested size: 117.83913pt x 173.44756pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[40] <figs/ch3/curve-in-cartesian.png, id=661, 357.335pt x 525.965pt>
-File: figs/ch3/curve-in-cartesian.png Graphic file (type png)
 
-<use figs/ch3/curve-in-cartesian.png>
-Package pdftex.def Info: figs/ch3/curve-in-cartesian.png used on input line 117
-.
-(pdftex.def)             Requested size: 117.83913pt x 173.44756pt.
-
-<figs/ch3/curve-in-cartesian-with-waypoints.png, id=663, 346.29375pt x 506.8937
+<figs/ch3/curve-in-cartesian-with-waypoints.png, id=679, 346.29375pt x 506.8937
 5pt>
 File: figs/ch3/curve-in-cartesian-with-waypoints.png Graphic file (type png)
  <use figs/ch3/curve-in-cartesian-with-waypoints.png>
 Package pdftex.def Info: figs/ch3/curve-in-cartesian-with-waypoints.png used on
- input line 128.
+ input line 129.
 (pdftex.def)             Requested size: 118.49393pt x 173.44756pt.
 
-<figs/ch3/waypoints-in-cartesian.png, id=664, 265.99374pt x 502.87875pt>
+<figs/ch3/waypoints-in-cartesian.png, id=680, 265.99374pt x 502.87875pt>
 File: figs/ch3/waypoints-in-cartesian.png Graphic file (type png)
 
 <use figs/ch3/waypoints-in-cartesian.png>
 Package pdftex.def Info: figs/ch3/waypoints-in-cartesian.png used on input line
- 133.
+ 134.
 (pdftex.def)             Requested size: 91.74358pt x 173.44756pt.
 
-Overfull \hbox (1.884pt too wide) in paragraph at lines 126--135
+Overfull \hbox (1.884pt too wide) in paragraph at lines 127--136
  []$[]$ $[]$ 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[41 <./figs/ch3/traj-generation.png> <./figs/ch3/curve-in-cartesian.png>]
-<figs/ch3/curve-in-frenet.png, id=672, 386.44376pt x 504.88625pt>
+
+Underfull \vbox (badness 1215) has occurred while \output is active []
+
+ [42 <./figs/ch3/traj-generation.png>]
+<figs/ch3/curve-in-frenet.png, id=687, 386.44376pt x 504.88625pt>
 File: figs/ch3/curve-in-frenet.png Graphic file (type png)
 
 <use figs/ch3/curve-in-frenet.png>
-Package pdftex.def Info: figs/ch3/curve-in-frenet.png used on input line 143.
+Package pdftex.def Info: figs/ch3/curve-in-frenet.png used on input line 144.
 (pdftex.def)             Requested size: 108.405pt x 141.6291pt.
 
-<figs/ch3/curve-in-frenet-with-waypoints.png, id=674, 383.4325pt x 495.8525pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+<figs/ch3/curve-in-frenet-with-waypoints.png, id=689, 383.4325pt x 495.8525pt>
 File: figs/ch3/curve-in-frenet-with-waypoints.png Graphic file (type png)
 
 <use figs/ch3/curve-in-frenet-with-waypoints.png>
 Package pdftex.def Info: figs/ch3/curve-in-frenet-with-waypoints.png used on in
-put line 154.
+put line 155.
 (pdftex.def)             Requested size: 134.12148pt x 173.44756pt.
 
-<figs/ch3/waypoints-in-frenet.png, id=675, 266.9975pt x 480.79625pt>
+<figs/ch3/waypoints-in-frenet.png, id=690, 266.9975pt x 480.79625pt>
 File: figs/ch3/waypoints-in-frenet.png Graphic file (type png)
 
 <use figs/ch3/waypoints-in-frenet.png>
-Package pdftex.def Info: figs/ch3/waypoints-in-frenet.png used on input line 15
-9.
+Package pdftex.def Info: figs/ch3/waypoints-in-frenet.png used on input line 16
+0.
 (pdftex.def)             Requested size: 96.31863pt x 173.44756pt.
 
-Overfull \hbox (1.884pt too wide) in paragraph at lines 152--161
+Overfull \hbox (1.884pt too wide) in paragraph at lines 153--162
  []$[]$ $[]$ 
  []
 
-[42 <./figs/ch3/curve-in-cartesian-with-waypoints.png> <./figs/ch3/waypoints-in
--cartesian.png> <./figs/ch3/curve-in-frenet.png>]
-<figs/ch3/frenet-final.png, id=683, 728.7225pt x 492.84125pt>
+[43 <./figs/ch3/curve-in-cartesian.png> <./figs/ch3/curve-in-cartesian-with-way
+points.png> <./figs/ch3/waypoints-in-cartesian.png>]
+<figs/ch3/frenet-final.png, id=698, 728.7225pt x 492.84125pt>
 File: figs/ch3/frenet-final.png Graphic file (type png)
 
 <use figs/ch3/frenet-final.png>
-Package pdftex.def Info: figs/ch3/frenet-final.png used on input line 176.
+Package pdftex.def Info: figs/ch3/frenet-final.png used on input line 177.
 (pdftex.def)             Requested size: 299.2118pt x 202.35622pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[43 <./figs/ch3/curve-in-frenet-with-waypoints.png> <./figs/ch3/waypoints-in-fr
-enet.png>]
-<figs/ch3/location-on-center-line.png, id=694, 595.22375pt x 550.055pt>
+[44 <./figs/ch3/curve-in-frenet.png> <./figs/ch3/curve-in-frenet-with-waypoints
+.png> <./figs/ch3/waypoints-in-frenet.png>]
+<figs/ch3/location-on-center-line.png, id=711, 595.22375pt x 550.055pt>
 File: figs/ch3/location-on-center-line.png Graphic file (type png)
 
 <use figs/ch3/location-on-center-line.png>
 Package pdftex.def Info: figs/ch3/location-on-center-line.png used on input lin
-e 191.
+e 192.
 (pdftex.def)             Requested size: 303.53267pt x 280.49915pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+<figs/ch3/path_selection.png, id=712, 450.18187pt x 216.30812pt>
+File: figs/ch3/path_selection.png Graphic file (type png)
 
-Underfull \vbox (badness 2221) has occurred while \output is active []
+<use figs/ch3/path_selection.png>
+Package pdftex.def Info: figs/ch3/path_selection.png used on input line 199.
+(pdftex.def)             Requested size: 303.53267pt x 145.84984pt.
 
- [44 <./figs/ch3/frenet-final.png>] [45 <./figs/ch3/location-on-center-line.png
->]
-<figs/ch3/purepursuit-cord.png, id=709, 501.875pt x 383.4325pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[45 <./figs/ch3/frenet-final.png>] [46 <./figs/ch3/location-on-center-line.png>
+ <./figs/ch3/path_selection.png>]
+<figs/ch3/purepursuit-cord.png, id=727, 501.875pt x 383.4325pt>
 File: figs/ch3/purepursuit-cord.png Graphic file (type png)
 
 <use figs/ch3/purepursuit-cord.png>
-Package pdftex.def Info: figs/ch3/purepursuit-cord.png used on input line 207.
+Package pdftex.def Info: figs/ch3/purepursuit-cord.png used on input line 215.
 (pdftex.def)             Requested size: 264.86674pt x 202.35622pt.
- [46 <./figs/ch3/purepursuit-cord.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [47]
-Overfull \hbox (16.79062pt too wide) in paragraph at lines 255--256
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[47]
+Underfull \vbox (badness 1668) has occurred while \output is active []
+
+ [48 <./figs/ch3/purepursuit-cord.png>] [49]
+Overfull \hbox (16.79062pt too wide) in paragraph at lines 263--264
 []\T1/futs/m/n/12 In the equa-tion, there are two dif-fer-ent er-rors, $\FML/fu
 tmi/m/it/12 Error[]$ \T1/futs/m/n/12 and $\FML/futmi/m/it/12 Error[]$\T1/futs/m
 /n/12 .
  []
 
-<figs/ch3/purepursuit.png, id=737, 502.0356pt x 297.2706pt>
+<figs/ch3/purepursuit.png, id=764, 502.0356pt x 297.2706pt>
 File: figs/ch3/purepursuit.png Graphic file (type png)
 
 <use figs/ch3/purepursuit.png>
-Package pdftex.def Info: figs/ch3/purepursuit.png used on input line 262.
+Package pdftex.def Info: figs/ch3/purepursuit.png used on input line 270.
 (pdftex.def)             Requested size: 341.74739pt x 202.35622pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [48])
-Underfull \vbox (badness 7685) has occurred while \output is active []
-
- [49 <./figs/ch3/purepursuit.png>] [50]
+ [50 <./figs/ch3/purepursuit.png>]) [51]
 \openout2 = `content/04-DeepReinforcementLearning.aux'.
 
  (./content/04-DeepReinforcementLearning.tex
 Chapter 4
-[51
+
+Underfull \vbox (badness 1590) has occurred while \output is active []
+
+ [52
 
 
 
-] <figs/ch4/Highway-Display.png, id=765, 773.89125pt x 395.4775pt>
+]
+<figs/ch4/Highway-Display.png, id=785, 773.89125pt x 395.4775pt>
 File: figs/ch4/Highway-Display.png Graphic file (type png)
 
 <use figs/ch4/Highway-Display.png>
@@ -1604,13 +1639,27 @@ Package pdftex.def Info: figs/ch4/Highway-Display.png used on input line 25.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figs/ch4/diagram.png, id=767, 402.50375pt x 360.34625pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53]
+<figs/ch4/diagram.png, id=791, 402.50375pt x 360.34625pt>
 File: figs/ch4/diagram.png Graphic file (type png)
 
 <use figs/ch4/diagram.png>
 Package pdftex.def Info: figs/ch4/diagram.png used on input line 36.
 (pdftex.def)             Requested size: 346.89731pt x 310.56255pt.
- [52] [53 <./figs/ch4/Highway-Display.png> <./figs/ch4/diagram.png>] [54]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 2181) has occurred while \output is active []
+
+ [54 <./figs/ch4/Highway-Display.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55 <./figs/ch4/diagram.png>]
 Overfull \hbox (6.26294pt too wide) in paragraph at lines 55--56
 []\T1/futs/m/n/12 Those el-e-ments were put to-gether in a RL frame-work, and t
 he pol-icy ob-tained, learned
@@ -1619,14 +1668,14 @@ he pol-icy ob-tained, learned
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [55]
-<figs/ch4/acc-drl.png, id=786, 733.74126pt x 472.76625pt>
+ [56]
+<figs/ch4/acc-drl.png, id=807, 733.74126pt x 472.76625pt>
 File: figs/ch4/acc-drl.png Graphic file (type png)
 
 <use figs/ch4/acc-drl.png>
 Package pdftex.def Info: figs/ch4/acc-drl.png used on input line 59.
 (pdftex.def)             Requested size: 346.89731pt x 223.51308pt.
- [56 <./figs/ch4/acc-drl.png>] [57] [58]
+ [57 <./figs/ch4/acc-drl.png>] [58] [59]
 Overfull \hbox (6.661pt too wide) in paragraph at lines 104--105
 []\T1/futs/m/n/12 For bet-ter con-ver-gence of the DQN, in-stead of es-ti-mat-i
 ng both $\FML/futmi/m/it/12 q\T1/futs/m/n/12 (\FML/futmi/m/it/12 S[]; A[]\T1/fu
@@ -1637,29 +1686,32 @@ a[]\T1/futs/m/n/12 )$
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [59]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [60]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [61]
-[62]
-Underfull \vbox (badness 3098) has occurred while \output is active []
-
- [63]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [62]
+[63]
+Underfull \vbox (badness 3098) has occurred while \output is active []
+
  [64]
-[65]
-<figs/ch4/architecture-of-deep-q-network.png, id=859, 501.875pt x 292.09125pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [65]
+[66]
+<figs/ch4/architecture-of-deep-q-network.png, id=880, 501.875pt x 292.09125pt>
 File: figs/ch4/architecture-of-deep-q-network.png Graphic file (type png)
 
 <use figs/ch4/architecture-of-deep-q-network.png>
 Package pdftex.def Info: figs/ch4/architecture-of-deep-q-network.png used on in
 put line 243.
 (pdftex.def)             Requested size: 346.89731pt x 201.90417pt.
- [66 <./figs/ch4/architecture-of-deep-q-network.png>]) [67]
+
+Underfull \vbox (badness 3460) has occurred while \output is active []
+
+ [67 <./figs/ch4/architecture-of-deep-q-network.png>]) [68]
 \openout2 = `content/05-Results.aux'.
 
  (./content/05-Results.tex
@@ -1667,12 +1719,12 @@ Chapter 5
 
 Underfull \vbox (badness 6910) has occurred while \output is active []
 
- [68
+ [69
 
 
 
 ]
-<figs/ch5/acc-env.png, id=877, 1068.99374pt x 778.91pt>
+<figs/ch5/acc-env.png, id=897, 1068.99374pt x 778.91pt>
 File: figs/ch5/acc-env.png Graphic file (type png)
 
 <use figs/ch5/acc-env.png>
@@ -1682,8 +1734,8 @@ Package pdftex.def Info: figs/ch5/acc-env.png used on input line 26.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[69] [70 <./figs/ch5/acc-env.png>]
-<figs/ch5/acc-reward.png, id=888, 642.4pt x 481.8pt>
+[70] [71 <./figs/ch5/acc-env.png>]
+<figs/ch5/acc-reward.png, id=908, 642.4pt x 481.8pt>
 File: figs/ch5/acc-reward.png Graphic file (type png)
 
 <use figs/ch5/acc-reward.png>
@@ -1695,7 +1747,7 @@ Overfull \hbox (6.87943pt too wide) in paragraph at lines 67--68
 ted re-wards i.e., value func-tion achieved
  []
 
-<figs/ch5/acc_action_distribution.png, id=890, 462.528pt x 346.896pt>
+<figs/ch5/acc_action_distribution.png, id=910, 462.528pt x 346.896pt>
 File: figs/ch5/acc_action_distribution.png Graphic file (type png)
 
 <use figs/ch5/acc_action_distribution.png>
@@ -1705,7 +1757,7 @@ e 71.
 
 Underfull \vbox (badness 3679) has occurred while \output is active []
 
- [71 <./figs/ch5/acc-reward.png>] <figs/ch5/vel_variance.png, id=895, 642.4pt x
+ [72 <./figs/ch5/acc-reward.png>] <figs/ch5/vel_variance.png, id=915, 642.4pt x
  481.8pt>
 File: figs/ch5/vel_variance.png Graphic file (type png)
 
@@ -1716,14 +1768,14 @@ Package pdftex.def Info: figs/ch5/vel_variance.png used on input line 78.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[72 <./figs/ch5/acc_action_distribution.png>] [73 <./figs/ch5/vel_variance.png>
-] <figs/ch5/auto-env.png, id=908, 1034.86626pt x 788.9475pt>
+[73 <./figs/ch5/acc_action_distribution.png>] [74 <./figs/ch5/vel_variance.png>
+] <figs/ch5/auto-env.png, id=929, 1034.86626pt x 788.9475pt>
 File: figs/ch5/auto-env.png Graphic file (type png)
 
 <use figs/ch5/auto-env.png>
 Package pdftex.def Info: figs/ch5/auto-env.png used on input line 92.
 (pdftex.def)             Requested size: 433.62pt x 330.57318pt.
- [74 <./figs/ch5/auto-env.png>]
+ [75 <./figs/ch5/auto-env.png>]
 Overfull \hbox (17.95494pt too wide) in paragraph at lines 115--116
 []$\FML/futmi/m/it/12 accel[]; accel[]; keep[]; decel[]; decel[]$ \T1/futs/m/n/
 12 = $2\FML/futmi/m/it/12 m\T1/futs/m/n/12 /\FML/futmi/m/it/12 s[]$\T1/futs/m/n
@@ -1733,7 +1785,7 @@ n/12 , $0\FML/futmi/m/it/12 m\T1/futs/m/n/12 /\FML/futmi/m/it/12 s[]$\T1/futs/m
 12 /\FML/futmi/m/it/12 s[]$\T1/futs/m/n/12 ,
  []
 
-<figs/ch5/auto-reward.png, id=916, 642.4pt x 481.8pt>
+<figs/ch5/auto-reward.png, id=936, 642.4pt x 481.8pt>
 File: figs/ch5/auto-reward.png Graphic file (type png)
 
 <use figs/ch5/auto-reward.png>
@@ -1749,7 +1801,11 @@ Overfull \hbox (6.87943pt too wide) in paragraph at lines 133--134
 ted re-wards i.e., value func-tion achieved
  []
 
-[75] <figs/ch5/auto_action_distribution.png, id=922, 462.528pt x 346.896pt>
+
+Underfull \vbox (badness 2134) has occurred while \output is active []
+
+ [76]
+<figs/ch5/auto_action_distribution.png, id=942, 462.528pt x 346.896pt>
 File: figs/ch5/auto_action_distribution.png Graphic file (type png)
 
 <use figs/ch5/auto_action_distribution.png>
@@ -1760,7 +1816,7 @@ ne 137.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figs/ch5/auto_vel.png, id=923, 642.4pt x 481.8pt>
+<figs/ch5/auto_vel.png, id=943, 642.4pt x 481.8pt>
 File: figs/ch5/auto_vel.png Graphic file (type png)
  <use figs/ch5/auto_vel.png>
 Package pdftex.def Info: figs/ch5/auto_vel.png used on input line 144.
@@ -1770,40 +1826,69 @@ Package pdftex.def Info: figs/ch5/auto_vel.png used on input line 144.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \vbox (badness 2318) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [76 <./figs/ch5/auto-reward.png>])
-Overfull \hbox (3.70145pt too wide) in paragraph at lines 155--238
+ [77 <./figs/ch5/auto-reward.png>]
+Underfull \vbox (badness 3281) has occurred while \output is active []
+
+ [78 <./figs/ch5/auto_action_distribution.png>]
+Overfull \hbox (3.70145pt too wide) in paragraph at lines 155--156
 \T1/futs/m/n/12 col-li-sions for a very long time and dis-tance af-ter enough t
 rain-ing. Nat-u-rally, $\FML/futmi/m/it/12 Agent\T1/futs/m/n/12 1[]$
  []
 
 
-Overfull \hbox (22.80476pt too wide) in paragraph at lines 155--238
+Overfull \hbox (22.80476pt too wide) in paragraph at lines 155--156
 \T1/futs/m/n/12 solved a sig-nif-i-cantly higher frac-tion of the episodes and 
 per-formed bet-ter than $\FML/futmi/m/it/12 Agent\T1/futs/m/n/12 2[]$,
  []
 
+[79 <./figs/ch5/auto_vel.png>]
+<figs/ch5/long_distance_variance.png, id=960, 462.528pt x 346.896pt>
+File: figs/ch5/long_distance_variance.png Graphic file (type png)
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<use figs/ch5/long_distance_variance.png>
+Package pdftex.def Info: figs/ch5/long_distance_variance.png used on input line
+ 161.
+(pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
 
- [77 <./figs/ch5/auto_action_distribution.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+<figs/ch5/long_speed_variance.png, id=961, 462.528pt x 346.896pt>
+File: figs/ch5/long_speed_variance.png Graphic file (type png)
 
- [78 <./figs/ch5/auto_vel.png>] [79]
+<use figs/ch5/long_speed_variance.png>
+Package pdftex.def Info: figs/ch5/long_speed_variance.png used on input line 16
+8.
+(pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<figs/ch5/long_travel_action.png, id=962, 462.528pt x 346.896pt>
+File: figs/ch5/long_travel_action.png Graphic file (type png)
+
+<use figs/ch5/long_travel_action.png>
+Package pdftex.def Info: figs/ch5/long_travel_action.png used on input line 175
+.
+(pdftex.def)             Requested size: 346.89731pt x 260.18723pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[80 <./figs/ch5/long_distance_variance.png>] [81 <./figs/ch5/long_speed_varianc
+e.png>]) [82 <./figs/ch5/long_travel_action.png>]
 \openout2 = `content/06-Conclusion.aux'.
 
  (./content/06-Conclusion.tex
 Chapter 6
-[80
+[83
 
 
 
-] [81]
-Underfull \vbox (badness 1728) has occurred while \output is active []
+] [84]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [82])
-[83]
+ [85])
+[86]
 \openout2 = `content/07-Futurework.aux'.
 
  (./content/07-Futurework.tex
@@ -1811,24 +1896,24 @@ Chapter 7
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [84
+ [87
 
 
 
 ])
-[85] (./thesis.bbl
+[88] (./thesis.bbl
 Bibliography
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [86
+ [89
 
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [87]
-Underfull \hbox (badness 4543) in paragraph at lines 185--189
+ [90]
+Underfull \hbox (badness 4543) in paragraph at lines 192--196
 []\T1/futs/m/n/12 M. Buehler K. Iag-nemma and S. Singh. |   []   |   []   |   [
 ]   |   []   |   []
  []
@@ -1836,10 +1921,10 @@ Underfull \hbox (badness 4543) in paragraph at lines 185--189
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [88])
+ [91])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 301.
 
-[89]
+[92]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 301.
  (./thesis.aux (./content/01-Introduction.aux) (./content/02-Simulation.aux) (.
 /content/03-SystemDesign.aux) (./content/04-DeepReinforcementLearning.aux)
@@ -1848,21 +1933,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 301.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 301.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 301.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 6988A95060850AADFD6837F312899DAA;2184.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+(rerunfilecheck)             Checksum: 3C5D8617F9796EC4E0941D8D1F07EAF1;2184.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 301.
  ) 
 Here is how much of TeX's memory you used:
- 12574 strings out of 492995
- 186004 string characters out of 6132704
- 298044 words of memory out of 5000000
- 15328 multiletter control sequences out of 15000+600000
+ 12611 strings out of 492995
+ 186947 string characters out of 6132704
+ 298907 words of memory out of 5000000
+ 15351 multiletter control sequences out of 15000+600000
  102607 words of font info for 114 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 44i,14n,53p,1478b,1011s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,14n,53p,1466b,1011s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -1880,10 +1961,10 @@ st/fonts/type1/adobe/utopia/putri8a.pfb></usr/local/texlive/2017/texmf-dist/fon
 ts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/2017/texmf-dist/fonts
 /type1/urw/avantgar/uagd8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/
 urw/avantgar/uagk8a.pfb>
-Output written on thesis.pdf (100 pages, 8020382 bytes).
+Output written on thesis.pdf (103 pages, 8208479 bytes).
 PDF statistics:
- 1104 PDF objects out of 1200 (max. 8388607)
- 907 compressed objects within 10 object streams
- 290 named destinations out of 1000 (max. 500000)
- 2025 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1148 PDF objects out of 1200 (max. 8388607)
+ 940 compressed objects within 10 object streams
+ 300 named destinations out of 1000 (max. 500000)
+ 2045 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -324,7 +324,7 @@ citecolor=felinkcolor, linkcolor=felinkcolor]{hyperref}
   \vspace{24pt}
   \noindent\textbf{#2}\\[-12pt]
   \rule{\hsize}{0.5pt}\\[-12pt]
-  Committee #3\ifx#1\empty\else,\fi~#1\hfill Date\\[-12pt]
+  Committee #3\ifx#1\empty\else,\fi~#1\hfill Date: June 15th, 2018\\[-12pt]
   #4\par}
 
 

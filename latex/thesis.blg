@@ -16,45 +16,45 @@ Warning--entry type for "ACC2002" isn't style-file defined
 --line 76 of file refs/my_reference.bib
 Warning--entry type for "Nissan2013" isn't style-file defined
 --line 93 of file refs/my_reference.bib
-You've used 40 entries,
+You've used 41 entries,
             1791 wiz_defined-function locations,
-            692 strings with 10600 characters,
-and the built_in function-call counts, 7283 in all, are:
-= -- 661
-> -- 287
-< -- 7
-+ -- 112
-- -- 72
-* -- 314
-:= -- 1186
-add.period$ -- 119
-call.type$ -- 40
-change.case$ -- 38
+            698 strings with 10822 characters,
+and the built_in function-call counts, 7613 in all, are:
+= -- 688
+> -- 304
+< -- 8
++ -- 118
+- -- 77
+* -- 335
+:= -- 1233
+add.period$ -- 122
+call.type$ -- 41
+change.case$ -- 39
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 387
-empty$ -- 728
-format.name$ -- 72
-if$ -- 1662
+cite$ -- 41
+duplicate$ -- 404
+empty$ -- 761
+format.name$ -- 77
+if$ -- 1740
 int.to.chr$ -- 0
-int.to.str$ -- 40
-missing$ -- 36
-newline$ -- 200
-num.names$ -- 42
-pop$ -- 134
+int.to.str$ -- 41
+missing$ -- 37
+newline$ -- 205
+num.names$ -- 43
+pop$ -- 140
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 218
+skip$ -- 228
 stack$ -- 0
-substring$ -- 264
-swap$ -- 96
-text.length$ -- 7
+substring$ -- 283
+swap$ -- 103
+text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 63
-width$ -- 42
-write$ -- 415
+while$ -- 67
+width$ -- 43
+write$ -- 426
 (There were 3 warnings)
