@@ -1,4 +1,4 @@
-# Adaptive Cruise Control and Lane Control using Deep Q-Learning
+## Adaptive Cruise Control and Lane Control using Deep Q-Learning
 
 ## Overview
 
@@ -34,8 +34,6 @@ The work aims at design of a learning based autonomous driving system mainly on 
 	sudo apt-get install ros-kinetic-velodyne
 	```
 
-## Instruction
-
 ## Experiments
 
 * Deep Q-Learning experiments on diverse scenarios.
@@ -58,15 +56,5 @@ The work aims at design of a learning based autonomous driving system mainly on 
 
 * FCNN and CNN
 
-**3/31/2018**
-
-* Added in Cartpole as a simpler example to use dqn.
-* Enabled online visualization and auto save of reward history.
-
-## Resources
-
-1. Dr. Kostas Alexis, [Introduction to Aerial Robotics](http://www.kostasalexis.com/introduction-to-aerial-robotics.html)
-
-2. [Tutorials of CAT VEHICLE TESTBED](https://cps-vo.org/node/31792)
 
 
